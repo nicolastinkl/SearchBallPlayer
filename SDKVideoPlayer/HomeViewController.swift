@@ -10,10 +10,9 @@ import Foundation
 //
 import UIKit
 import SafariServices
- 
 import Alamofire
 import SDWebImage
-
+import SwiftIcons
 
 // 基本的数据模型
 struct Website: Codable {
@@ -55,13 +54,14 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     var currentRecommandURL:String = ""
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
           
             
         }
+        
+        self.view.backgroundColor = UIColor(fromHex: "#eeeff1")
 
        searchBar.delegate = self
        suggestionsTableView.dataSource = self
@@ -280,10 +280,12 @@ class IconCollectionViewCell: UICollectionViewCell {
           super.init(frame: frame)
 
           // 取得螢幕寬度
-        iconImageView =  SDAnimatedImageView(frame:  CGRect(x: 10, y: 10, width: 80   , height: 80))
+        iconImageView =  SDAnimatedImageView(frame:  CGRect(x: 10, y: 10, width: 20   , height: 20))
         iconImageView.contentMode = .scaleAspectFit
         icontitle  = UILabel(frame: CGRect(x: 0, y: 85, width: 80   , height: 40))
         icontitle.textAlignment = .center
+        icontitle.font = UIFont.systemFont(ofSize: 12)
+        
         self.addSubview(iconImageView)
         self.addSubview(icontitle)
       }
@@ -305,7 +307,7 @@ class KeywordCollectionViewCell: UICollectionViewCell {
           // 取得螢幕寬度
         keywordBtn =  UIButton(type: UIButton.ButtonType.custom)
         keywordBtn.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
-        keywordBtn.setTitleColor(UIColor.black, for: UIControl.State.normal)
+//        keywordBtn.setTitleColor(UIColor.black, for: UIControl.State.normal)
         self.addSubview(keywordBtn)
       }
 

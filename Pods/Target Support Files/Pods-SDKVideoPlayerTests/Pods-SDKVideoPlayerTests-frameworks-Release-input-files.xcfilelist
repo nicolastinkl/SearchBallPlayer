@@ -1,3 +1,2 @@
 ${PODS_ROOT}/Target Support Files/Pods-SDKVideoPlayerTests/Pods-SDKVideoPlayerTests-frameworks.sh
-${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
-${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework
+${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework

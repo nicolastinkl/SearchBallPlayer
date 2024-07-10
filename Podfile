@@ -6,13 +6,16 @@ target 'SDKVideoPlayer' do
   use_frameworks!
 
   # Pods for SDKVideoPlayer
+  pod 'SwiftIcons', '~> 3.0'
+  
+#    pod 'CYLTabBarController', '~> 1.24.0'
+#    pod 'Alamofire', '~> 5.4.0'
+
 
   target 'SDKVideoPlayerTests' do
     inherit! :search_paths
     # Pods for testing
-#    pod 'CYLTabBarController', '~> 1.24.0'
-#    pod 'Alamofire', '~> 5.4.0'
-
+  
   end
 
   target 'SDKVideoPlayerUITests' do
