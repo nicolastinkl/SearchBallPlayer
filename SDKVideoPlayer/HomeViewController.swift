@@ -38,6 +38,7 @@ struct DataClass: Codable {
 }
 
 
+// search viewconoller 
 class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource,SFSafariViewControllerDelegate {
     
   
@@ -63,28 +64,30 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         
         self.view.backgroundColor = UIColor(fromHex: "#eeeff1")
 
-       searchBar.delegate = self
-       suggestionsTableView.dataSource = self
-       suggestionsTableView.delegate = self
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 100, height: 44)
-        suggestionsTableView.collectionViewLayout = layout
-        
-//        suggestionsTableView.backgroundColor = UIColor.lightGray
-        // 如果使用 storyboard
-        suggestionsTableView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        
-        //icon list
-       iconsCollectionView.dataSource = self
-       iconsCollectionView.delegate = self
+        searchBar.delegate = self
+        suggestionsTableView.dataSource = self
+        suggestionsTableView.delegate = self
+         
+         let layout = UICollectionViewFlowLayout()
+         layout.scrollDirection = .horizontal
+         layout.itemSize = CGSize(width: 100, height: 44)
+         suggestionsTableView.collectionViewLayout = layout
+         
+ //        suggestionsTableView.backgroundColor = UIColor.lightGray
+         // 如果使用 storyboard
+         suggestionsTableView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+         
+         //icon list
+        iconsCollectionView.dataSource = self
+        iconsCollectionView.delegate = self
         iconsCollectionView.register(IconCollectionViewCell.self, forCellWithReuseIdentifier:iconCellId)
-  
-        
-        
+   
+       
+        suggestionsTableView.backgroundColor = UIColor.clear
+        iconsCollectionView.backgroundColor = UIColor.clear
+        searchBar.backgroundColor = UIColor.clear
         let layout2 = UICollectionViewFlowLayout()
-        layout2.itemSize = CGSize(width: 80, height: 120)
+        layout2.itemSize = CGSize(width: 120, height: 120)
         layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
         layout2.minimumLineSpacing = 10 // 设置行间距
         layout2.sectionInset =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // 设置间距
@@ -92,6 +95,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         
 
         sendRequestGetconfig()
+        
     }
     
     
@@ -133,8 +137,15 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                         if(Int(response_config.code) == 1){
                             self.configData = response_config
                             self.searchSuggestionKeywords = response_config.data.searchrecommadlist
+                            
+                            
+                            
                             self.icons = response_config.data.classlist
                             DispatchQueue.main.async {
+                                
+                                if let s = response_config.data.searchrecommadlist.first?.keyword {
+                                    self.searchBar.placeholder = s
+                                }
                                 // UI 更新代码
                                 self.suggestionsTableView.reloadData()
                                 self.iconsCollectionView.reloadData()
@@ -226,11 +237,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
            }
            
            let keyword:Website = icons[indexPath.item]
-           cell.icontitle.text = keyword.name
-           cell.iconImageView.sd_setImage(with: URL.init(string: keyword.iconurl), placeholderImage: UIImage(named: "placeholder-image"), context: nil)
-//           cell.keywordBtn.setTitle(keyword.keyword, for: UIControl.State.normal)
-//           cell.keywordBtn.tag = indexPath.item
-//           cell.keywordBtn.addTarget(self, action: #selector(self.openRecommandTarget(_:)), for: UIControl.Event.touchUpInside)?
+           cell.configure(with: keyword.iconurl, title: keyword.name)
            return cell
            
            
@@ -259,40 +266,86 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
 //       }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.layer.cornerRadius = 10 // 设置圆角
-        cell.layer.shadowColor = UIColor.black.cgColor // 设置阴影颜色
-        cell.layer.shadowOffset = CGSize(width: 0, height: 2) // 设置阴影偏移
-        cell.layer.shadowOpacity = 0.3 // 设置阴影透明度
+//        cell.layer.cornerRadius = 10 // 设置圆角
+//        cell.layer.shadowColor = UIColor.black.cgColor // 设置阴影颜色
+//        cell.layer.shadowOffset = CGSize(width: 0, height: 2) // 设置阴影偏移
+//        cell.layer.shadowOpacity = 0.3 // 设置阴影透明度
     }
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.layer.shadowPath = nil // 移除阴影
+//        cell.layer.shadowPath = nil // 移除阴影
     }
 
 }
 
 // 自定义 UICollectionViewCell
 class IconCollectionViewCell: UICollectionViewCell {
-    var iconImageView: SDAnimatedImageView!
-    var icontitle: UILabel!
+//    var iconImageView: SDAnimatedImageView!
+//    var icontitle: UILabel!
+    
+    
+     private let iconImageView: SDAnimatedImageView = {
+         let imageView = SDAnimatedImageView()
+         imageView.contentMode = .scaleAspectFit
+         imageView.translatesAutoresizingMaskIntoConstraints = false
+         return imageView
+     }()
+     
+     private let titleLabel: UILabel = {
+         let label = UILabel()
+         label.textAlignment = .center
+         label.font = UIFont.systemFont(ofSize: 12)
+         label.textColor = .darkGray
+         label.translatesAutoresizingMaskIntoConstraints = false
+         return label
+     }()
+     
     
     override init(frame: CGRect) {
           super.init(frame: frame)
-
-          // 取得螢幕寬度
-        iconImageView =  SDAnimatedImageView(frame:  CGRect(x: 10, y: 10, width: 20   , height: 20))
-        iconImageView.contentMode = .scaleAspectFit
-        icontitle  = UILabel(frame: CGRect(x: 0, y: 85, width: 80   , height: 40))
-        icontitle.textAlignment = .center
-        icontitle.font = UIFont.systemFont(ofSize: 12)
         
-        self.addSubview(iconImageView)
-        self.addSubview(icontitle)
+                contentView.backgroundColor = .white
+                contentView.layer.cornerRadius = 10
+                contentView.layer.shadowColor = UIColor.white.cgColor
+                contentView.layer.shadowOffset = CGSize(width: 0, height: 1)
+                contentView.layer.shadowOpacity = 0.1
+                contentView.layer.shadowRadius = 1
+                contentView.layer.masksToBounds = false
+                
+                contentView.addSubview(iconImageView)
+                contentView.addSubview(titleLabel)
+                
+                NSLayoutConstraint.activate([
+                    iconImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                    iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -10),
+                    iconImageView.widthAnchor.constraint(equalToConstant: 20),
+                    iconImageView.heightAnchor.constraint(equalToConstant: 20),
+                    
+                    titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 10),
+                    titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+                    titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
+                ])
+        
       }
 
       required init?(coder aDecoder: NSCoder) {
           fatalError("init(coder:) has not been implemented")
       }
+    
+    func configure(with iconurl: String, title: String) {
+
+//            iconImageView.sd_setImage(with: URL.init(string: iconurl), placeholderImage: UIImage(named: "placeholder-image"), context: nil)
+        iconImageView.sd_setImage(with:  URL.init(string: iconurl)) { image, error,sdimagetype, url in
+           
+            if let err = error {
+                //
+//                print("\(err.localizedDescription) \(url)")
+                self.iconImageView.setIcon(icon:  .weather(.rainMix))
+            }
+        }
+            titleLabel.text = title
+        }
+    
 }
 
 

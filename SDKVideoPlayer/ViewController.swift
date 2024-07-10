@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         activityIndicator.style = .large
         activityIndicator.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
           
             
             guard let vchome = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateInitialViewController(),

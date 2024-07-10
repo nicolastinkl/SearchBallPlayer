@@ -26,6 +26,15 @@
         "revision" : "be0bcd7823ce56629948491f2eaeaa19979514f7",
         "version" : "5.19.4"
       }
+    },
+    {
+      "identity" : "swiftfulloadingindicators",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftfulThinking/SwiftfulLoadingIndicators",
+      "state" : {
+        "revision" : "85858c0246dcd781228301f9928519f75ce89758",
+        "version" : "0.0.4"
+      }
     }
   ],
   "version" : 2
