@@ -1,0 +1,6 @@
+framework module Pods_SDKVideoPlayer_SDKVideoPlayerUITests {
+  umbrella header "Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
