@@ -1,0 +1,6 @@
+kex_exchange_identification: Connection closed by remote host
+Connection closed by 198.18.0.68 port 22
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
