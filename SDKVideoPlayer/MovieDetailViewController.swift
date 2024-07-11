@@ -63,16 +63,15 @@ class MovieDetailViewController: UIViewController {
     }()
     
     
-    private let ScrollView: UIScrollView = {
-        let label = UIScrollView()
-        return label
-    }()
+    let scrollView = UIScrollView()
+    let contentView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-         
+        
+        
         setupScrollView()
         setupPosterImageView()
         setupNameLabel()
@@ -89,30 +88,78 @@ class MovieDetailViewController: UIViewController {
         
         // Scrollview
         
+        setupNavigationBar()
+    
     }
     
-    private func setupScrollView(){
+    private func setupNavigationBar() {
+        // 创建一个UIButton作为返回按钮
+        let backButton = UIButton(type: .custom)
         
-        view.addSubview(ScrollView)
-        // 约束：顶部对齐刘海屏，宽度占满屏幕，高度根据图片比例设置
-          NSLayoutConstraint.activate([
-            ScrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            ScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            ScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-          ])
+        // 设置按钮的图片（假设你有一个名为"back_arrow"的图片）
+        backButton.setImage(UIImage(named: "back"), for: .normal)
         
+        // 设置按钮的颜色
+        backButton.tintColor = UIColor.white
+        
+        // 添加点击事件
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        
+        // 禁用自动约束
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 添加按钮到主视图
+        self.view.addSubview(backButton)
+        
+        // 设置按钮的约束
+        NSLayoutConstraint.activate([
+            backButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
+            backButton.widthAnchor.constraint(equalToConstant: 44),
+            backButton.heightAnchor.constraint(equalToConstant: 44) // 根据图片实际比例调整
+        ])
     }
+    
+    @objc private func backButtonTapped() {
+        // 执行返回操作
+        self.dismiss(animated: true)
+    }
+    
+    private func setupScrollView() {
+          scrollView.translatesAutoresizingMaskIntoConstraints = false
+          contentView.translatesAutoresizingMaskIntoConstraints = false
+          view.addSubview(scrollView)
+          scrollView.addSubview(contentView)
+          
+          NSLayoutConstraint.activate([
+              scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+              scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+              scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+              scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+              
+              contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+              contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+              contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+              contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+              contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+              
+              // 关键部分：设置contentView的高度，使其大于scrollView的高度，以实现滚动
+              contentView.heightAnchor.constraint(equalToConstant: 1200)
+          ])
+      }
+    
+    
+      
     
     private func setupPosterImageView() {
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
-        ScrollView.addSubview(posterImageView)
+        contentView.addSubview(posterImageView)
         
         // 约束：顶部对齐刘海屏，宽度占满屏幕，高度根据图片比例设置
           NSLayoutConstraint.activate([
-              posterImageView.topAnchor.constraint(equalTo: ScrollView.topAnchor),
-              posterImageView.leadingAnchor.constraint(equalTo: ScrollView.leadingAnchor),
-              posterImageView.trailingAnchor.constraint(equalTo: ScrollView.trailingAnchor),
+              posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+              posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+              posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
               posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 16/9) // 根据图片实际比例调整
           ])
           
@@ -120,42 +167,45 @@ class MovieDetailViewController: UIViewController {
           posterImageView.layoutIfNeeded()
           let gradientLayer = posterImageView.layer.sublayers?.first as? CAGradientLayer
           gradientLayer?.frame = CGRect(x: 0, y: 0, width: posterImageView.bounds.width, height: posterImageView.bounds.height)
+
     
     }
     
     private func setupNameLabel() {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        ScrollView.addSubview(nameLabel)
+        contentView.addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 20),
-            nameLabel.leadingAnchor.constraint(equalTo: ScrollView.leadingAnchor, constant: 20),
-            nameLabel.trailingAnchor.constraint(equalTo: ScrollView.trailingAnchor, constant: -20)
+            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
     
     private func setupSummaryLabel() {
         summaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        ScrollView.addSubview(summaryLabel)
+        contentView.addSubview(summaryLabel)
         
         NSLayoutConstraint.activate([
             summaryLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
-            summaryLabel.leadingAnchor.constraint(equalTo: ScrollView.leadingAnchor, constant: 20),
-            summaryLabel.trailingAnchor.constraint(equalTo: ScrollView.trailingAnchor, constant: -20)
+            summaryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            summaryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
     
     private func setupRemarksLabel() {
         remarksLabel.translatesAutoresizingMaskIntoConstraints = false
-        ScrollView.addSubview(remarksLabel)
+        contentView.addSubview(remarksLabel)
         
         NSLayoutConstraint.activate([
             remarksLabel.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20),
-            remarksLabel.leadingAnchor.constraint(equalTo: ScrollView.leadingAnchor, constant: 20),
-            remarksLabel.trailingAnchor.constraint(equalTo: ScrollView.trailingAnchor, constant: -20)
+            remarksLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            remarksLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
     
+    var jishuArray :[String] = [String]()
+    var jishuURLArray :[String] = [String]()
     private func loadMovieDetail(_ movie: Video) {
         // 从URL加载图片
         if let imageUrl = URL(string: movie.vodPic) {
@@ -163,8 +213,89 @@ class MovieDetailViewController: UIViewController {
         }
         nameLabel.text = movie.vodName
         summaryLabel.text = movie.vodBlurb + movie.vodContent
-        remarksLabel.text = movie.vodRemarks
+        remarksLabel.text = movie.vodRemarks + " " + movie.vodLang  + " " + movie.vodYear
+        let movies = movie.vodPlayURL as NSString
+        var newMovices = movies.replacingOccurrences(of: ".m3u8#", with: ".m3u8\n")
+        newMovices = newMovices.replacingOccurrences(of: "$https", with: "\nhttps")
+      
+        
+        
+        newMovices.components(separatedBy: "\n").forEach { str in
+            //print("\n" + str)
+            
+            if(str.count > 10){
+                jishuURLArray.append(str)
+            }else{
+                jishuArray.append(str)
+            }
+
+            
+        }
+        print(jishuArray)
+        print(jishuURLArray)
+        setupButtons()
     }
     
+ 
+    func setupButtons() {
+           let buttonWidth: CGFloat = (self.view.frame.width - 30) / 4 // 4 buttons per row with 5 points spacing
+           let buttonHeight: CGFloat = 44.0 // Default button height
+           
+           let stackView = UIStackView()
+           stackView.axis = .vertical
+           stackView.alignment = .fill
+           stackView.distribution = .equalSpacing
+           stackView.spacing = 5
+           stackView.translatesAutoresizingMaskIntoConstraints = false
+           
+        for row in 0..<5 { // 5 rows of buttons, adjust as needed
+               let horizontalStack = UIStackView()
+               horizontalStack.axis = .horizontal
+               horizontalStack.alignment = .fill
+               horizontalStack.distribution = .equalSpacing
+               horizontalStack.spacing = 5
+               
+               for col in 0..<4 {
+                   let index = row * 4 + col
+                   if index < jishuArray.count {
+                       let button = UIButton(type: .custom)
+                       button.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
+                       button.setTitle(jishuArray[index], for: .normal)
+                       button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                       
+                      button.layer.cornerRadius = 5
+                      button.layer.borderWidth = 0.5
+                      button.layer.borderColor = UIColor.systemGray4.cgColor
+                      button.clipsToBounds = true
+                       horizontalStack.addArrangedSubview(button)
+                       button.tag = index
+                       button.addTarget(self, action: #selector(ButtonTapped(_:)), for: .touchUpInside)
+                   }
+                  
+               }
+               stackView.addArrangedSubview(horizontalStack)
+           }
+        
+           
+            contentView.addSubview(stackView)
+           
+           NSLayoutConstraint.activate([
+               stackView.leadingAnchor.constraint(equalTo:contentView.leadingAnchor, constant: 35),
+               stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+               stackView.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 15)
+           ])
+       }
     
+    @objc private func ButtonTapped(_ button:UIButton){
+       
+        
+        if let u = URL(string: jishuURLArray[button.tag]) { //movie.link
+                   let resource = KSPlayerResource(url: u)
+                   let controller = DetailViewController()
+                   controller.resource = resource
+                   controller.modalPresentationStyle = .fullScreen
+                   self.present(controller, animated:true)
+               }
+            
+    }
 }
