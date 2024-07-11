@@ -13,6 +13,7 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 import SwiftfulLoadingIndicators
+import SwiftLoader
  
 
 class MovieCollectionViewCell: UICollectionViewCell {
@@ -42,13 +43,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
-        
+//        contentView.backgroundColor = UIColor.lightGray
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor ,constant: 10),
+//            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
 //            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 //            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
-            
+            imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//               imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+
             imageView.widthAnchor.constraint(equalToConstant: 100),
             imageView.heightAnchor.constraint(equalToConstant: 140),
             
@@ -114,6 +117,13 @@ class HeaderView: UICollectionReusableView {
     
     let titleLabel = UILabel()
     
+    private let imageView: SDAnimatedImageView = {
+        let imageView = SDAnimatedImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -125,17 +135,31 @@ class HeaderView: UICollectionReusableView {
     }
     
     private func setupViews() {
+        
+        self.backgroundColor = UIColor(fromHex: "#f2f4f6")
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
+        addSubview(imageView)
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 36),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            
+            
+            
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            
+            imageView.widthAnchor.constraint(equalToConstant: 20),
+            imageView.heightAnchor.constraint(equalToConstant: 20),
+            
+            
         ])
     }
     
     func configure(with title: String) {
+        imageView.image = UIImage(named: "cateicon")
         titleLabel.text = title
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
     }
@@ -153,31 +177,32 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
       
       override func viewDidLoad() {
           super.viewDidLoad()
-          view.backgroundColor = UIColor(fromHex: "#f1f4f5")
+//          view.backgroundColor = UIColor(fromHex: "#f1f4f5")
           
           let layout = UICollectionViewFlowLayout()
           layout.scrollDirection = .vertical
+          
+          collectionView.backgroundColor = UIColor(fromHex: "#f2f4f6")
           
           //collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
           collectionView.backgroundColor = .white
           collectionView.dataSource = self
           collectionView.delegate = self
           collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
-          
-          
+                    
           let layout2 = UICollectionViewFlowLayout()
           layout2.headerReferenceSize = CGSize(width: view.frame.width, height: 50)
-          layout2.itemSize = CGSize(width: 120, height: 200)
-          layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
+          let width = (collectionView.frame.width - 30) / 3
+          
+//          print("width \(width)")
+          layout2.itemSize = CGSize(width: width, height: 180)
+          layout2.minimumInteritemSpacing = 0 // 设置图标之间的间距)
           layout2.minimumLineSpacing = 10 // 设置行间距
-          layout2.sectionInset =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // 设置间距
+          layout2.sectionInset =  UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0) // 设置间距
           collectionView.collectionViewLayout = layout2
           
-                 
-          
+
           collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.identifier)
-              
-          
           
           sendRequestGetconfig()
           
@@ -186,7 +211,9 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
       
       func sendRequestGetconfig() {
           
-//          LoadingIndicator()
+          SwiftLoader.show(title: "Loading...", animated: true)
+
+        //  LoadingIndicator()
   //        // Fetch Request
           
           let requestComplete: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
@@ -202,51 +229,50 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
                       
                       guard let data = value.data(using: String.Encoding.utf8) else {
                           print("Error: Cannot create data from JSON string.")
+                          SwiftLoader.hide()
                           return
                       }
-                      
-                      print(value)
-
+                       
                       // 创建 JSONDecoder 实例
                       let decoder = JSONDecoder()
 
-                      // 使用 JSONDecoder 解码数据
-                      do {
-                          let response_config = try decoder.decode(VideoListResponse.self, from: data)
-                          print("Code: \(response_config.code)")
-                          print("Message: \(response_config.message)")
-                          
-                          if(Int(response_config.code) == 1){
+                          // 使用 JSONDecoder 解码数据
+                          do {
+                              let response_config = try decoder.decode(VideoListResponse.self, from: data)
+                              print("Code: \(response_config.code)")
+                              print("Message: \(response_config.message)")
                               
-                              //self.movies = response_config.data.videolist
-                              
-                              response_config.data.videolist.forEach { VideoCategoryItem in
-//                                  self.movies?.append(VideoCategoryItem.categoryName)
-                                  self.videoCategorys.append(VideoCategoryItem)
-                                  VideoCategoryItem.videoListChild.forEach { Videoitem in
-                                      self.movies.append(Videoitem)
+                              if(Int(response_config.code) == 1){
+                                  
+                                  //self.movies = response_config.data.videolist
+                                  
+                                  response_config.data.videolist.forEach { VideoCategoryItem in
+    //                                  self.movies?.append(VideoCategoryItem.categoryName)
+                                      self.videoCategorys.append(VideoCategoryItem)
+                                      VideoCategoryItem.videoListChild.forEach { Videoitem in
+                                          self.movies.append(Videoitem)
+                                      }
+                                  }
+                                  
+                                  
+                                   
+                                  DispatchQueue.main.async {
+                                      SwiftLoader.hide()
+
+                                      self.collectionView.reloadData()
+                                      
+                                      
                                   }
                               }
                               
-                              
-                               
-                              DispatchQueue.main.async {
-                                    
-                                  self.collectionView.reloadData()
-                                  
-                                  
-                              }
+                          } catch {
+                              SwiftLoader.hide()
+                              print("Json parse Error: \(error)")
                           }
-                          
-                      } catch {
-                          print("Error: \(error)")
-                      }
                       
-                             // 在主线程更新 UI 或处理数据
-                             DispatchQueue.main.async {
-                                 // UI 更新代码
-                             }
+                              
                          case .failure(let error):
+                            self.sendRequestGetconfig()
                              debugPrint("HTTP Request failed: \(error)")
                              // 错误处理
                          }
@@ -296,6 +322,12 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
           return headerView
       }
       
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //https://hn.bfvvs.com/play/6dBWo3We/index.m3u8
+
+        
+    }
 //      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //          let width = (collectionView.frame.width - 30) / 3
 //          return CGSize(width: width, height: width * 1.5)

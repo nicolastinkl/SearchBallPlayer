@@ -87,10 +87,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         iconsCollectionView.backgroundColor = UIColor.clear
         searchBar.backgroundColor = UIColor.clear
         let layout2 = UICollectionViewFlowLayout()
-        layout2.itemSize = CGSize(width: 120, height: 120)
-        layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
-        layout2.minimumLineSpacing = 10 // 设置行间距
-        layout2.sectionInset =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // 设置间距
+        let width = (iconsCollectionView.frame.width - 30) / 3
+        layout2.itemSize = CGSize(width:width, height: 120)
+//        layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
+//        layout2.minimumLineSpacing = 10 // 设置行间距
+        layout2.sectionInset =  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // 设置间距
         iconsCollectionView.collectionViewLayout = layout2
         
 
@@ -183,8 +184,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
              
             //DataResponse<Decodable, AFError>
             
-            
-        
+             
         
     }
 
@@ -339,7 +339,7 @@ class IconCollectionViewCell: UICollectionViewCell {
            
             if let err = error {
                 //
-//                print("\(err.localizedDescription) \(url)")
+                print("\(err.localizedDescription)  ")
                 self.iconImageView.setIcon(icon:  .weather(.rainMix))
             }
         }
