@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		5AFAAE8F84FB0CDF9BCFDA9D /* Pods_SDKVideoPlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ACC29B576E7E61EC3D021A /* Pods_SDKVideoPlayerTests.framework */; };
 		C00A39F32C3FBC57004E31E4 /* SwiftLoader in Frameworks */ = {isa = PBXBuildFile; productRef = C00A39F22C3FBC57004E31E4 /* SwiftLoader */; };
 		C00A39F52C3FC0C4004E31E4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */; };
+		C00A39FA2C3FCA4C004E31E4 /* KSPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = C00A39F92C3FCA4C004E31E4 /* KSPlayer */; };
+		C00A39FC2C3FEB39004E31E4 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A39FB2C3FEB39004E31E4 /* MovieDetailViewController.swift */; };
 		C09C70162C3D4641000F6E01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70152C3D4641000F6E01 /* AppDelegate.swift */; };
 		C09C70182C3D4641000F6E01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70172C3D4641000F6E01 /* SceneDelegate.swift */; };
 		C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70192C3D4641000F6E01 /* ViewController.swift */; };
@@ -73,6 +75,7 @@
 		61ACC29B576E7E61EC3D021A /* Pods_SDKVideoPlayerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SDKVideoPlayerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE686547336B4DCAE9A7CE4B /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests.release.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayer-SDKVideoPlayerUITests/Pods-SDKVideoPlayer-SDKVideoPlayerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C00A39FB2C3FEB39004E31E4 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		C09C70122C3D4641000F6E01 /* SDKVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09C70152C3D4641000F6E01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C09C70172C3D4641000F6E01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 			files = (
 				59027263754A113519BFADEA /* Pods_SDKVideoPlayer.framework in Frameworks */,
 				C00A39F32C3FBC57004E31E4 /* SwiftLoader in Frameworks */,
+				C00A39FA2C3FCA4C004E31E4 /* KSPlayer in Frameworks */,
 				12CADDA72C3E2F540032635B /* Alamofire in Frameworks */,
 				C09C70652C3D6558000F6E01 /* SDWebImageMapKit in Frameworks */,
 				C09C70632C3D6558000F6E01 /* SDWebImage in Frameworks */,
@@ -182,6 +186,7 @@
 				C09C70192C3D4641000F6E01 /* ViewController.swift */,
 				C09C704C2C3D4AE5000F6E01 /* HomeViewController.swift */,
 				12CADDAD2C3E398E0032635B /* MainViewController.swift */,
+				C00A39FB2C3FEB39004E31E4 /* MovieDetailViewController.swift */,
 				C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */,
 				12CADDAB2C3E31FB0032635B /* Utitils.swift */,
 				C09C701B2C3D4641000F6E01 /* Main.storyboard */,
@@ -237,6 +242,7 @@
 				12CADDA62C3E2F540032635B /* Alamofire */,
 				12CADDB02C3E43940032635B /* SwiftfulLoadingIndicators */,
 				C00A39F22C3FBC57004E31E4 /* SwiftLoader */,
+				C00A39F92C3FCA4C004E31E4 /* KSPlayer */,
 			);
 			productName = SDKVideoPlayer;
 			productReference = C09C70122C3D4641000F6E01 /* SDKVideoPlayer.app */;
@@ -319,6 +325,7 @@
 				12CADDA52C3E2F050032635B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				12CADDAF2C3E43940032635B /* XCRemoteSwiftPackageReference "SwiftfulLoadingIndicators" */,
 				C00A39F12C3FBC57004E31E4 /* XCRemoteSwiftPackageReference "SwiftLoader" */,
+				C00A39F82C3FCA4C004E31E4 /* XCLocalSwiftPackageReference "KSPlayer" */,
 			);
 			productRefGroup = C09C70132C3D4641000F6E01 /* Products */;
 			projectDirPath = "";
@@ -471,6 +478,7 @@
 				12CADDAC2C3E31FB0032635B /* Utitils.swift in Sources */,
 				C09C704D2C3D4AE5000F6E01 /* HomeViewController.swift in Sources */,
 				C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */,
+				C00A39FC2C3FEB39004E31E4 /* MovieDetailViewController.swift in Sources */,
 				C09C70202C3D4641000F6E01 /* SDKVideoPlayer.xcdatamodeld in Sources */,
 				C09C70162C3D4641000F6E01 /* AppDelegate.swift in Sources */,
 				C09C70182C3D4641000F6E01 /* SceneDelegate.swift in Sources */,
@@ -836,6 +844,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		C00A39F82C3FCA4C004E31E4 /* XCLocalSwiftPackageReference "KSPlayer" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = KSPlayer;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		12CADDA52C3E2F050032635B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -894,6 +909,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C00A39F12C3FBC57004E31E4 /* XCRemoteSwiftPackageReference "SwiftLoader" */;
 			productName = SwiftLoader;
+		};
+		C00A39F92C3FCA4C004E31E4 /* KSPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KSPlayer;
 		};
 		C09C70622C3D6558000F6E01 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;

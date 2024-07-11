@@ -40,6 +40,7 @@ class DetailViewController: UIViewController, DetailProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.black
         view.addSubview(playerView)
         playerView.delegate = self
         playerView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,12 +63,15 @@ class DetailViewController: UIViewController, DetailProtocol {
         playerView.backBlock = { [unowned self] in
             #if os(iOS)
             if UIApplication.shared.statusBarOrientation.isLandscape {
+                view.backgroundColor = UIColor.black
                 playerView.updateUI(isLandscape: false)
             } else {
                 navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true)
             }
             #else
             navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
             #endif
         }
         playerView.becomeFirstResponder()

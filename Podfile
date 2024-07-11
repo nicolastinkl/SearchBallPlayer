@@ -7,12 +7,9 @@ target 'SDKVideoPlayer' do
 
   # Pods for SDKVideoPlayer
   pod 'SwiftIcons', '~> 3.0'
-  # pod 'KSPlayer' #, :path => './KSPlayer/'
-  # pod 'DisplayCriteria'#, :path => './KSPlayer/'
-
-
-  pod 'KSPlayer',:git => 'https://github.com/kingslay/KSPlayer.git', :branch => 'main'
-  pod 'DisplayCriteria',:git => 'https://github.com/kingslay/KSPlayer.git', :branch => 'main'
+  pod 'DisplayCriteria', :path => './KSPlayer/'
+#  pod 'KSPlayer' , :path => './KSPlayer/'
+  
 
 
   target 'SDKVideoPlayerTests' do

@@ -14,6 +14,7 @@ import SDWebImage
 import SwiftIcons
 import SwiftfulLoadingIndicators
 import SwiftLoader
+import KSPlayer
  
 
 class MovieCollectionViewCell: UICollectionViewCell {
@@ -68,8 +69,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func configure(with data: Video) {
         
-        imageView.sd_setImage(with: URL.init(string: data.coverImageUrl), placeholderImage: UIImage(named: "placeholder-image"), context: nil)
-        titleLabel.text = data.title
+        imageView.sd_setImage(with: URL.init(string: data.vodPic), placeholderImage: UIImage(named: "placeholder-image"), context: nil)
+        titleLabel.text = data.vodName
 //        imageView.image = image
 //        titleLabel.text = title
           
@@ -97,15 +98,132 @@ struct VideoCategory: Codable {
 }
 
 struct Video: Codable {
-    let title: String
-    let link: String
-    let coverImageUrl: String
+//    let title: String
+//    let link: String
+//    let coverImageUrl: String
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case title
+//        case link
+//        case coverImageUrl = "corverimageurl"
+//    }
     
+    let vodID, typeID, typeID1, groupID: Int
+       let vodName, vodSub, vodEn: String
+       let vodStatus: Int
+       let vodLetter, vodColor, vodTag, vodClass: String
+       let vodPic: String
+       let vodPicThumb, vodPicSlide, vodPicScreenshot, vodActor: String
+       let vodDirector, vodWriter, vodBehind, vodBlurb: String
+       let vodRemarks, vodPubdate: String
+       let vodTotal: Int
+       let vodSerial, vodTv, vodWeekday, vodArea: String
+       let vodLang, vodYear, vodVersion, vodState: String
+       let vodAuthor, vodJumpurl, vodTpl, vodTplPlay: String
+       let vodTplDown: String
+       let vodIsend, vodLock, vodLevel, vodCopyright: Int
+       let vodPoints, vodPointsPlay, vodPointsDown, vodHits: Int
+       let vodHitsDay, vodHitsWeek, vodHitsMonth: Int
+       let vodDuration: String
+       let vodUp, vodDown: Int
+       let vodScore: String
+       let vodScoreAll, vodScoreNum: Int
+       let vodTime: String
+       let vodTimeAdd, vodTimeHits, vodTimeMake, vodTrysee: Int
+       let vodDoubanID: Int
+       let vodDoubanScore, vodReurl, vodRelVOD, vodRelArt: String
+       let vodPwd, vodPwdURL, vodPwdPlay, vodPwdPlayURL: String
+       let vodPwdDown, vodPwdDownURL, vodContent, vodPlayFrom: String
+       let vodPlayServer, vodPlayNote, vodPlayURL, vodDownFrom: String
+       let vodDownServer, vodDownNote, vodDownURL: String
+       let vodPlot: Int
+       let vodPlotName, vodPlotDetail, typeName: String
+
     enum CodingKeys: String, CodingKey {
-        case title
-        case link
-        case coverImageUrl = "corverimageurl"
-    }
+           case vodID = "vod_id"
+           case typeID = "type_id"
+           case typeID1 = "type_id_1"
+           case groupID = "group_id"
+           case vodName = "vod_name"
+           case vodSub = "vod_sub"
+           case vodEn = "vod_en"
+           case vodStatus = "vod_status"
+           case vodLetter = "vod_letter"
+           case vodColor = "vod_color"
+           case vodTag = "vod_tag"
+           case vodClass = "vod_class"
+           case vodPic = "vod_pic"
+           case vodPicThumb = "vod_pic_thumb"
+           case vodPicSlide = "vod_pic_slide"
+           case vodPicScreenshot = "vod_pic_screenshot"
+           case vodActor = "vod_actor"
+           case vodDirector = "vod_director"
+           case vodWriter = "vod_writer"
+           case vodBehind = "vod_behind"
+           case vodBlurb = "vod_blurb"
+           case vodRemarks = "vod_remarks"
+           case vodPubdate = "vod_pubdate"
+           case vodTotal = "vod_total"
+           case vodSerial = "vod_serial"
+           case vodTv = "vod_tv"
+           case vodWeekday = "vod_weekday"
+           case vodArea = "vod_area"
+           case vodLang = "vod_lang"
+           case vodYear = "vod_year"
+           case vodVersion = "vod_version"
+           case vodState = "vod_state"
+           case vodAuthor = "vod_author"
+           case vodJumpurl = "vod_jumpurl"
+           case vodTpl = "vod_tpl"
+           case vodTplPlay = "vod_tpl_play"
+           case vodTplDown = "vod_tpl_down"
+           case vodIsend = "vod_isend"
+           case vodLock = "vod_lock"
+           case vodLevel = "vod_level"
+           case vodCopyright = "vod_copyright"
+           case vodPoints = "vod_points"
+           case vodPointsPlay = "vod_points_play"
+           case vodPointsDown = "vod_points_down"
+           case vodHits = "vod_hits"
+           case vodHitsDay = "vod_hits_day"
+           case vodHitsWeek = "vod_hits_week"
+           case vodHitsMonth = "vod_hits_month"
+           case vodDuration = "vod_duration"
+           case vodUp = "vod_up"
+           case vodDown = "vod_down"
+           case vodScore = "vod_score"
+           case vodScoreAll = "vod_score_all"
+           case vodScoreNum = "vod_score_num"
+           case vodTime = "vod_time"
+           case vodTimeAdd = "vod_time_add"
+           case vodTimeHits = "vod_time_hits"
+           case vodTimeMake = "vod_time_make"
+           case vodTrysee = "vod_trysee"
+           case vodDoubanID = "vod_douban_id"
+           case vodDoubanScore = "vod_douban_score"
+           case vodReurl = "vod_reurl"
+           case vodRelVOD = "vod_rel_vod"
+           case vodRelArt = "vod_rel_art"
+           case vodPwd = "vod_pwd"
+           case vodPwdURL = "vod_pwd_url"
+           case vodPwdPlay = "vod_pwd_play"
+           case vodPwdPlayURL = "vod_pwd_play_url"
+           case vodPwdDown = "vod_pwd_down"
+           case vodPwdDownURL = "vod_pwd_down_url"
+           case vodContent = "vod_content"
+           case vodPlayFrom = "vod_play_from"
+           case vodPlayServer = "vod_play_server"
+           case vodPlayNote = "vod_play_note"
+           case vodPlayURL = "vod_play_url"
+           case vodDownFrom = "vod_down_from"
+           case vodDownServer = "vod_down_server"
+           case vodDownNote = "vod_down_note"
+           case vodDownURL = "vod_down_url"
+           case vodPlot = "vod_plot"
+           case vodPlotName = "vod_plot_name"
+           case vodPlotDetail = "vod_plot_detail"
+           case typeName = "type_name"
+       }
 }
 
 
@@ -114,8 +232,16 @@ class HeaderView: UICollectionReusableView {
     
     
     static let identifier = "HeaderViewCollectionViewCell"
+     
     
-    let titleLabel = UILabel()
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textAlignment = .left
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private let imageView: SDAnimatedImageView = {
         let imageView = SDAnimatedImageView()
@@ -324,9 +450,21 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
       
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //https://hn.bfvvs.com/play/6dBWo3We/index.m3u8
-
+        //
         
+        let category = videoCategorys[indexPath.section]
+        let  movie =  category.videoListChild[indexPath.item]
+        let  controller = MovieDetailViewController()
+        controller.movieDetail = movie
+        controller.modalPresentationStyle = .fullScreen
+         self.present(controller, animated:true)
+//        if let u = URL(string: "https://hn.bfvvs.com/play/6dBWo3We/index.m3u8") { //movie.link
+//            let resource = KSPlayerResource(url: u)
+//            let controller = DetailViewController()
+//            controller.resource = resource
+//            controller.modalPresentationStyle = .fullScreen
+//            self.present(controller, animated:true)
+//        }
     }
 //      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //          let width = (collectionView.frame.width - 30) / 3
