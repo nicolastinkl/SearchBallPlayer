@@ -288,8 +288,11 @@ class MovieDetailViewController: UIViewController {
            }
         
               // 约束内容视图的高度，使其包含所有按钮
+              let heightSummary:CGFloat = CGFloat(summaryLabel.text?.count ?? 0) * 1.2
+              print(heightSummary)
               NSLayoutConstraint.activate([
-                contentView.heightAnchor.constraint(equalToConstant:self.view.frame.height*0.7 +  CGFloat(numberOfRows) * (buttonSize + spacing) + spacing)
+                
+                contentView.heightAnchor.constraint(equalToConstant:self.view.frame.height*0.6 + heightSummary   +  CGFloat(numberOfRows) * (buttonSize + spacing) + spacing)
               ])
        }
     
