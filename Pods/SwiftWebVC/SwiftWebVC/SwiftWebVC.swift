@@ -168,6 +168,7 @@ public class SwiftWebVC: UIViewController {
     // Toolbar
     
     func updateToolbarItems() {
+        return
         backBarButtonItem.isEnabled = webView.canGoBack
         forwardBarButtonItem.isEnabled = webView.canGoForward
         

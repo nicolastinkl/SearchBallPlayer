@@ -228,9 +228,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
             let keyword:Website = icons[indexPath.item]
             let urlString = keyword.url
             if let url = URL(string: urlString) {
-                       let safariViewController = SFSafariViewController(url: url)
-                       safariViewController.delegate = self
-                       present(safariViewController, animated: true, completion: nil)
+//                       let safariViewController = SFSafariViewController(url: url)
+//                       safariViewController.delegate = self
+//                       present(safariViewController, animated: true, completion: nil)
+                let controller = SwiftWebVC(urlString: urlString)
+                self.show(controller, sender: self)
                    }
         }
     }
