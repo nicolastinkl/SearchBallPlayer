@@ -27,9 +27,9 @@ class MovieDetailViewController: UIViewController {
            let gradientLayer = CAGradientLayer()
            gradientLayer.colors = [
                UIColor.clear.cgColor, // 顶部透明
-               UIColor.black.cgColor  // 底部黑色
+               UIColor.black.withAlphaComponent(0.5).cgColor  // 底部黑色
            ]
-           gradientLayer.locations = [0.0, 0.9] // 渐变在图片高度的一半开始
+           gradientLayer.locations = [0.0, 0.95] // 渐变在图片高度的一半开始
            gradientLayer.frame = imageView.bounds
            
            // 将渐变层添加到图片视图
@@ -109,12 +109,12 @@ class MovieDetailViewController: UIViewController {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
         // 添加按钮到主视图
-        self.view.addSubview(backButton)
+        scrollView.addSubview(backButton)
         
         // 设置按钮的约束
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
+            backButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
             backButton.widthAnchor.constraint(equalToConstant: 44),
             backButton.heightAnchor.constraint(equalToConstant: 44) // 根据图片实际比例调整
         ])
@@ -144,7 +144,7 @@ class MovieDetailViewController: UIViewController {
               contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
               
               // 关键部分：设置contentView的高度，使其大于scrollView的高度，以实现滚动
-              contentView.heightAnchor.constraint(equalToConstant: 1200)
+              //contentView.heightAnchor.constraint(equalToConstant: 1200)
           ])
       }
     
@@ -157,10 +157,11 @@ class MovieDetailViewController: UIViewController {
         
         // 约束：顶部对齐刘海屏，宽度占满屏幕，高度根据图片比例设置
           NSLayoutConstraint.activate([
-              posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+              posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: -60),
               posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
               posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-              posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 16/9) // 根据图片实际比例调整
+//              posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 16/9) // 根据图片实际比例调整
+            posterImageView.heightAnchor.constraint(equalToConstant: 400)
           ])
           
           // 更新渐变层的位置，确保它适应刘海屏
@@ -219,71 +220,74 @@ class MovieDetailViewController: UIViewController {
         newMovices = newMovices.replacingOccurrences(of: "$https", with: "\nhttps")
       
         
-        
+        var index = 1
         newMovices.components(separatedBy: "\n").forEach { str in
             //print("\n" + str)
             
             if(str.count > 10){
                 jishuURLArray.append(str)
-            }else{
-                jishuArray.append(str)
+                jishuArray.append("\(index)")
+                index  = index + 1
+                
             }
 
             
         }
-        print(jishuArray)
-        print(jishuURLArray)
+//        print(jishuArray)
+        print("总条数：\(jishuURLArray.count)" )
+        print("行数: ")
+        print(jishuArray.count/4)
         setupButtons()
     }
     
  
     func setupButtons() {
-           let buttonWidth: CGFloat = (self.view.frame.width - 30) / 4 // 4 buttons per row with 5 points spacing
-           let buttonHeight: CGFloat = 44.0 // Default button height
-           
-           let stackView = UIStackView()
-           stackView.axis = .vertical
-           stackView.alignment = .fill
-           stackView.distribution = .equalSpacing
-           stackView.spacing = 5
-           stackView.translatesAutoresizingMaskIntoConstraints = false
-           
-        for row in 0..<5 { // 5 rows of buttons, adjust as needed
-               let horizontalStack = UIStackView()
-               horizontalStack.axis = .horizontal
-               horizontalStack.alignment = .fill
-               horizontalStack.distribution = .equalSpacing
-               horizontalStack.spacing = 5
-               
-               for col in 0..<4 {
-                   let index = row * 4 + col
+        
+//        let buttonSize: CGFloat = 40.0
+        let numberOfColumns: Int = 6
+        
+        let numberOfRows =   jishuArray.count/numberOfColumns+1
+        let spacing: CGFloat = 10
+        let buttonSize: CGFloat = (self.view.frame.width - spacing*7) / 6
+        for row in 0..<numberOfRows { //  6 rows of buttons, adjust as needed
+
+            for col in 0..<numberOfColumns {
+                   let index = row * numberOfColumns + col
                    if index < jishuArray.count {
                        let button = UIButton(type: .custom)
-                       button.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
                        button.setTitle(jishuArray[index], for: .normal)
                        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                       button.setTitleColor(UIColor.orange, for: UIControl.State.selected)
+                       button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
                        
-                      button.layer.cornerRadius = 5
-                      button.layer.borderWidth = 0.5
-                      button.layer.borderColor = UIColor.systemGray4.cgColor
-                      button.clipsToBounds = true
-                       horizontalStack.addArrangedSubview(button)
+                       button.backgroundColor = UIColor(fromHex: "#eeeef0")
+                       button.layer.cornerRadius = 5
+                       button.clipsToBounds = true
+
                        button.tag = index
                        button.addTarget(self, action: #selector(ButtonTapped(_:)), for: .touchUpInside)
+                       
+                       
+                       contentView.addSubview(button)
+                       button.translatesAutoresizingMaskIntoConstraints = false
+                         
+                     
+                         NSLayoutConstraint.activate([
+                             button.widthAnchor.constraint(equalToConstant: buttonSize),
+                             button.heightAnchor.constraint(equalToConstant: buttonSize),
+                             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(col) * (buttonSize + spacing) + spacing),
+                             button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 + CGFloat(row) * (buttonSize + spacing) + spacing)
+                         ])
+        
                    }
                   
                }
-               stackView.addArrangedSubview(horizontalStack)
            }
         
-           
-            contentView.addSubview(stackView)
-           
-           NSLayoutConstraint.activate([
-               stackView.leadingAnchor.constraint(equalTo:contentView.leadingAnchor, constant: 35),
-               stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-               stackView.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 15)
-           ])
+              // 约束内容视图的高度，使其包含所有按钮
+              NSLayoutConstraint.activate([
+                contentView.heightAnchor.constraint(equalToConstant:self.view.frame.height*0.7 +  CGFloat(numberOfRows) * (buttonSize + spacing) + spacing)
+              ])
        }
     
     @objc private func ButtonTapped(_ button:UIButton){
