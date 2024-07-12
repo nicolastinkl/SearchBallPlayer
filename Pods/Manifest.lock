@@ -1,13 +1,16 @@
 PODS:
   - DisplayCriteria (1.1.0)
+  - JSQWebViewController (6.0.0)
   - SwiftIcons (3.0)
 
 DEPENDENCIES:
   - DisplayCriteria (from `./KSPlayer/`)
+  - JSQWebViewController
   - SwiftIcons (~> 3.0)
 
 SPEC REPOS:
   trunk:
+    - JSQWebViewController
     - SwiftIcons
 
 EXTERNAL SOURCES:
@@ -16,8 +19,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   DisplayCriteria: bb0a90faf14b30848bc50ac0516340ce50164187
+  JSQWebViewController: 51041569b75d19dbb6b7fe0b7ae053c32409a9be
   SwiftIcons: 3b748e57d9eee0c7c8d3bdbf2d742c0b1b4c6172
 
-PODFILE CHECKSUM: e03364daf59d8ae0b3e0855a33e9fa2630246364
+PODFILE CHECKSUM: 8a3bc8afb811a0fc07e7a069d8cc25e8e2659bd9
 
 COCOAPODS: 1.15.2

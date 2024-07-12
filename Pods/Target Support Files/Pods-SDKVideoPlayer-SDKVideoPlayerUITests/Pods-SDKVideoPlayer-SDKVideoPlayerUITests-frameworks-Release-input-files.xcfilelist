@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-SDKVideoPlayer-SDKVideoPlayerUITests/Pods-SDKVideoPlayer-SDKVideoPlayerUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/JSQWebViewController/JSQWebViewController.framework
 ${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework

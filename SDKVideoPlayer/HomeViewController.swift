@@ -14,6 +14,7 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 import SwiftLoader
+import JSQWebViewController
 
 // 基本的数据模型
 struct Website: Codable {
@@ -264,9 +265,13 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
             let keyword:SearchRecommendation =  searchSuggestionKeywords[sender.tag]
             let urlString = keyword.url
             if let url = URL(string: urlString) {
-                       let safariViewController = SFSafariViewController(url: url)
-                       safariViewController.delegate = self
-                       present(safariViewController, animated: true, completion: nil)
+//                       let safariViewController = SFSafariViewController(url: url)
+//                       safariViewController.delegate = self
+//                       present(safariViewController, animated: true, completion: nil)
+                
+                let controller = WebViewController(url: url)
+                self.show(controller, sender: self)
+                
                    }
         }
        

@@ -7,7 +7,7 @@
 
 import Foundation
 
-//SDKWBViewController
+//
 
 
 import UIKit
@@ -18,4 +18,15 @@ import SwiftfulLoadingIndicators
 import SwiftLoader
 import KSPlayer
 
+
+
+class SDKWBViewController: UIViewController { 
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
+    
 
