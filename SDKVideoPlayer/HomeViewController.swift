@@ -13,6 +13,7 @@ import SafariServices
 import Alamofire
 import SDWebImage
 import SwiftIcons
+import SwiftLoader
 
 // 基本的数据模型
 struct Website: Codable {
@@ -107,12 +108,13 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
          */
 
         
+        SwiftLoader.show(title: "Loading...", animated: true)
         
 //        // Fetch Request
         
         let requestComplete: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
 //            let end = CACurrentMediaTime()
-
+            SwiftLoader.hide()
             //if let response {
 //                for (field, value) in response.allHeaderFields {
 //                    debugPrint("\(field) \(value)" )
@@ -123,6 +125,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                     
                     guard let data = value.data(using: String.Encoding.utf8) else {
                         print("Error: Cannot create data from JSON string.")
+                        DispatchQueue.main.async {
+                            self.showNetworkErrorView(errormsg: "Error: Cannot create data from JSON string.", clickBlock: {
+                                self.sendRequestGetconfig()
+                            })
+                        }
                         return
                     }
 
@@ -157,20 +164,30 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                         
                     } catch {
                         print("Error: \(error)")
+                        
+                        DispatchQueue.main.async {
+                            // UI 更新代码
+                            self.showNetworkErrorView (errormsg: "\(error.localizedDescription)", clickBlock: {
+                                self.sendRequestGetconfig()
+                            })
+                        }
                     }
                     
-                           // 在主线程更新 UI 或处理数据
-                           DispatchQueue.main.async {
-                               // UI 更新代码
-                           }
+                          
                        case .failure(let error):
                            debugPrint("HTTP Request failed: \(error)")
+                            // 在主线程更新 UI 或处理数据
+                            DispatchQueue.main.async {
+                                // UI 更新代码
+                                self.showNetworkErrorView (errormsg: "\(error.localizedDescription)", clickBlock: {
+                                    self.sendRequestGetconfig()
+                                })
+                            }
                            // 错误处理
                        }
                 
 //            }
 
-           
  
         }
         

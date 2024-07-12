@@ -18,6 +18,8 @@
 		C00A39FA2C3FCA4C004E31E4 /* KSPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = C00A39F92C3FCA4C004E31E4 /* KSPlayer */; };
 		C00A39FC2C3FEB39004E31E4 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A39FB2C3FEB39004E31E4 /* MovieDetailViewController.swift */; };
 		C00A39FE2C40D14A004E31E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C00A39FD2C40D14A004E31E4 /* InfoPlist.strings */; };
+		C00A3A002C4136BC004E31E4 /* MoreVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A39FF2C4136BC004E31E4 /* MoreVideosViewController.swift */; };
+		C00A3A022C413871004E31E4 /* SDKWBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A3A012C413871004E31E4 /* SDKWBViewController.swift */; };
 		C09C70162C3D4641000F6E01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70152C3D4641000F6E01 /* AppDelegate.swift */; };
 		C09C70182C3D4641000F6E01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70172C3D4641000F6E01 /* SceneDelegate.swift */; };
 		C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70192C3D4641000F6E01 /* ViewController.swift */; };
@@ -78,6 +80,8 @@
 		C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C00A39FB2C3FEB39004E31E4 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		C00A39FD2C40D14A004E31E4 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		C00A39FF2C4136BC004E31E4 /* MoreVideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVideosViewController.swift; sourceTree = "<group>"; };
+		C00A3A012C413871004E31E4 /* SDKWBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKWBViewController.swift; sourceTree = "<group>"; };
 		C09C70122C3D4641000F6E01 /* SDKVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09C70152C3D4641000F6E01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C09C70172C3D4641000F6E01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,7 +192,9 @@
 				C09C70192C3D4641000F6E01 /* ViewController.swift */,
 				C09C704C2C3D4AE5000F6E01 /* HomeViewController.swift */,
 				12CADDAD2C3E398E0032635B /* MainViewController.swift */,
+				C00A3A012C413871004E31E4 /* SDKWBViewController.swift */,
 				C00A39FB2C3FEB39004E31E4 /* MovieDetailViewController.swift */,
+				C00A39FF2C4136BC004E31E4 /* MoreVideosViewController.swift */,
 				C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */,
 				12CADDAB2C3E31FB0032635B /* Utitils.swift */,
 				C09C701B2C3D4641000F6E01 /* Main.storyboard */,
@@ -481,12 +487,14 @@
 				12CADDAE2C3E398E0032635B /* MainViewController.swift in Sources */,
 				12CADDAC2C3E31FB0032635B /* Utitils.swift in Sources */,
 				C09C704D2C3D4AE5000F6E01 /* HomeViewController.swift in Sources */,
+				C00A3A002C4136BC004E31E4 /* MoreVideosViewController.swift in Sources */,
 				C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */,
 				C00A39FC2C3FEB39004E31E4 /* MovieDetailViewController.swift in Sources */,
 				C09C70202C3D4641000F6E01 /* SDKVideoPlayer.xcdatamodeld in Sources */,
 				C09C70162C3D4641000F6E01 /* AppDelegate.swift in Sources */,
 				C09C70182C3D4641000F6E01 /* SceneDelegate.swift in Sources */,
 				C00A39F52C3FC0C4004E31E4 /* DetailViewController.swift in Sources */,
+				C00A3A022C413871004E31E4 /* SDKWBViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

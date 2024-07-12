@@ -27,6 +27,7 @@ class MovieDetailViewController: UIViewController {
            let gradientLayer = CAGradientLayer()
            gradientLayer.colors = [
                UIColor.clear.cgColor, // 顶部透明
+//               UIColor(fromHex: "#9244a5").cgColor
                UIColor.black.withAlphaComponent(0.5).cgColor  // 底部黑色
            ]
            gradientLayer.locations = [0.0, 0.95] // 渐变在图片高度的一半开始
@@ -62,9 +63,19 @@ class MovieDetailViewController: UIViewController {
         return label
     }()
     
-    
+    private let playButton:UIButton = {
+        
+        let playButton = UIButton(type: .custom)
+        
+        playButton.tintColor = UIColor.white
+        playButton.setImage(UIImage(named: "Play"), for: UIControl.State.normal)
+//          playButton.layer.cornerRadius = 25
+          playButton.translatesAutoresizingMaskIntoConstraints = false
+          return playButton
+    }()
     let scrollView = UIScrollView()
     let contentView = UIView()
+    var hdplayurl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,19 +88,22 @@ class MovieDetailViewController: UIViewController {
         setupNameLabel()
         setupSummaryLabel()
         setupRemarksLabel()
+        setupPlayButton()
         
         // 使用提供的JSON数据填充界面
         guard let movieDetail = movieDetail else { return }
         loadMovieDetail(movieDetail)
         
+        
         //generation back button
-        
-        // list
-        
-        // Scrollview
-        
         setupNavigationBar()
+          
+    }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     private func setupNavigationBar() {
@@ -100,30 +114,41 @@ class MovieDetailViewController: UIViewController {
         backButton.setImage(UIImage(named: "back"), for: .normal)
         
         // 设置按钮的颜色
-        backButton.tintColor = UIColor.white
+//        backButton.tintColor = UIColor.white
         
         // 添加点击事件
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
+        backButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+
+        // 设置按钮的尺寸
+//        backButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         // 禁用自动约束
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        
+         
         // 添加按钮到主视图
         scrollView.addSubview(backButton)
-        
+
         // 设置按钮的约束
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10),
             backButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
             backButton.widthAnchor.constraint(equalToConstant: 44),
             backButton.heightAnchor.constraint(equalToConstant: 44) // 根据图片实际比例调整
         ])
+        
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView())
+        
+//        self.navigationController?.navigationItem.setLeftBarButton(UIBarButtonItem(customView: backButton), animated: true)
     }
     
     @objc private func backButtonTapped() {
         // 执行返回操作
-        self.dismiss(animated: true)
+        
+        navigationController?.popViewController(animated: true)
     }
+    
+    
     
     private func setupScrollView() {
           scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -157,7 +182,7 @@ class MovieDetailViewController: UIViewController {
         
         // 约束：顶部对齐刘海屏，宽度占满屏幕，高度根据图片比例设置
           NSLayoutConstraint.activate([
-              posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: -60),
+              posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: -100),
               posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
               posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 //              posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 16/9) // 根据图片实际比例调整
@@ -170,6 +195,19 @@ class MovieDetailViewController: UIViewController {
           gradientLayer?.frame = CGRect(x: 0, y: 0, width: posterImageView.bounds.width, height: posterImageView.bounds.height)
 
     
+    }
+    
+    private func setupPlayButton(){
+        contentView.addSubview(playButton)
+        
+        NSLayoutConstraint.activate([
+            playButton.centerXAnchor.constraint(equalTo: posterImageView.centerXAnchor),
+            playButton.centerYAnchor.constraint(equalTo: posterImageView.centerYAnchor,constant: 10),
+            playButton.widthAnchor.constraint(equalToConstant: 100),
+            playButton.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        
     }
     
     private func setupNameLabel() {
@@ -219,7 +257,6 @@ class MovieDetailViewController: UIViewController {
         var newMovices = movies.replacingOccurrences(of: ".m3u8#", with: ".m3u8\n")
         newMovices = newMovices.replacingOccurrences(of: "$https", with: "\nhttps")
       
-//        print(newMovices)
         var index = 1
         newMovices.components(separatedBy: "\n").forEach { str in
             //print("\n" + str)
@@ -237,10 +274,57 @@ class MovieDetailViewController: UIViewController {
 
             
         }
-//        print(jishuArray)
         print("总条数：\(jishuURLArray.count)" )
          
-        setupButtons()
+        if jishuURLArray.count > 1 {
+            setupButtons()
+        }else{
+            //只有一个播放列表时
+            if let playlistOne  = jishuURLArray.first as? NSString {
+                
+                if let url = playlistOne.components(separatedBy: ".m3u8").first {
+                    
+                    
+                    let button = UIButton(type: .custom)
+                    button.setTitle("\(movie.vodRemarks)", for: .normal)
+                    button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                    button.setTitleColor(UIColor.orange, for: UIControl.State.selected)
+                    button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+                    
+                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
+                    button.layer.cornerRadius = 5
+                    button.clipsToBounds = true
+
+                    button.tag = index
+                    button.addTarget(self, action: #selector(ButtonhdplayurlTapped(_:)), for: .touchUpInside)
+                    
+                    
+                    contentView.addSubview(button)
+                    button.translatesAutoresizingMaskIntoConstraints = false
+                      
+                    let buttonSize: CGFloat = 44
+                      NSLayoutConstraint.activate([
+                          button.heightAnchor.constraint(equalToConstant: buttonSize),
+                          button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  50),
+                          button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -50),
+                          button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 )
+                      ])
+                    
+                    
+                    jishuURLArray.removeAll()
+                    jishuURLArray.append(url+".m3u8")
+                    hdplayurl = url+".m3u8"
+                    NSLayoutConstraint.activate([
+                    
+                          contentView.heightAnchor.constraint(equalToConstant:1200)
+                      
+                    ])
+                }
+            }
+        }
+        print(movie)
+        print(jishuURLArray)
+        
     }
     
  
@@ -281,32 +365,47 @@ class MovieDetailViewController: UIViewController {
                              button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(col) * (buttonSize + spacing) + spacing),
                              button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 + CGFloat(row) * (buttonSize + spacing) + spacing)
                          ])
-        
                    }
                   
                }
            }
         
               // 约束内容视图的高度，使其包含所有按钮
-              let heightSummary:CGFloat = CGFloat(summaryLabel.text?.count ?? 0) * 1.2
+              var heightSummary:CGFloat = CGFloat(summaryLabel.text?.count ?? 0) * 1.2
               print(heightSummary)
+                if ( heightSummary <= 0.0) {
+                    heightSummary = 200.0
+                }
               NSLayoutConstraint.activate([
+              
+                    contentView.heightAnchor.constraint(equalToConstant:self.view.frame.height*0.6 + heightSummary   +  CGFloat(numberOfRows) * (buttonSize + spacing) + spacing)
                 
-                contentView.heightAnchor.constraint(equalToConstant:self.view.frame.height*0.6 + heightSummary   +  CGFloat(numberOfRows) * (buttonSize + spacing) + spacing)
               ])
        }
     
-    @objc private func ButtonTapped(_ button:UIButton){
-       
-        
-        if let u = URL(string: jishuURLArray[button.tag]) {
-            print(u.absoluteString)
-                   let resource = KSPlayerResource(url: u)
-                   let controller = DetailViewController()
-                   controller.resource = resource
-                   controller.modalPresentationStyle = .fullScreen
-                   self.present(controller, animated:true)
-               }
+    @objc private func ButtonhdplayurlTapped(_ button:UIButton){
+        if hdplayurl.count > 5 ,let u = URL(string: hdplayurl) {
             
+            let resource = KSPlayerResource(url: u)
+            let controller = DetailViewController()
+            controller.resource = resource
+//            self.show(controller, sender: self)
+            controller.modalPresentationStyle = .fullScreen
+            self.present(controller, animated:false)
+        }
+        
+    }
+    
+    @objc private func ButtonTapped(_ button:UIButton){
+               
+        if let u = URL(string: jishuURLArray[button.tag]) {
+            
+           let resource = KSPlayerResource(url: u)
+           let controller = DetailViewController()
+           controller.resource = resource
+//            self.show(controller, sender: self)
+           controller.modalPresentationStyle = .fullScreen
+           self.present(controller, animated:false)
+       }
     }
 }

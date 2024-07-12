@@ -249,6 +249,18 @@ class HeaderView: UICollectionReusableView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+     
+    public let moreButton:UIButton = {
+        
+        let retryButton = UIButton(type: .system)
+        retryButton.setTitle("更多", for: .normal)
+        retryButton.setTitleColor(.red, for: .normal)
+        retryButton.layer.cornerRadius = 20
+        retryButton.translatesAutoresizingMaskIntoConstraints = false
+        return retryButton
+    }()
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -266,6 +278,7 @@ class HeaderView: UICollectionReusableView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addSubview(imageView)
+        addSubview(moreButton)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 36),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
@@ -273,13 +286,16 @@ class HeaderView: UICollectionReusableView {
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             
             
-            
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            
             imageView.widthAnchor.constraint(equalToConstant: 20),
             imageView.heightAnchor.constraint(equalToConstant: 20),
             
+            
+            moreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10),
+            moreButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            moreButton.widthAnchor.constraint(equalToConstant: 80),
+            moreButton.heightAnchor.constraint(equalToConstant: 20),
             
         ])
     }
@@ -289,6 +305,7 @@ class HeaderView: UICollectionReusableView {
         titleLabel.text = title
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
     }
+    
 }
 
 // Main viewconoller
@@ -332,7 +349,36 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
           
           sendRequestGetconfig()
           
+          configureNavigationBar()
+          
+          
       }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 确保在视图将要出现时隐藏导航栏
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // 确保在视图将要消失时显示导航栏
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    private func configureNavigationBar() {
+        if #available(iOS 13.0, *) {
+            // iOS 13 及以上版本使用 UINavigationBarAppearance
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.backgroundColor = .clear
+            appearance.shadowColor = .clear
+
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        }
+    }
+    
       
       
       func sendRequestGetconfig() {
@@ -343,8 +389,9 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
   //        // Fetch Request
           
           let requestComplete: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
-  //            let end = CACurrentMediaTime()
-
+  
+              SwiftLoader.hide()
+              
               //if let response {
   //                for (field, value) in response.allHeaderFields {
   //                    debugPrint("\(field) \(value)" )
@@ -354,8 +401,13 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
                       // 将 JSON 字符串转换为 Data
                       
                       guard let data = value.data(using: String.Encoding.utf8) else {
-                          print("Error: Cannot create data from JSON string.")
-                          SwiftLoader.hide()
+                          
+                          DispatchQueue.main.async {
+                              self.showNetworkErrorView(errormsg: "Error: Cannot create data from JSON string.", clickBlock: {
+                                  self.sendRequestGetconfig()
+                              })
+                          }
+                          
                           return
                       }
                        
@@ -383,7 +435,6 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
                                   
                                    
                                   DispatchQueue.main.async {
-                                      SwiftLoader.hide()
 
                                       self.collectionView.reloadData()
                                       
@@ -392,14 +443,24 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
                               }
                               
                           } catch {
-                              SwiftLoader.hide()
-                              print("Json parse Error: \(error)")
+                              DispatchQueue.main.async {
+                                  self.showNetworkErrorView(errormsg: "Json parse Error: \(error.localizedDescription)", clickBlock: {
+                                      self.sendRequestGetconfig()
+                                  })
+                              }
+                              
                           }
                       
                               
                          case .failure(let error):
-                            self.sendRequestGetconfig()
-                             debugPrint("HTTP Request failed: \(error)")
+//
+//                             debugPrint("HTTP Request failed: ")
+                              DispatchQueue.main.async {
+                                  // UI 更新代码
+                                  self.showNetworkErrorView (errormsg: "\(error.localizedDescription)", clickBlock: {
+                                      self.sendRequestGetconfig()
+                                  })
+                              }
                              // 错误处理
                          }
                   
@@ -445,19 +506,29 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
           let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:  HeaderView.identifier, for: indexPath) as! HeaderView
           let category = videoCategorys[indexPath.section]
           headerView.configure(with: category.categoryName)
+          headerView.moreButton.addTarget(self, action: #selector(MoreButtonTapped(_:)), for: .touchUpInside)
+          headerView.moreButton.tag = category.videoListChild.first?.typeID ?? 0
           return headerView
       }
-      
+    
+    @objc private func MoreButtonTapped(_ button:UIButton){
+
+        let controller = MoreVideosViewController()
+        controller.requestType = 1
+//        controller.modalPresentationStyle = .fullScreen
+        self.show(controller, sender: self)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //
         
         let category = videoCategorys[indexPath.section]
         let  movie =  category.videoListChild[indexPath.item]
         let  controller = MovieDetailViewController()
         controller.movieDetail = movie
-        controller.modalPresentationStyle = .fullScreen
-         self.present(controller, animated:true)
+//        controller.modalPresentationStyle = .fullScreen
+        self.show(controller, sender: self)
+//         self.present(controller, animated:false)
 //        if let u = URL(string: "https://hn.bfvvs.com/play/6dBWo3We/index.m3u8") { //movie.link
 //            let resource = KSPlayerResource(url: u)
 //            let controller = DetailViewController()
@@ -466,16 +537,4 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
 //            self.present(controller, animated:true)
 //        }
     }
-//      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//          let width = (collectionView.frame.width - 30) / 3
-//          return CGSize(width: width, height: width * 1.5)
-//      }
-//      
-//      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//          return 10
-//      }
-//      
-//      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//          return 10
-//      }
 }
