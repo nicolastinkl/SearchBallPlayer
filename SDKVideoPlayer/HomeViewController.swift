@@ -14,8 +14,7 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 import SwiftLoader
-import JSQWebViewController
-
+import SwiftWebVC
 // 基本的数据模型
 struct Website: Codable {
     let name: String
@@ -269,10 +268,9 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
 //                       safariViewController.delegate = self
 //                       present(safariViewController, animated: true, completion: nil)
                 
-                let controller = WebViewController(url: url)
+                let controller = SwiftWebVC(urlString: urlString)
                 self.show(controller, sender: self)
-                
-                   }
+            }
         }
        
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {

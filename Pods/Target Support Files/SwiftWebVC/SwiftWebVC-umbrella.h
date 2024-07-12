@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double JSQWebViewControllerVersionNumber;
-FOUNDATION_EXPORT const unsigned char JSQWebViewControllerVersionString[];
+FOUNDATION_EXPORT double SwiftWebVCVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftWebVCVersionString[];
 

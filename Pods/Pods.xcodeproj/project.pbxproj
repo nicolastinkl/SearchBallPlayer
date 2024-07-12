@@ -7,181 +7,200 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		131EB228DC0F1225A96520EE31FC0D9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D20E8E61FE391C0ED97D6F5A9EEEFD /* Foundation.framework */; };
+		013454ED20AB3C1CC27F958D18F4D252 /* WeatherIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E6F32302961B398FF02839091377A30 /* WeatherIcons.ttf */; };
+		04A474A84B1D7AFBDF7729C0C57F1E85 /* Icofont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5742AAD731FA1BE5BDAB56B65A5296E /* Icofont.ttf */; };
+		0B47DF67B15F92E374F8ECE8D62B64BB /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2992F377CF6E9166D4949348015E87A /* FontAwesome.ttf */; };
+		0E22F856F6755313E260B1F05C4A340E /* FontAwesomeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5B0B7EFC809B46D4057D31C242EE1C4 /* FontAwesomeRegular.ttf */; };
+		131EB228DC0F1225A96520EE31FC0D9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		15FDA5B1DD840BFECD9334DBEEE1F9A2 /* Pods-SDKVideoPlayerTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D04ED736DBC72C371DB5EE1ED4FB57C1 /* Pods-SDKVideoPlayerTests-dummy.m */; };
-		1A1CA3A7098984963867E71023821831 /* TypIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7C65CEC3B5D50C28722BBAFFEC96E8 /* TypIcons.ttf */; };
-		1BB1569BC2A59313E8817895A47EBF56 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AA5E340BC13E618EB8835CC3E737CD9F /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		283ADE37189650DF81975354C6720784 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D20E8E61FE391C0ED97D6F5A9EEEFD /* Foundation.framework */; };
-		36715D5B6218A355890575C7AC4DDA3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D20E8E61FE391C0ED97D6F5A9EEEFD /* Foundation.framework */; };
-		3AF3A77B09CB6EA259CA8FB62A46F3B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D20E8E61FE391C0ED97D6F5A9EEEFD /* Foundation.framework */; };
-		42075CCADF4988F048B069519C91E758 /* FontAwesomeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10D16E89F6850AA14EA950AB6576E136 /* FontAwesomeRegular.ttf */; };
-		449D2DE570765443E5517A2509AA13D1 /* Emoji.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E82D71B36DE6767B45571268BE2AD6A1 /* Emoji.ttf */; };
-		481EE91FFE591C3A18F03586348F3915 /* Dripicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D15E1446654A5CFF5FB6DCD948FA2E7 /* Dripicons.ttf */; };
-		4AE1E9C3098B8462815CEDCAAA3EA39E /* Pods-SDKVideoPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4DA54AA6CEAAD2B6F7622D38A8E5FD /* Pods-SDKVideoPlayer-dummy.m */; };
-		4C8D0EE90C31A754D7ED25296FCE25B5 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F51050B450E81C7B9BFF5BEA9738CD /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-dummy.m */; };
-		4DA36B3BA4C4820B3E8B0A5EE6B0E4CF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EF553D523C38B7B8929221EFCA8E632 /* FontAwesome.ttf */; };
-		51F8D46F649D75A985E75737C2988E98 /* JSQWebViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFA2DB4E95834FB8E35CE4280633466 /* JSQWebViewController-dummy.m */; };
-		5A269FB113E2FD1F82CF8D574A3D0DFE /* SwiftIcons-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C108B1296B25ECA4119CB62567F36D14 /* SwiftIcons-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		187C80ED3AD9689FADABCA4C5601BBCD /* Linearicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24F3E45E11F23938F942AF9B6D086A1C /* Linearicons.ttf */; };
+		194C7C8BD313313F374DAABFCFCCBFA7 /* SwiftWebVC-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 164810504C534A914123A78DC4BB781C /* SwiftWebVC-dummy.m */; };
+		1B0296E291ABB7F7D490AE949D32CC8D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81AB1AA92B95F911BE5D31297C959A57 /* Ionicons.ttf */; };
+		283ADE37189650DF81975354C6720784 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		2B05FB7D5AED97331FB460440ECC5AD6 /* SwiftWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E35C372BB29EDDD56A8241BC9685ED /* SwiftWebVC.swift */; };
+		330E228476812DB520C4BBA3B0939A96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		3AF3A77B09CB6EA259CA8FB62A46F3B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		3D1CE53021D97287C7CCA0765CDFE75B /* SwiftModalWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18825D300FA9E658694120CF691D4D9 /* SwiftModalWebVC.swift */; };
+		42C4A609C3FC11EBB6358E3A1036CEA9 /* FontAwesomeSolid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546C2B5DCECE45F74D756CA4FA8D1C15 /* FontAwesomeSolid.ttf */; };
+		4F4A734218C11A1E5B71F4DB129001E1 /* MapIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DEE4EB9A98DE7EE372B63A02AE72B82 /* MapIcons.ttf */; };
+		56BE685977AD320768AF48C58B5FEB21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		5A269FB113E2FD1F82CF8D574A3D0DFE /* SwiftIcons-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C86F42FAFB28F8491D9B13E1AE887467 /* SwiftIcons-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DF5D0BF8D07555231EB3558E0F1B018 /* SwiftWebVCActivityChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ABBB4FC8D163E5BC6824F63CB7202E /* SwiftWebVCActivityChrome.swift */; };
+		62613D2329CE87993AC7938737F3B076 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AA5E340BC13E618EB8835CC3E737CD9F /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A5E44E15E6A48331097318F24CC0391 /* DisplayCriteria-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CFA8ED98C9ED1349B04A7DCD43658E1D /* DisplayCriteria-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BB540D90D0978268E60C6184921EACB /* SwiftIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A890BE3D9745F3133EB6FBF89777BCF9 /* SwiftIcons.swift */; };
+		6BB540D90D0978268E60C6184921EACB /* SwiftIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AB913505FE6DA018592EDCC3BE7B9F /* SwiftIcons.swift */; };
+		768B4CD1B9168367C4CC62DF17E0332B /* Emoji.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC8E84B2397705A4130DFB9BF69FA32B /* Emoji.ttf */; };
+		78E754534785EE7BC8E4B2F18E035E07 /* SwiftWebVCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF81B4DFA0C65120BBD224CB6B2C12 /* SwiftWebVCActivity.swift */; };
 		7C4AC590B01689900B97199DE0B32256 /* DisplayCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C3E0B06746D4552A2306486B8F9B2 /* DisplayCriteria.m */; };
-		8868E29729BE10D7215BB4368D1FC5BA /* SwiftIcons-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD6D3F126CCF5B932F4D98F6D59100 /* SwiftIcons-dummy.m */; };
-		9832CB9EB15B9816C129F9340D7064CC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB655F8A3B9F0C3DB37D349580B2779 /* WebKit.framework */; };
+		8868E29729BE10D7215BB4368D1FC5BA /* SwiftIcons-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C96AEE8D0921931675464075C480320E /* SwiftIcons-dummy.m */; };
+		93452C37904EB2AAADBB39DD7654F487 /* FontAwesomeBrands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F11CD68ED5D90CC72F75D61E955C2 /* FontAwesomeBrands.ttf */; };
 		9BC414A8E10831E226AA959DCCA0733A /* DisplayCriteria-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EE8EFF102CF4D4F0CA21E5386052AC /* DisplayCriteria-dummy.m */; };
-		9DA00D81AC2E14A13E37685EE0FF74A6 /* WeatherIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30DBDF3499109E49D5246DB60DB3384E /* WeatherIcons.ttf */; };
-		A457C5E2F1016AB294FC99774CD4CAC0 /* Icofont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F951A567B61D103E4382C286D18956FE /* Icofont.ttf */; };
-		AEDB12BD5851F5C5F0F988041DC23566 /* MapIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F90DEF794A0724737D13B4D05A9FF37 /* MapIcons.ttf */; };
-		AF50F4117CAF1BCAF141019DB364B57A /* Pods-SDKVideoPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 472283DF272D9B61045A3E3529CE5827 /* Pods-SDKVideoPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B28B339C27F2C7A0AC28C87DF4E930C8 /* FontAwesomeSolid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FDB0718A47E44FA59D0CF0125CE045 /* FontAwesomeSolid.ttf */; };
-		B7596376D0A512E0BEAC00683C81E28D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A08D62DF68E06FDFDA9FC13C63AE015A /* Ionicons.ttf */; };
-		BC18E0507F2E7F5ECACD92566473F85B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9B64F70A9CA24F8404AF13CE0DDABF4 /* MaterialIcons.ttf */; };
-		C2F686B920FA88FF2239829CE64A25A8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D44CEAC9569EA2E6FED591F6E82273B /* WebViewController.swift */; };
-		C9B3537091E4B7E5B2118339173FF19B /* Stateface.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0301F0906EADF7373F4A9DA867A11421 /* Stateface.ttf */; };
-		C9CDA57A063DA60AF133BC19BA1228EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D20E8E61FE391C0ED97D6F5A9EEEFD /* Foundation.framework */; };
-		C9D17E9702D80EC83F5520F0E3855EFC /* OpenIconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB544FC397D95AF564C015CA0EACEB84 /* OpenIconic.ttf */; };
-		D180934B7131106F29E8884766C12487 /* FontAwesomeBrands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED5487A67B334D560B7BA501ABF76B33 /* FontAwesomeBrands.ttf */; };
+		9E115DFAD5B5EE675C797467AC3FAB02 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E86BE5BF9F16CFFBEF1BF917501A922 /* Media.xcassets */; };
+		9FA08D5C10EBE80B5971F58C87856B51 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25A37BDD877397E8072A13FC522C8C1F /* MaterialIcons.ttf */; };
+		A4981569EEC29F0FF38C9B246686DC59 /* Pods-SDKVideoPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 472283DF272D9B61045A3E3529CE5827 /* Pods-SDKVideoPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAD4050E4344E182FA7A2932249A2114 /* SwiftWebVCActivitySafari.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C21014076B5D87FFD713E3EAC9D90 /* SwiftWebVCActivitySafari.swift */; };
+		BA412B50CE6B6EC3B3970BB024D6A797 /* Stateface.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F96392D09C84F119977F62EF1153505D /* Stateface.ttf */; };
+		BECE422E41C7264B8DF4056E08BF8B31 /* SwiftWebVC-SwiftWebVCResources in Resources */ = {isa = PBXBuildFile; fileRef = A07CAC69320BD4F63F1C74A86BFB5E28 /* SwiftWebVC-SwiftWebVCResources */; };
+		C8EFE4A666DF13383CF8B2B32A602086 /* TypIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8670050C224513592DFAE23392C0A25 /* TypIcons.ttf */; };
+		CF094A39DECAC6FC5563CCDC460238F5 /* OpenIconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63FEDBCD27FC1A312A65F3C4280884B8 /* OpenIconic.ttf */; };
+		D4613C0B7241433F7C08611759FDE9F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		D8E908ACF18BF515BF5130E79C497D70 /* Dripicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B19A6054A5628F802A68D1F7B167EF /* Dripicons.ttf */; };
 		DD1673381E1B465B056E1FFA453348BF /* Pods-SDKVideoPlayerTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D24A2DF1232EDB9BCE797AED0C2EDA80 /* Pods-SDKVideoPlayerTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9444E435A638DBAFF0CCF527B75A79E /* AVDisplayCriteriaKS.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F93CAA5630548596747A2A5E3C2811A /* AVDisplayCriteriaKS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F0BDBF26C0CC53BA0F7D538889FE9BE2 /* Linearicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F30EFA1D3CA3D2558B0CB779B7A8C0FA /* Linearicons.ttf */; };
+		F37AED69A2475695A81214872446EED8 /* SwiftWebVC-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E613E5A67758F3873A4268C554ABBA6 /* SwiftWebVC-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F7BC5FF11D94BD743458A5A70AD303ED /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F51050B450E81C7B9BFF5BEA9738CD /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-dummy.m */; };
 		FB7A66D380AE5759193A086A361536D7 /* SwiftIcons-SwiftIcons in Resources */ = {isa = PBXBuildFile; fileRef = E138077ACCD4D7F5A61DAC1D99E93392 /* SwiftIcons-SwiftIcons */; };
-		FBC82131257F3709BAC4032E38EAC1E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D20E8E61FE391C0ED97D6F5A9EEEFD /* Foundation.framework */; };
-		FEE9133C89847EA1F30B59D86F1E86B3 /* JSQWebViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4867AF3591891A47AD17E10C9C9A6E76 /* JSQWebViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE829ABF87E1653B040A4EBDE8CF2DF4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E86BE5BF9F16CFFBEF1BF917501A922 /* Media.xcassets */; };
+		FF7495A9906B9DEC649893750C546817 /* Pods-SDKVideoPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4DA54AA6CEAAD2B6F7622D38A8E5FD /* Pods-SDKVideoPlayer-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		35CA05FF13B54ACA987F00CE20C49266 /* PBXContainerItemProxy */ = {
+		33DB50EC71FACACB038AB7ECD8F86530 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1C2487255CD9CEE6ECBA5303794D6A70;
-			remoteInfo = DisplayCriteria;
+			remoteGlobalIDString = 831DE2A2E1C749797E9D44BE273531D7;
+			remoteInfo = SwiftIcons;
 		};
-		449882C759B5DCA86DFE2B9E604AA32C /* PBXContainerItemProxy */ = {
+		352C8A029B26D226353DAFC9741617BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BB1ED8A5F37C269A1CAD26E5E93BD450;
-			remoteInfo = "Pods-SDKVideoPlayer";
+			remoteGlobalIDString = 831DE2A2E1C749797E9D44BE273531D7;
+			remoteInfo = SwiftIcons;
 		};
-		4D95EED0B00FCC3C2EFDA94C6BDB8896 /* PBXContainerItemProxy */ = {
+		66A216B65116BE0D0ED6DB6541DF7061 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 664D87A9A415EAF3D989A8CBA73CBE6C;
+			remoteInfo = SwiftWebVC;
+		};
+		80EE06772A8683664A02EDB19D5E3FE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FFA1A15AFDB5DA9D9A98596F92997762;
 			remoteInfo = "SwiftIcons-SwiftIcons";
 		};
-		5DCA25C49F8F84E4A346586E4A6FA18F /* PBXContainerItemProxy */ = {
+		9F01FB9E2177EC4329D755DE068491BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 831DE2A2E1C749797E9D44BE273531D7;
-			remoteInfo = SwiftIcons;
+			remoteGlobalIDString = 0227C9046CD1364E815179B0A22FD632;
+			remoteInfo = "SwiftWebVC-SwiftWebVCResources";
 		};
-		6FCDF949B81DDA2A673CAFC81296DEF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BB00292CC82DDEC1747B11B163A5F179;
-			remoteInfo = JSQWebViewController;
-		};
-		8B753BDE7A264184800D6814D9C5346E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 831DE2A2E1C749797E9D44BE273531D7;
-			remoteInfo = SwiftIcons;
-		};
-		DE083D49E883C1BCA28482D7C2A74AC6 /* PBXContainerItemProxy */ = {
+		AA7322CF6D5D9581EF4BDF4CA2E0D02D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1C2487255CD9CEE6ECBA5303794D6A70;
 			remoteInfo = DisplayCriteria;
 		};
-		E759A1C5BCB05B4171E9ED12B327B2BF /* PBXContainerItemProxy */ = {
+		AB252B1253204DF6187E733CE0E6E978 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BB00292CC82DDEC1747B11B163A5F179;
-			remoteInfo = JSQWebViewController;
+			remoteGlobalIDString = 664D87A9A415EAF3D989A8CBA73CBE6C;
+			remoteInfo = SwiftWebVC;
+		};
+		B419C5C4C8C8710B737A53D08DF8E776 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BB1ED8A5F37C269A1CAD26E5E93BD450;
+			remoteInfo = "Pods-SDKVideoPlayer";
+		};
+		DB91890EFF3DF507DF01B94B201AE326 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C2487255CD9CEE6ECBA5303794D6A70;
+			remoteInfo = DisplayCriteria;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0301F0906EADF7373F4A9DA867A11421 /* Stateface.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Stateface.ttf; path = Source/Fonts/Stateface.ttf; sourceTree = "<group>"; };
+		087180CCE9D07F6922B0899BD2EDAC8A /* SwiftIcons.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftIcons.modulemap; sourceTree = "<group>"; };
 		0DCA4107BCE960F9F699C64B7299C156 /* Pods-SDKVideoPlayer-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SDKVideoPlayer-frameworks.sh"; sourceTree = "<group>"; };
 		0F93CAA5630548596747A2A5E3C2811A /* AVDisplayCriteriaKS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AVDisplayCriteriaKS.h; sourceTree = "<group>"; };
-		10D16E89F6850AA14EA950AB6576E136 /* FontAwesomeRegular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesomeRegular.ttf; path = Source/Fonts/FontAwesomeRegular.ttf; sourceTree = "<group>"; };
-		12DBB7BF2E4C86BE6370103FD317D88F /* SwiftIcons-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftIcons-prefix.pch"; sourceTree = "<group>"; };
+		14B19A6054A5628F802A68D1F7B167EF /* Dripicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = Dripicons.ttf; path = Source/Fonts/Dripicons.ttf; sourceTree = "<group>"; };
 		14B81A757A87D78D1F233B3A36468502 /* DisplayCriteria.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DisplayCriteria.modulemap; sourceTree = "<group>"; };
+		164810504C534A914123A78DC4BB781C /* SwiftWebVC-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftWebVC-dummy.m"; sourceTree = "<group>"; };
+		17AB913505FE6DA018592EDCC3BE7B9F /* SwiftIcons.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIcons.swift; path = Source/SwiftIcons.swift; sourceTree = "<group>"; };
 		18C06CC2A2238F2BBAE6BF89D84724C2 /* DisplayCriteria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DisplayCriteria.debug.xcconfig; sourceTree = "<group>"; };
-		19D2BA2C2D10EA291CA37144B541E376 /* JSQWebViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JSQWebViewController-prefix.pch"; sourceTree = "<group>"; };
-		1ADD72D6BEFE1ACDACA890075286EF00 /* SwiftIcons.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftIcons.debug.xcconfig; sourceTree = "<group>"; };
-		1B7C65CEC3B5D50C28722BBAFFEC96E8 /* TypIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = TypIcons.ttf; path = Source/Fonts/TypIcons.ttf; sourceTree = "<group>"; };
 		1C313D6CC3B2860FA81B1C58EA774540 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		1E86BE5BF9F16CFFBEF1BF917501A922 /* Media.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = SwiftWebVC/Resources/Media.xcassets; sourceTree = "<group>"; };
 		1ED920D9EBE4B4EAE9C52916A393E3B8 /* SwiftIcons */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftIcons; path = SwiftIcons.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BB655F8A3B9F0C3DB37D349580B2779 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
-		2BFA2DB4E95834FB8E35CE4280633466 /* JSQWebViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JSQWebViewController-dummy.m"; sourceTree = "<group>"; };
-		2F90DEF794A0724737D13B4D05A9FF37 /* MapIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = MapIcons.ttf; path = Source/Fonts/MapIcons.ttf; sourceTree = "<group>"; };
-		30DBDF3499109E49D5246DB60DB3384E /* WeatherIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = WeatherIcons.ttf; path = Source/Fonts/WeatherIcons.ttf; sourceTree = "<group>"; };
-		32D20E8E61FE391C0ED97D6F5A9EEEFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		21950AC2D164232DBDF9E59524855000 /* SwiftIcons-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftIcons-prefix.pch"; sourceTree = "<group>"; };
+		2472589721DD6B9E6E23A70CE7275B35 /* SwiftIcons-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftIcons-Info.plist"; sourceTree = "<group>"; };
+		24F3E45E11F23938F942AF9B6D086A1C /* Linearicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = Linearicons.ttf; path = Source/Fonts/Linearicons.ttf; sourceTree = "<group>"; };
+		25A37BDD877397E8072A13FC522C8C1F /* MaterialIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = MaterialIcons.ttf; path = Source/Fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
+		2A5860C805C80798D24FA3B16A07B82B /* ResourceBundle-SwiftIcons-SwiftIcons-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-SwiftIcons-SwiftIcons-Info.plist"; sourceTree = "<group>"; };
+		2C7F11CD68ED5D90CC72F75D61E955C2 /* FontAwesomeBrands.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = FontAwesomeBrands.ttf; path = Source/Fonts/FontAwesomeBrands.ttf; sourceTree = "<group>"; };
+		328932BAD07B211645AA34156DD026BF /* SwiftIcons.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftIcons.debug.xcconfig; sourceTree = "<group>"; };
 		37D5DCB149B816F736959EBC63B1A155 /* Pods-SDKVideoPlayerTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SDKVideoPlayerTests"; path = Pods_SDKVideoPlayerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		39CF193489D0602FD49014BAECF22A89 /* ResourceBundle-SwiftWebVCResources-SwiftWebVC-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-SwiftWebVCResources-SwiftWebVC-Info.plist"; sourceTree = "<group>"; };
 		3D44FFE84A40B09E8FF154F1976746F3 /* Pods-SDKVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDKVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		3D7416458BF0BD841454C43A1E738EB7 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests"; path = Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E02FA533013FEDDA7D90BF56A8FFA27 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		472283DF272D9B61045A3E3529CE5827 /* Pods-SDKVideoPlayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SDKVideoPlayer-umbrella.h"; sourceTree = "<group>"; };
-		4867AF3591891A47AD17E10C9C9A6E76 /* JSQWebViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JSQWebViewController-umbrella.h"; sourceTree = "<group>"; };
-		4EF553D523C38B7B8929221EFCA8E632 /* FontAwesome.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesome.ttf; path = Source/Fonts/FontAwesome.ttf; sourceTree = "<group>"; };
+		4DEE4EB9A98DE7EE372B63A02AE72B82 /* MapIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = MapIcons.ttf; path = Source/Fonts/MapIcons.ttf; sourceTree = "<group>"; };
 		518E9A0133AEA0AAE744CD38A0F10536 /* Pods-SDKVideoPlayer-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDKVideoPlayer-acknowledgements.plist"; sourceTree = "<group>"; };
+		546C2B5DCECE45F74D756CA4FA8D1C15 /* FontAwesomeSolid.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = FontAwesomeSolid.ttf; path = Source/Fonts/FontAwesomeSolid.ttf; sourceTree = "<group>"; };
 		556733CCCB9864FEA5270BF540AE1FCC /* Pods-SDKVideoPlayer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SDKVideoPlayer-acknowledgements.markdown"; sourceTree = "<group>"; };
-		56D51C71B5DE49C08FA6EDD9B80CE56C /* JSQWebViewController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JSQWebViewController.release.xcconfig; sourceTree = "<group>"; };
-		58FDB0718A47E44FA59D0CF0125CE045 /* FontAwesomeSolid.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesomeSolid.ttf; path = Source/Fonts/FontAwesomeSolid.ttf; sourceTree = "<group>"; };
 		5F984BE634D635360CFC14DBA94B4A6C /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests.modulemap"; sourceTree = "<group>"; };
 		60A39A1C302B9F7C431A7ADD362B48C1 /* DisplayCriteria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DisplayCriteria.release.xcconfig; sourceTree = "<group>"; };
+		63FEDBCD27FC1A312A65F3C4280884B8 /* OpenIconic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = OpenIconic.ttf; path = Source/Fonts/OpenIconic.ttf; sourceTree = "<group>"; };
 		64D766FC68DCC5B91801C5C37CC128F1 /* Pods-SDKVideoPlayer */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SDKVideoPlayer"; path = Pods_SDKVideoPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69EE8EFF102CF4D4F0CA21E5386052AC /* DisplayCriteria-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DisplayCriteria-dummy.m"; sourceTree = "<group>"; };
-		6ADD6D3F126CCF5B932F4D98F6D59100 /* SwiftIcons-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftIcons-dummy.m"; sourceTree = "<group>"; };
-		6D15E1446654A5CFF5FB6DCD948FA2E7 /* Dripicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Dripicons.ttf; path = Source/Fonts/Dripicons.ttf; sourceTree = "<group>"; };
+		6CEF81B4DFA0C65120BBD224CB6B2C12 /* SwiftWebVCActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWebVCActivity.swift; path = SwiftWebVC/SwiftWebVCActivity.swift; sourceTree = "<group>"; };
+		6E6F32302961B398FF02839091377A30 /* WeatherIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = WeatherIcons.ttf; path = Source/Fonts/WeatherIcons.ttf; sourceTree = "<group>"; };
 		6F26A81AEB537873FDCDFFEFCEAAE619 /* Pods-SDKVideoPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDKVideoPlayer.release.xcconfig"; sourceTree = "<group>"; };
-		7118F25B4F42CB37A7D3530B0CEF8833 /* SwiftIcons.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftIcons.modulemap; sourceTree = "<group>"; };
-		7269846D187566F3E2F57B37A61F8AF9 /* DisplayCriteria.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = DisplayCriteria.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		7269846D187566F3E2F57B37A61F8AF9 /* DisplayCriteria.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = DisplayCriteria.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7A86CB0B37BF12DDC4E2A9C7E5314174 /* DisplayCriteria-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DisplayCriteria-Info.plist"; sourceTree = "<group>"; };
 		7D2166465179CEFAC43BF6D060481148 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests-Info.plist"; sourceTree = "<group>"; };
-		7D44CEAC9569EA2E6FED591F6E82273B /* WebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = Source/WebViewController.swift; sourceTree = "<group>"; };
+		7E613E5A67758F3873A4268C554ABBA6 /* SwiftWebVC-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftWebVC-umbrella.h"; sourceTree = "<group>"; };
+		810ACAFDB44F3A00F546F81B021602B5 /* SwiftWebVC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftWebVC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB1AA92B95F911BE5D31297C959A57 /* Ionicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = Ionicons.ttf; path = Source/Fonts/Ionicons.ttf; sourceTree = "<group>"; };
 		831974C0206338A53309A6023A909E37 /* Pods-SDKVideoPlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDKVideoPlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		85D616A88529D65558492E17D00BCF77 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8BCCCB43E8220783DCB68C6089212AC4 /* Pods-SDKVideoPlayerTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDKVideoPlayerTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		8C7C3E0B06746D4552A2306486B8F9B2 /* DisplayCriteria.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DisplayCriteria.m; path = Sources/DisplayCriteria/DisplayCriteria.m; sourceTree = "<group>"; };
 		93F51050B450E81C7B9BFF5BEA9738CD /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F3BB5675194A7564743F8D16612AA31 /* Pods-SDKVideoPlayerTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDKVideoPlayerTests-Info.plist"; sourceTree = "<group>"; };
-		A08D62DF68E06FDFDA9FC13C63AE015A /* Ionicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Ionicons.ttf; path = Source/Fonts/Ionicons.ttf; sourceTree = "<group>"; };
-		A890BE3D9745F3133EB6FBF89777BCF9 /* SwiftIcons.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIcons.swift; path = Source/SwiftIcons.swift; sourceTree = "<group>"; };
+		A07CAC69320BD4F63F1C74A86BFB5E28 /* SwiftWebVC-SwiftWebVCResources */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "SwiftWebVC-SwiftWebVCResources"; path = SwiftWebVCResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8ABBB4FC8D163E5BC6824F63CB7202E /* SwiftWebVCActivityChrome.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWebVCActivityChrome.swift; path = SwiftWebVC/SwiftWebVCActivityChrome.swift; sourceTree = "<group>"; };
 		AA5E340BC13E618EB8835CC3E737CD9F /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h"; sourceTree = "<group>"; };
-		AB544FC397D95AF564C015CA0EACEB84 /* OpenIconic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = OpenIconic.ttf; path = Source/Fonts/OpenIconic.ttf; sourceTree = "<group>"; };
 		ABBF5555203EEE7FBBD0DD05A6C7236A /* DisplayCriteria-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DisplayCriteria-prefix.pch"; sourceTree = "<group>"; };
-		AFE4AEC22EA33E2E35C1A7B76FAE7107 /* JSQWebViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JSQWebViewController.debug.xcconfig; sourceTree = "<group>"; };
-		B87F867DB2AFEE97FFE808F36D6C16A5 /* ResourceBundle-SwiftIcons-SwiftIcons-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-SwiftIcons-SwiftIcons-Info.plist"; sourceTree = "<group>"; };
-		C108B1296B25ECA4119CB62567F36D14 /* SwiftIcons-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftIcons-umbrella.h"; sourceTree = "<group>"; };
-		C2D9E2351DE232358DC58D9B870F4E52 /* JSQWebViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JSQWebViewController.modulemap; sourceTree = "<group>"; };
+		AE19B2B830A57F38CC9E8BB04864473D /* SwiftWebVC.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftWebVC.modulemap; sourceTree = "<group>"; };
+		B16599F4F8FA52E1F0909D13018FB527 /* SwiftIcons.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftIcons.release.xcconfig; sourceTree = "<group>"; };
+		C3264690287DB82AB87A9B6D5F55EEAD /* SwiftWebVC-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftWebVC-prefix.pch"; sourceTree = "<group>"; };
+		C3E35C372BB29EDDD56A8241BC9685ED /* SwiftWebVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWebVC.swift; path = SwiftWebVC/SwiftWebVC.swift; sourceTree = "<group>"; };
 		C4D95D31642E9FBC6549A0A3C45DD639 /* Pods-SDKVideoPlayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SDKVideoPlayer.modulemap"; sourceTree = "<group>"; };
-		C87245673C0010A928E751EDA14884A2 /* SwiftIcons.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftIcons.release.xcconfig; sourceTree = "<group>"; };
-		C9B64F70A9CA24F8404AF13CE0DDABF4 /* MaterialIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = MaterialIcons.ttf; path = Source/Fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
+		C5B0B7EFC809B46D4057D31C242EE1C4 /* FontAwesomeRegular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = FontAwesomeRegular.ttf; path = Source/Fonts/FontAwesomeRegular.ttf; sourceTree = "<group>"; };
+		C86F42FAFB28F8491D9B13E1AE887467 /* SwiftIcons-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftIcons-umbrella.h"; sourceTree = "<group>"; };
+		C9207E5A7B9A639686E2DC27E7AF0B28 /* SwiftWebVC-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftWebVC-Info.plist"; sourceTree = "<group>"; };
+		C96AEE8D0921931675464075C480320E /* SwiftIcons-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftIcons-dummy.m"; sourceTree = "<group>"; };
+		CC8E84B2397705A4130DFB9BF69FA32B /* Emoji.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = Emoji.ttf; path = Source/Fonts/Emoji.ttf; sourceTree = "<group>"; };
 		CFA8ED98C9ED1349B04A7DCD43658E1D /* DisplayCriteria-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DisplayCriteria-umbrella.h"; sourceTree = "<group>"; };
 		D04ED736DBC72C371DB5EE1ED4FB57C1 /* Pods-SDKVideoPlayerTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SDKVideoPlayerTests-dummy.m"; sourceTree = "<group>"; };
 		D24A2DF1232EDB9BCE797AED0C2EDA80 /* Pods-SDKVideoPlayerTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SDKVideoPlayerTests-umbrella.h"; sourceTree = "<group>"; };
-		DB85C803045A0C8E23A146AB0AB65E9F /* JSQWebViewController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "JSQWebViewController-Info.plist"; sourceTree = "<group>"; };
+		D5742AAD731FA1BE5BDAB56B65A5296E /* Icofont.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = Icofont.ttf; path = Source/Fonts/Icofont.ttf; sourceTree = "<group>"; };
 		DD4DA54AA6CEAAD2B6F7622D38A8E5FD /* Pods-SDKVideoPlayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SDKVideoPlayer-dummy.m"; sourceTree = "<group>"; };
 		DEECA37B7E1F566DC026715B461E83D4 /* Pods-SDKVideoPlayerTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SDKVideoPlayerTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E138077ACCD4D7F5A61DAC1D99E93392 /* SwiftIcons-SwiftIcons */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "SwiftIcons-SwiftIcons"; path = SwiftIcons.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		E82D71B36DE6767B45571268BE2AD6A1 /* Emoji.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Emoji.ttf; path = Source/Fonts/Emoji.ttf; sourceTree = "<group>"; };
+		E18825D300FA9E658694120CF691D4D9 /* SwiftModalWebVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftModalWebVC.swift; path = SwiftWebVC/SwiftModalWebVC.swift; sourceTree = "<group>"; };
 		E85F0D34238226733007AD677B225676 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		ED5487A67B334D560B7BA501ABF76B33 /* FontAwesomeBrands.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesomeBrands.ttf; path = Source/Fonts/FontAwesomeBrands.ttf; sourceTree = "<group>"; };
+		E8670050C224513592DFAE23392C0A25 /* TypIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = TypIcons.ttf; path = Source/Fonts/TypIcons.ttf; sourceTree = "<group>"; };
+		EF560585F933A109B760CD6307B69564 /* SwiftWebVC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftWebVC.release.xcconfig; sourceTree = "<group>"; };
+		F07C21014076B5D87FFD713E3EAC9D90 /* SwiftWebVCActivitySafari.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftWebVCActivitySafari.swift; path = SwiftWebVC/SwiftWebVCActivitySafari.swift; sourceTree = "<group>"; };
 		F0ECF1D0D2EEDB29BCDE2B1EA3B9A825 /* Pods-SDKVideoPlayer-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDKVideoPlayer-Info.plist"; sourceTree = "<group>"; };
-		F159724F77128B773A32F649A0B82756 /* JSQWebViewController */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JSQWebViewController; path = JSQWebViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F30EFA1D3CA3D2558B0CB779B7A8C0FA /* Linearicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Linearicons.ttf; path = Source/Fonts/Linearicons.ttf; sourceTree = "<group>"; };
-		F5CE07070F44607B4C1AE64C400F6EE1 /* SwiftIcons-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftIcons-Info.plist"; sourceTree = "<group>"; };
-		F951A567B61D103E4382C286D18956FE /* Icofont.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Icofont.ttf; path = Source/Fonts/Icofont.ttf; sourceTree = "<group>"; };
+		F2992F377CF6E9166D4949348015E87A /* FontAwesome.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = FontAwesome.ttf; path = Source/Fonts/FontAwesome.ttf; sourceTree = "<group>"; };
+		F79DD8D106AA22BB26D7CCA13C2DB09A /* SwiftWebVC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftWebVC.debug.xcconfig; sourceTree = "<group>"; };
+		F96392D09C84F119977F62EF1153505D /* Stateface.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = Stateface.ttf; path = Source/Fonts/Stateface.ttf; sourceTree = "<group>"; };
 		F98F4B8EEBDBBC76034BAFC2A3EEABAD /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests-frameworks.sh"; sourceTree = "<group>"; };
 		FA7F5ADD9188C0484B1130313057C648 /* Pods-SDKVideoPlayerTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SDKVideoPlayerTests.modulemap"; sourceTree = "<group>"; };
 		FBFEE47D335DD752B9C349E3F9A53FB7 /* Pods-SDKVideoPlayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDKVideoPlayerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -197,19 +216,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4427EA100BA41C35EF9C2BAC9065CB29 /* Frameworks */ = {
+		2239DA708207D850AD554E323793D807 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9CDA57A063DA60AF133BC19BA1228EC /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5C4707ED714112005F68B90E5C847690 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				36715D5B6218A355890575C7AC4DDA3E /* Foundation.framework in Frameworks */,
+				56BE685977AD320768AF48C58B5FEB21 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,16 +232,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A1B90E3FA14B1A977A13EC1E0385A738 /* Frameworks */ = {
+		B6A782C082E84B3DBE67D3801AECAD3B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBC82131257F3709BAC4032E38EAC1E1 /* Foundation.framework in Frameworks */,
-				9832CB9EB15B9816C129F9340D7064CC /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C18BE56FB4371BB2387AA5B1555A04B8 /* Frameworks */ = {
+		BD2FAF0C9A6F862718FCA4696B5A5BFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4613C0B7241433F7C08611759FDE9F8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBF5A36DB23F3F5129A9456097E9CB09 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,9 +262,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5C2FFD566C77395FCEA15B3B0C935F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330E228476812DB520C4BBA3B0939A96 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		061C801DCFB312AADABC6D4F3077846C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1E86BE5BF9F16CFFBEF1BF917501A922 /* Media.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		0E72064BCB2D69782044B2CB3F294658 /* Pods-SDKVideoPlayerTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,27 +309,20 @@
 			path = ../KSPlayer;
 			sourceTree = "<group>";
 		};
-		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
+		1822EEF692C013F9C44F43F092FCC259 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				D4666CE1A84ECF5C342FAD3C508C69DE /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		1DAE3726B3286EBEC11879F0050BDE57 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C2D9E2351DE232358DC58D9B870F4E52 /* JSQWebViewController.modulemap */,
-				2BFA2DB4E95834FB8E35CE4280633466 /* JSQWebViewController-dummy.m */,
-				DB85C803045A0C8E23A146AB0AB65E9F /* JSQWebViewController-Info.plist */,
-				19D2BA2C2D10EA291CA37144B541E376 /* JSQWebViewController-prefix.pch */,
-				4867AF3591891A47AD17E10C9C9A6E76 /* JSQWebViewController-umbrella.h */,
-				AFE4AEC22EA33E2E35C1A7B76FAE7107 /* JSQWebViewController.debug.xcconfig */,
-				56D51C71B5DE49C08FA6EDD9B80CE56C /* JSQWebViewController.release.xcconfig */,
+				39CF193489D0602FD49014BAECF22A89 /* ResourceBundle-SwiftWebVCResources-SwiftWebVC-Info.plist */,
+				AE19B2B830A57F38CC9E8BB04864473D /* SwiftWebVC.modulemap */,
+				164810504C534A914123A78DC4BB781C /* SwiftWebVC-dummy.m */,
+				C9207E5A7B9A639686E2DC27E7AF0B28 /* SwiftWebVC-Info.plist */,
+				C3264690287DB82AB87A9B6D5F55EEAD /* SwiftWebVC-prefix.pch */,
+				7E613E5A67758F3873A4268C554ABBA6 /* SwiftWebVC-umbrella.h */,
+				F79DD8D106AA22BB26D7CCA13C2DB09A /* SwiftWebVC.debug.xcconfig */,
+				EF560585F933A109B760CD6307B69564 /* SwiftWebVC.release.xcconfig */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/JSQWebViewController";
+			path = "../Target Support Files/SwiftWebVC";
 			sourceTree = "<group>";
 		};
 		25E90DE1084035DFECD3CF34DC3B7FE2 /* Targets Support Files */ = {
@@ -309,25 +335,20 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		288C2B0202D966948626E16A95BDF8C7 /* JSQWebViewController */ = {
+		371856DCEE8E5464A801455958D8F4D5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				7D44CEAC9569EA2E6FED591F6E82273B /* WebViewController.swift */,
-				1DAE3726B3286EBEC11879F0050BDE57 /* Support Files */,
+				2A5860C805C80798D24FA3B16A07B82B /* ResourceBundle-SwiftIcons-SwiftIcons-Info.plist */,
+				087180CCE9D07F6922B0899BD2EDAC8A /* SwiftIcons.modulemap */,
+				C96AEE8D0921931675464075C480320E /* SwiftIcons-dummy.m */,
+				2472589721DD6B9E6E23A70CE7275B35 /* SwiftIcons-Info.plist */,
+				21950AC2D164232DBDF9E59524855000 /* SwiftIcons-prefix.pch */,
+				C86F42FAFB28F8491D9B13E1AE887467 /* SwiftIcons-umbrella.h */,
+				328932BAD07B211645AA34156DD026BF /* SwiftIcons.debug.xcconfig */,
+				B16599F4F8FA52E1F0909D13018FB527 /* SwiftIcons.release.xcconfig */,
 			);
-			name = JSQWebViewController;
-			path = JSQWebViewController;
-			sourceTree = "<group>";
-		};
-		43E9A52A4FBDB7E914D9610DA023D674 /* SwiftIcons */ = {
-			isa = PBXGroup;
-			children = (
-				A890BE3D9745F3133EB6FBF89777BCF9 /* SwiftIcons.swift */,
-				AC09185725202B508CF7BB4D44E7CDEC /* Resources */,
-				F131452E8FED904FC06822B740BA0DB0 /* Support Files */,
-			);
-			name = SwiftIcons;
-			path = SwiftIcons;
+			name = "Support Files";
+			path = "../Target Support Files/SwiftIcons";
 			sourceTree = "<group>";
 		};
 		47359F06B1B2A6358DE56013FBF661CF /* Development Pods */ = {
@@ -338,12 +359,30 @@
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
+		4743F1B34988FC70BF00CBEEA3FCFC2E /* SwiftIcons */ = {
+			isa = PBXGroup;
+			children = (
+				17AB913505FE6DA018592EDCC3BE7B9F /* SwiftIcons.swift */,
+				B188929EAEA1103F19EF179C1ECA952F /* Resources */,
+				371856DCEE8E5464A801455958D8F4D5 /* Support Files */,
+			);
+			path = SwiftIcons;
+			sourceTree = "<group>";
+		};
 		52C72EC4D33FDB44661CD86FDE6535D0 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
 				7269846D187566F3E2F57B37A61F8AF9 /* DisplayCriteria.podspec */,
 			);
 			name = Pod;
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		68889A654EF4BB324033F9D20EDADA82 /* Support Files */ = {
@@ -361,6 +400,15 @@
 			path = "../Pods/Target Support Files/DisplayCriteria";
 			sourceTree = "<group>";
 		};
+		68ADC5D4F1D2ECEB21F5F4D6D6F0F222 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4743F1B34988FC70BF00CBEEA3FCFC2E /* SwiftIcons */,
+				EFF3D4D2F453D9BE284DC79A4161A7FB /* SwiftWebVC */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		822470D60D8C8C21CD4BBA4B42AFFC35 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,35 +418,26 @@
 			path = Sources/DisplayCriteria/include;
 			sourceTree = "<group>";
 		};
-		AC09185725202B508CF7BB4D44E7CDEC /* Resources */ = {
+		B188929EAEA1103F19EF179C1ECA952F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6D15E1446654A5CFF5FB6DCD948FA2E7 /* Dripicons.ttf */,
-				E82D71B36DE6767B45571268BE2AD6A1 /* Emoji.ttf */,
-				4EF553D523C38B7B8929221EFCA8E632 /* FontAwesome.ttf */,
-				ED5487A67B334D560B7BA501ABF76B33 /* FontAwesomeBrands.ttf */,
-				10D16E89F6850AA14EA950AB6576E136 /* FontAwesomeRegular.ttf */,
-				58FDB0718A47E44FA59D0CF0125CE045 /* FontAwesomeSolid.ttf */,
-				F951A567B61D103E4382C286D18956FE /* Icofont.ttf */,
-				A08D62DF68E06FDFDA9FC13C63AE015A /* Ionicons.ttf */,
-				F30EFA1D3CA3D2558B0CB779B7A8C0FA /* Linearicons.ttf */,
-				2F90DEF794A0724737D13B4D05A9FF37 /* MapIcons.ttf */,
-				C9B64F70A9CA24F8404AF13CE0DDABF4 /* MaterialIcons.ttf */,
-				AB544FC397D95AF564C015CA0EACEB84 /* OpenIconic.ttf */,
-				0301F0906EADF7373F4A9DA867A11421 /* Stateface.ttf */,
-				1B7C65CEC3B5D50C28722BBAFFEC96E8 /* TypIcons.ttf */,
-				30DBDF3499109E49D5246DB60DB3384E /* WeatherIcons.ttf */,
+				14B19A6054A5628F802A68D1F7B167EF /* Dripicons.ttf */,
+				CC8E84B2397705A4130DFB9BF69FA32B /* Emoji.ttf */,
+				F2992F377CF6E9166D4949348015E87A /* FontAwesome.ttf */,
+				2C7F11CD68ED5D90CC72F75D61E955C2 /* FontAwesomeBrands.ttf */,
+				C5B0B7EFC809B46D4057D31C242EE1C4 /* FontAwesomeRegular.ttf */,
+				546C2B5DCECE45F74D756CA4FA8D1C15 /* FontAwesomeSolid.ttf */,
+				D5742AAD731FA1BE5BDAB56B65A5296E /* Icofont.ttf */,
+				81AB1AA92B95F911BE5D31297C959A57 /* Ionicons.ttf */,
+				24F3E45E11F23938F942AF9B6D086A1C /* Linearicons.ttf */,
+				4DEE4EB9A98DE7EE372B63A02AE72B82 /* MapIcons.ttf */,
+				25A37BDD877397E8072A13FC522C8C1F /* MaterialIcons.ttf */,
+				63FEDBCD27FC1A312A65F3C4280884B8 /* OpenIconic.ttf */,
+				F96392D09C84F119977F62EF1153505D /* Stateface.ttf */,
+				E8670050C224513592DFAE23392C0A25 /* TypIcons.ttf */,
+				6E6F32302961B398FF02839091377A30 /* WeatherIcons.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		B5EF78C7AFEACBC64E019678AA6B3EA1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				288C2B0202D966948626E16A95BDF8C7 /* JSQWebViewController */,
-				43E9A52A4FBDB7E914D9610DA023D674 /* SwiftIcons */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -406,34 +445,19 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				47359F06B1B2A6358DE56013FBF661CF /* Development Pods */,
-				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
-				B5EF78C7AFEACBC64E019678AA6B3EA1 /* Pods */,
-				D1CA9A1E640BE6B53AD926F65C86F628 /* Products */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				68ADC5D4F1D2ECEB21F5F4D6D6F0F222 /* Pods */,
+				EADB53AFCB20A80D0C1570D7E568EE22 /* Products */,
 				25E90DE1084035DFECD3CF34DC3B7FE2 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D1CA9A1E640BE6B53AD926F65C86F628 /* Products */ = {
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FD74DF289FA25043221139516093992A /* DisplayCriteria */,
-				F159724F77128B773A32F649A0B82756 /* JSQWebViewController */,
-				64D766FC68DCC5B91801C5C37CC128F1 /* Pods-SDKVideoPlayer */,
-				3D7416458BF0BD841454C43A1E738EB7 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests */,
-				37D5DCB149B816F736959EBC63B1A155 /* Pods-SDKVideoPlayerTests */,
-				1ED920D9EBE4B4EAE9C52916A393E3B8 /* SwiftIcons */,
-				E138077ACCD4D7F5A61DAC1D99E93392 /* SwiftIcons-SwiftIcons */,
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D4666CE1A84ECF5C342FAD3C508C69DE /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				32D20E8E61FE391C0ED97D6F5A9EEEFD /* Foundation.framework */,
-				2BB655F8A3B9F0C3DB37D349580B2779 /* WebKit.framework */,
-			);
-			name = iOS;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DFCB4D912FA7E7DD85FDD9695AF1098F /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests */ = {
@@ -453,20 +477,33 @@
 			path = "Target Support Files/Pods-SDKVideoPlayer-SDKVideoPlayerUITests";
 			sourceTree = "<group>";
 		};
-		F131452E8FED904FC06822B740BA0DB0 /* Support Files */ = {
+		EADB53AFCB20A80D0C1570D7E568EE22 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B87F867DB2AFEE97FFE808F36D6C16A5 /* ResourceBundle-SwiftIcons-SwiftIcons-Info.plist */,
-				7118F25B4F42CB37A7D3530B0CEF8833 /* SwiftIcons.modulemap */,
-				6ADD6D3F126CCF5B932F4D98F6D59100 /* SwiftIcons-dummy.m */,
-				F5CE07070F44607B4C1AE64C400F6EE1 /* SwiftIcons-Info.plist */,
-				12DBB7BF2E4C86BE6370103FD317D88F /* SwiftIcons-prefix.pch */,
-				C108B1296B25ECA4119CB62567F36D14 /* SwiftIcons-umbrella.h */,
-				1ADD72D6BEFE1ACDACA890075286EF00 /* SwiftIcons.debug.xcconfig */,
-				C87245673C0010A928E751EDA14884A2 /* SwiftIcons.release.xcconfig */,
+				FD74DF289FA25043221139516093992A /* DisplayCriteria */,
+				64D766FC68DCC5B91801C5C37CC128F1 /* Pods-SDKVideoPlayer */,
+				3D7416458BF0BD841454C43A1E738EB7 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests */,
+				37D5DCB149B816F736959EBC63B1A155 /* Pods-SDKVideoPlayerTests */,
+				1ED920D9EBE4B4EAE9C52916A393E3B8 /* SwiftIcons */,
+				E138077ACCD4D7F5A61DAC1D99E93392 /* SwiftIcons-SwiftIcons */,
+				810ACAFDB44F3A00F546F81B021602B5 /* SwiftWebVC.framework */,
+				A07CAC69320BD4F63F1C74A86BFB5E28 /* SwiftWebVC-SwiftWebVCResources */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftIcons";
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EFF3D4D2F453D9BE284DC79A4161A7FB /* SwiftWebVC */ = {
+			isa = PBXGroup;
+			children = (
+				E18825D300FA9E658694120CF691D4D9 /* SwiftModalWebVC.swift */,
+				C3E35C372BB29EDDD56A8241BC9685ED /* SwiftWebVC.swift */,
+				6CEF81B4DFA0C65120BBD224CB6B2C12 /* SwiftWebVCActivity.swift */,
+				A8ABBB4FC8D163E5BC6824F63CB7202E /* SwiftWebVCActivityChrome.swift */,
+				F07C21014076B5D87FFD713E3EAC9D90 /* SwiftWebVCActivitySafari.swift */,
+				061C801DCFB312AADABC6D4F3077846C /* Resources */,
+				1822EEF692C013F9C44F43F092FCC259 /* Support Files */,
+			);
+			path = SwiftWebVC;
 			sourceTree = "<group>";
 		};
 		F256CAE7FA02169118A86D01E6F45E3D /* Pods-SDKVideoPlayer */ = {
@@ -497,27 +534,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		754015A8A5E722F3A3358B6EE2FDA247 /* Headers */ = {
+		49D4224B0E6AE9A69E23DC06A4C4A0C8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEE9133C89847EA1F30B59D86F1E86B3 /* JSQWebViewController-umbrella.h in Headers */,
+				A4981569EEC29F0FF38C9B246686DC59 /* Pods-SDKVideoPlayer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A554F5223479A13637B79E0FF2DA792D /* Headers */ = {
+		6822B1E65D7A8296F66B6095EA9116B3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BB1569BC2A59313E8817895A47EBF56 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h in Headers */,
+				F37AED69A2475695A81214872446EED8 /* SwiftWebVC-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53DAF884432A92064B24A6A9CA6C38B /* Headers */ = {
+		B49C8B2200482D3207B0441A319BE041 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF50F4117CAF1BCAF141019DB364B57A /* Pods-SDKVideoPlayer-umbrella.h in Headers */,
+				62613D2329CE87993AC7938737F3B076 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +578,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		0227C9046CD1364E815179B0A22FD632 /* SwiftWebVC-SwiftWebVCResources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D977EF37361516CCED96D76591C03EE /* Build configuration list for PBXNativeTarget "SwiftWebVC-SwiftWebVCResources" */;
+			buildPhases = (
+				29EC6E64168EA669A3BC0A4EFB3DF9CA /* Sources */,
+				CBF5A36DB23F3F5129A9456097E9CB09 /* Frameworks */,
+				DA59FF05B36A4FBBB22D5F64258E93D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SwiftWebVC-SwiftWebVCResources";
+			productName = SwiftWebVCResources;
+			productReference = A07CAC69320BD4F63F1C74A86BFB5E28 /* SwiftWebVC-SwiftWebVCResources */;
+			productType = "com.apple.product-type.bundle";
+		};
 		1C2487255CD9CEE6ECBA5303794D6A70 /* DisplayCriteria */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 476EC03BDB5F21FB0A1DE5F709892AB2 /* Build configuration list for PBXNativeTarget "DisplayCriteria" */;
@@ -571,11 +625,30 @@
 			buildRules = (
 			);
 			dependencies = (
-				33B0F88F4693E23F7A8FF5BC8028CDC2 /* PBXTargetDependency */,
+				1B7EB85894913D946688F7A4CA63C6A0 /* PBXTargetDependency */,
 			);
 			name = "Pods-SDKVideoPlayerTests";
 			productName = Pods_SDKVideoPlayerTests;
 			productReference = 37D5DCB149B816F736959EBC63B1A155 /* Pods-SDKVideoPlayerTests */;
+			productType = "com.apple.product-type.framework";
+		};
+		664D87A9A415EAF3D989A8CBA73CBE6C /* SwiftWebVC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CFEBB63B7DEEB2DE28CAAE485381D9F /* Build configuration list for PBXNativeTarget "SwiftWebVC" */;
+			buildPhases = (
+				6822B1E65D7A8296F66B6095EA9116B3 /* Headers */,
+				98C6A495D2BC9FBC8763EC3447128829 /* Sources */,
+				2239DA708207D850AD554E323793D807 /* Frameworks */,
+				BC28A10AFE96BC0DA660D60947F87B22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0C92ED0700C329799C56F66C85892A8C /* PBXTargetDependency */,
+			);
+			name = SwiftWebVC;
+			productName = SwiftWebVC;
+			productReference = 810ACAFDB44F3A00F546F81B021602B5 /* SwiftWebVC.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		831DE2A2E1C749797E9D44BE273531D7 /* SwiftIcons */ = {
@@ -590,7 +663,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				730A91C2BFA688CBC0939E21FA930120 /* PBXTargetDependency */,
+				459B86C7E10471A412B5E990EA6BA696 /* PBXTargetDependency */,
 			);
 			name = SwiftIcons;
 			productName = SwiftIcons;
@@ -599,58 +672,40 @@
 		};
 		8C463CB52575F5090DB826BB390C938E /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 74244DDEEBCC69AA880890344B845BB4 /* Build configuration list for PBXNativeTarget "Pods-SDKVideoPlayer-SDKVideoPlayerUITests" */;
+			buildConfigurationList = 2F2E5736993F508A32F0F36DA29949E0 /* Build configuration list for PBXNativeTarget "Pods-SDKVideoPlayer-SDKVideoPlayerUITests" */;
 			buildPhases = (
-				A554F5223479A13637B79E0FF2DA792D /* Headers */,
-				AEEADA66BD8411BDF89FDB8035FFB4F2 /* Sources */,
-				5C4707ED714112005F68B90E5C847690 /* Frameworks */,
-				5F7CA1A96C64279DEF74866644585E76 /* Resources */,
+				B49C8B2200482D3207B0441A319BE041 /* Headers */,
+				82DC70B8FA6DFFA280A12E577A9571AE /* Sources */,
+				E5C2FFD566C77395FCEA15B3B0C935F0 /* Frameworks */,
+				13DCFE5DD6D674CEDF9326B224695D0A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8358EBEC9C5E78D9B970007830C6F009 /* PBXTargetDependency */,
-				9AC13D6118528A1508A81621B56AB6BA /* PBXTargetDependency */,
-				92E47EF4972A7E6499241E6BE4803FC4 /* PBXTargetDependency */,
+				CA756741BFCEA0849F75F0E30EE20FA3 /* PBXTargetDependency */,
+				5D8F4259E3009B42C938DB38E2F0415B /* PBXTargetDependency */,
+				29C53300CB5A4AB585E647F1DE1A0B8C /* PBXTargetDependency */,
 			);
 			name = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests";
 			productName = Pods_SDKVideoPlayer_SDKVideoPlayerUITests;
 			productReference = 3D7416458BF0BD841454C43A1E738EB7 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests */;
 			productType = "com.apple.product-type.framework";
 		};
-		BB00292CC82DDEC1747B11B163A5F179 /* JSQWebViewController */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A4F10A8C26F6130B9065D1697DBE4F78 /* Build configuration list for PBXNativeTarget "JSQWebViewController" */;
-			buildPhases = (
-				754015A8A5E722F3A3358B6EE2FDA247 /* Headers */,
-				40E916F120B8B0A171DBC14E97214B5B /* Sources */,
-				A1B90E3FA14B1A977A13EC1E0385A738 /* Frameworks */,
-				02CECF6C34399F4CC4DA69D486B85B0F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = JSQWebViewController;
-			productName = JSQWebViewController;
-			productReference = F159724F77128B773A32F649A0B82756 /* JSQWebViewController */;
-			productType = "com.apple.product-type.framework";
-		};
 		BB1ED8A5F37C269A1CAD26E5E93BD450 /* Pods-SDKVideoPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C4CBF3F09986FC067A2C2DF35032A634 /* Build configuration list for PBXNativeTarget "Pods-SDKVideoPlayer" */;
+			buildConfigurationList = 91D70DAB773E833D593DBFF916DC9025 /* Build configuration list for PBXNativeTarget "Pods-SDKVideoPlayer" */;
 			buildPhases = (
-				B53DAF884432A92064B24A6A9CA6C38B /* Headers */,
-				45E812B68BD774E14F7EDF5F9EFF8CD0 /* Sources */,
-				4427EA100BA41C35EF9C2BAC9065CB29 /* Frameworks */,
-				9783C446840E0785B487A989C58F0624 /* Resources */,
+				49D4224B0E6AE9A69E23DC06A4C4A0C8 /* Headers */,
+				ABDBD10C3CA062BC442270AC2C45B81A /* Sources */,
+				BD2FAF0C9A6F862718FCA4696B5A5BFF /* Frameworks */,
+				1592379F5091EFD69A26A2165F559257 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8452783B2EFE9A93BED8ADA75A7292A8 /* PBXTargetDependency */,
-				DB55F1A4D34820A7291580A24ECB3A22 /* PBXTargetDependency */,
-				03CE59A3A5D3B83EAB811E082F35EC2E /* PBXTargetDependency */,
+				7701FA73A009C69D4FDBC5EC18570545 /* PBXTargetDependency */,
+				C6F19BB7B342CA1044A05C3A581DD33A /* PBXTargetDependency */,
+				764C07C747F996E6A15F0C2B51F2069B /* PBXTargetDependency */,
 			);
 			name = "Pods-SDKVideoPlayer";
 			productName = Pods_SDKVideoPlayer;
@@ -659,11 +714,11 @@
 		};
 		FFA1A15AFDB5DA9D9A98596F92997762 /* SwiftIcons-SwiftIcons */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C98894FD900FADB9AEA7673491D0D055 /* Build configuration list for PBXNativeTarget "SwiftIcons-SwiftIcons" */;
+			buildConfigurationList = 02A27A76D82E3238697756E77E65FFA2 /* Build configuration list for PBXNativeTarget "SwiftIcons-SwiftIcons" */;
 			buildPhases = (
-				0A3B4A71FA37A8504598C3D5FE585C87 /* Sources */,
-				C18BE56FB4371BB2387AA5B1555A04B8 /* Frameworks */,
-				1789F6B8A19F03295F5899057513B0C3 /* Resources */,
+				345FD315B09316B65F0D341E3037159D /* Sources */,
+				B6A782C082E84B3DBE67D3801AECAD3B /* Frameworks */,
+				1FB4DA177866EF7793EEC6C2767C15A9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -692,23 +747,24 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = D1CA9A1E640BE6B53AD926F65C86F628 /* Products */;
+			productRefGroup = EADB53AFCB20A80D0C1570D7E568EE22 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				1C2487255CD9CEE6ECBA5303794D6A70 /* DisplayCriteria */,
-				BB00292CC82DDEC1747B11B163A5F179 /* JSQWebViewController */,
 				BB1ED8A5F37C269A1CAD26E5E93BD450 /* Pods-SDKVideoPlayer */,
 				8C463CB52575F5090DB826BB390C938E /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests */,
 				55A1681A41ECA8A3F12D03588EE35D09 /* Pods-SDKVideoPlayerTests */,
 				831DE2A2E1C749797E9D44BE273531D7 /* SwiftIcons */,
 				FFA1A15AFDB5DA9D9A98596F92997762 /* SwiftIcons-SwiftIcons */,
+				664D87A9A415EAF3D989A8CBA73CBE6C /* SwiftWebVC */,
+				0227C9046CD1364E815179B0A22FD632 /* SwiftWebVC-SwiftWebVCResources */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		02CECF6C34399F4CC4DA69D486B85B0F /* Resources */ = {
+		13DCFE5DD6D674CEDF9326B224695D0A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -722,32 +778,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1789F6B8A19F03295F5899057513B0C3 /* Resources */ = {
+		1592379F5091EFD69A26A2165F559257 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				481EE91FFE591C3A18F03586348F3915 /* Dripicons.ttf in Resources */,
-				449D2DE570765443E5517A2509AA13D1 /* Emoji.ttf in Resources */,
-				4DA36B3BA4C4820B3E8B0A5EE6B0E4CF /* FontAwesome.ttf in Resources */,
-				D180934B7131106F29E8884766C12487 /* FontAwesomeBrands.ttf in Resources */,
-				42075CCADF4988F048B069519C91E758 /* FontAwesomeRegular.ttf in Resources */,
-				B28B339C27F2C7A0AC28C87DF4E930C8 /* FontAwesomeSolid.ttf in Resources */,
-				A457C5E2F1016AB294FC99774CD4CAC0 /* Icofont.ttf in Resources */,
-				B7596376D0A512E0BEAC00683C81E28D /* Ionicons.ttf in Resources */,
-				F0BDBF26C0CC53BA0F7D538889FE9BE2 /* Linearicons.ttf in Resources */,
-				AEDB12BD5851F5C5F0F988041DC23566 /* MapIcons.ttf in Resources */,
-				BC18E0507F2E7F5ECACD92566473F85B /* MaterialIcons.ttf in Resources */,
-				C9D17E9702D80EC83F5520F0E3855EFC /* OpenIconic.ttf in Resources */,
-				C9B3537091E4B7E5B2118339173FF19B /* Stateface.ttf in Resources */,
-				1A1CA3A7098984963867E71023821831 /* TypIcons.ttf in Resources */,
-				9DA00D81AC2E14A13E37685EE0FF74A6 /* WeatherIcons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5F7CA1A96C64279DEF74866644585E76 /* Resources */ = {
+		1FB4DA177866EF7793EEC6C2767C15A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8E908ACF18BF515BF5130E79C497D70 /* Dripicons.ttf in Resources */,
+				768B4CD1B9168367C4CC62DF17E0332B /* Emoji.ttf in Resources */,
+				0B47DF67B15F92E374F8ECE8D62B64BB /* FontAwesome.ttf in Resources */,
+				93452C37904EB2AAADBB39DD7654F487 /* FontAwesomeBrands.ttf in Resources */,
+				0E22F856F6755313E260B1F05C4A340E /* FontAwesomeRegular.ttf in Resources */,
+				42C4A609C3FC11EBB6358E3A1036CEA9 /* FontAwesomeSolid.ttf in Resources */,
+				04A474A84B1D7AFBDF7729C0C57F1E85 /* Icofont.ttf in Resources */,
+				1B0296E291ABB7F7D490AE949D32CC8D /* Ionicons.ttf in Resources */,
+				187C80ED3AD9689FADABCA4C5601BBCD /* Linearicons.ttf in Resources */,
+				4F4A734218C11A1E5B71F4DB129001E1 /* MapIcons.ttf in Resources */,
+				9FA08D5C10EBE80B5971F58C87856B51 /* MaterialIcons.ttf in Resources */,
+				CF094A39DECAC6FC5563CCDC460238F5 /* OpenIconic.ttf in Resources */,
+				BA412B50CE6B6EC3B3970BB024D6A797 /* Stateface.ttf in Resources */,
+				C8EFE4A666DF13383CF8B2B32A602086 /* TypIcons.ttf in Resources */,
+				013454ED20AB3C1CC27F958D18F4D252 /* WeatherIcons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,13 +815,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9783C446840E0785B487A989C58F0624 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9F39F9B18EF8F5CFAC3572021E60F9B6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -773,30 +822,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BC28A10AFE96BC0DA660D60947F87B22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E115DFAD5B5EE675C797467AC3FAB02 /* Media.xcassets in Resources */,
+				BECE422E41C7264B8DF4056E08BF8B31 /* SwiftWebVC-SwiftWebVCResources in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA59FF05B36A4FBBB22D5F64258E93D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE829ABF87E1653B040A4EBDE8CF2DF4 /* Media.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0A3B4A71FA37A8504598C3D5FE585C87 /* Sources */ = {
+		29EC6E64168EA669A3BC0A4EFB3DF9CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		40E916F120B8B0A171DBC14E97214B5B /* Sources */ = {
+		345FD315B09316B65F0D341E3037159D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51F8D46F649D75A985E75737C2988E98 /* JSQWebViewController-dummy.m in Sources */,
-				C2F686B920FA88FF2239829CE64A25A8 /* WebViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		45E812B68BD774E14F7EDF5F9EFF8CD0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4AE1E9C3098B8462815CEDCAAA3EA39E /* Pods-SDKVideoPlayer-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,68 +882,133 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AEEADA66BD8411BDF89FDB8035FFB4F2 /* Sources */ = {
+		82DC70B8FA6DFFA280A12E577A9571AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C8D0EE90C31A754D7ED25296FCE25B5 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-dummy.m in Sources */,
+				F7BC5FF11D94BD743458A5A70AD303ED /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		98C6A495D2BC9FBC8763EC3447128829 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D1CE53021D97287C7CCA0765CDFE75B /* SwiftModalWebVC.swift in Sources */,
+				2B05FB7D5AED97331FB460440ECC5AD6 /* SwiftWebVC.swift in Sources */,
+				194C7C8BD313313F374DAABFCFCCBFA7 /* SwiftWebVC-dummy.m in Sources */,
+				78E754534785EE7BC8E4B2F18E035E07 /* SwiftWebVCActivity.swift in Sources */,
+				5DF5D0BF8D07555231EB3558E0F1B018 /* SwiftWebVCActivityChrome.swift in Sources */,
+				AAD4050E4344E182FA7A2932249A2114 /* SwiftWebVCActivitySafari.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABDBD10C3CA062BC442270AC2C45B81A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF7495A9906B9DEC649893750C546817 /* Pods-SDKVideoPlayer-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		03CE59A3A5D3B83EAB811E082F35EC2E /* PBXTargetDependency */ = {
+		0C92ED0700C329799C56F66C85892A8C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SwiftIcons;
-			target = 831DE2A2E1C749797E9D44BE273531D7 /* SwiftIcons */;
-			targetProxy = 5DCA25C49F8F84E4A346586E4A6FA18F /* PBXContainerItemProxy */;
+			name = "SwiftWebVC-SwiftWebVCResources";
+			target = 0227C9046CD1364E815179B0A22FD632 /* SwiftWebVC-SwiftWebVCResources */;
+			targetProxy = 9F01FB9E2177EC4329D755DE068491BC /* PBXContainerItemProxy */;
 		};
-		33B0F88F4693E23F7A8FF5BC8028CDC2 /* PBXTargetDependency */ = {
+		1B7EB85894913D946688F7A4CA63C6A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-SDKVideoPlayer";
 			target = BB1ED8A5F37C269A1CAD26E5E93BD450 /* Pods-SDKVideoPlayer */;
-			targetProxy = 449882C759B5DCA86DFE2B9E604AA32C /* PBXContainerItemProxy */;
+			targetProxy = B419C5C4C8C8710B737A53D08DF8E776 /* PBXContainerItemProxy */;
 		};
-		730A91C2BFA688CBC0939E21FA930120 /* PBXTargetDependency */ = {
+		29C53300CB5A4AB585E647F1DE1A0B8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftWebVC;
+			target = 664D87A9A415EAF3D989A8CBA73CBE6C /* SwiftWebVC */;
+			targetProxy = 66A216B65116BE0D0ED6DB6541DF7061 /* PBXContainerItemProxy */;
+		};
+		459B86C7E10471A412B5E990EA6BA696 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "SwiftIcons-SwiftIcons";
 			target = FFA1A15AFDB5DA9D9A98596F92997762 /* SwiftIcons-SwiftIcons */;
-			targetProxy = 4D95EED0B00FCC3C2EFDA94C6BDB8896 /* PBXContainerItemProxy */;
+			targetProxy = 80EE06772A8683664A02EDB19D5E3FE0 /* PBXContainerItemProxy */;
 		};
-		8358EBEC9C5E78D9B970007830C6F009 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DisplayCriteria;
-			target = 1C2487255CD9CEE6ECBA5303794D6A70 /* DisplayCriteria */;
-			targetProxy = DE083D49E883C1BCA28482D7C2A74AC6 /* PBXContainerItemProxy */;
-		};
-		8452783B2EFE9A93BED8ADA75A7292A8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DisplayCriteria;
-			target = 1C2487255CD9CEE6ECBA5303794D6A70 /* DisplayCriteria */;
-			targetProxy = 35CA05FF13B54ACA987F00CE20C49266 /* PBXContainerItemProxy */;
-		};
-		92E47EF4972A7E6499241E6BE4803FC4 /* PBXTargetDependency */ = {
+		5D8F4259E3009B42C938DB38E2F0415B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftIcons;
 			target = 831DE2A2E1C749797E9D44BE273531D7 /* SwiftIcons */;
-			targetProxy = 8B753BDE7A264184800D6814D9C5346E /* PBXContainerItemProxy */;
+			targetProxy = 352C8A029B26D226353DAFC9741617BF /* PBXContainerItemProxy */;
 		};
-		9AC13D6118528A1508A81621B56AB6BA /* PBXTargetDependency */ = {
+		764C07C747F996E6A15F0C2B51F2069B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = JSQWebViewController;
-			target = BB00292CC82DDEC1747B11B163A5F179 /* JSQWebViewController */;
-			targetProxy = 6FCDF949B81DDA2A673CAFC81296DEF7 /* PBXContainerItemProxy */;
+			name = SwiftWebVC;
+			target = 664D87A9A415EAF3D989A8CBA73CBE6C /* SwiftWebVC */;
+			targetProxy = AB252B1253204DF6187E733CE0E6E978 /* PBXContainerItemProxy */;
 		};
-		DB55F1A4D34820A7291580A24ECB3A22 /* PBXTargetDependency */ = {
+		7701FA73A009C69D4FDBC5EC18570545 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = JSQWebViewController;
-			target = BB00292CC82DDEC1747B11B163A5F179 /* JSQWebViewController */;
-			targetProxy = E759A1C5BCB05B4171E9ED12B327B2BF /* PBXContainerItemProxy */;
+			name = DisplayCriteria;
+			target = 1C2487255CD9CEE6ECBA5303794D6A70 /* DisplayCriteria */;
+			targetProxy = DB91890EFF3DF507DF01B94B201AE326 /* PBXContainerItemProxy */;
+		};
+		C6F19BB7B342CA1044A05C3A581DD33A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftIcons;
+			target = 831DE2A2E1C749797E9D44BE273531D7 /* SwiftIcons */;
+			targetProxy = 33DB50EC71FACACB038AB7ECD8F86530 /* PBXContainerItemProxy */;
+		};
+		CA756741BFCEA0849F75F0E30EE20FA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DisplayCriteria;
+			target = 1C2487255CD9CEE6ECBA5303794D6A70 /* DisplayCriteria */;
+			targetProxy = AA7322CF6D5D9581EF4BDF4CA2E0D02D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0F16DAAFA7BFDC71EB30DF153CFBE682 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F26A81AEB537873FDCDFFEFCEAAE619 /* Pods-SDKVideoPlayer.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		1779A9FA3BA49ACF4EAC1CBA1C46495C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 831974C0206338A53309A6023A909E37 /* Pods-SDKVideoPlayerTests.release.xcconfig */;
@@ -926,16 +1047,53 @@
 			};
 			name = Release;
 		};
-		22EA3DF94CC03B212674E0D23E25475F /* Debug */ = {
+		2F11F1C887CE44A9D0436F55E556B484 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1ADD72D6BEFE1ACDACA890075286EF00 /* SwiftIcons.debug.xcconfig */;
+			baseConfigurationReference = 3D44FFE84A40B09E8FF154F1976746F3 /* Pods-SDKVideoPlayer.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3108F00C24F5105E2F8548969F086E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F79DD8D106AA22BB26D7CCA13C2DB09A /* SwiftWebVC.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftIcons";
-				IBSC_MODULE = SwiftIcons;
-				INFOPLIST_FILE = "Target Support Files/SwiftIcons/ResourceBundle-SwiftIcons-SwiftIcons-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				PRODUCT_NAME = SwiftIcons;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftWebVC";
+				IBSC_MODULE = SwiftWebVC;
+				INFOPLIST_FILE = "Target Support Files/SwiftWebVC/ResourceBundle-SwiftWebVCResources-SwiftWebVC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = SwiftWebVCResources;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -943,7 +1101,7 @@
 			};
 			name = Debug;
 		};
-		5AC85449B1E942548F1C9C986F914778 /* Debug */ = {
+		687F6DA735AC04279C75673A7C8AA255 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E02FA533013FEDDA7D90BF56A8FFA27 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests.debug.xcconfig */;
 			buildSettings = {
@@ -980,43 +1138,9 @@
 			};
 			name = Debug;
 		};
-		78D1067331A55B4ED713E70A2FF001F4 /* Debug */ = {
+		6F2DD7B45788579D148BC418E6D80E43 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFE4AEC22EA33E2E35C1A7B76FAE7107 /* JSQWebViewController.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/JSQWebViewController/JSQWebViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JSQWebViewController/JSQWebViewController-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/JSQWebViewController/JSQWebViewController.modulemap";
-				PRODUCT_MODULE_NAME = JSQWebViewController;
-				PRODUCT_NAME = JSQWebViewController;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		83D4734495C8116E768BEA17B8392FC4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F26A81AEB537873FDCDFFEFCEAAE619 /* Pods-SDKVideoPlayer.release.xcconfig */;
+			baseConfigurationReference = 85D616A88529D65558492E17D00BCF77 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1028,7 +1152,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-SDKVideoPlayer-SDKVideoPlayerUITests/Pods-SDKVideoPlayer-SDKVideoPlayerUITests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1037,7 +1161,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-SDKVideoPlayer-SDKVideoPlayerUITests/Pods-SDKVideoPlayer-SDKVideoPlayerUITests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -1051,6 +1175,23 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		723642B28844B419889855CBFFA5CF20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 328932BAD07B211645AA34156DD026BF /* SwiftIcons.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftIcons";
+				IBSC_MODULE = SwiftIcons;
+				INFOPLIST_FILE = "Target Support Files/SwiftIcons/ResourceBundle-SwiftIcons-SwiftIcons-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				PRODUCT_NAME = SwiftIcons;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
 		};
 		88E7F5978B402327B1F0ADB64B0BDF2B /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1155,6 +1296,23 @@
 			};
 			name = Debug;
 		};
+		9BE2D1702A9E112479B3F15EE5F72AAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B16599F4F8FA52E1F0909D13018FB527 /* SwiftIcons.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftIcons";
+				IBSC_MODULE = SwiftIcons;
+				INFOPLIST_FILE = "Target Support Files/SwiftIcons/ResourceBundle-SwiftIcons-SwiftIcons-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				PRODUCT_NAME = SwiftIcons;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		9E406C6AAF85E580207CD97B0044DEAB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1217,46 +1375,26 @@
 			};
 			name = Release;
 		};
-		A53144BF273F3F872D0D5F1534B07C94 /* Debug */ = {
+		A7ACCC337DF77502AC5C93C20E75CF72 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D44FFE84A40B09E8FF154F1976746F3 /* Pods-SDKVideoPlayer.debug.xcconfig */;
+			baseConfigurationReference = EF560585F933A109B760CD6307B69564 /* SwiftWebVC.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftWebVC";
+				IBSC_MODULE = SwiftWebVC;
+				INFOPLIST_FILE = "Target Support Files/SwiftWebVC/ResourceBundle-SwiftWebVCResources-SwiftWebVC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = SwiftWebVCResources;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = bundle;
 			};
-			name = Debug;
+			name = Release;
 		};
 		A85D00CA1AFBF746D9EE14553ACBD2E8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C87245673C0010A928E751EDA14884A2 /* SwiftIcons.release.xcconfig */;
+			baseConfigurationReference = B16599F4F8FA52E1F0909D13018FB527 /* SwiftIcons.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1292,7 +1430,7 @@
 		};
 		AAF2DE6A31E18488890864A0D57F543B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1ADD72D6BEFE1ACDACA890075286EF00 /* SwiftIcons.debug.xcconfig */;
+			baseConfigurationReference = 328932BAD07B211645AA34156DD026BF /* SwiftIcons.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1362,26 +1500,9 @@
 			};
 			name = Debug;
 		};
-		C6AA96717271396D2A724410E4537B53 /* Release */ = {
+		D088B07B14FCE33BBF6F968575206D57 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C87245673C0010A928E751EDA14884A2 /* SwiftIcons.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftIcons";
-				IBSC_MODULE = SwiftIcons;
-				INFOPLIST_FILE = "Target Support Files/SwiftIcons/ResourceBundle-SwiftIcons-SwiftIcons-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				PRODUCT_NAME = SwiftIcons;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		C755F5B7D620D100E9416785A3381A4A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56D51C71B5DE49C08FA6EDD9B80CE56C /* JSQWebViewController.release.xcconfig */;
+			baseConfigurationReference = EF560585F933A109B760CD6307B69564 /* SwiftWebVC.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1391,18 +1512,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/JSQWebViewController/JSQWebViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JSQWebViewController/JSQWebViewController-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftWebVC/SwiftWebVC-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftWebVC/SwiftWebVC-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/JSQWebViewController/JSQWebViewController.modulemap";
-				PRODUCT_MODULE_NAME = JSQWebViewController;
-				PRODUCT_NAME = JSQWebViewController;
+				MODULEMAP_FILE = "Target Support Files/SwiftWebVC/SwiftWebVC.modulemap";
+				PRODUCT_MODULE_NAME = SwiftWebVC;
+				PRODUCT_NAME = SwiftWebVC;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -1414,12 +1535,10 @@
 			};
 			name = Release;
 		};
-		D10B6194F8AC62F47197F5596A18E89F /* Release */ = {
+		D25EBF2F0B139F245A796A53BB47D975 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 85D616A88529D65558492E17D00BCF77 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests.release.xcconfig */;
+			baseConfigurationReference = F79DD8D106AA22BB26D7CCA13C2DB09A /* SwiftWebVC.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1428,7 +1547,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SDKVideoPlayer-SDKVideoPlayerUITests/Pods-SDKVideoPlayer-SDKVideoPlayerUITests-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftWebVC/SwiftWebVC-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftWebVC/SwiftWebVC-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1436,21 +1556,18 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SDKVideoPlayer-SDKVideoPlayerUITests/Pods-SDKVideoPlayer-SDKVideoPlayerUITests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/SwiftWebVC/SwiftWebVC.modulemap";
+				PRODUCT_MODULE_NAME = SwiftWebVC;
+				PRODUCT_NAME = SwiftWebVC;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		EB77A8E7E014C2B59F38D2BBFB538F40 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1491,6 +1608,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		02A27A76D82E3238697756E77E65FFA2 /* Build configuration list for PBXNativeTarget "SwiftIcons-SwiftIcons" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				723642B28844B419889855CBFFA5CF20 /* Debug */,
+				9BE2D1702A9E112479B3F15EE5F72AAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F2E5736993F508A32F0F36DA29949E0 /* Build configuration list for PBXNativeTarget "Pods-SDKVideoPlayer-SDKVideoPlayerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				687F6DA735AC04279C75673A7C8AA255 /* Debug */,
+				6F2DD7B45788579D148BC418E6D80E43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		476EC03BDB5F21FB0A1DE5F709892AB2 /* Build configuration list for PBXNativeTarget "DisplayCriteria" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1509,6 +1644,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		4D977EF37361516CCED96D76591C03EE /* Build configuration list for PBXNativeTarget "SwiftWebVC-SwiftWebVCResources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3108F00C24F5105E2F8548969F086E2F /* Debug */,
+				A7ACCC337DF77502AC5C93C20E75CF72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5781B78979219ACC5D95CA3C00B01868 /* Build configuration list for PBXNativeTarget "SwiftIcons" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1518,38 +1662,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		74244DDEEBCC69AA880890344B845BB4 /* Build configuration list for PBXNativeTarget "Pods-SDKVideoPlayer-SDKVideoPlayerUITests" */ = {
+		6CFEBB63B7DEEB2DE28CAAE485381D9F /* Build configuration list for PBXNativeTarget "SwiftWebVC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5AC85449B1E942548F1C9C986F914778 /* Debug */,
-				D10B6194F8AC62F47197F5596A18E89F /* Release */,
+				D25EBF2F0B139F245A796A53BB47D975 /* Debug */,
+				D088B07B14FCE33BBF6F968575206D57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4F10A8C26F6130B9065D1697DBE4F78 /* Build configuration list for PBXNativeTarget "JSQWebViewController" */ = {
+		91D70DAB773E833D593DBFF916DC9025 /* Build configuration list for PBXNativeTarget "Pods-SDKVideoPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				78D1067331A55B4ED713E70A2FF001F4 /* Debug */,
-				C755F5B7D620D100E9416785A3381A4A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C4CBF3F09986FC067A2C2DF35032A634 /* Build configuration list for PBXNativeTarget "Pods-SDKVideoPlayer" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A53144BF273F3F872D0D5F1534B07C94 /* Debug */,
-				83D4734495C8116E768BEA17B8392FC4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C98894FD900FADB9AEA7673491D0D055 /* Build configuration list for PBXNativeTarget "SwiftIcons-SwiftIcons" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22EA3DF94CC03B212674E0D23E25475F /* Debug */,
-				C6AA96717271396D2A724410E4537B53 /* Release */,
+				2F11F1C887CE44A9D0436F55E556B484 /* Debug */,
+				0F16DAAFA7BFDC71EB30DF153CFBE682 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
