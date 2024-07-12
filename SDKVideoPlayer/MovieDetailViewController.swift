@@ -219,15 +219,19 @@ class MovieDetailViewController: UIViewController {
         var newMovices = movies.replacingOccurrences(of: ".m3u8#", with: ".m3u8\n")
         newMovices = newMovices.replacingOccurrences(of: "$https", with: "\nhttps")
       
-        
+//        print(newMovices)
         var index = 1
         newMovices.components(separatedBy: "\n").forEach { str in
             //print("\n" + str)
             
             if(str.count > 10){
-                jishuURLArray.append(str)
-                jishuArray.append("\(index)")
-                index  = index + 1
+                let newStr =  str as NSString
+                if  newStr.contains(".m3u8"){
+                    
+                    jishuURLArray.append(newStr as String)
+                    jishuArray.append("\(index)")
+                    index  = index + 1
+                }
                 
             }
 
@@ -235,8 +239,7 @@ class MovieDetailViewController: UIViewController {
         }
 //        print(jishuArray)
         print("总条数：\(jishuURLArray.count)" )
-        print("行数: ")
-        print(jishuArray.count/4)
+         
         setupButtons()
     }
     
@@ -293,7 +296,8 @@ class MovieDetailViewController: UIViewController {
     @objc private func ButtonTapped(_ button:UIButton){
        
         
-        if let u = URL(string: jishuURLArray[button.tag]) { //movie.link
+        if let u = URL(string: jishuURLArray[button.tag]) {
+            print(u.absoluteString)
                    let resource = KSPlayerResource(url: u)
                    let controller = DetailViewController()
                    controller.resource = resource
