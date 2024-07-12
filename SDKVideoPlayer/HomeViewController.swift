@@ -382,7 +382,7 @@ class KeywordCollectionViewCell: UICollectionViewCell {
           // 取得螢幕寬度
         keywordBtn =  UIButton(type: UIButton.ButtonType.custom)
         keywordBtn.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
-//        keywordBtn.setTitleColor(UIColor.black, for: UIControl.State.normal)
+            keywordBtn.setTitleColor(UIColor.black, for: UIControl.State.normal)
         self.addSubview(keywordBtn)
       }
 

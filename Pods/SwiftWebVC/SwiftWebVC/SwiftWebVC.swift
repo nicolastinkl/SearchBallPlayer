@@ -83,7 +83,7 @@ public class SwiftWebVC: UIViewController {
     
     deinit {
         webView.stopLoading()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         webView.uiDelegate = nil;
         webView.navigationDelegate = nil;
     }
@@ -143,27 +143,29 @@ public class SwiftWebVC: UIViewController {
         
         super.viewWillAppear(true)
         
-        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
-            self.navigationController?.setToolbarHidden(false, animated: false)
-        }
-        else if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
-            self.navigationController?.setToolbarHidden(true, animated: true)
-        }
-    }
-    
-    override public func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+        self.navigationController?.setToolbarHidden(true, animated: true)
         
-        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
-            self.navigationController?.setToolbarHidden(true, animated: true)
-        }
+//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
+//            self.navigationController?.setToolbarHidden(false, animated: false)
+//        }
+//        else if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+//            self.navigationController?.setToolbarHidden(true, animated: true)
+//        }
     }
     
-    override public func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-    
+//    override public func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(true)
+//        
+//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
+//            self.navigationController?.setToolbarHidden(true, animated: true)
+//        }
+//    }
+//    
+//    override public func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(true)
+////        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//    }
+//    
     ////////////////////////////////////////////////
     // Toolbar
     
@@ -291,13 +293,13 @@ extension SwiftWebVC: WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.delegate?.didStartLoading()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         updateToolbarItems()
     }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.delegate?.didFinishLoading(success: true)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         
         webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
             self.navBarTitle.text = response as! String?
@@ -309,62 +311,8 @@ extension SwiftWebVC: WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.delegate?.didFinishLoading(success: false)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         updateToolbarItems()
     }
-    
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        let url = navigationAction.request.url
-        
-        let hostAddress = navigationAction.request.url?.host
-        
-        if (navigationAction.targetFrame == nil) {
-            if UIApplication.shared.canOpenURL(url!) {
-                UIApplication.shared.openURL(url!)
-            }
-        }
-        
-        // To connnect app store
-        if hostAddress == "itunes.apple.com" {
-            if UIApplication.shared.canOpenURL(navigationAction.request.url!) {
-                UIApplication.shared.openURL(navigationAction.request.url!)
-                decisionHandler(.cancel)
-                return
-            }
-        }
-        
-        let url_elements = url!.absoluteString.components(separatedBy: ":")
-        
-        switch url_elements[0] {
-        case "tel":
-            openCustomApp(urlScheme: "telprompt://", additional_info: url_elements[1])
-            decisionHandler(.cancel)
-            
-        case "sms":
-            openCustomApp(urlScheme: "sms://", additional_info: url_elements[1])
-            decisionHandler(.cancel)
-            
-        case "mailto":
-            openCustomApp(urlScheme: "mailto://", additional_info: url_elements[1])
-            decisionHandler(.cancel)
-            
-        default:
-            //print("Default")
-            break
-        }
-        
-        decisionHandler(.allow)
-        
-    }
-    
-    func openCustomApp(urlScheme: String, additional_info:String){
-        
-        if let requestUrl: URL = URL(string:"\(urlScheme)"+"\(additional_info)") {
-            let application:UIApplication = UIApplication.shared
-            if application.canOpenURL(requestUrl) {
-                application.openURL(requestUrl)
-            }
-        }
-    }
+     
 }
