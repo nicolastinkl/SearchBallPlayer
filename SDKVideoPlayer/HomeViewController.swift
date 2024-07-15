@@ -122,11 +122,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-          
             
         }
-        
-//        self.view.backgroundColor =
+            
+          
 
         searchBar.delegate = self
         suggestionsTableView.dataSource = self
@@ -160,7 +159,35 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
 
         sendRequestGetconfig()
         
+        configureNavigationBar()
+        
+        
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      // 确保在视图将要出现时隐藏导航栏
+      navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      // 确保在视图将要消失时显示导航栏
+      navigationController?.setNavigationBarHidden(false, animated: animated)
+  }
+  
+  private func configureNavigationBar() {
+      if #available(iOS 13.0, *) {
+          // iOS 13 及以上版本使用 UINavigationBarAppearance
+          let appearance = UINavigationBarAppearance()
+          appearance.configureWithTransparentBackground()
+          appearance.backgroundColor = .clear
+          appearance.shadowColor = .clear
+
+          navigationController?.navigationBar.standardAppearance = appearance
+          navigationController?.navigationBar.scrollEdgeAppearance = appearance
+      }
+  }
     
     @objc func openSearchTarget(_ sender: UIButton){
         
@@ -245,7 +272,14 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
  
                                     let searvc = SearcViewController()
                                     searvc.searchList = response_config.data
-                                    searvc.searchText = "'\(self.searchBar.text ?? "")' 搜索结果"
+                                    searvc.searchText =  self.searchBar.text ?? "" // "'\()' 搜索结果"
+                                    
+                                    
+                                    searvc.total = response_config.total
+                                    searvc.page = response_config.page
+                                    searvc.limit = response_config.limit
+                                    searvc.pagecount = response_config.pagecount
+                                    
                                     self.show(searvc, sender: self)
                                 }
                             }

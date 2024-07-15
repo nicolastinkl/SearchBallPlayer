@@ -30,11 +30,16 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
     var isLoading = false
     var hasMoreData = true
     
+    var total = 0
+    var page = 0
+    var limit = 0
+    var pagecount = 0
+    
     
    override func viewDidLoad() {
        super.viewDidLoad()
        
-       self.title = searchText
+       self.title =  "'\(searchText)' 搜索结果"
        
        setupTableView()
        
@@ -57,6 +62,8 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
      tableView.register(LoadingFooterView.self, forHeaderFooterViewReuseIdentifier: "footer")
      tableView.tableFooterView = UIView()
        
+       
+       
    }
     
     
@@ -64,15 +71,112 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
         guard !isLoading else { return }
         isLoading = true
         
-        DispatchQueue.global().asyncAfter(deadline: .now() ) {
-            
-//            self.hasMoreData = moreItems.count > 0
-            self.isLoading = false
-            self.hasMoreData = false
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+        searchRequest(searchText: searchText)
+        
+//        DispatchQueue.global().asyncAfter(deadline: .now() ) {
+//           
+//            self.hasMoreData = self.total > self.page * self.limit
+//            self.isLoading = false
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+    }
+    
+    
+    
+    func searchRequest(searchText: String) {
+        self.isLoading = true
+         
+        
+        let requestComplete1: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
+ 
+            //if let response {
+//                for (field, value) in response.allHeaderFields {
+//                    debugPrint("\(field) \(value)" )
+//                }
+                switch  result {
+                       case .success(let value):
+                    // 将 JSON 字符串转换为 Data
+                    
+//                    var  s = ""
+//                    if let sstr = value as? NSString {
+//                        s = sstr.replacingOccurrences(of: "null", with: "\"\"")
+//                    }
+//
+//                    print(s)
+                    guard let data = value.data(using: String.Encoding.utf8) else {
+                        
+                         
+//                        let error = SearchError.errorWith("Error: Cannot create data from JSON string.")
+                        self.showSearchErrorAlert(on:self, error: "Error: Cannot create data from JSON string." )
+                        return
+                    }
+                    
+                    
+                    // 创建 JSONDecoder 实例
+                    let decoder = JSONDecoder()
+
+                        // 使用 JSONDecoder 解码数据
+                        do {
+                            let response_config = try decoder.decode(VideoSearchResponse.self, from: data)
+                            print("Code: \(response_config.code)")
+                            
+                            if(Int(response_config.code) == 1){
+                                self.page = self.page + 1
+                                //self.movies = response_config.data.videolist
+                                
+//                                response_config.data.videolist.forEach { VideoCategoryItem in
+//  //                                  self.movies?.append(VideoCategoryItem.categoryName)
+//                                   // self.videoCategorys.append(VideoCategoryItem)
+//                                    VideoCategoryItem.videoListChild.forEach { Videoitem in
+//                                        self.movies.append(Videoitem)
+//                                    }
+//                                }
+                                 
+                                
+                                response_config.data.forEach { video in
+                                    self.searchList?.append(video)
+                                }
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                    
+                                }
+                            }
+                            
+                        } catch {
+                            print("\(error.localizedDescription)")
+//                            let error = SearchError.errorWith("Json parse Error: \(error.localizedDescription)")
+                            self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
+                            
+                           
+                            
+                        }
+                    
+                            
+                       case .failure(let error):
+                            
+//                            let error = SearchError.errorWith("\(error.localizedDescription)")
+                            self.showSearchErrorAlert(on:self, error: "\(error.localizedDescription)" )
+                    
+                     
+                       }
+                
+//            }
+
+           
+ 
         }
+        
+         
+        
+        AF.request("https://www.gooapis.com/player/search?keyword=\(searchText)&page=\(self.page)", method: .get)
+            .validate(statusCode: 200..<300)
+            .responseString(completionHandler: { response in
+                requestComplete1(response.response, response.result)
+                     
+            })
     }
     
    
@@ -102,7 +206,7 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
    }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-          return hasMoreData ? 50 : 0
+        return  70// isLoading ?  70 : 0
       }
    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -292,14 +396,18 @@ class LoadingFooterView: UITableViewHeaderFooterView {
     }
     
     func configure(hasMoreData: Bool) {
-        label.frame = contentView.bounds
+//        label.frame = contentView.bounds
+        label.frame = CGRect(x: 0, y: 40, width: contentView.frame.width, height: 30)
+        label.textAlignment = .center
         activityIndicator.frame = contentView.bounds
         if hasMoreData {
             label.text = "Loading more data..."
             activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
         } else {
             label.text = "No more data"
             activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
         }
     }
 }
