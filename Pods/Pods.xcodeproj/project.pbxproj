@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -560,7 +560,7 @@
 			);
 			name = "Pods-SDKVideoPlayer";
 			productName = Pods_SDKVideoPlayer;
-			productReference = 64D766FC68DCC5B91801C5C37CC128F1 /* Pods-SDKVideoPlayer */;
+			productReference = 64D766FC68DCC5B91801C5C37CC128F1 /* Pods_SDKVideoPlayer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		FFA1A15AFDB5DA9D9A98596F92997762 /* SwiftIcons-SwiftIcons */ = {
@@ -590,7 +590,7 @@
 				LastUpgradeCheck = 1500;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 15.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
