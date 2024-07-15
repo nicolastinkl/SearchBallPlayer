@@ -8,8 +8,9 @@ target 'SDKVideoPlayer' do
   # Pods for SDKVideoPlayer
   pod 'SwiftIcons', '~> 3.0'
   pod 'DisplayCriteria', :path => './KSPlayer/'
+#  pod 'SwiftLoader', :path => './SwiftLoader/'
   #  pod 'KSPlayer' , :path => './KSPlayer/'
-  pod 'SwiftWebVC'
+#  pod 'SwiftWebVC'
 
 
 

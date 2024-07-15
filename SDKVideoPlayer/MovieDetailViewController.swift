@@ -11,7 +11,7 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 import SwiftfulLoadingIndicators
-import SwiftLoader
+//import SwiftLoader
 import KSPlayer
 
 class MovieDetailViewController: UIViewController {
@@ -198,14 +198,14 @@ class MovieDetailViewController: UIViewController {
     }
     
     private func setupPlayButton(){
-        contentView.addSubview(playButton)
-        
-        NSLayoutConstraint.activate([
-            playButton.centerXAnchor.constraint(equalTo: posterImageView.centerXAnchor),
-            playButton.centerYAnchor.constraint(equalTo: posterImageView.centerYAnchor,constant: 10),
-            playButton.widthAnchor.constraint(equalToConstant: 100),
-            playButton.heightAnchor.constraint(equalToConstant: 100)
-        ])
+//        contentView.addSubview(playButton)
+//        
+//        NSLayoutConstraint.activate([
+//            playButton.centerXAnchor.constraint(equalTo: posterImageView.centerXAnchor),
+//            playButton.centerYAnchor.constraint(equalTo: posterImageView.centerYAnchor,constant: 10),
+//            playButton.widthAnchor.constraint(equalToConstant: 100),
+//            playButton.heightAnchor.constraint(equalToConstant: 100)
+//        ])
         
         
     }
@@ -390,6 +390,15 @@ class MovieDetailViewController: UIViewController {
             let controller = DetailViewController()
             controller.resource = resource
 //            self.show(controller, sender: self)
+            if let s = self.movieDetail {
+                LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+                //通知刷新列表
+                
+                // 发送通知
+                NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+                
+            }
+            
             controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated:false)
         }
@@ -403,6 +412,16 @@ class MovieDetailViewController: UIViewController {
            let resource = KSPlayerResource(url: u)
            let controller = DetailViewController()
            controller.resource = resource
+            
+            if let s = self.movieDetail {
+                LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+                //通知刷新列表
+                
+                // 发送通知
+                NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+                
+            }
+            
 //            self.show(controller, sender: self)
            controller.modalPresentationStyle = .fullScreen
            self.present(controller, animated:false)

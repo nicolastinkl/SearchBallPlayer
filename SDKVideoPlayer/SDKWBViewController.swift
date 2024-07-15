@@ -15,7 +15,7 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 import SwiftfulLoadingIndicators
-import SwiftLoader
+//import SwiftLoader
 import KSPlayer
 
 

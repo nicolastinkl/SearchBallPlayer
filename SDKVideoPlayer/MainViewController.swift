@@ -13,7 +13,7 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 import SwiftfulLoadingIndicators
-import SwiftLoader
+////import SwiftLoader
 import KSPlayer
  
 
@@ -383,7 +383,8 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
       
       func sendRequestGetconfig() {
           
-          SwiftLoader.show(title: "Loading...", animated: true)
+          SwiftLoader.show(title: "正在请求数据...", animated: true)
+          
 
         //  LoadingIndicator()
   //        // Fetch Request

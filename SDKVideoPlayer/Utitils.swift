@@ -7,7 +7,120 @@
 
 import Foundation
 import UIKit
+
+
+// 定义一个错误处理的枚举类型
+enum SearchError: Error {
+    case networkError
+    case notFound
+    case unknown
+    case errorWith(String) // 存储输入错误的具体信息
+    // 更新 LocalizedError 以处理新的输入错误情况
+       var errorDescription: String? {
+           switch self {
+           case .networkError:
+               return "Network error occurred. Please check your connection and try again."
+           case .notFound:
+               return "No results found. Please try a different query."
+           case .unknown:
+               return "An unknown error occurred. Please try again later."
+           case .errorWith(let input):
+               return "Invalid input error: '\(input)' is not a valid input."
+           }
+       }
+}
+
+ 
+
+extension UIViewController{
+    
+    // 创建一个函数来显示搜索错误弹窗
+    func showSearchErrorAlert(on viewController: UIViewController, error: String) {
+        // 根据错误类型创建UIAlertController
+        let alertController = UIAlertController(title: "搜索失败", message: error, preferredStyle: .alert)
+        
+        // 添加一个'OK'按钮，用于关闭弹窗
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        // 确保在主线程中呈现弹窗
+        DispatchQueue.main.async {
+            viewController.present(alertController, animated: true, completion: nil)
+        }
+    }
+}
+
+
+extension Notification.Name {
+    static let historyItemsUpdated = Notification.Name("RecentlyWatchVideoItemsUpdated")
+}
+
+
+class LocalStore{
+    static    func saveToUserDefaults(RecentlyWatchVideo: Video) {
+        
+        
+        //Array Object/
+       /*  if var savedHistoryItems = UserDefaults.standard.array(forKey: "Recently_watched_history") {
+            savedHistoryItems.insert(RecentlyWatchVideo, at: 0)
+            UserDefaults.standard.setValue(savedHistoryItems, forKey: "Recently_watched_HHistory")
+        }else{
+            UserDefaults.standard.setValue([RecentlyWatchVideo], forKey: "Recently_watched_HHistory")
+        } */
+        
+        
+        
+        //JSONArray Object/
+      let encoder = JSONEncoder()
+          
+        if let savedHistoryItems = UserDefaults.standard.data(forKey: "Recently_watched_history") {
+            let decoder = JSONDecoder()
+            if var loadedHistoryItems = try? decoder.decode([Video].self, from: savedHistoryItems) {
+                loadedHistoryItems.insert(RecentlyWatchVideo, at: 0)
+                
+                if let encoded = try? encoder.encode(loadedHistoryItems) {
+                    UserDefaults.standard.set(encoded, forKey: "Recently_watched_history")
+                }                
+            }
+        }else{
+            let arraryVideo:[Video] = [RecentlyWatchVideo]
+            if let encoded = try? encoder.encode(arraryVideo) {
+                UserDefaults.standard.set(encoded, forKey: "Recently_watched_history")
+            }
+        }
+         
+    }
+    
+    static  func getFromUserDefaults()->[Video]? {
+        
+        //Array Object/
+        /* if let savedHistoryItems = UserDefaults.standard.array(forKey: "Recently_watched_HHistory") {
+              return savedHistoryItems as? [Video]
+        }
+        
+        return nil */
+        
+
+        //JSONArray Object/
+        if let savedHistoryItems = UserDefaults.standard.data(forKey: "Recently_watched_history") {
+            let decoder = JSONDecoder()
+            if let loadedHistoryItems = try? decoder.decode([Video].self, from: savedHistoryItems) {
+                return loadedHistoryItems
+            }
+        }
+        return nil
+        
+        
+    }
+    
+    
+}
+
 extension UIColor {
+    static func MainColor() -> UIColor{
+        return UIColor.systemPurple
+//     return UIColor(fromHex: "#9c45ac")
+    }
+        
         /// Initialises UIColor from a hexadecimal string. Color is clear if string is invalid.
         /// - Parameter fromHex: supported formats are "#RGB", "#RGBA", "#RRGGBB", "#RRGGBBAA", with or without the # character
         public convenience init(fromHex:String) {

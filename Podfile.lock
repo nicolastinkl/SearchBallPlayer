@@ -1,17 +1,14 @@
 PODS:
   - DisplayCriteria (1.1.0)
   - SwiftIcons (3.0)
-  - SwiftWebVC (0.4.2)
 
 DEPENDENCIES:
   - DisplayCriteria (from `./KSPlayer/`)
   - SwiftIcons (~> 3.0)
-  - SwiftWebVC
 
 SPEC REPOS:
   trunk:
     - SwiftIcons
-    - SwiftWebVC
 
 EXTERNAL SOURCES:
   DisplayCriteria:
@@ -20,8 +17,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   DisplayCriteria: bb0a90faf14b30848bc50ac0516340ce50164187
   SwiftIcons: 3b748e57d9eee0c7c8d3bdbf2d742c0b1b4c6172
-  SwiftWebVC: ecc4feaabe5a3f75e059a0a345d3386bb0d16c44
 
-PODFILE CHECKSUM: 371c8155500a6a36d68bd4631d8548593328c708
+PODFILE CHECKSUM: e6d509362d0c816cf05e8699ef6410e238d58d74
 
 COCOAPODS: 1.15.2

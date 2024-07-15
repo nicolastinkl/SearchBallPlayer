@@ -13,8 +13,8 @@ import SafariServices
 import Alamofire
 import SDWebImage
 import SwiftIcons
-import SwiftLoader
-import SwiftWebVC
+//import SwiftLoader
+//import SwiftWebVC
 // 基本的数据模型
 struct Website: Codable {
     let name: String
@@ -39,8 +39,26 @@ struct DataClass: Codable {
 }
 
 
-// search viewconoller 
-class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource,SFSafariViewControllerDelegate {
+
+
+//"page":"1","pagecount":1,"limit":"20","total":17,
+struct VideoSearchResponse: Codable {
+    let code: Int
+    let message: String
+    let page: Int
+    let pagecount: Int
+    let limit: Int
+    let total: Int
+    let data: [Video]
+}
+
+
+
+
+
+
+// Home Search viewconoller
+class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
   
     
@@ -54,27 +72,71 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     
     var configData:ConfigResponse?
     var currentRecommandURL:String = ""
+    @IBOutlet weak var labelSearchBar: UILabel!
     
+    @IBOutlet weak var searchButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Example usage:
+        let gradientView = GradientView(frame: view.bounds)
+        gradientView.startColor = UIColor.MainColor() // Light blue
+        gradientView.endColor =  UIColor(fromHex: "#eeeff1") //UIColor(red: 0.12, green: 0.56, blue: 1.0, alpha: 1.0)   // Blue
+        
+        view.insertSubview(gradientView, at: 0)
+         
+        // 设置搜索框背景为透明
+        searchBar.backgroundImage = UIImage() // 使用空白的 UIImage
+        labelSearchBar.layer.cornerRadius = 11
+        labelSearchBar.layer.borderWidth = 1
+        labelSearchBar.layer.borderColor = UIColor.MainColor().cgColor
+        labelSearchBar.clipsToBounds = true
+        
+        searchButton.addTarget(self, action: #selector(self.openSearchTarget(_:)), for: UIControl.Event.touchUpInside)
+
+        
+        
+            
+        // 设置搜索框背景颜色为白色
+//        searchBar.barTintColor = .white
+        
+        NSLayoutConstraint.activate([
+            gradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 0),
+            gradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: 0),
+            gradientView.topAnchor.constraint(equalTo: view.topAnchor),
+            gradientView.bottomAnchor.constraint(equalTo:view.bottomAnchor),
+        ])
+        
+        // 添加圆角
+          let maskPath = UIBezierPath(roundedRect: searchButton.bounds,
+                                      byRoundingCorners: [.topRight, .bottomRight],
+                                      cornerRadii: CGSize(width: 10.0, height: 10.0))
+          
+          let maskLayer = CAShapeLayer()
+          maskLayer.frame = searchButton.bounds
+          maskLayer.path = maskPath.cgPath
+          searchButton.layer.mask = maskLayer
+    
+        
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
           
             
         }
         
-        self.view.backgroundColor = UIColor(fromHex: "#eeeff1")
+//        self.view.backgroundColor =
 
         searchBar.delegate = self
         suggestionsTableView.dataSource = self
         suggestionsTableView.delegate = self
-         
+//         
          let layout = UICollectionViewFlowLayout()
          layout.scrollDirection = .horizontal
-         layout.itemSize = CGSize(width: 100, height: 44)
+         layout.itemSize = CGSize(width: 120, height: 44)
          suggestionsTableView.collectionViewLayout = layout
          
- //        suggestionsTableView.backgroundColor = UIColor.lightGray
          // 如果使用 storyboard
          suggestionsTableView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
          
@@ -88,8 +150,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         iconsCollectionView.backgroundColor = UIColor.clear
         searchBar.backgroundColor = UIColor.clear
         let layout2 = UICollectionViewFlowLayout()
-        let width = (iconsCollectionView.frame.width - 30) / 3
-        layout2.itemSize = CGSize(width:width, height: 120)
+        let width = (iconsCollectionView.frame.width - 40) / 4
+        layout2.itemSize = CGSize(width:width, height: width)
 //        layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
 //        layout2.minimumLineSpacing = 10 // 设置行间距
         layout2.sectionInset =  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // 设置间距
@@ -100,6 +162,127 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         
     }
     
+    @objc func openSearchTarget(_ sender: UIButton){
+        
+        if let text =  searchBar.text as? NSString {
+            let newText = text as String
+            if (text.contains("https://")  || text.contains("http://")  || text.contains("www.")  ){
+                //target webview
+              
+                if let _ = URL(string: newText) {
+                    let controller = SwiftWebVC(urlString:  newText )
+                    self.show(controller, sender: self)
+                    return
+                }
+              
+                
+            }
+            
+            if(text.length > 0){
+                //search view
+                
+                searchRequest(searchText: newText)
+            }
+        }
+        
+        
+        
+    }
+    
+    func searchRequest(searchText: String) {
+        
+        SwiftLoader.show(title: "搜索中...", animated: true)
+         
+        
+        let requestComplete1: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
+
+            SwiftLoader.hide()
+            
+            //if let response {
+//                for (field, value) in response.allHeaderFields {
+//                    debugPrint("\(field) \(value)" )
+//                }
+                switch  result {
+                       case .success(let value):
+                    // 将 JSON 字符串转换为 Data
+                    
+//                    var  s = ""
+//                    if let sstr = value as? NSString {
+//                        s = sstr.replacingOccurrences(of: "null", with: "\"\"")
+//                    }
+//                    
+//                    print(s)
+                    guard let data = value.data(using: String.Encoding.utf8) else {
+                        
+                         
+//                        let error = SearchError.errorWith("Error: Cannot create data from JSON string.")
+                        self.showSearchErrorAlert(on:self, error: "Error: Cannot create data from JSON string." )
+                        return
+                    }
+                    
+                    
+                    // 创建 JSONDecoder 实例
+                    let decoder = JSONDecoder()
+
+                        // 使用 JSONDecoder 解码数据
+                        do {
+                            let response_config = try decoder.decode(VideoSearchResponse.self, from: data)
+                            print("Code: \(response_config.code)")
+                            
+                            if(Int(response_config.code) == 1){
+                                
+                                //self.movies = response_config.data.videolist
+                                
+//                                response_config.data.videolist.forEach { VideoCategoryItem in
+//  //                                  self.movies?.append(VideoCategoryItem.categoryName)
+//                                   // self.videoCategorys.append(VideoCategoryItem)
+//                                    VideoCategoryItem.videoListChild.forEach { Videoitem in
+//                                        self.movies.append(Videoitem)
+//                                    }
+//                                }
+                                 
+                                DispatchQueue.main.async {
+ 
+                                    let searvc = SearcViewController()
+                                    searvc.searchList = response_config.data
+                                    searvc.searchText = "'\(self.searchBar.text ?? "")' 搜索结果"
+                                    self.show(searvc, sender: self)
+                                }
+                            }
+                            
+                        } catch {
+                            print("\(error.localizedDescription)")
+//                            let error = SearchError.errorWith("Json parse Error: \(error.localizedDescription)")
+                            self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
+                            
+                           
+                            
+                        }
+                    
+                            
+                       case .failure(let error):
+                            
+//                            let error = SearchError.errorWith("\(error.localizedDescription)")
+                            self.showSearchErrorAlert(on:self, error: "\(error.localizedDescription)" )
+                    
+                     
+                       }
+                
+//            }
+
+           
+ 
+        }
+        
+         
+        
+        AF.request("https://www.gooapis.com/player/search?keyword=\(searchText)", method: .get)
+            .validate(statusCode: 200..<300)
+            .responseString(completionHandler: { response in
+                requestComplete1(response.response, response.result)
+                     
+            })
+    }
     
     func sendRequestGetconfig() {
         /**
@@ -108,7 +291,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
          */
 
         
-        SwiftLoader.show(title: "Loading...", animated: true)
+        SwiftLoader.show(title: "加载中...", animated: true)
         
 //        // Fetch Request
         
@@ -123,6 +306,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                        case .success(let value):
                     // 将 JSON 字符串转换为 Data
                     
+                    
                     guard let data = value.data(using: String.Encoding.utf8) else {
                         print("Error: Cannot create data from JSON string.")
                         DispatchQueue.main.async {
@@ -132,6 +316,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                         }
                         return
                     }
+                    
 
                     // 创建 JSONDecoder 实例
                     let decoder = JSONDecoder()
@@ -151,9 +336,9 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                             self.icons = response_config.data.classlist
                             DispatchQueue.main.async {
                                 
-                                if let s = response_config.data.searchrecommadlist.first?.keyword {
-                                    self.searchBar.placeholder = s
-                                }
+//                                if let s = response_config.data.searchrecommadlist.first?.keyword {
+////                                    self.searchBar.placeholder = s
+//                                }
                                 // UI 更新代码
                                 self.suggestionsTableView.reloadData()
                                 self.iconsCollectionView.reloadData()
@@ -212,6 +397,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
            searchBar.resignFirstResponder()
            // 处理搜索逻辑
+           openSearchTarget(UIButton())
        }
      
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -245,7 +431,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                }
                
                let keyword:SearchRecommendation = searchSuggestionKeywords[indexPath.item]
-               cell.keywordBtn.setTitle(keyword.keyword, for: UIControl.State.normal)
+               
+               cell.configData(title: keyword.keyword, isFirst: indexPath.item == 0)
                cell.keywordBtn.tag = indexPath.item
                cell.keywordBtn.addTarget(self, action: #selector(self.openRecommandTarget(_:)), for: UIControl.Event.touchUpInside)
                return cell
@@ -282,9 +469,12 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
        // UICollectionViewDelegateFlowLayout 用于自定义布局（如果需要）
 //       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //           if(collectionView === self.suggestionsTableView) {
-//               return CGSize(width: 100, height: 44)
+//               let keyword:SearchRecommendation = searchSuggestionKeywords[indexPath.item]
+//               
+//               return CGSize(width: 60 * keyword.keyword.count, height: 44)
 //           }
-//           return CGSize(width: (iconsCollectionView.frame.width - 20) / 3, height: 100) // 每行 3 个图标，宽度平分
+//            
+//           return CGSize(width: (iconsCollectionView.frame.width - 40) / 3, height: 120) // 每行 3 个图标，宽度平分
 //       }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -374,21 +564,63 @@ class IconCollectionViewCell: UICollectionViewCell {
 class KeywordCollectionViewCell: UICollectionViewCell {
     
 //    @IBOutlet weak
-    var keywordBtn: UIButton!
+    var keywordBtn: UIButton = {
+        let keywordBtn  =    UIButton(type: UIButton.ButtonType.custom)
+        
+        keywordBtn.layer.cornerRadius = 15
+        keywordBtn.clipsToBounds = true
+        keywordBtn.translatesAutoresizingMaskIntoConstraints = false
+        return keywordBtn
+    }()
     
     override init(frame: CGRect) {
           super.init(frame: frame)
 
           // 取得螢幕寬度
-        keywordBtn =  UIButton(type: UIButton.ButtonType.custom)
-        keywordBtn.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
-            keywordBtn.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        
+        
+        
         self.addSubview(keywordBtn)
+        
+        NSLayoutConstraint.activate([
+            keywordBtn.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 10),
+            keywordBtn.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -2),
+            keywordBtn.topAnchor.constraint(equalTo: topAnchor),
+//            keywordBtn.bottomAnchor.constraint(equalTo:bottomAnchor),
+            keywordBtn.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
       }
 
       required init?(coder aDecoder: NSCoder) {
           fatalError("init(coder:) has not been implemented")
       }
+    
+    func configData(title: String, isFirst: Bool){
+        
+//        keyword.keyword
+        keywordBtn.setTitle(title, for: UIControl.State.normal)
+        
+//        keywordBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+//        keywordBtn.frame = CGRect(x: 10, y: 0, width: 30 * title.count, height: 44)
+        
+        if (isFirst){
+            keywordBtn.backgroundColor = UIColor(fromHex: "#fde6de")
+//            keywordBtn.titleLabel?.textColor =
+            keywordBtn.setTitleColor(UIColor(fromHex: "#e45a50"), for: UIControl.State.normal)
+            
+//            keywordBtn.setImage(UIImage(named: "fire"), for: .normal)
+            // Adjust image and title position relative to each other
+//            keywordBtn.imageEdgeInsets = UIEdgeInsets(top: 5, left: -5, bottom: 5, right: 15) // Adjust as needed
+                   
+        }else{
+            
+            keywordBtn.backgroundColor = UIColor(fromHex: "#e8e8e8")
+//            keywordBtn.titleLabel?.textColor =
+            keywordBtn.setTitleColor(UIColor(fromHex: "#787878"), for: UIControl.State.normal)
+        }
+        
+    }
     
 }
 

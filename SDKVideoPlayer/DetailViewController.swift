@@ -42,6 +42,7 @@ class DetailViewController: UIViewController, DetailProtocol {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black
         view.addSubview(playerView)
+        
         playerView.delegate = self
         playerView.translatesAutoresizingMaskIntoConstraints = false
         #if os(iOS)
@@ -74,7 +75,9 @@ class DetailViewController: UIViewController, DetailProtocol {
             self.dismiss(animated: true)
             #endif
         }
-        playerView.becomeFirstResponder()
+         
+        SwiftLoader.show(title: "正在缓冲...", animated: true)
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +99,12 @@ extension DetailViewController: PlayerControllerDelegate {
     }
 
     func playerController(state states: KSPlayerState) {
+        if states == .readyToPlay {
+            
+            SwiftLoader.hide()
+            playerView.becomeFirstResponder()
+            
+        }
         print(">>>>>>>>>>state: \(states.description)")
     }
 

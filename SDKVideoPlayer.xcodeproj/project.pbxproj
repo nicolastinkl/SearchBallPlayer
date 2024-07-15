@@ -13,7 +13,6 @@
 		12CADDB12C3E43940032635B /* SwiftfulLoadingIndicators in Frameworks */ = {isa = PBXBuildFile; productRef = 12CADDB02C3E43940032635B /* SwiftfulLoadingIndicators */; };
 		59027263754A113519BFADEA /* Pods_SDKVideoPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27556689315A2CC80610D09A /* Pods_SDKVideoPlayer.framework */; };
 		5AFAAE8F84FB0CDF9BCFDA9D /* Pods_SDKVideoPlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ACC29B576E7E61EC3D021A /* Pods_SDKVideoPlayerTests.framework */; };
-		C00A39F32C3FBC57004E31E4 /* SwiftLoader in Frameworks */ = {isa = PBXBuildFile; productRef = C00A39F22C3FBC57004E31E4 /* SwiftLoader */; };
 		C00A39F52C3FC0C4004E31E4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */; };
 		C00A39FA2C3FCA4C004E31E4 /* KSPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = C00A39F92C3FCA4C004E31E4 /* KSPlayer */; };
 		C00A39FC2C3FEB39004E31E4 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A39FB2C3FEB39004E31E4 /* MovieDetailViewController.swift */; };
@@ -35,6 +34,16 @@
 		C09C704D2C3D4AE5000F6E01 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C704C2C3D4AE5000F6E01 /* HomeViewController.swift */; };
 		C09C70632C3D6558000F6E01 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C09C70622C3D6558000F6E01 /* SDWebImage */; };
 		C09C70652C3D6558000F6E01 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C09C70642C3D6558000F6E01 /* SDWebImageMapKit */; };
+		C0AD2AEA2C44F5260091A508 /* SwiftWebVCActivityChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AE32C44F5260091A508 /* SwiftWebVCActivityChrome.swift */; };
+		C0AD2AEB2C44F5260091A508 /* SwiftWebVCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AE42C44F5260091A508 /* SwiftWebVCActivity.swift */; };
+		C0AD2AEC2C44F5260091A508 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0AD2AE62C44F5260091A508 /* Media.xcassets */; };
+		C0AD2AED2C44F5260091A508 /* SwiftModalWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AE72C44F5260091A508 /* SwiftModalWebVC.swift */; };
+		C0AD2AEE2C44F5260091A508 /* SwiftWebVCActivitySafari.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AE82C44F5260091A508 /* SwiftWebVCActivitySafari.swift */; };
+		C0AD2AEF2C44F5260091A508 /* SwiftWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AE92C44F5260091A508 /* SwiftWebVC.swift */; };
+		C0AD2AF12C44F8A70091A508 /* SettingsHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AF02C44F8A70091A508 /* SettingsHomeViewController.swift */; };
+		C0AD2AF42C45118C0091A508 /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AF32C45118C0091A508 /* SwiftLoader.swift */; };
+		C0AD2AF62C4527C10091A508 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AF52C4527C10091A508 /* GradientView.swift */; };
+		C0AD2AF82C452BC80091A508 /* SearcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AF72C452BC80091A508 /* SearcViewController.swift */; };
 		EFA861AE282C041E5293EAD0 /* Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC56020215A4BE85F66C5AA /* Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +111,20 @@
 		C09C704A2C3D473A000F6E01 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		C09C704C2C3D4AE5000F6E01 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C09C704F2C3D5B8B000F6E01 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0AD2AE32C44F5260091A508 /* SwiftWebVCActivityChrome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWebVCActivityChrome.swift; sourceTree = "<group>"; };
+		C0AD2AE42C44F5260091A508 /* SwiftWebVCActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWebVCActivity.swift; sourceTree = "<group>"; };
+		C0AD2AE62C44F5260091A508 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		C0AD2AE72C44F5260091A508 /* SwiftModalWebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftModalWebVC.swift; sourceTree = "<group>"; };
+		C0AD2AE82C44F5260091A508 /* SwiftWebVCActivitySafari.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWebVCActivitySafari.swift; sourceTree = "<group>"; };
+		C0AD2AE92C44F5260091A508 /* SwiftWebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWebVC.swift; sourceTree = "<group>"; };
+		C0AD2AF02C44F8A70091A508 /* SettingsHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHomeViewController.swift; sourceTree = "<group>"; };
+		C0AD2AF32C45118C0091A508 /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
+		C0AD2AF52C4527C10091A508 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		C0AD2AF72C452BC80091A508 /* SearcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearcViewController.swift; sourceTree = "<group>"; };
+		C0AD2AF92C4530260091A508 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		C0AD2AFA2C4530260091A508 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		C0AD2AFB2C4530290091A508 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		C0AD2AFC2C4530290091A508 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		C233142CF27D3A70C5907986 /* Pods-SDKVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayer.debug.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		D2D96159D4A16121035BB634 /* Pods-SDKVideoPlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayerTests.release.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayerTests/Pods-SDKVideoPlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,7 +135,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				59027263754A113519BFADEA /* Pods_SDKVideoPlayer.framework in Frameworks */,
-				C00A39F32C3FBC57004E31E4 /* SwiftLoader in Frameworks */,
 				C00A3A042C413B82004E31E4 /* WebKit.framework in Frameworks */,
 				C00A39FA2C3FCA4C004E31E4 /* KSPlayer in Frameworks */,
 				12CADDA72C3E2F540032635B /* Alamofire in Frameworks */,
@@ -196,10 +218,15 @@
 				C09C70192C3D4641000F6E01 /* ViewController.swift */,
 				C09C704C2C3D4AE5000F6E01 /* HomeViewController.swift */,
 				12CADDAD2C3E398E0032635B /* MainViewController.swift */,
+				C0AD2AF52C4527C10091A508 /* GradientView.swift */,
 				C00A3A012C413871004E31E4 /* SDKWBViewController.swift */,
 				C00A39FB2C3FEB39004E31E4 /* MovieDetailViewController.swift */,
 				C00A39FF2C4136BC004E31E4 /* MoreVideosViewController.swift */,
+				C0AD2AF72C452BC80091A508 /* SearcViewController.swift */,
 				C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */,
+				C0AD2AF02C44F8A70091A508 /* SettingsHomeViewController.swift */,
+				C0AD2AF22C45118C0091A508 /* SwiftLoader */,
+				C0AD2AE22C44F5260091A508 /* SwiftWebVC */,
 				12CADDAB2C3E31FB0032635B /* Utitils.swift */,
 				C09C701B2C3D4641000F6E01 /* Main.storyboard */,
 				C09C704A2C3D473A000F6E01 /* Home.storyboard */,
@@ -230,6 +257,35 @@
 			path = SDKVideoPlayerUITests;
 			sourceTree = "<group>";
 		};
+		C0AD2AE22C44F5260091A508 /* SwiftWebVC */ = {
+			isa = PBXGroup;
+			children = (
+				C0AD2AE32C44F5260091A508 /* SwiftWebVCActivityChrome.swift */,
+				C0AD2AE42C44F5260091A508 /* SwiftWebVCActivity.swift */,
+				C0AD2AE52C44F5260091A508 /* Resources */,
+				C0AD2AE72C44F5260091A508 /* SwiftModalWebVC.swift */,
+				C0AD2AE82C44F5260091A508 /* SwiftWebVCActivitySafari.swift */,
+				C0AD2AE92C44F5260091A508 /* SwiftWebVC.swift */,
+			);
+			path = SwiftWebVC;
+			sourceTree = "<group>";
+		};
+		C0AD2AE52C44F5260091A508 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C0AD2AE62C44F5260091A508 /* Media.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C0AD2AF22C45118C0091A508 /* SwiftLoader */ = {
+			isa = PBXGroup;
+			children = (
+				C0AD2AF32C45118C0091A508 /* SwiftLoader.swift */,
+			);
+			path = SwiftLoader;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -254,7 +310,6 @@
 				C09C70642C3D6558000F6E01 /* SDWebImageMapKit */,
 				12CADDA62C3E2F540032635B /* Alamofire */,
 				12CADDB02C3E43940032635B /* SwiftfulLoadingIndicators */,
-				C00A39F22C3FBC57004E31E4 /* SwiftLoader */,
 				C00A39F92C3FCA4C004E31E4 /* KSPlayer */,
 			);
 			productName = SDKVideoPlayer;
@@ -325,11 +380,13 @@
 			};
 			buildConfigurationList = C09C700D2C3D4641000F6E01 /* Build configuration list for PBXProject "SDKVideoPlayer" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
+				"zh-Hans",
 			);
 			mainGroup = C09C70092C3D4641000F6E01;
 			packageReferences = (
@@ -337,7 +394,6 @@
 				C09C70612C3D6558000F6E01 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				12CADDA52C3E2F050032635B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				12CADDAF2C3E43940032635B /* XCRemoteSwiftPackageReference "SwiftfulLoadingIndicators" */,
-				C00A39F12C3FBC57004E31E4 /* XCRemoteSwiftPackageReference "SwiftLoader" */,
 				C00A39F82C3FCA4C004E31E4 /* XCLocalSwiftPackageReference "KSPlayer" */,
 			);
 			productRefGroup = C09C70132C3D4641000F6E01 /* Products */;
@@ -360,6 +416,7 @@
 				C09C70222C3D4642000F6E01 /* Assets.xcassets in Resources */,
 				C09C701D2C3D4641000F6E01 /* Main.storyboard in Resources */,
 				C09C704B2C3D473A000F6E01 /* Home.storyboard in Resources */,
+				C0AD2AEC2C44F5260091A508 /* Media.xcassets in Resources */,
 				C00A39FE2C40D14A004E31E4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,17 +545,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0AD2AF62C4527C10091A508 /* GradientView.swift in Sources */,
+				C0AD2AF42C45118C0091A508 /* SwiftLoader.swift in Sources */,
+				C0AD2AEA2C44F5260091A508 /* SwiftWebVCActivityChrome.swift in Sources */,
+				C0AD2AED2C44F5260091A508 /* SwiftModalWebVC.swift in Sources */,
 				12CADDAE2C3E398E0032635B /* MainViewController.swift in Sources */,
 				12CADDAC2C3E31FB0032635B /* Utitils.swift in Sources */,
 				C09C704D2C3D4AE5000F6E01 /* HomeViewController.swift in Sources */,
+				C0AD2AEB2C44F5260091A508 /* SwiftWebVCActivity.swift in Sources */,
 				C00A3A002C4136BC004E31E4 /* MoreVideosViewController.swift in Sources */,
 				C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */,
 				C00A39FC2C3FEB39004E31E4 /* MovieDetailViewController.swift in Sources */,
+				C0AD2AEE2C44F5260091A508 /* SwiftWebVCActivitySafari.swift in Sources */,
+				C0AD2AF12C44F8A70091A508 /* SettingsHomeViewController.swift in Sources */,
 				C09C70202C3D4641000F6E01 /* SDKVideoPlayer.xcdatamodeld in Sources */,
 				C09C70162C3D4641000F6E01 /* AppDelegate.swift in Sources */,
 				C09C70182C3D4641000F6E01 /* SceneDelegate.swift in Sources */,
 				C00A39F52C3FC0C4004E31E4 /* DetailViewController.swift in Sources */,
+				C0AD2AF82C452BC80091A508 /* SearcViewController.swift in Sources */,
 				C00A3A022C413871004E31E4 /* SDKWBViewController.swift in Sources */,
+				C0AD2AEF2C44F5260091A508 /* SwiftWebVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +605,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C09C701C2C3D4641000F6E01 /* Base */,
+				C0AD2AF92C4530260091A508 /* zh-Hant */,
+				C0AD2AFB2C4530290091A508 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -547,6 +615,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C09C70242C3D4642000F6E01 /* Base */,
+				C0AD2AFA2C4530260091A508 /* zh-Hant */,
+				C0AD2AFC2C4530290091A508 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -559,6 +629,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -622,6 +693,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -888,14 +960,6 @@
 				minimumVersion = 0.0.4;
 			};
 		};
-		C00A39F12C3FBC57004E31E4 /* XCRemoteSwiftPackageReference "SwiftLoader" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/leoru/SwiftLoader";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		C09C70492C3D4688000F6E01 /* XCRemoteSwiftPackageReference "FFmpegKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kingslay/FFmpegKit.git";
@@ -924,11 +988,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 12CADDAF2C3E43940032635B /* XCRemoteSwiftPackageReference "SwiftfulLoadingIndicators" */;
 			productName = SwiftfulLoadingIndicators;
-		};
-		C00A39F22C3FBC57004E31E4 /* SwiftLoader */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C00A39F12C3FBC57004E31E4 /* XCRemoteSwiftPackageReference "SwiftLoader" */;
-			productName = SwiftLoader;
 		};
 		C00A39F92C3FCA4C004E31E4 /* KSPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
