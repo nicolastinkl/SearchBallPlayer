@@ -14,6 +14,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
 
     let collectionView: UICollectionView
 
+    var vc:UIViewController?
     let historyLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -83,6 +84,19 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 120, height: 180) // 设置单元格尺寸
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let ls =  LocalStore.getFromUserDefaults() {
+            let data =  ls[indexPath.item]
+            let  controller = MovieDetailViewController()
+            controller.movieDetail = data
+    //        controller.modalPresentationStyle = .fullScreen
+            self.vc?.show(controller, sender: self)
+//            cell.configure(with: ls[indexPath.item])
+            
+        }
+        
     }
 }
 
@@ -291,6 +305,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
             // 配置历史记录单元格
+            cell.vc = self
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
@@ -327,9 +342,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.row == 0 ? 240 : 44
     }
-    
-    
-    
+     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

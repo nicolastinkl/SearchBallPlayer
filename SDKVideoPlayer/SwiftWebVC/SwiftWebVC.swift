@@ -295,24 +295,32 @@ extension SwiftWebVC: WKNavigationDelegate {
         self.delegate?.didStartLoading()
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         updateToolbarItems()
+        SwiftLoader.show(title: "正在加载中...", animated: true)
     }
+        
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.delegate?.didFinishLoading(success: true)
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         
-        webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
-            self.navBarTitle.text = response as! String?
-            self.navBarTitle.sizeToFit()
-            self.updateToolbarItems()
-        })
+//        webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
+//            self.navBarTitle.text = response as! String?
+//            self.navBarTitle.sizeToFit()
+//            self.updateToolbarItems()
+//        })
+        SwiftLoader.hide()
         
     }
     
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.delegate?.didFinishLoading(success: false)
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        updateToolbarItems()
+//        updateToolbarItems()
+        SwiftLoader.hide()
+        
+        self.showNetworkErrorView(errormsg: "\(error.localizedDescription)") {
+            webView.reload()
+        }
     }
      
 }

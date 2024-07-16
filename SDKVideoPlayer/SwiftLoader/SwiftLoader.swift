@@ -48,6 +48,43 @@ public class SwiftLoader: UIView {
     public class func show(animated: Bool) {
         self.show(title: nil, animated: animated)
     }
+   
+    
+    public class func show(view:UIView,title: String?, animated : Bool) {
+         
+        
+        let loader = SwiftLoader.shared
+        loader.canUpdated = true
+        loader.animated = animated
+        loader.title = title
+        loader.update()
+        
+        NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(notification: )),
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
+        
+        let height: CGFloat = UIScreen.main.bounds.size.height
+        let width: CGFloat = UIScreen.main.bounds.size.width
+        let center: CGPoint = CGPoint(x: width / 2.0, y: height / 2.0)
+        
+        loader.center = center
+        
+        if (loader.superview == nil) {
+            loader.coverView = UIView(frame: view.bounds)
+            loader.coverView?.backgroundColor = loader.config.foregroundColor.withAlphaComponent(loader.config.foregroundAlpha)
+            
+            view.addSubview(loader.coverView!)
+            view.addSubview(loader)
+            loader.start()
+        }
+    }
+    
+    public class func hide(view:UIView) {
+        NotificationCenter.default.removeObserver(SwiftLoader.shared)
+        SwiftLoader.shared.stop()
+    }
+    
+    
     
     public class func show(title: String?, animated : Bool) {
         let currentWindow: UIWindow? = UIApplication
