@@ -44,3 +44,45 @@ class IconGradientView: UIView {
         (self.layer.sublayers?.first as? CAGradientLayer)?.frame = self.bounds
     }
 }
+
+
+
+class ShadowButton: UIButton {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        applyShadow()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        applyShadow()
+    }
+    
+    private func applyShadow() {
+        // 设置圆角为按钮宽度的一半，以保持圆形
+        self.layer.cornerRadius = self.frame.size.width / 2
+        
+        // 设置阴影颜色
+        self.layer.shadowColor = UIColor.black.cgColor
+        
+        // 设置阴影偏移量
+        self.layer.shadowOffset = CGSize(width: 0, height: 4)
+        
+        // 设置阴影透明度
+        self.layer.shadowOpacity = 0.9
+        
+        // 设置阴影半径，影响阴影的模糊程度
+        self.layer.shadowRadius = 18
+        
+        // 确保阴影始终显示在按钮后面
+        self.layer.masksToBounds = false
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // 确保按钮的圆角是当前宽度的一半
+        self.layer.cornerRadius = self.frame.size.width / 2
+    }
+}
+

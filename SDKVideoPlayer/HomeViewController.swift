@@ -149,11 +149,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         iconsCollectionView.backgroundColor = UIColor.clear
         searchBar.backgroundColor = UIColor.clear
         let layout2 = UICollectionViewFlowLayout()
-        let width = (iconsCollectionView.frame.width - 40) / 4
+        let width = (iconsCollectionView.frame.width - 60) / 4
         layout2.itemSize = CGSize(width:width, height: width)
 //        layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
 //        layout2.minimumLineSpacing = 10 // 设置行间距
-        layout2.sectionInset =  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // 设置间距
+        layout2.sectionInset =  UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) // 设置间距
         iconsCollectionView.collectionViewLayout = layout2
         
 

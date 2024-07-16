@@ -108,7 +108,7 @@ class MovieDetailViewController: UIViewController {
     
     private func setupNavigationBar() {
         // 创建一个UIButton作为返回按钮
-        let backButton = UIButton(type: .custom)
+        let backButton = ShadowButton(type: .custom)
         
         // 设置按钮的图片（假设你有一个名为"back_arrow"的图片）
         backButton.setImage(UIImage(named: "back"), for: .normal)
