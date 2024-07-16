@@ -26,7 +26,7 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
      
    private let loadMoreOffset = 20 // 定义触发加载更多的偏移量
     
-    var searchList:[Video]?
+    var searchList:[Video]? = [Video]()
     
     var isLoading = false
     var hasMoreData = true
@@ -51,7 +51,8 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
        
        setupTableView()
        
-       //loadData()
+       self.page = self.page + 1
+       loadData()
    }
    
    private func setupTableView() {
@@ -125,6 +126,11 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
                             
                             if(Int(response_config.code) == 1){
                                 self.page = self.page + 1
+                                self.pagecount = response_config.pagecount
+                                self.total = response_config.total
+                                self.limit = response_config.limit
+                                 
+                                
                                 //self.movies = response_config.data.videolist
                                 
 //                                response_config.data.videolist.forEach { VideoCategoryItem in
@@ -171,8 +177,7 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
            
  
         }
-        
-          
+                
         AF.request("https://www.gooapis.com/player/jieshuo?type=\(self.requestType)&page=\(self.page)", method: .get)
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in

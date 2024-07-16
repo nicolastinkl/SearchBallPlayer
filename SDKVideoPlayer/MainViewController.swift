@@ -79,7 +79,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 
 struct VideoListResponse: Codable {
     let code: String
-    let message: String
+    let message: String    
     let data: DataClassMain
 }
 
@@ -261,6 +261,9 @@ class HeaderView: UICollectionReusableView {
     }()
     
     
+    private let iconTag:IconGradientView = IconGradientView()
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -276,9 +279,13 @@ class HeaderView: UICollectionReusableView {
         
         self.backgroundColor = UIColor(fromHex: "#f2f4f6")
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        iconTag.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         addSubview(titleLabel)
         addSubview(imageView)
         addSubview(moreButton)
+//        addSubview(iconTag)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 36),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
@@ -296,8 +303,17 @@ class HeaderView: UICollectionReusableView {
             moreButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             moreButton.widthAnchor.constraint(equalToConstant: 80),
             moreButton.heightAnchor.constraint(equalToConstant: 20),
+//            
+//            
+//            iconTag.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+//            iconTag.topAnchor.constraint(equalTo: imageView.topAnchor),
+//            iconTag.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+//            iconTag.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+//            
             
         ])
+        
+        
     }
     
     func configure(with title: String) {
@@ -515,9 +531,7 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
     @objc private func MoreButtonTapped(_ button:UIButton){
 
         let controller = MoreVideosViewController()
-        controller.requestType = button.tag
-        controller.searchList = movies
-//        controller.modalPresentationStyle = .fullScreen
+        controller.requestType = button.tag        
         self.show(controller, sender: self)
     }
     

@@ -173,7 +173,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         
         self.view.backgroundColor = UIColor(fromHex: "#f6f6f6")
         
-        setupTableView() 
+        setupTableView()
         
         
         // 注册通知观察者
@@ -255,6 +255,12 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         startButton.setTitle("评价我们", for: UIControl.State.normal)
         startButton.translatesAutoresizingMaskIntoConstraints = false
         headView.addSubview(startButton)
+        
+        startButton.clipsToBounds = true
+        startButton.layer.cornerRadius = 22
+        startButton.layer.borderWidth = 0.5
+        startButton.layer.borderColor = UIColor.MainColor().cgColor
+        
         
         // 设置约束
         NSLayoutConstraint.activate([
