@@ -173,8 +173,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         
         self.view.backgroundColor = UIColor(fromHex: "#f6f6f6")
         
-        setupTableView()
-//        self.title = "欢迎来到天天短剧"
+        setupTableView() 
         
         
         // 注册通知观察者
@@ -245,7 +244,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         
         let customTextLabel = UILabel()
         headView.addSubview(customTextLabel)
-        customTextLabel.text = "欢迎来到天天短剧"
+        customTextLabel.text = "欢迎来到搜球吧"
         
         customTextLabel.translatesAutoresizingMaskIntoConstraints = false
         customTextLabel.font = UIFont.boldSystemFont(ofSize: 22)

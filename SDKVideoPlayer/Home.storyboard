@@ -44,7 +44,7 @@
             </objects>
             <point key="canvasLocation" x="-2063" y="644"/>
         </scene>
-        <!--主页-->
+        <!--观影-->
         <scene sceneID="nFP-tq-jjo">
             <objects>
                 <viewController id="HM0-3n-Yyb" customClass="MainViewController" customModule="SDKVideoPlayer" customModuleProvider="target" sceneMemberID="viewController">
@@ -82,7 +82,7 @@
                             <constraint firstItem="KAD-fE-Qc8" firstAttribute="top" secondItem="CGd-TQ-de3" secondAttribute="top" id="xea-4k-ezZ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="主页" image="home1" selectedImage="home1" id="ymc-of-57i"/>
+                    <tabBarItem key="tabBarItem" title="观影" image="play.circle.fill" catalog="system" selectedImage="play.circle.fill" id="ymc-of-57i"/>
                     <navigationItem key="navigationItem" id="4B8-kv-ktg"/>
                     <connections>
                         <outlet property="collectionView" destination="KAD-fE-Qc8" id="wXF-MH-ZvA"/>
@@ -92,7 +92,7 @@
             </objects>
             <point key="canvasLocation" x="-140" y="-702"/>
         </scene>
-        <!--Home View Controller-->
+        <!--浏览器-->
         <scene sceneID="26A-jB-gQ3">
             <objects>
                 <viewController id="k5B-vU-PQ1" customClass="HomeViewController" customModule="SDKVideoPlayer" customModuleProvider="target" sceneMemberID="viewController">
@@ -183,7 +183,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜短剧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol8-7N-ZiM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜球吧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol8-7N-ZiM">
                                 <rect key="frame" x="108" y="79" width="177" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="7pP-gG-Jy9"/>
@@ -229,7 +229,7 @@
                             <constraint firstItem="YQQ-Si-YYT" firstAttribute="width" secondItem="uA9-CE-Zwk" secondAttribute="width" multiplier="0.956743" id="ysO-rA-Zse"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" selectedImage="search" systemItem="search" id="bpw-sx-iu0"/>
+                    <tabBarItem key="tabBarItem" title="浏览器" image="home1" selectedImage="home1" id="bpw-sx-iu0"/>
                     <navigationItem key="navigationItem" id="hW1-bP-jnl"/>
                     <connections>
                         <outlet property="iconsCollectionView" destination="hyF-zq-sN8" id="Thf-43-A1b"/>
@@ -269,8 +269,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="spA-jk-kzU" kind="relationship" relationship="viewControllers" id="6lu-0M-7Kg"/>
                         <segue destination="fvu-YJ-NuX" kind="relationship" relationship="viewControllers" id="oL9-Jl-HGr"/>
+                        <segue destination="spA-jk-kzU" kind="relationship" relationship="viewControllers" id="6lu-0M-7Kg"/>
                         <segue destination="8AA-fd-YSi" kind="relationship" relationship="viewControllers" id="E8d-0I-1j7"/>
                     </connections>
                 </tabBarController>
@@ -316,7 +316,7 @@
     <resources>
         <image name="home1" width="24" height="24"/>
         <image name="placeholder" width="80" height="60"/>
-        <image name="search" width="512" height="512"/>
+        <image name="play.circle.fill" catalog="system" width="128" height="123"/>
         <image name="settings1" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
