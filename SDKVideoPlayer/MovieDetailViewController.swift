@@ -322,8 +322,8 @@ class MovieDetailViewController: UIViewController {
                 }
             }
         }
-        print(movie)
-        print(jishuURLArray)
+//        print(movie)
+//        print(jishuURLArray)
         
     }
     

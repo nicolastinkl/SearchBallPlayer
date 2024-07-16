@@ -25,6 +25,7 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     
     var searchText : String = ""
+    
     var searchList:[Video]?
     
     var isLoading = false
@@ -65,10 +66,10 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
      tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
      //tableView.register(LoadingFooterView.self, forHeaderFooterViewReuseIdentifier: "footer")
 //     tableView.tableFooterView = UIView()
-       
-       footView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 70)
-       footView.configure(hasMoreData: hasMoreData)
        tableView.tableFooterView = footView
+       footView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 70)
+       footView.configure(hasMoreData: true)
+       
        
    }
      
@@ -273,16 +274,35 @@ class CustomCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLabel)
         contentView.addSubview(itemImageView)
-        
         contentView.addSubview(desLabel)
         
-        itemImageView.frame = CGRect(x: 15, y: 15, width: 70, height: 120)
-        titleLabel.frame = CGRect(x: 95, y: 15, width: contentView.frame.width - 50, height: 40)
-        itemImageView.contentMode = .scaleAspectFill
-        itemImageView.clipsToBounds = true
+//        itemImageView.frame = CGRect(x: 15, y: 15, width: 70, height: 120)
+//        titleLabel.frame = CGRect(x: 95, y: 15, width: contentView.frame.width - 50, height: 40)
+//        desLabel.frame = CGRect(x: 95, y: 15 + 20, width: contentView.frame.width - 50, height: 80)
         
         
-        desLabel.frame = CGRect(x: 95, y: 15 + 20, width: contentView.frame.width - 50, height: 80)
+        itemImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            itemImageView.widthAnchor.constraint(equalToConstant: 70),
+            itemImageView.heightAnchor.constraint(equalToConstant: 120)
+        ])
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
+        ])
+        
+        desLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            desLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 20),
+            desLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            desLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            desLabel.heightAnchor.constraint(equalToConstant: 60) // 如果高度是固定的，可以设置为一个常数
+        ])
          
         setupTagsStackView()
         
@@ -292,7 +312,19 @@ class CustomCell: UITableViewCell {
          
         tagsStackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(tagsStackView)
-        tagsStackView.frame =  CGRect(x: 95, y: 15 + 40 + 50, width: contentView.frame.width , height: 30)
+        // tagsStackView.frame =  CGRect(x: 95, y: 15 + 40 + 50, width: contentView.frame.width , height: 30)
+        
+        tagsStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tagsStackView.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 20),
+            tagsStackView.topAnchor.constraint(equalTo: desLabel.bottomAnchor, constant: 5),
+            tagsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
+            tagsStackView.heightAnchor.constraint(equalToConstant: 30) // 如果高度是固定的，可以设置为一个常数
+        ])
+         
+        
+        
+        
         
         for index in 10...13 {
             let tagLabel = UILabel()
@@ -390,7 +422,28 @@ class LoadingFooterView: UITableViewHeaderFooterView {
         contentView.addSubview(label)
         contentView.addSubview(activityIndicator)
         
+        activityIndicator.isHidden = true
+        label.isHidden = true
+        
         activityIndicator.hidesWhenStopped = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+         NSLayoutConstraint.activate([
+            activityIndicator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            activityIndicator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            activityIndicator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            
+            
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            
+            
+         ])
+        
+        
     }
     
     required init?(coder: NSCoder) {
@@ -401,15 +454,17 @@ class LoadingFooterView: UITableViewHeaderFooterView {
 
         
         label.textAlignment = .center
-        activityIndicator.frame = contentView.bounds
+        //activityIndicator.frame = contentView.bounds
         if hasMoreData {
             label.text = "正在加载更多..."
-            label.frame = CGRect(x: 0, y: 40, width: contentView.frame.width, height: 30)
+            //label.frame = CGRect(x: 0, y: 40, width: contentView.frame.width, height: 30)
             activityIndicator.startAnimating()
             activityIndicator.isHidden = false
+            label.isHidden = false
         } else {
-            label.frame = contentView.bounds
+           // label.frame = contentView.bounds
             label.text = "没有更多数据了"
+            label.isHidden = false
             activityIndicator.stopAnimating()
             activityIndicator.isHidden = true
         }

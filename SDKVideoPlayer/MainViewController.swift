@@ -515,7 +515,8 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
     @objc private func MoreButtonTapped(_ button:UIButton){
 
         let controller = MoreVideosViewController()
-        controller.requestType = 1
+        controller.requestType = button.tag
+        controller.searchList = movies
 //        controller.modalPresentationStyle = .fullScreen
         self.show(controller, sender: self)
     }
