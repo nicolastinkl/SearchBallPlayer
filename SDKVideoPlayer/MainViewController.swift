@@ -254,7 +254,7 @@ class HeaderView: UICollectionReusableView {
         
         let retryButton = UIButton(type: .system)
         retryButton.setTitle("更多", for: .normal)
-        retryButton.setTitleColor(.red, for: .normal)
+        retryButton.setTitleColor(UIColor.MainColor(), for: .normal)
         retryButton.layer.cornerRadius = 20
         retryButton.translatesAutoresizingMaskIntoConstraints = false
         return retryButton

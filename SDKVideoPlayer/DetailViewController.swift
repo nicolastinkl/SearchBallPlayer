@@ -75,8 +75,8 @@ class DetailViewController: UIViewController, DetailProtocol {
             self.dismiss(animated: true)
             #endif
         }
-         
-        SwiftLoader.show(title: "正在缓冲...", animated: true)
+        playerView.becomeFirstResponder()
+//        SwiftLoader.show(title: "正在缓冲...", animated: true)
         
     }
 
@@ -101,8 +101,8 @@ extension DetailViewController: PlayerControllerDelegate {
     func playerController(state states: KSPlayerState) {
         if states == .readyToPlay {
             
-            SwiftLoader.hide()
-            playerView.becomeFirstResponder()
+//            SwiftLoader.hide()
+            
             
         }
         print(">>>>>>>>>>state: \(states.description)")
