@@ -36,14 +36,18 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
     var pagecount = 0
     
     
+    private let  footView =  LoadingFooterView(reuseIdentifier: LoadingFooterView.reuseIdentifier)
+    
    override func viewDidLoad() {
-       super.viewDidLoad()
        
+       super.viewDidLoad()
+       view.backgroundColor = UIColor.white
+        
        self.title =  "'\(searchText)' 搜索结果"
        
        setupTableView()
        
-       loadData()
+       //loadData()
    }
    
    private func setupTableView() {
@@ -59,34 +63,27 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
        ])
        
      tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
-     tableView.register(LoadingFooterView.self, forHeaderFooterViewReuseIdentifier: "footer")
-     tableView.tableFooterView = UIView()
+     //tableView.register(LoadingFooterView.self, forHeaderFooterViewReuseIdentifier: "footer")
+//     tableView.tableFooterView = UIView()
        
-       
+       footView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 70)
+       footView.configure(hasMoreData: hasMoreData)
+       tableView.tableFooterView = footView
        
    }
-    
-    
+     
     func loadData() {
         guard !isLoading else { return }
-        isLoading = true
+        self.isLoading = true
         
         searchRequest(searchText: searchText)
-        
-//        DispatchQueue.global().asyncAfter(deadline: .now() ) {
-//           
-//            self.hasMoreData = self.total > self.page * self.limit
-//            self.isLoading = false
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
+         
     }
     
     
     
     func searchRequest(searchText: String) {
-        self.isLoading = true
+        print("searchRequest \( page)")
          
         
         let requestComplete1: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
@@ -120,7 +117,7 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
                         // 使用 JSONDecoder 解码数据
                         do {
                             let response_config = try decoder.decode(VideoSearchResponse.self, from: data)
-                            print("Code: \(response_config.code)")
+                            print("Load more Code: \(response_config.code)  \(response_config.page) - \(response_config.pagecount) -  \(response_config.total)")
                             
                             if(Int(response_config.code) == 1){
                                 self.page = self.page + 1
@@ -140,6 +137,9 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 }
                                 
                                 DispatchQueue.main.async {
+                                    self.hasMoreData = self.total > self.page * self.limit
+                                    self.isLoading = false
+                                    self.footView.configure(hasMoreData: self.hasMoreData)
                                     self.tableView.reloadData()
                                     
                                 }
@@ -150,7 +150,6 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
 //                            let error = SearchError.errorWith("Json parse Error: \(error.localizedDescription)")
                             self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
                             
-                           
                             
                         }
                     
@@ -170,7 +169,7 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
          
-        
+        print("https://www.gooapis.com/player/search?keyword=\(searchText)&page=\(self.page)")
         AF.request("https://www.gooapis.com/player/search?keyword=\(searchText)&page=\(self.page)", method: .get)
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
@@ -205,15 +204,15 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
        return cell
    }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return  70// isLoading ?  70 : 0
-      }
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return   isLoading ?  70 : 0
+//      }
    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-          let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "footer") as! LoadingFooterView
-          footer.configure(hasMoreData: hasMoreData)
-          return footer
-      }
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//          let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "footer") as! LoadingFooterView
+//          footer.configure(hasMoreData: hasMoreData)
+//          return footer
+//      }
       
       func scrollViewDidScroll(_ scrollView: UIScrollView) {
           let offsetY = scrollView.contentOffset.y
@@ -221,7 +220,10 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
           let height = scrollView.frame.size.height
           
           if offsetY > contentHeight - height {
-              loadData()
+              if hasMoreData {
+                  loadData()
+              }
+              
           }
       }
     
@@ -380,7 +382,7 @@ class CustomCell: UITableViewCell {
 class LoadingFooterView: UITableViewHeaderFooterView {
     
     let label = UILabel()
-    
+    static let reuseIdentifier = "LoadingFooterView"
     let activityIndicator = UIActivityIndicatorView(style: .medium)
     
     override init(reuseIdentifier: String?) {
@@ -396,16 +398,18 @@ class LoadingFooterView: UITableViewHeaderFooterView {
     }
     
     func configure(hasMoreData: Bool) {
-//        label.frame = contentView.bounds
-        label.frame = CGRect(x: 0, y: 40, width: contentView.frame.width, height: 30)
+
+        
         label.textAlignment = .center
         activityIndicator.frame = contentView.bounds
         if hasMoreData {
-            label.text = "Loading more data..."
+            label.text = "正在加载更多..."
+            label.frame = CGRect(x: 0, y: 40, width: contentView.frame.width, height: 30)
             activityIndicator.startAnimating()
             activityIndicator.isHidden = false
         } else {
-            label.text = "No more data"
+            label.frame = contentView.bounds
+            label.text = "没有更多数据了"
             activityIndicator.stopAnimating()
             activityIndicator.isHidden = true
         }

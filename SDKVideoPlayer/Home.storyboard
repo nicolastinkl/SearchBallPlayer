@@ -243,6 +243,21 @@
             </objects>
             <point key="canvasLocation" x="487.78625954198469" y="5.6338028169014089"/>
         </scene>
+        <!--Searc View Controller-->
+        <scene sceneID="lXq-kZ-9LF">
+            <objects>
+                <viewController id="J3U-wT-2BN" customClass="SearcViewController" customModule="SDKVideoPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JCG-Av-B4i">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="mzd-js-8za"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iw4-zg-gv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-18" y="689"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ESd-bC-644">
             <objects>
