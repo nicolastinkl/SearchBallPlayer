@@ -318,9 +318,9 @@ extension SwiftWebVC: WKNavigationDelegate {
 //        updateToolbarItems()
         SwiftLoader.hide()
         
-        self.showNetworkErrorView(errormsg: "\(error.localizedDescription)") {
-            webView.reload()
-        }
+//        self.showNetworkErrorView(errormsg: "\(error.localizedDescription)") {
+//            webView.reload()
+//        }
     }
      
 }
