@@ -190,7 +190,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
             if let searchlist = searchlist, !searchlist.isEmpty {
                    // 获取当前索引的搜索项的 title 属性
                 let currentItemTitle = searchlist[currentIndex].keyword
-                   print("Timer fired! Current item title: \(currentItemTitle)")
+                   //print("Timer fired! Current item title: \(currentItemTitle)")
                    // self.searchBar.text = currentItemTitle
                    // 在这里可以处理获取的 title，例如更新界面或其他操作
                 // 添加动画效果

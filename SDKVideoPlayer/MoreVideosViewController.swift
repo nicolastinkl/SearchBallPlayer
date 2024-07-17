@@ -42,7 +42,7 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
    override func viewDidLoad() {
        
        super.viewDidLoad()
-       view.backgroundColor = UIColor.white
+       view.backgroundColor = ThemeManager.shared.viewBackgroundColor
        if requestType == 64 {
            self.title =  "热门短剧"
        }else if requestType == 65 {

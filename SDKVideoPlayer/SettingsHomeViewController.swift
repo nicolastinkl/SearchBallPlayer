@@ -257,7 +257,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         view.backgroundColor = ThemeManager.shared.viewBackgroundColor
         
         let headView = UIView()
-        headView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 150)
+        headView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 110)
         
         let customTextLabel = UILabel()
         headView.addSubview(customTextLabel)
@@ -315,7 +315,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
              
              switch indexPath.row {
                  case 1:
-                     cell.configure(text: "我的收藏", detailText: nil)
+                     cell.configure(text: "我的喜好", detailText: nil)
                  case 2:
                      cell.configure(text: "服务协议", detailText: nil)
                  case 3:
@@ -323,7 +323,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
                  case 4:
                      cell.configure(text: "隐私政策", detailText: nil)
                  case 5:
-                     cell.configure(text: "版本号", detailText: "1.1.4")
+                     cell.configure(text: "版本号", detailText: "1.0.0")
                  default:
                      cell.configure(text: "", detailText: nil)
              }
