@@ -164,8 +164,7 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
                 
 //            }
 
-           
- 
+            
         }
         
          

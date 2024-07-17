@@ -30,7 +30,11 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         fatalError("init(coder:) has not been implemented")
     }
     func setupHistoryLabel() {
-         historyLabel.text = "最近观看记录"
+        if let ls =  LocalStore.getFromWatchedHistory(), ls.count > 0 {
+            historyLabel.text = "最近观看记录"
+        }else{
+            historyLabel.text = ""
+        }
          historyLabel.font = UIFont.boldSystemFont(ofSize: 16)
          historyLabel.translatesAutoresizingMaskIntoConstraints = false
          contentView.addSubview(historyLabel)
@@ -64,17 +68,17 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (LocalStore.getFromUserDefaults()?.count ?? 0) > 10{
+        if (LocalStore.getFromWatchedHistory()?.count ?? 0) > 10{
             return 10
         }
-        return LocalStore.getFromUserDefaults()?.count ?? 0
+        return LocalStore.getFromWatchedHistory()?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as! MovieCollectionViewCell
 
-        if let ls =  LocalStore.getFromUserDefaults() {
+        if let ls =  LocalStore.getFromWatchedHistory() {
             cell.configure(with: ls[indexPath.item])
         }
         
@@ -87,7 +91,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let ls =  LocalStore.getFromUserDefaults() {
+        if let ls =  LocalStore.getFromWatchedHistory() {
             let data =  ls[indexPath.item]
             let  controller = MovieDetailViewController()
             controller.movieDetail = data
@@ -343,7 +347,17 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 240 : 44
+        
+        
+        if indexPath.row == 0 {
+            if let ls =  LocalStore.getFromWatchedHistory(), ls.count > 0 {
+                return  240
+            }else{
+                return 0
+            }
+        }
+                
+                return 44
     }
      
     
@@ -353,18 +367,28 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         switch indexPath.row {
             case 1:
                 print("")
+             let brVc = BrowseViewController()
+                self.show(brVc, sender: self)
 //                cell.configure(text: "我的浏览记录", detailText: nil)
+            
             case 2:
                 print("")
+                let controller = SwiftWebVC(urlString: "\(ApplicationS.baseURL)/player/serverdeail")
+                self.show(controller, sender: self)
 //                cell.configure(text: "服务协议", detailText: nil)
             case 3:
                 print("")
+                let controller = SwiftWebVC(urlString: "\(ApplicationS.baseURL)/player/versiondeail")
+                self.show(controller, sender: self)
 //                cell.configure(text: "版权说明", detailText: nil)
             case 4:
                 print("")
+                let controller = SwiftWebVC(urlString: "\(ApplicationS.baseURL)/player/prvacrydeail")
+                self.show(controller, sender: self)
 //                cell.configure(text: "隐私政策", detailText: nil)
             case 5:
                 print("")
+                showSearchErrorAlert(on: self, error: "1.0.0(1000)",title: "版本号信息")
 //                cell.configure(text: "版本号", detailText: "1.0.0")
             default:
                 print("")

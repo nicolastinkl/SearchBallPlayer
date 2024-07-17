@@ -49,6 +49,7 @@
 		C0AD2B182C47AEC90091A508 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2B172C47AEC90091A508 /* BaseViewController.swift */; };
 		C0AD2B1A2C47B0D50091A508 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0AD2B192C47B0D50091A508 /* AppTrackingTransparency.framework */; };
 		C0AD2B1C2C47B79C0091A508 /* ApplicationS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2B1B2C47B79C0091A508 /* ApplicationS.swift */; };
+		C0AD2B1E2C47BCCE0091A508 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2B1D2C47BCCE0091A508 /* BrowseViewController.swift */; };
 		EFA861AE282C041E5293EAD0 /* Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC56020215A4BE85F66C5AA /* Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,7 @@
 		C0AD2B172C47AEC90091A508 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C0AD2B192C47B0D50091A508 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		C0AD2B1B2C47B79C0091A508 /* ApplicationS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationS.swift; sourceTree = "<group>"; };
+		C0AD2B1D2C47BCCE0091A508 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		C233142CF27D3A70C5907986 /* Pods-SDKVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayer.debug.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		D2D96159D4A16121035BB634 /* Pods-SDKVideoPlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayerTests.release.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayerTests/Pods-SDKVideoPlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,6 +242,7 @@
 				C0AD2AFD2C4650400091A508 /* IconGradientView.swift */,
 				C0AD2B1B2C47B79C0091A508 /* ApplicationS.swift */,
 				C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */,
+				C0AD2B1D2C47BCCE0091A508 /* BrowseViewController.swift */,
 				C0AD2AF02C44F8A70091A508 /* SettingsHomeViewController.swift */,
 				C0AD2AF22C45118C0091A508 /* SwiftLoader */,
 				C0AD2AE22C44F5260091A508 /* SwiftWebVC */,
@@ -575,6 +578,7 @@
 				C00A3A002C4136BC004E31E4 /* MoreVideosViewController.swift in Sources */,
 				C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */,
 				C00A39FC2C3FEB39004E31E4 /* MovieDetailViewController.swift in Sources */,
+				C0AD2B1E2C47BCCE0091A508 /* BrowseViewController.swift in Sources */,
 				C0AD2AEE2C44F5260091A508 /* SwiftWebVCActivitySafari.swift in Sources */,
 				C0AD2AF12C44F8A70091A508 /* SettingsHomeViewController.swift in Sources */,
 				C09C70202C3D4641000F6E01 /* SDKVideoPlayer.xcdatamodeld in Sources */,
@@ -792,7 +796,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sdkplayer.zeus.SDKVideoPlayer-1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sdkplayer.zeus.SDKVideoPlayer-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -829,7 +833,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sdkplayer.zeus.SDKVideoPlayer-1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sdkplayer.zeus.SDKVideoPlayer-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

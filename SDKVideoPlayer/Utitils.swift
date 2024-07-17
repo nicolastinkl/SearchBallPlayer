@@ -35,9 +35,10 @@ enum SearchError: Error {
 extension UIViewController{
     
     // 创建一个函数来显示搜索错误弹窗
-    func showSearchErrorAlert(on viewController: UIViewController, error: String) {
+    func showSearchErrorAlert(on viewController: UIViewController, error: String,title: String = "搜索失败") {
         // 根据错误类型创建UIAlertController
-        let alertController = UIAlertController(title: "搜索失败", message: error, preferredStyle: .alert)
+        
+        let alertController = UIAlertController(title: title, message: error, preferredStyle: .alert)
         
         // 添加一个'OK'按钮，用于关闭弹窗
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -90,7 +91,7 @@ class LocalStore{
          
     }
     
-    static  func getFromUserDefaults()->[Video]? {
+    static  func getFromWatchedHistory()->[Video]? {
         
         //Array Object/
         /* if let savedHistoryItems = UserDefaults.standard.array(forKey: "Recently_watched_HHistory") {
