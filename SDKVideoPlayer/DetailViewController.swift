@@ -68,11 +68,11 @@ class DetailViewController: UIViewController, DetailProtocol {
                 playerView.updateUI(isLandscape: false)
             } else {
                 navigationController?.popViewController(animated: true)
-                self.dismiss(animated: true)
+                self.dismiss(animated: false)
             }
             #else
-            navigationController?.popViewController(animated: true)
-            self.dismiss(animated: true)
+                navigationController?.popViewController(animated: true)
+                self.dismiss(animated: false)
             #endif
         }
         playerView.becomeFirstResponder()

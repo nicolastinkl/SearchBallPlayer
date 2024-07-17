@@ -75,7 +75,11 @@ public class SwiftLoader: UIView {
             
             view.addSubview(loader.coverView!)
             view.addSubview(loader)
-            loader.start()
+            DispatchQueue.main.async {
+                loader.start()
+            }
+
+            
         }
     }
     
