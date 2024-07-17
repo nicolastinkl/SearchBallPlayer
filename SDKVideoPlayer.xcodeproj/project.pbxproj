@@ -47,6 +47,7 @@
 		C0AD2AFE2C4650400091A508 /* IconGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AFD2C4650400091A508 /* IconGradientView.swift */; };
 		C0AD2B162C4797C00091A508 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2B152C4797C00091A508 /* ThemeManager.swift */; };
 		C0AD2B182C47AEC90091A508 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2B172C47AEC90091A508 /* BaseViewController.swift */; };
+		C0AD2B1A2C47B0D50091A508 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0AD2B192C47B0D50091A508 /* AppTrackingTransparency.framework */; };
 		EFA861AE282C041E5293EAD0 /* Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC56020215A4BE85F66C5AA /* Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -131,6 +132,7 @@
 		C0AD2AFD2C4650400091A508 /* IconGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconGradientView.swift; sourceTree = "<group>"; };
 		C0AD2B152C4797C00091A508 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		C0AD2B172C47AEC90091A508 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		C0AD2B192C47B0D50091A508 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		C233142CF27D3A70C5907986 /* Pods-SDKVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayer.debug.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		D2D96159D4A16121035BB634 /* Pods-SDKVideoPlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayerTests.release.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayerTests/Pods-SDKVideoPlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59027263754A113519BFADEA /* Pods_SDKVideoPlayer.framework in Frameworks */,
+				C0AD2B1A2C47B0D50091A508 /* AppTrackingTransparency.framework in Frameworks */,
 				C00A3A042C413B82004E31E4 /* WebKit.framework in Frameworks */,
 				C00A39FA2C3FCA4C004E31E4 /* KSPlayer in Frameworks */,
 				12CADDA72C3E2F540032635B /* Alamofire in Frameworks */,
@@ -185,6 +188,7 @@
 		B1EE987EB595310FAF64E9EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C0AD2B192C47B0D50091A508 /* AppTrackingTransparency.framework */,
 				C00A3A032C413B82004E31E4 /* WebKit.framework */,
 				C09C704F2C3D5B8B000F6E01 /* Alamofire.framework */,
 				27556689315A2CC80610D09A /* Pods_SDKVideoPlayer.framework */,
@@ -771,6 +775,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SDKVideoPlayer/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "App would like to access ID for push personalized ads";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -806,6 +811,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SDKVideoPlayer/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "App would like to access ID for push personalized ads";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

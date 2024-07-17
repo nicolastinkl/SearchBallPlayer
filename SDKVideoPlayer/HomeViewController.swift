@@ -13,6 +13,8 @@ import SafariServices
 import Alamofire
 import SDWebImage
 import SwiftIcons
+import AppTrackingTransparency
+
 //import SwiftLoader
 //import SwiftWebVC
 // 基本的数据模型
@@ -86,9 +88,30 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     
     var timer: Timer?
     
+      func applicationDidBecomeActive( ) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                if #available(iOS 14, *) {
+                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+
+                    })
+                }
+            })
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                if #available(iOS 14, *) {
+                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+
+                    })
+                }
+            })
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        applicationDidBecomeActive()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Example usage:
         let gradientView = GradientView(frame: view.bounds)
