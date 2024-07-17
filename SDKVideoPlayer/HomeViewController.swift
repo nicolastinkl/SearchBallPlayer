@@ -412,8 +412,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         
          
         
-        AF.request("https://www.gooapis.com/player/search?keyword=\(searchText)", method: .get)
-            .validate(statusCode: 200..<300)
+        AF.request("\(ApplicationS.baseURL)/player/search?keyword=\(searchText)", method: .get,headers: ApplicationS.addCustomHeaders())
+            .validate(statusCode: 200..<300)            
             .responseString(completionHandler: { response in
                 requestComplete1(response.response, response.result)
                      
@@ -516,7 +516,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         }
         
         
-        AF.request("https://www.gooapis.com/player/getconfig", method: .get)
+        AF.request("\(ApplicationS.baseURL)/player/getconfig", method: .get,headers: ApplicationS.addCustomHeaders())
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
                 requestComplete(response.response, response.result)

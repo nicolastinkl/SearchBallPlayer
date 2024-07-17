@@ -490,7 +490,7 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
           }
           
           
-          AF.request("https://www.gooapis.com/player/home", method: .get)
+          AF.request("\(ApplicationS.baseURL)/player/home", method: .get,headers: ApplicationS.addCustomHeaders())
               .validate(statusCode: 200..<300)
               .responseString(completionHandler: { response in
                   requestComplete(response.response, response.result)

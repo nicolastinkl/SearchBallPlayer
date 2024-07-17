@@ -169,8 +169,8 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
          
-        print("https://www.gooapis.com/player/search?keyword=\(searchText)&page=\(self.page)")
-        AF.request("https://www.gooapis.com/player/search?keyword=\(searchText)&page=\(self.page)", method: .get)
+        print("\(ApplicationS.baseURL)/player/search?keyword=\(searchText)&page=\(self.page)")
+        AF.request("\(ApplicationS.baseURL)/player/search?keyword=\(searchText)&page=\(self.page)", method: .get,headers: ApplicationS.addCustomHeaders())
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
                 requestComplete1(response.response, response.result)

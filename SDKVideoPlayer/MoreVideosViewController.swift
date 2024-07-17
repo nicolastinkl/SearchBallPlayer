@@ -46,7 +46,7 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
        if requestType == 64 {
            self.title =  "热门短剧"
        }else if requestType == 65 {
-           self.title =  "电影解说"
+           self.title =  "热门解说"
        }
        
        setupTableView()
@@ -178,7 +178,7 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
  
         }
                 
-        AF.request("https://www.gooapis.com/player/jieshuo?type=\(self.requestType)&page=\(self.page)", method: .get)
+        AF.request("\(ApplicationS.baseURL)/player/jieshuo?type=\(self.requestType)&page=\(self.page)", method: .get,headers: ApplicationS.addCustomHeaders())
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
                 requestComplete2(response.response, response.result)

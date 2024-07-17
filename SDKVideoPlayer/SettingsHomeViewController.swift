@@ -315,7 +315,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
              
              switch indexPath.row {
                  case 1:
-                     cell.configure(text: "我的喜好", detailText: nil)
+                     cell.configure(text: "我的浏览记录", detailText: nil)
                  case 2:
                      cell.configure(text: "服务协议", detailText: nil)
                  case 3:
@@ -350,7 +350,26 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        
+        switch indexPath.row {
+            case 1:
+                print("")
+//                cell.configure(text: "我的浏览记录", detailText: nil)
+            case 2:
+                print("")
+//                cell.configure(text: "服务协议", detailText: nil)
+            case 3:
+                print("")
+//                cell.configure(text: "版权说明", detailText: nil)
+            case 4:
+                print("")
+//                cell.configure(text: "隐私政策", detailText: nil)
+            case 5:
+                print("")
+//                cell.configure(text: "版本号", detailText: "1.0.0")
+            default:
+                print("")
+//                cell.configure(text: "", detailText: nil)
+        }
     }
      
     
