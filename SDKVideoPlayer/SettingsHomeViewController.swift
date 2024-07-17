@@ -238,6 +238,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func historyItemsUpdated() {
            // 刷新表格视图 
+        tableView.reloadData()
         let indexPath = IndexPath(row: 0, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) as? HistoryTableViewCell {
                 cell.reloadData()
