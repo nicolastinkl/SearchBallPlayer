@@ -50,37 +50,42 @@ public class SwiftLoader: UIView {
     }
     
     
-    public class func show(view:UIView,title: String?, animated : Bool) {
+    public class func show(view: UIView?,title: String?, animated : Bool) {
          
-        
-        let loader = SwiftLoader.shared
-        loader.canUpdated = true
-        loader.animated = animated
-        loader.title = title
-        loader.update()
-        
-        NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(notification: )),
-                                               name: UIDevice.orientationDidChangeNotification,
-                                               object: nil)
-        
-        let height: CGFloat = UIScreen.main.bounds.size.height
-        let width: CGFloat = UIScreen.main.bounds.size.width
-        let center: CGPoint = CGPoint(x: width / 2.0, y: height / 2.0)
-        
-        loader.center = center
-        
-        if (loader.superview == nil) {
-            loader.coverView = UIView(frame: view.bounds)
-            loader.coverView?.backgroundColor = loader.config.foregroundColor.withAlphaComponent(loader.config.foregroundAlpha)
+        if let v = view {
+            let loader = SwiftLoader.shared
+            loader.canUpdated = true
+            loader.animated = animated
+            loader.title = title
+            loader.update()
             
-            view.addSubview(loader.coverView!)
-            view.addSubview(loader)
-            DispatchQueue.main.async {
-                loader.start()
-            }
+            NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(notification: )),
+                                                   name: UIDevice.orientationDidChangeNotification,
+                                                   object: nil)
+            
+            let height: CGFloat = UIScreen.main.bounds.size.height
+            let width: CGFloat = UIScreen.main.bounds.size.width
+            let center: CGPoint = CGPoint(x: width / 2.0, y: height / 2.0)
+            
+            loader.center = center
+            
+            if (loader.superview == nil) {
+                loader.coverView = UIView(frame: v.bounds)
+                loader.coverView?.backgroundColor = loader.config.foregroundColor.withAlphaComponent(loader.config.foregroundAlpha)
+                
+                v.addSubview(loader.coverView!)
+                v.addSubview(loader)
+                DispatchQueue.main.async {
+                    loader.start()
+                }
 
-            
+                
+            }
+        }else{
+            self.show(title: title, animated: animated)
         }
+        
+       
     }
     
     public class func hide(view:UIView) {
@@ -123,7 +128,9 @@ public class SwiftLoader: UIView {
 //            currentWindow.rootViewController?.view.addSubview(loader)
             currentWindow.addSubview(loader.coverView!)
             currentWindow.addSubview(loader)
-            loader.start()
+            DispatchQueue.main.async {
+                loader.start()
+            }
         }
     }
     

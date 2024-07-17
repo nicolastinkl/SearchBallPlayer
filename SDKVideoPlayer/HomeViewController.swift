@@ -35,6 +35,7 @@ struct ConfigResponse: Codable {
 
 struct DataClass: Codable {
     let classlist: [Website]
+    let searchlist: [SearchRecommendation]
     let searchrecommadlist: [SearchRecommendation]
 }
 
@@ -67,6 +68,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     @IBOutlet weak var iconsCollectionView: UICollectionView!
     var searchSuggestionKeywords = [SearchRecommendation]()   // 搜索建议关键词
     var icons = [Website]() // 图标数组
+    var searchlist: [SearchRecommendation]?
+    var currentIndex: Int = 0 // 当前展示的搜索项索引
+
+    
+    
     let cellId = "SuggestionCell"
     let iconCellId = "IconCell"
     
@@ -75,6 +81,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     @IBOutlet weak var labelSearchBar: UILabel!
     
     @IBOutlet weak var searchButton: UIButton!
+    
+    @IBOutlet weak var dajiaLabel: UILabel!
+    
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,9 +168,60 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         layout2.sectionInset =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // 设置间距
         iconsCollectionView.collectionViewLayout = layout2
         
-        
         sendRequestGetconfig()
+        
+        
+        // 创建 UISearchBar
+        searchBar.delegate = self
+         
+        
     }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        // 输入开始时停止定时器
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc func timerAction() {
+           // 定时器触发时执行的操作
+           
+           // 在这里添加你想要执行的具体操作
+            if let searchlist = searchlist, !searchlist.isEmpty {
+                   // 获取当前索引的搜索项的 title 属性
+                let currentItemTitle = searchlist[currentIndex].keyword
+                   print("Timer fired! Current item title: \(currentItemTitle)")
+                   // self.searchBar.text = currentItemTitle
+                   // 在这里可以处理获取的 title，例如更新界面或其他操作
+                // 添加动画效果
+                // 隐藏老的文字，新的文字移动到上方暂停显示
+                // 1. 移动老的文字向上隐藏
+                     UIView.animate(withDuration: 0.1, animations: {
+                         self.searchBar.transform = CGAffineTransform(translationX: 0, y: -self.searchBar.bounds.height/4)
+                     }) { (finished) in
+                        
+                     }
+
+                // 2. 设置新的文字
+                self.searchBar.text = currentItemTitle
+                
+                // 3. 将新的文字移动到搜索栏位置
+                self.searchBar.transform = CGAffineTransform(translationX: 0, y: self.searchBar.bounds.height/4)
+                
+                // 4. 动画新的文字向下移动显示，并恢复搜索栏原始位置
+                UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut, animations: {
+                    self.searchBar.transform = .identity
+                }, completion: { (finished) in
+                    // 5. 动画完成后，恢复搜索栏原始位置
+                    self.searchBar.transform = .identity
+                })
+                   // 移动到下一个索引，循环展示
+                   currentIndex = (currentIndex + 1) % searchlist.count
+               }
+        
+    }
+    
+    
 //
 //        configureNavigationBar()
 //                
@@ -195,6 +256,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         
         if let text =  searchBar.text as? NSString {
             let newText = text as String
+            
             if (text.contains("https://")  || text.contains("http://")  || text.contains("www.")  ){
                 //target webview
               
@@ -210,7 +272,22 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
             if(text.length > 0){
                 //search view
                 
-                searchRequest(searchText: newText)
+                //检查是否是推荐的关键词
+                var isNotSearchlist:Bool = true
+                if let searchlist = searchlist, !searchlist.isEmpty {
+                    searchlist.forEach { model in
+                        if model.keyword == newText {
+                            let controller = SwiftWebVC(urlString:  model.url )
+                            self.show(controller, sender: self)
+                            isNotSearchlist = false
+                        }
+                    }
+                }
+                
+                if isNotSearchlist{
+                    searchRequest(searchText: newText)
+                }
+                
             }
         }
         
@@ -220,7 +297,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     
     func searchRequest(searchText: String) {
         
-        SwiftLoader.show(title: "搜索中...", animated: true)
+        SwiftLoader.show(view: self.view,title: "搜索中...", animated: true)
          
         
         let requestComplete1: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
@@ -327,7 +404,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
          */
 
         
-        SwiftLoader.show(title: "加载中...", animated: true)
+        SwiftLoader.show(view: self.view,title: "加载中...", animated: true)
         
 //        // Fetch Request
         
@@ -370,7 +447,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                             
                             
                             self.icons = response_config.data.classlist
+                            self.searchlist = response_config.data.searchlist
                             DispatchQueue.main.async {
+                                self.dajiaLabel.text = "大家都在搜"
+                                self.timer =   Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
                                 
 //                                if let s = response_config.data.searchrecommadlist.first?.keyword {
 ////                                    self.searchBar.placeholder = s
@@ -672,4 +752,4 @@ class KeywordCollectionViewCell: UICollectionViewCell {
     }
     
 }
-
+ 

@@ -70,6 +70,8 @@ public class SwiftWebVC: UIViewController {
         var tempWebView = WKWebView(frame: UIScreen.main.bounds)
         tempWebView.uiDelegate = self
         tempWebView.navigationDelegate = self
+        tempWebView.backgroundColor =  ThemeManager.shared.viewBackgroundColor
+        
         return tempWebView;
     }()
     
@@ -106,6 +108,7 @@ public class SwiftWebVC: UIViewController {
         self.request = aRequest
     }
     
+    
     func loadRequest(_ request: URLRequest) {
         webView.load(request)
     }
@@ -121,7 +124,50 @@ public class SwiftWebVC: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor =  ThemeManager.shared.viewBackgroundColor
+        
+        
+        
+        
+        
+        
     }
+    
+    func injectDarkModeJavaScript() {
+          // Check system dark mode setting
+          let isDarkMode = traitCollection.userInterfaceStyle == .dark
+          
+          // JavaScript to enable dark mode
+          let darkModeScript = """
+          document.documentElement.style.backgroundColor = 'black';
+          document.documentElement.style.color = 'white';
+          """
+          
+          // JavaScript to disable dark mode
+          let lightModeScript = """
+          document.documentElement.style.backgroundColor = 'white';
+          document.documentElement.style.color = 'black';
+          """
+        
+          
+          // Select appropriate script based on system setting
+          let script = isDarkMode ? darkModeScript : lightModeScript
+          
+          // Inject JavaScript into WKWebView
+          webView.evaluateJavaScript(script, completionHandler: { result, error in
+              if let error = error {
+                  print("Error injecting JavaScript: \(error.localizedDescription)")
+              }
+          })
+      }
+    
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//           super.traitCollectionDidChange(previousTraitCollection)
+//           
+//           // Re-inject JavaScript when the system appearance changes
+//           if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+//               injectDarkModeJavaScript()
+//           }
+//       }
     
     override public func viewWillAppear(_ animated: Bool) {
         assert(self.navigationController != nil, "SVWebViewController needs to be contained in a UINavigationController. If you are presenting SVWebViewController modally, use SVModalWebViewController instead.")
@@ -296,14 +342,14 @@ extension SwiftWebVC: WKNavigationDelegate {
         self.delegate?.didStartLoading()
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         updateToolbarItems()
-        SwiftLoader.show(title: "正在加载中...", animated: true)
+        SwiftLoader.show(view: self.view,title: "正在加载中...", animated: true)
     }
-        
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.delegate?.didFinishLoading(success: true)
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        
+        // Inject JavaScript for dark mode
+//        injectDarkModeJavaScript()
         webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
             if let s = response as? String {
                 self.navBarTitle.text = s

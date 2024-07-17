@@ -111,7 +111,7 @@
                                     <outlet property="delegate" destination="k5B-vU-PQ1" id="UYM-5c-jNG"/>
                                 </connections>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大家都在搜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhL-yO-FiP">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhL-yO-FiP">
                                 <rect key="frame" x="16" y="257" width="119" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="G10-3x-7YZ"/>
@@ -232,6 +232,7 @@
                     <tabBarItem key="tabBarItem" title="浏览器" image="home1" selectedImage="home1" id="bpw-sx-iu0"/>
                     <navigationItem key="navigationItem" id="hW1-bP-jnl"/>
                     <connections>
+                        <outlet property="dajiaLabel" destination="hhL-yO-FiP" id="BqV-eN-8jJ"/>
                         <outlet property="iconsCollectionView" destination="hyF-zq-sN8" id="Thf-43-A1b"/>
                         <outlet property="labelSearchBar" destination="YQQ-Si-YYT" id="Zkc-q6-bhY"/>
                         <outlet property="searchBar" destination="uA9-CE-Zwk" id="rgu-EY-UaF"/>

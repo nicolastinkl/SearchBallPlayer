@@ -401,7 +401,7 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
       
       func sendRequestGetconfig() {
           
-          SwiftLoader.show(title: "正在请求数据...", animated: true)
+          SwiftLoader.show(view: self.view,title: "正在请求数据...", animated: true)
           
 
         //  LoadingIndicator()
