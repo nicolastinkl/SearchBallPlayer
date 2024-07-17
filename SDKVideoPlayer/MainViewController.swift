@@ -34,7 +34,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
-        label.textColor = .darkGray
+        label.textColor = ThemeManager.shared.fontColor
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -238,7 +238,7 @@ class HeaderView: UICollectionReusableView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.textAlignment = .left
-        label.textColor = .black
+        label.textColor =  ThemeManager.shared.fontColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -277,7 +277,8 @@ class HeaderView: UICollectionReusableView {
     
     private func setupViews() {
         
-        self.backgroundColor = UIColor(fromHex: "#f2f4f6")
+//        self.backgroundColor = UIColor(fromHex: "#f2f4f6")
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         iconTag.translatesAutoresizingMaskIntoConstraints = false
         
@@ -341,10 +342,11 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
           let layout = UICollectionViewFlowLayout()
           layout.scrollDirection = .vertical
           
-          collectionView.backgroundColor = UIColor(fromHex: "#f2f4f6")
+//          collectionView.backgroundColor = UIColor(fromHex: "#f2f4f6")
           
+          self.view.backgroundColor = ThemeManager.shared.viewBackgroundColor
           //collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-          collectionView.backgroundColor = .white
+//          collectionView.backgroundColor = .white
           collectionView.dataSource = self
           collectionView.delegate = self
           collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)

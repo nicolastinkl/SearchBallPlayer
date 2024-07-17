@@ -48,7 +48,7 @@ public class SwiftLoader: UIView {
     public class func show(animated: Bool) {
         self.show(title: nil, animated: animated)
     }
-   
+    
     
     public class func show(view:UIView,title: String?, animated : Bool) {
          
@@ -115,6 +115,8 @@ public class SwiftLoader: UIView {
             loader.coverView = UIView(frame: currentWindow.bounds)
             loader.coverView?.backgroundColor = loader.config.foregroundColor.withAlphaComponent(loader.config.foregroundAlpha)
             
+//            currentWindow.rootViewController?.view.addSubview(loader.coverView!)
+//            currentWindow.rootViewController?.view.addSubview(loader)
             currentWindow.addSubview(loader.coverView!)
             currentWindow.addSubview(loader)
             loader.start()
@@ -278,17 +280,17 @@ public class SwiftLoader: UIView {
             self.backgroundLayer?.fillColor = self.backgroundColor?.cgColor
             self.backgroundLayer?.lineCap = CAShapeLayerLineCap.round
             self.backgroundLayer?.lineWidth = CGFloat(self.lineWidth!)
-            /*self.layer.addSublayer(self.backgroundLayer!)
-            */
+            self.layer.addSublayer(self.backgroundLayer!)
             
-            self.addSubview(LayerImage)
-            // 设置按钮的约束
-            NSLayoutConstraint.activate([
-                LayerImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-                LayerImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-                LayerImage.widthAnchor.constraint(equalToConstant: 50),
-                LayerImage.heightAnchor.constraint(equalToConstant: 50) // 根据图片实际比例调整
-            ])
+            
+//            self.addSubview(LayerImage)
+//            // 设置按钮的约束
+//            NSLayoutConstraint.activate([
+//                LayerImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                LayerImage.centerYAnchor.constraint(equalTo: centerYAnchor),
+//                LayerImage.widthAnchor.constraint(equalToConstant: 50),
+//                LayerImage.heightAnchor.constraint(equalToConstant: 50) // 根据图片实际比例调整
+//            ])
             
         }
         
@@ -358,7 +360,7 @@ public class SwiftLoader: UIView {
         public var size : CGFloat = 120.0
         
         /// Color of spinner view
-        public var spinnerColor = UIColor.black
+        public var spinnerColor = UIColor.MainColor()// UIColor.black
         
         /// Line width
         public var spinnerLineWidth :Float = 1.0
@@ -370,10 +372,10 @@ public class SwiftLoader: UIView {
         public var speed :Int = 1
         
         /// Font for title text in loader
-        public var titleTextFont : UIFont = UIFont.boldSystemFont(ofSize: 16.0)
+        public var titleTextFont : UIFont = UIFont.boldSystemFont(ofSize: 15.0)
         
         /// Background color for loader
-        public var backgroundColor = UIColor.white
+        public var backgroundColor = ThemeManager.shared.viewBackgroundColor
         
         /// Foreground color
         public var foregroundColor = UIColor.clear

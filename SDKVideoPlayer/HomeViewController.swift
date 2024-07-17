@@ -83,10 +83,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         // Example usage:
         let gradientView = GradientView(frame: view.bounds)
         gradientView.startColor = UIColor.MainColor() // Light blue
-        gradientView.endColor =  UIColor(fromHex: "#eeeff1") //UIColor(red: 0.12, green: 0.56, blue: 1.0, alpha: 1.0)   // Blue
+        gradientView.endColor = ThemeManager.shared.viewBackgroundColor
+        //  UIColor(fromHex: "#eeeff1") //UIColor(red: 0.12, green: 0.56, blue: 1.0, alpha: 1.0)   // Blue
         
         view.insertSubview(gradientView, at: 0)
-         
+        
         // 设置搜索框背景为透明
         searchBar.backgroundImage = UIImage() // 使用空白的 UIImage
         labelSearchBar.layer.cornerRadius = 11
@@ -95,12 +96,12 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         labelSearchBar.clipsToBounds = true
         
         searchButton.addTarget(self, action: #selector(self.openSearchTarget(_:)), for: UIControl.Event.touchUpInside)
-
         
         
-            
+        
+        
         // 设置搜索框背景颜色为白色
-//        searchBar.barTintColor = .white
+        //        searchBar.barTintColor = .white
         
         NSLayoutConstraint.activate([
             gradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 0),
@@ -110,84 +111,85 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         ])
         
         // 添加圆角
-          let maskPath = UIBezierPath(roundedRect: searchButton.bounds,
-                                      byRoundingCorners: [.topRight, .bottomRight],
-                                      cornerRadii: CGSize(width: 10.0, height: 10.0))
-          
-          let maskLayer = CAShapeLayer()
-          maskLayer.frame = searchButton.bounds
-          maskLayer.path = maskPath.cgPath
-          searchButton.layer.mask = maskLayer
-    
+        let maskPath = UIBezierPath(roundedRect: searchButton.bounds,
+                                    byRoundingCorners: [.topRight, .bottomRight],
+                                    cornerRadii: CGSize(width: 10.0, height: 10.0))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = searchButton.bounds
+        maskLayer.path = maskPath.cgPath
+        searchButton.layer.mask = maskLayer
+        
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             
         }
-            
-          
-
+        
+        
+        
         searchBar.delegate = self
         suggestionsTableView.dataSource = self
         suggestionsTableView.delegate = self
-//         
-         let layout = UICollectionViewFlowLayout()
-         layout.scrollDirection = .horizontal
-         layout.itemSize = CGSize(width: 120, height: 44)
-         suggestionsTableView.collectionViewLayout = layout
-         
-         // 如果使用 storyboard
-         suggestionsTableView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-         
-         //icon list
+        //
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 120, height: 44)
+        suggestionsTableView.collectionViewLayout = layout
+        
+        // 如果使用 storyboard
+        suggestionsTableView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+        //icon list
         iconsCollectionView.dataSource = self
         iconsCollectionView.delegate = self
         iconsCollectionView.register(IconCollectionViewCell.self, forCellWithReuseIdentifier:iconCellId)
-   
-       
+        
+        
         suggestionsTableView.backgroundColor = UIColor.clear
         iconsCollectionView.backgroundColor = UIColor.clear
         searchBar.backgroundColor = UIColor.clear
         let layout2 = UICollectionViewFlowLayout()
         let width = (iconsCollectionView.frame.width - 60) / 4
         layout2.itemSize = CGSize(width:width, height: width)
-//        layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
-//        layout2.minimumLineSpacing = 10 // 设置行间距
-        layout2.sectionInset =  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // 设置间距
+        layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
+        layout2.minimumLineSpacing = 10 // 设置行间距
+        
+        layout2.sectionInset =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // 设置间距
         iconsCollectionView.collectionViewLayout = layout2
         
-
+        
         sendRequestGetconfig()
-        
-        configureNavigationBar()
-        
-        
     }
-  
-  override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      // 确保在视图将要出现时隐藏导航栏
-      navigationController?.setNavigationBarHidden(true, animated: animated)
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      // 确保在视图将要消失时显示导航栏
-      navigationController?.setNavigationBarHidden(false, animated: animated)
-  }
-  
-  private func configureNavigationBar() {
-      if #available(iOS 13.0, *) {
-          // iOS 13 及以上版本使用 UINavigationBarAppearance
-          let appearance = UINavigationBarAppearance()
-          appearance.configureWithTransparentBackground()
-          appearance.backgroundColor = .clear
-          appearance.shadowColor = .clear
-
-          navigationController?.navigationBar.standardAppearance = appearance
-          navigationController?.navigationBar.scrollEdgeAppearance = appearance
-      }
-  }
+//
+//        configureNavigationBar()
+//                
+//    }
+//  
+//  override func viewWillAppear(_ animated: Bool) {
+//      super.viewWillAppear(animated)
+//      // 确保在视图将要出现时隐藏导航栏
+//      navigationController?.setNavigationBarHidden(true, animated: animated)
+//  }
+//
+//  override func viewWillDisappear(_ animated: Bool) {
+//      super.viewWillDisappear(animated)
+//      // 确保在视图将要消失时显示导航栏
+//      navigationController?.setNavigationBarHidden(false, animated: animated)
+//  }
+//  
+//  private func configureNavigationBar() {
+//      if #available(iOS 13.0, *) {
+//          // iOS 13 及以上版本使用 UINavigationBarAppearance
+//          let appearance = UINavigationBarAppearance()
+//          appearance.configureWithTransparentBackground()
+//          appearance.backgroundColor = .clear
+//          appearance.shadowColor = .clear
+//
+//          navigationController?.navigationBar.standardAppearance = appearance
+//          navigationController?.navigationBar.scrollEdgeAppearance = appearance
+//      }
+//  }
     
     @objc func openSearchTarget(_ sender: UIButton){
         
@@ -541,7 +543,7 @@ class IconCollectionViewCell: UICollectionViewCell {
          let label = UILabel()
          label.textAlignment = .center
          label.font = UIFont.systemFont(ofSize: 12)
-         label.textColor = .darkGray
+         label.textColor = ThemeManager.shared.fontColor
          label.translatesAutoresizingMaskIntoConstraints = false
          return label
      }()
@@ -550,8 +552,18 @@ class IconCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
           super.init(frame: frame)
         
-                contentView.backgroundColor = .white
-                contentView.layer.cornerRadius = 10
+        
+        let currentUserInterfaceStyle = ThemeManager.shared.currentUserInterfaceStyle
+        switch currentUserInterfaceStyle {
+            case .dark:
+                contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+            case .light:
+                contentView.backgroundColor = UIColor(fromHex: "#eeeff1")
+            default:
+                contentView.backgroundColor = UIColor(fromHex: "#eeeff1")
+        }
+        
+                contentView.layer.cornerRadius = 5
                 contentView.layer.shadowColor = UIColor.white.cgColor
                 contentView.layer.shadowOffset = CGSize(width: 0, height: 1)
                 contentView.layer.shadowOpacity = 0.1
@@ -604,22 +616,22 @@ class KeywordCollectionViewCell: UICollectionViewCell {
         keywordBtn.layer.cornerRadius = 15
         keywordBtn.clipsToBounds = true
         keywordBtn.translatesAutoresizingMaskIntoConstraints = false
+        keywordBtn.layer.borderWidth = 1
+        keywordBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        
+    
         return keywordBtn
     }()
     
     override init(frame: CGRect) {
           super.init(frame: frame)
-
-          // 取得螢幕寬度
-        
-        
         
         self.addSubview(keywordBtn)
         
         NSLayoutConstraint.activate([
             keywordBtn.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 10),
             keywordBtn.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -2),
-            keywordBtn.topAnchor.constraint(equalTo: topAnchor),
+            keywordBtn.topAnchor.constraint(equalTo: topAnchor,constant: 2),
 //            keywordBtn.bottomAnchor.constraint(equalTo:bottomAnchor),
             keywordBtn.heightAnchor.constraint(equalToConstant: 30)
         ])
@@ -639,19 +651,22 @@ class KeywordCollectionViewCell: UICollectionViewCell {
 //        keywordBtn.frame = CGRect(x: 10, y: 0, width: 30 * title.count, height: 44)
         
         if (isFirst){
-            keywordBtn.backgroundColor = UIColor(fromHex: "#fde6de")
+            //keywordBtn.backgroundColor = UIColor(fromHex: "#fde6de")
 //            keywordBtn.titleLabel?.textColor =
             keywordBtn.setTitleColor(UIColor(fromHex: "#e45a50"), for: UIControl.State.normal)
-            
+            keywordBtn.layer.borderColor = UIColor(fromHex: "#e45a50").cgColor
 //            keywordBtn.setImage(UIImage(named: "fire"), for: .normal)
             // Adjust image and title position relative to each other
 //            keywordBtn.imageEdgeInsets = UIEdgeInsets(top: 5, left: -5, bottom: 5, right: 15) // Adjust as needed
                    
         }else{
             
-            keywordBtn.backgroundColor = UIColor(fromHex: "#e8e8e8")
+            //keywordBtn.backgroundColor = UIColor(fromHex: "#e8e8e8")
 //            keywordBtn.titleLabel?.textColor =
-            keywordBtn.setTitleColor(UIColor(fromHex: "#787878"), for: UIControl.State.normal)
+            
+            keywordBtn.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+            keywordBtn.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
+            //keywordBtn.setTitleColor(UIColor(fromHex: "#787878"), for: UIControl.State.normal)
         }
         
     }

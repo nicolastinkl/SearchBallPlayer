@@ -122,13 +122,15 @@ class CustomTableViewCell: UITableViewCell {
         // 配置 customTextLabel
         customTextLabel.translatesAutoresizingMaskIntoConstraints = false
         customTextLabel.font = UIFont.systemFont(ofSize: 16)
-        customTextLabel.textColor = .black
+//        customTextLabel.textColor = .black
+        customTextLabel.textColor = ThemeManager.shared.fontColor
         contentView.addSubview(customTextLabel)
         
         // 配置 customDetailTextLabel
         customDetailTextLabel.translatesAutoresizingMaskIntoConstraints = false
         customDetailTextLabel.font = UIFont.systemFont(ofSize: 14)
-        customDetailTextLabel.textColor = .gray
+//        customDetailTextLabel.textColor = .gray
+        customDetailTextLabel.textColor = ThemeManager.shared.fontColor
         contentView.addSubview(customDetailTextLabel)
         
         // 配置 arrowImageView
@@ -251,7 +253,8 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         tableView.frame = view.bounds
         view.addSubview(tableView)
         
-        tableView.backgroundColor = UIColor(fromHex: "#f6f6f6")
+//        tableView.backgroundColor = UIColor(fromHex: "#f6f6f6")
+        view.backgroundColor = ThemeManager.shared.viewBackgroundColor
         
         let headView = UIView()
         headView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 150)
@@ -262,7 +265,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         
         customTextLabel.translatesAutoresizingMaskIntoConstraints = false
         customTextLabel.font = UIFont.boldSystemFont(ofSize: 22)
-        customTextLabel.textColor = .black
+        customTextLabel.textColor =  ThemeManager.shared.fontColor
         
         
         let startButton = UIButton(type: .system)
@@ -272,7 +275,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         
         startButton.clipsToBounds = true
         startButton.layer.cornerRadius = 22
-        startButton.layer.borderWidth = 0.5
+        startButton.layer.borderWidth = 1
         startButton.layer.borderColor = UIColor.MainColor().cgColor
         
         

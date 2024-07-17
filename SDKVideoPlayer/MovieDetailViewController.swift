@@ -43,6 +43,7 @@ class MovieDetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .center
+        label.textColor = ThemeManager.shared.fontColor
         return label
     }()
     
@@ -51,13 +52,15 @@ class MovieDetailViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.textColor = ThemeManager.shared.fontColor
         return label
     }()
     
     private let remarksLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
+//        label.textColor = .gray
+        label.textColor = ThemeManager.shared.fontColor
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -80,7 +83,7 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = ThemeManager.shared.viewBackgroundColor
         
         
         setupScrollView()

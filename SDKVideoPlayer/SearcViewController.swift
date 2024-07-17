@@ -42,8 +42,7 @@ class SearcViewController: UIViewController, UITableViewDataSource, UITableViewD
    override func viewDidLoad() {
        
        super.viewDidLoad()
-       view.backgroundColor = UIColor.white
-        
+       view.backgroundColor =  ThemeManager.shared.viewBackgroundColor
        self.title =  "'\(searchText)' 搜索结果"
        
        setupTableView()
@@ -254,7 +253,7 @@ class CustomCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .darkGray
+        label.textColor = ThemeManager.shared.fontColor2
         label.numberOfLines = 3
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

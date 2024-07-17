@@ -120,6 +120,7 @@ public class SwiftWebVC: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor =  ThemeManager.shared.viewBackgroundColor
     }
     
     override public func viewWillAppear(_ animated: Bool) {
@@ -303,11 +304,13 @@ extension SwiftWebVC: WKNavigationDelegate {
         self.delegate?.didFinishLoading(success: true)
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         
-//        webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
-//            self.navBarTitle.text = response as! String?
-//            self.navBarTitle.sizeToFit()
-//            self.updateToolbarItems()
-//        })
+        webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
+            if let s = response as? String {
+                self.navBarTitle.text = s
+                self.navBarTitle.sizeToFit()
+            }
+            self.updateToolbarItems()
+        })
         SwiftLoader.hide()
         
     }
