@@ -283,7 +283,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         startButton.layer.borderWidth = 1
         startButton.layer.borderColor = UIColor.MainColor().cgColor
         
-        
+        startButton.addTarget(self, action: #selector(ButtonhdplayurlTapped(_:)), for: .touchUpInside)
         // 设置约束
         NSLayoutConstraint.activate([
             customTextLabel.leadingAnchor.constraint(equalTo: headView.leadingAnchor, constant: 16),
@@ -303,6 +303,12 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
          
         
         tableView.tableHeaderView = headView
+    }
+    
+    @objc private func ButtonhdplayurlTapped(_ button:UIButton){
+        UIApplication.shared.open( URL(string: "https://apps.apple.com/us/app/mystictreasureslegends/id652341")!,options: [:]) { complate in
+            
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
