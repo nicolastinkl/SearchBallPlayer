@@ -93,7 +93,7 @@ open class IOSVideoPlayerView: VideoPlayerView {
         }
         insertSubview(maskImageView, at: 0)
         maskImageView.contentMode = .scaleAspectFit
-        //toolBar.addArrangedSubview(landscapeButton)
+        toolBar.addArrangedSubview(landscapeButton)
         landscapeButton.tag = PlayerButtonType.landscape.rawValue
         landscapeButton.addTarget(self, action: #selector(onButtonPressed(_:)), for: .touchUpInside)
         landscapeButton.tintColor = .white
@@ -260,6 +260,7 @@ open class IOSVideoPlayerView: VideoPlayerView {
             landscapeButton.isHidden = true
         }
         lockButton.isHidden = !isLandscape
+
         judgePanGesture()
          
 //        landscapeButton.isHidden = false
