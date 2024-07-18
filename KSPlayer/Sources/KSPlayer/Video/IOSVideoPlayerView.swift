@@ -11,7 +11,50 @@ import CoreServices
 import MediaPlayer
 import UIKit
 
+
+public class IOSShadowButton: UIButton {
+
+  override init(frame: CGRect) {
+      super.init(frame: frame)
+      applyShadow()
+  }
+  
+    required public init?(coder: NSCoder) {
+      super.init(coder: coder)
+      applyShadow()
+  }
+  
+  private func applyShadow() {
+      // 设置圆角为按钮宽度的一半，以保持圆形
+      self.layer.cornerRadius = self.frame.size.width / 2
+      
+      // 设置阴影颜色
+      self.layer.shadowColor = UIColor.lightGray.cgColor
+      
+      // 设置阴影偏移量
+      self.layer.shadowOffset = CGSize(width: 0, height: 4)
+      
+      // 设置阴影透明度
+      self.layer.shadowOpacity = 0.9
+      
+      // 设置阴影半径，影响阴影的模糊程度
+      self.layer.shadowRadius = 18
+      
+      // 确保阴影始终显示在按钮后面
+      self.layer.masksToBounds = false
+  }
+  
+      open override func layoutSubviews() {
+      super.layoutSubviews()
+      // 确保按钮的圆角是当前宽度的一半
+      self.layer.cornerRadius = self.frame.size.width / 2
+  }
+}
+
+
 open class IOSVideoPlayerView: VideoPlayerView {
+    
+    
     private weak var originalSuperView: UIView?
     private var originalframeConstraints: [NSLayoutConstraint]?
     private var originalFrame = CGRect.zero
@@ -20,7 +63,7 @@ open class IOSVideoPlayerView: VideoPlayerView {
     private var isVolume = false
     private let volumeView = BrightnessVolume()
     public var volumeViewSlider = UXSlider()
-    public var backButton = UIButton()
+    public var backButton = IOSShadowButton()
     public var airplayStatusView: UIView = AirplayStatusView()
     #if !os(xrOS)
     public var routeButton = AVRoutePickerView()
@@ -50,7 +93,7 @@ open class IOSVideoPlayerView: VideoPlayerView {
         }
         insertSubview(maskImageView, at: 0)
         maskImageView.contentMode = .scaleAspectFit
-        toolBar.addArrangedSubview(landscapeButton)
+        //toolBar.addArrangedSubview(landscapeButton)
         landscapeButton.tag = PlayerButtonType.landscape.rawValue
         landscapeButton.addTarget(self, action: #selector(onButtonPressed(_:)), for: .touchUpInside)
         landscapeButton.tintColor = .white
@@ -58,10 +101,16 @@ open class IOSVideoPlayerView: VideoPlayerView {
             landscapeButton.setImage(UIImage(systemName: "arrow.up.left.and.arrow.down.right"), for: .normal)
             landscapeButton.setImage(UIImage(systemName: "arrow.down.right.and.arrow.up.left"), for: .selected)
         }
+        
+         
         backButton.tag = PlayerButtonType.back.rawValue
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         backButton.addTarget(self, action: #selector(onButtonPressed(_:)), for: .touchUpInside)
         backButton.tintColor = .white
+//        backButton.layer.borderColor =  UIColor.white.cgColor
+//        backButton.layer.borderWidth = 1
+//        backButton.layer.cornerRadius = 22
+        backButton.clipsToBounds = true
         navigationBar.insertArrangedSubview(backButton, at: 0)
 
         addSubview(airplayStatusView)
@@ -80,7 +129,9 @@ open class IOSVideoPlayerView: VideoPlayerView {
             maskImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             maskImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             maskImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backButton.widthAnchor.constraint(equalToConstant: 25),
+            backButton.widthAnchor.constraint(equalToConstant: 44),
+            backButton.heightAnchor.constraint(equalToConstant: 44),
+            
             landscapeButton.widthAnchor.constraint(equalToConstant: 30),
             airplayStatusView.centerXAnchor.constraint(equalTo: centerXAnchor),
             airplayStatusView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -188,7 +239,9 @@ open class IOSVideoPlayerView: VideoPlayerView {
             topMaskView.isHidden = KSOptions.topBarShowInCase != .always
         }
         toolBar.playbackRateButton.isHidden = false
-        toolBar.srtButton.isHidden = srtControl.subtitleInfos.isEmpty
+        
+        toolBar.srtButton.isHidden =  srtControl.subtitleInfos.isEmpty //隐藏字幕按钮
+        
         if UIDevice.current.userInterfaceIdiom == .phone {
             if isLandscape {
                 landscapeButton.isHidden = true
@@ -201,12 +254,16 @@ open class IOSVideoPlayerView: VideoPlayerView {
                     landscapeButton.isHidden = false
                 }
             }
-            toolBar.playbackRateButton.isHidden = !isLandscape
+            toolBar.playbackRateButton.isHidden = !isLandscape //speedometer icon
+            
         } else {
             landscapeButton.isHidden = true
         }
         lockButton.isHidden = !isLandscape
         judgePanGesture()
+         
+//        landscapeButton.isHidden = false
+//        toolBar.srtButton.isHidden = true // srtControl.subtitleInfos.isEmpty //隐藏字幕按钮
     }
 
     override open func player(layer: KSPlayerLayer, state: KSPlayerState) {
