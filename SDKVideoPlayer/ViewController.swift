@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         activityIndicator.isHidden = true
         self.view.backgroundColor = UIColor.black
         
+        SDKAdServices().requestTrackingAuthorization()
         
         setupViews();
         

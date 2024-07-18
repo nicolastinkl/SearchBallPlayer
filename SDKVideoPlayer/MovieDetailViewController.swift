@@ -24,17 +24,18 @@ class MovieDetailViewController: UIViewController {
         imageView.clipsToBounds = true
            
            // 创建渐变层
-           let gradientLayer = CAGradientLayer()
-           gradientLayer.colors = [
-               UIColor.clear.cgColor, // 顶部透明
-//               UIColor(fromHex: "#9244a5").cgColor
-               UIColor.black.withAlphaComponent(0.5).cgColor  // 底部黑色
-           ]
-           gradientLayer.locations = [0.0, 0.95] // 渐变在图片高度的一半开始
-           gradientLayer.frame = imageView.bounds
-           
-           // 将渐变层添加到图片视图
-           imageView.layer.insertSublayer(gradientLayer, at: 0)
+//           let gradientLayer = CAGradientLayer()
+//           gradientLayer.colors = [
+//               UIColor.clear.cgColor, // 顶部透明
+////               UIColor(fromHex: "#9244a5").cgColor
+//               UIColor.black.withAlphaComponent(0.5).cgColor  // 底部黑色
+//           ]
+//           //gradientLayer.locations = [0.0, 0.95] // 渐变在图片高度的一半开始
+//            gradientLayer.locations = [0.0, 0.9, 1.0] // 0.0 表示顶部开始，1.0 表示底部结束
+//           gradientLayer.frame = imageView.bounds
+//           
+//           // 将渐变层添加到图片视图
+//           imageView.layer.insertSublayer(gradientLayer, at: 0)
            
         return imageView
     }()

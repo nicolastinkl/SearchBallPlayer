@@ -11,7 +11,7 @@
 		12CADDAC2C3E31FB0032635B /* Utitils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CADDAB2C3E31FB0032635B /* Utitils.swift */; };
 		12CADDAE2C3E398E0032635B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CADDAD2C3E398E0032635B /* MainViewController.swift */; };
 		12CADDB12C3E43940032635B /* SwiftfulLoadingIndicators in Frameworks */ = {isa = PBXBuildFile; productRef = 12CADDB02C3E43940032635B /* SwiftfulLoadingIndicators */; };
-		59027263754A113519BFADEA /* Pods_SDKVideoPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27556689315A2CC80610D09A /* Pods_SDKVideoPlayer.framework */; };
+		59027263754A113519BFADEA /* Pods_SDKVideoPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27556689315A2CC80610D09A /* Pods_SDKVideoPlayer.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5AFAAE8F84FB0CDF9BCFDA9D /* Pods_SDKVideoPlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ACC29B576E7E61EC3D021A /* Pods_SDKVideoPlayerTests.framework */; };
 		C00A39F52C3FC0C4004E31E4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */; };
 		C00A39FA2C3FCA4C004E31E4 /* KSPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = C00A39F92C3FCA4C004E31E4 /* KSPlayer */; };
@@ -20,6 +20,9 @@
 		C00A3A002C4136BC004E31E4 /* MoreVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A39FF2C4136BC004E31E4 /* MoreVideosViewController.swift */; };
 		C00A3A022C413871004E31E4 /* SDKWBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A3A012C413871004E31E4 /* SDKWBViewController.swift */; };
 		C00A3A042C413B82004E31E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00A3A032C413B82004E31E4 /* WebKit.framework */; platformFilters = (ios, macos, xros, ); };
+		C050488A2C48F05200E4DEDB /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C05048892C48F05200E4DEDB /* AdServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C050488C2C48F0B800E4DEDB /* SDKAdServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050488B2C48F0B800E4DEDB /* SDKAdServices.swift */; };
+		C050488E2C48F0DA00E4DEDB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C050488D2C48F0DA00E4DEDB /* iAd.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		C09C70162C3D4641000F6E01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70152C3D4641000F6E01 /* AppDelegate.swift */; };
 		C09C70182C3D4641000F6E01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70172C3D4641000F6E01 /* SceneDelegate.swift */; };
 		C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70192C3D4641000F6E01 /* ViewController.swift */; };
@@ -99,6 +102,9 @@
 		C00A39FF2C4136BC004E31E4 /* MoreVideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVideosViewController.swift; sourceTree = "<group>"; };
 		C00A3A012C413871004E31E4 /* SDKWBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKWBViewController.swift; sourceTree = "<group>"; };
 		C00A3A032C413B82004E31E4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		C05048892C48F05200E4DEDB /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
+		C050488B2C48F0B800E4DEDB /* SDKAdServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKAdServices.swift; sourceTree = "<group>"; };
+		C050488D2C48F0DA00E4DEDB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		C09C70122C3D4641000F6E01 /* SDKVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09C70152C3D4641000F6E01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C09C70172C3D4641000F6E01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59027263754A113519BFADEA /* Pods_SDKVideoPlayer.framework in Frameworks */,
+				C050488E2C48F0DA00E4DEDB /* iAd.framework in Frameworks */,
 				C0AD2B1A2C47B0D50091A508 /* AppTrackingTransparency.framework in Frameworks */,
 				C00A3A042C413B82004E31E4 /* WebKit.framework in Frameworks */,
 				C00A39FA2C3FCA4C004E31E4 /* KSPlayer in Frameworks */,
@@ -154,6 +161,7 @@
 				C09C70652C3D6558000F6E01 /* SDWebImageMapKit in Frameworks */,
 				C09C70632C3D6558000F6E01 /* SDWebImage in Frameworks */,
 				12CADDB12C3E43940032635B /* SwiftfulLoadingIndicators in Frameworks */,
+				C050488A2C48F05200E4DEDB /* AdServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +200,8 @@
 		B1EE987EB595310FAF64E9EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C050488D2C48F0DA00E4DEDB /* iAd.framework */,
+				C05048892C48F05200E4DEDB /* AdServices.framework */,
 				C0AD2B192C47B0D50091A508 /* AppTrackingTransparency.framework */,
 				C00A3A032C413B82004E31E4 /* WebKit.framework */,
 				C09C704F2C3D5B8B000F6E01 /* Alamofire.framework */,
@@ -239,6 +249,7 @@
 				C00A39FF2C4136BC004E31E4 /* MoreVideosViewController.swift */,
 				C0AD2AF72C452BC80091A508 /* SearcViewController.swift */,
 				C0AD2B172C47AEC90091A508 /* BaseViewController.swift */,
+				C050488B2C48F0B800E4DEDB /* SDKAdServices.swift */,
 				C0AD2AFD2C4650400091A508 /* IconGradientView.swift */,
 				C0AD2B1B2C47B79C0091A508 /* ApplicationS.swift */,
 				C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */,
@@ -581,6 +592,7 @@
 				C0AD2B1E2C47BCCE0091A508 /* BrowseViewController.swift in Sources */,
 				C0AD2AEE2C44F5260091A508 /* SwiftWebVCActivitySafari.swift in Sources */,
 				C0AD2AF12C44F8A70091A508 /* SettingsHomeViewController.swift in Sources */,
+				C050488C2C48F0B800E4DEDB /* SDKAdServices.swift in Sources */,
 				C09C70202C3D4641000F6E01 /* SDKVideoPlayer.xcdatamodeld in Sources */,
 				C09C70162C3D4641000F6E01 /* AppDelegate.swift in Sources */,
 				C09C70182C3D4641000F6E01 /* SceneDelegate.swift in Sources */,
@@ -790,7 +802,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -831,7 +843,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

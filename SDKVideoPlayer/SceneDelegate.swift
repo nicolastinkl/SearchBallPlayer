@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           window?.tintColor = UIColor.MainColor()
             
         
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

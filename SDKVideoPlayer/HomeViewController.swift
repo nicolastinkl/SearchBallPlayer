@@ -110,16 +110,28 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         super.viewDidAppear(animated)
         applicationDidBecomeActive()
     }
+    
+    let gradientView = GradientView()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Example usage:
-        let gradientView = GradientView(frame: view.bounds)
+        
         gradientView.startColor = UIColor.MainColor() // Light blue
         gradientView.endColor = ThemeManager.shared.viewBackgroundColor
         //  UIColor(fromHex: "#eeeff1") //UIColor(red: 0.12, green: 0.56, blue: 1.0, alpha: 1.0)   // Blue
         
         view.insertSubview(gradientView, at: 0)
+        
+        
+        // 设置 Auto Layout 约束
+        NSLayoutConstraint.activate([
+            gradientView.topAnchor.constraint(equalTo: view.topAnchor),
+            gradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            gradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        gradientView.frame = view.frame
         
         // 设置搜索框背景为透明
         searchBar.backgroundImage = UIImage() // 使用空白的 UIImage
@@ -199,6 +211,16 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
          
         
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: { context in
+            // 在动画过渡期间更新视图大小
+            self.gradientView.frame = CGRect(origin: .zero, size: size)
+        }, completion: nil)
+    }
+
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         // 输入开始时停止定时器
