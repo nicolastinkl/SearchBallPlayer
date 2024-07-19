@@ -189,6 +189,9 @@ public class SwiftWebVC: UIViewController{
         loadRequest(request)
         configureNavigationBar()
         SwiftLoader.show(view: self.view,title: "正在加载中...", animated: true)
+        
+         
+        
     }
     
     
@@ -382,7 +385,7 @@ extension SwiftWebVC: WKNavigationDelegate  {
     func showVideoPopupView(with url: URL?) {
         // 创建半透明遮罩视图
         let overlayView = UIView()
-        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         view.addSubview(overlayView)
         
         overlayView.translatesAutoresizingMaskIntoConstraints = false
@@ -416,9 +419,9 @@ extension SwiftWebVC: WKNavigationDelegate  {
         popupView.translatesAutoresizingMaskIntoConstraints = false
         overlayView.addSubview(popupView)
         NSLayoutConstraint.activate([
-            popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 6),
-            popupView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -6),
-            popupView.bottomAnchor.constraint(equalTo: overlayView.safeAreaLayoutGuide.bottomAnchor, constant: -6),
+            popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 0),
+            popupView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: 0),
+            popupView.bottomAnchor.constraint(equalTo: overlayView.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             popupView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
@@ -428,6 +431,24 @@ extension SwiftWebVC: WKNavigationDelegate  {
                 popupView.configData(title: s, durationLabel:  "" )
             }
         })
+        
+        // // 使用示例
+//        if let u = url{
+//            VideoUnities().fetchVideoInfo(from: u.absoluteString) { duration, resolution in
+//                if let duration = duration {
+//                    print("视频时长: \(duration)秒")
+//                } else {
+//                    print("无法获取视频时长")
+//                }
+//                
+//                if let resolution = resolution {
+//                    print("视频分辨率: \(resolution)")
+//                } else {
+//                    print("无法获取视频分辨率")
+//                }
+//            }
+//        }
+//        
         
         // 保存视图到属性中
         self.videoPopupView = popupView
@@ -443,7 +464,7 @@ extension SwiftWebVC: WKNavigationDelegate  {
         
     }
     
-    @objc private func hideVideoPopupView() {
+    @objc public func hideVideoPopupView() {
         overlayView?.removeFromSuperview()
         videoPopupView?.removeFromSuperview()
         overlayView = nil
@@ -601,6 +622,7 @@ class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
             
             if  let urlstring = request.urlRequest?.url?.absoluteString {
                   if urlstring.contains(".m3u8") {
+                      await self?.ViewController?.hideVideoPopupView()
                       await self?.ViewController?.showVideoPopupView(with: request.urlRequest?.url)
                       // 处理视频 URL（如弹出播放界面或其他操作）
                   }

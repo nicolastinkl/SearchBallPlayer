@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12CA1C132C4A97E000D2154F /* VideoUnities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CA1C122C4A97E000D2154F /* VideoUnities.swift */; };
 		12CADDA72C3E2F540032635B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 12CADDA62C3E2F540032635B /* Alamofire */; };
 		12CADDAC2C3E31FB0032635B /* Utitils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CADDAB2C3E31FB0032635B /* Utitils.swift */; };
 		12CADDAE2C3E398E0032635B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CADDAD2C3E398E0032635B /* MainViewController.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		12CA1C122C4A97E000D2154F /* VideoUnities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUnities.swift; sourceTree = "<group>"; };
 		12CADDAB2C3E31FB0032635B /* Utitils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utitils.swift; sourceTree = "<group>"; };
 		12CADDAD2C3E398E0032635B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1B1A822C0F5F20385FB91E10 /* Pods-SDKVideoPlayer-SDKVideoPlayerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayer-SDKVideoPlayerUITests.debug.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayer-SDKVideoPlayerUITests/Pods-SDKVideoPlayer-SDKVideoPlayerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */,
 				C0AD2B1D2C47BCCE0091A508 /* BrowseViewController.swift */,
 				C0EEFC272C4A46C500AAFFD0 /* VideoPopupView.swift */,
+				12CA1C122C4A97E000D2154F /* VideoUnities.swift */,
 				C0EEFC2E2C4A592100AAFFD0 /* Objc.h */,
 				C0EEFC2F2C4A592100AAFFD0 /* Objc.m */,
 				C0EEFC292C4A55A800AAFFD0 /* MethodSwizzing.swift */,
@@ -602,6 +605,7 @@
 				12CADDAE2C3E398E0032635B /* MainViewController.swift in Sources */,
 				12CADDAC2C3E31FB0032635B /* Utitils.swift in Sources */,
 				C09C704D2C3D4AE5000F6E01 /* HomeViewController.swift in Sources */,
+				12CA1C132C4A97E000D2154F /* VideoUnities.swift in Sources */,
 				C0AD2AEB2C44F5260091A508 /* SwiftWebVCActivity.swift in Sources */,
 				C0AD2AFE2C4650400091A508 /* IconGradientView.swift in Sources */,
 				C00A3A002C4136BC004E31E4 /* MoreVideosViewController.swift in Sources */,
