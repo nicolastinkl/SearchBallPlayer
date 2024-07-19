@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ViewController: UIViewController {
+class ViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     

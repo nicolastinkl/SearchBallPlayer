@@ -61,7 +61,7 @@ struct VideoSearchResponse: Codable {
 
 
 // Home Search viewconoller
-class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
   
     

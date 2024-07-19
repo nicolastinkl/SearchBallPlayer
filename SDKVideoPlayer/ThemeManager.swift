@@ -21,6 +21,13 @@ class ThemeManager {
     
     // 根据用户界面样式返回不同的字体颜色
     var fontColor: UIColor {
+        
+//        if UserDefaults.standard.bool(forKey: "isDarkMode") {
+//            return UIColor.white
+//        }else{
+//            return UIColor.black
+//        }
+        
         switch currentUserInterfaceStyle {
         case .dark:
             return UIColor.white
@@ -32,6 +39,14 @@ class ThemeManager {
     }
     
     var fontColor2: UIColor {
+        
+//        if UserDefaults.standard.bool(forKey: "isDarkMode") {
+//            return UIColor.white
+//        }else{
+//            return UIColor.black.withAlphaComponent(0.5)
+//        }
+//        
+        
         switch currentUserInterfaceStyle {
         case .dark:
             return UIColor.white
@@ -45,6 +60,14 @@ class ThemeManager {
     
     // 根据用户界面样式返回不同的视图背景颜色
     var viewBackgroundColor: UIColor {
+        
+//        if UserDefaults.standard.bool(forKey: "isDarkMode") {
+//            return UIColor.black
+//        }else{
+//            return UIColor.white
+//        }
+        
+        
         switch currentUserInterfaceStyle {
         case .dark:
             return UIColor.black

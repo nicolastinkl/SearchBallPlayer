@@ -53,7 +53,9 @@ extension UIViewController{
 
 extension Notification.Name {
     static let historyItemsUpdated = Notification.Name("RecentlyWatchVideoItemsUpdated")
+    static let themeChanged = Notification.Name("themeChanged")
 }
+ 
 
 
 class LocalStore{
@@ -180,6 +182,8 @@ private var errorViewKey: UInt8 = 11
 private var isShowingErrorViewKey: UInt8 = 12
 
 extension UIViewController {
+    
+    
     
     private var privateClickBlock: (() -> Void)? {
          get {

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 //BrowseViewController
-class BrowseViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BrowseViewController : BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     public var requestType : Int = 0
     

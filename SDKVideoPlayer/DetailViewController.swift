@@ -14,7 +14,7 @@ protocol DetailProtocol: UIViewController {
     var resource: KSPlayerResource? { get set }
 }
 
-class DetailViewController: UIViewController, DetailProtocol {
+class DetailViewController: BaseViewController, DetailProtocol {
     #if os(iOS)
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent

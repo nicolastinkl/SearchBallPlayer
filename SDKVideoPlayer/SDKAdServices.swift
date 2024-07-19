@@ -57,6 +57,10 @@ class SDKAdServices{
                        do {
                           let result = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
                            print("Search Ads attribution info:", result)
+                           /*
+                            ["adId": 1234567890, "campaignId": 1234567890, "orgId": 1234567890, "adGroupId": 1234567890, "conversionType": Download, "countryOrRegion": US, "keywordId": 12323222, "attribution": 1, "clickDate": 2024-07-19T07:11Z]
+                           Code: 1
+                            */
                            if let campaignId = result["campaignId"] as? Int {
                            // Only send data to Amplitude if it is not mock data, in which case the campaign id would be the integer below
                                if campaignId != 1234567890 {

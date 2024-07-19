@@ -15,7 +15,7 @@ import SDWebImage
 import SwiftIcons
 
 
-class SearcViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SearcViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
    
  
     

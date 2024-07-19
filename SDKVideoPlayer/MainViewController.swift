@@ -326,7 +326,7 @@ class HeaderView: UICollectionReusableView {
 }
 
 // Main viewconoller
-class MainViewController: UIViewController,  UICollectionViewDelegate, UICollectionViewDataSource {
+class MainViewController: BaseViewController,  UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     @IBOutlet weak var collectionView: UICollectionView!

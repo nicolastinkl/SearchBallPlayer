@@ -20,7 +20,7 @@ import KSPlayer
 
 
 
-class SDKWBViewController: UIViewController { 
+class SDKWBViewController: BaseViewController { 
     
     
     override func viewDidLoad() {

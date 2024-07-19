@@ -13,7 +13,31 @@ public protocol SwiftWebVCDelegate: class {
     func didFinishLoading(success: Bool)
 }
 
-public class SwiftWebVC: UIViewController {
+public class SwiftWebVC: UIViewController{
+    
+    
+     private struct AssociatedKeys {
+         static var videoPopupView = "videoPopupView"
+         static var overlayView = "overlayView"
+     }
+     
+     private var videoPopupView: VideoPopupView? {
+         get {
+             return objc_getAssociatedObject(self, &AssociatedKeys.videoPopupView) as? VideoPopupView
+         }
+         set {
+             objc_setAssociatedObject(self, &AssociatedKeys.videoPopupView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+         }
+     }
+     
+     private var overlayView: UIView? {
+         get {
+             return objc_getAssociatedObject(self, &AssociatedKeys.overlayView) as? UIView
+         }
+         set {
+             objc_setAssociatedObject(self, &AssociatedKeys.overlayView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+         }
+     }
     
     public weak var delegate: SwiftWebVCDelegate?
     var storedStatusColor: UIBarStyle?
@@ -65,16 +89,23 @@ public class SwiftWebVC: UIViewController {
         return tempActionBarButtonItem
     }()
     
+//    
+//    lazy var webView: WKWebView = {
+//        
+//        
+//        let webConfiguration = WKWebViewConfiguration()
+////        webConfiguration.setURLSchemeHandler(self, forURLScheme: "https")
+//        
+//        var tempWebView = WKWebView(frame: UIScreen.main.bounds,configuration: webConfiguration)
+//        tempWebView.uiDelegate = self
+//        tempWebView.navigationDelegate = self
+//        tempWebView.backgroundColor =  ThemeManager.shared.viewBackgroundColor
+//        
+//        
+//        return tempWebView;
+//    }()
     
-    lazy var webView: WKWebView = {
-        var tempWebView = WKWebView(frame: UIScreen.main.bounds)
-        tempWebView.uiDelegate = self
-        tempWebView.navigationDelegate = self
-        tempWebView.backgroundColor =  ThemeManager.shared.viewBackgroundColor
-        
-        return tempWebView;
-    }()
-    
+    var webView: WKWebView!
     var request: URLRequest!
     
     var navBarTitle: UILabel!
@@ -116,17 +147,46 @@ public class SwiftWebVC: UIViewController {
     ////////////////////////////////////////////////
     // View Lifecycle
     
-    override public func loadView() {
-        view = webView
-        loadRequest(request)
-    }
+//    override public func loadView() {
+//        view = webView
+//        loadRequest(request)
+//    }
+    
+  
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor =  ThemeManager.shared.viewBackgroundColor
         
-        configureNavigationBar()
         
+        let webConfiguration = WKWebViewConfiguration()
+        
+        // Create a CustomURLSchemeHandler and set it
+        let schemeHandler = CustomURLSchemeHandler()
+        schemeHandler.ViewController = self
+        webConfiguration.setURLSchemeHandler(schemeHandler, forURLScheme: "https")
+        
+//        webConfiguration.setURLSchemeHandler(schemeHandler, forURLScheme:  "customscheme")
+        // Create a WKUserContentController
+        webView = WKWebView(frame: UIScreen.main.bounds,configuration: webConfiguration)
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        webView.backgroundColor =  ThemeManager.shared.viewBackgroundColor
+        
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(webView)
+       
+        NSLayoutConstraint.activate([
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            
+        ])
+        loadRequest(request)
+        configureNavigationBar()
+        SwiftLoader.show(view: self.view,title: "正在加载中...", animated: true)
     }
     
     
@@ -144,42 +204,7 @@ public class SwiftWebVC: UIViewController {
   }
     
     
-    func injectDarkModeJavaScript() {
-          // Check system dark mode setting
-          let isDarkMode = traitCollection.userInterfaceStyle == .dark
-          
-          // JavaScript to enable dark mode
-          let darkModeScript = """
-          document.documentElement.style.backgroundColor = 'black';
-          document.documentElement.style.color = 'white';
-          """
-          
-          // JavaScript to disable dark mode
-          let lightModeScript = """
-          document.documentElement.style.backgroundColor = 'white';
-          document.documentElement.style.color = 'black';
-          """
-        
-          
-          // Select appropriate script based on system setting
-          let script = isDarkMode ? darkModeScript : lightModeScript
-          
-          // Inject JavaScript into WKWebView
-          webView.evaluateJavaScript(script, completionHandler: { result, error in
-              if let error = error {
-                  print("Error injecting JavaScript: \(error.localizedDescription)")
-              }
-          })
-      }
-    
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//           super.traitCollectionDidChange(previousTraitCollection)
-//           
-//           // Re-inject JavaScript when the system appearance changes
-//           if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-//               injectDarkModeJavaScript()
-//           }
-//       }
+   
     
     override public func viewWillAppear(_ animated: Bool) {
         assert(self.navigationController != nil, "SVWebViewController needs to be contained in a UINavigationController. If you are presenting SVWebViewController modally, use SVModalWebViewController instead.")
@@ -348,18 +373,82 @@ extension SwiftWebVC: WKUIDelegate {
     
 }
 
-extension SwiftWebVC: WKNavigationDelegate {
+extension SwiftWebVC: WKNavigationDelegate  {
+     
+    
+    func showVideoPopupView(with url: URL?) {
+        // 创建半透明遮罩视图
+        let overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.addSubview(overlayView)
+        
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            overlayView.topAnchor.constraint(equalTo: view.topAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideVideoPopupView))
+        overlayView.addGestureRecognizer(tapGesture)
+        
+        // 创建并配置弹出视图
+        let popupView = VideoPopupView()
+        popupView.titleLabel.text = "Video Title" // Customize the title
+        popupView.durationLabel.text = "Duration: 00:00" // Fetch and set the actual duration
+        popupView.playAction = { [weak self] in
+            if let url = url {
+                self?.playVideo(with: url)
+            }
+            
+        }
+        
+        overlayView.addSubview(popupView)
+        
+        popupView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 16),
+            popupView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -16),
+            popupView.bottomAnchor.constraint(equalTo: overlayView.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        ])
+        
+        // 保存视图到属性中
+        self.videoPopupView = popupView
+        self.overlayView = overlayView
+    }
+    
+    @objc private func hideVideoPopupView() {
+        overlayView?.removeFromSuperview()
+        videoPopupView?.removeFromSuperview()
+        overlayView = nil
+        videoPopupView = nil
+    }
+    
+    private func playVideo(with url: URL) {
+        // Implement video playback logic here
+        print("Playing video from URL: \(url.absoluteString)")
+        hideVideoPopupView()
+    }
     
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.delegate?.didStartLoading()
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         updateToolbarItems()
-        if !webView.canGoBack {
-            SwiftLoader.show(view: self.view,title: "正在加载中...", animated: true)
-        }
         
     }
     
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+          if let url = navigationAction.request.url {
+              print("decidePolicyFor \( url.absoluteString)")
+//              if url.absoluteString.contains(".m3u8") {
+//                  print("decidePolicyFor video URL: \(url.absoluteString)")
+//                  self.showVideoPopupView(with: url)
+//                  // 处理视频 URL（如弹出播放界面或其他操作）
+//              }
+          }
+          decisionHandler(.allow)
+      }
     
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -374,7 +463,10 @@ extension SwiftWebVC: WKNavigationDelegate {
             }
             self.updateToolbarItems()
         })
+        
          SwiftLoader.hide()
+        
+        self.showVideoPopupView(with: URL(string: "https://super.ffzy-online6.com/20240626/33711_6bf52cc1/2000k/hls/mixed.m3u8"))
         
     }
     
@@ -389,4 +481,163 @@ extension SwiftWebVC: WKNavigationDelegate {
 //        }
     }
      
+}
+
+
+
+    
+    /*
+    func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
+        if let url = urlSchemeTask.request.url{
+            // 打印请求的 URL
+            print(">>>>>> \(url)")
+            
+            urlSchemeTask.request
+            // 模拟响应，或者通过实际网络请求获取数据
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    let mimeType = response?.mimeType ?? "application/octet-stream"
+                    let response = HTTPURLResponse(url: url, mimeType: mimeType, expectedContentLength: data.count, textEncodingName: nil)
+                    urlSchemeTask.didReceive(response)
+                    urlSchemeTask.didReceive(data)
+                    urlSchemeTask.didFinish()
+                    print(response.statusCode )
+                    if (response.statusCode == 302) {
+                        // 假设 resp 是 HTTPURLResponse 类型，urlSchemeTask 是 WKURLSchemeTask 类型
+                        if let location = response.allHeaderFields["Location"] as? String {
+                            let rspDataString = "<script>location = '\(location)';</script>"
+                            print(rspDataString)
+//                            if let rspData = rspDataString.data(using: .utf8) {
+//                                var headers = response.allHeaderFields as? [String: String] ?? [:]
+//                                headers["Content-Type"] = "text/html; charset=utf-8"
+//                                headers["Content-Length"] = "\(rspData.count)"
+//                                
+//                                if let url = response.url {
+//                                    if let newResp = HTTPURLResponse(url: url,
+//                                                                  statusCode: response.statusCode,
+//                                                                  httpVersion: "HTTP/1.1",
+//                                                                     headerFields: headers) {
+//                                        
+//                                        urlSchemeTask.didReceive(newResp)
+//                                    }
+//                                    
+//                                    urlSchemeTask.didReceive(rspData)
+//                                    urlSchemeTask.didFinish()
+//                                }
+//                            }
+                        }
+ 
+
+                    }
+                    
+                } else if let error = error {
+                    urlSchemeTask.didFailWithError(error)
+                }
+            }
+            task.resume()
+        }
+       
+        
+       
+    }
+    
+    func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
+        // Handle stopping of the task if needed
+        
+    }*/
+    
+class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
+    
+    public var ViewController:SwiftWebVC?
+    
+    private var pendingTasks = [ObjectIdentifier: TaskItem]()
+    
+        
+    func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
+        guard let task = pendingTasks.removeValue(forKey: urlSchemeTask.id) else { return }
+        print("Stopping task \(urlSchemeTask)")
+        task.stop()
+    }
+    
+    func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
+        let task = Task { [weak self] in
+            let request = urlSchemeTask.request
+            print(">>>>>> \(request.urlRequest?.url?.absoluteString ?? ""  )")
+            
+            if  let urlstring = request.urlRequest?.url?.absoluteString {
+                  if urlstring.contains(".m3u8") {
+                      await self?.ViewController?.showVideoPopupView(with: request.urlRequest?.url)
+                      // 处理视频 URL（如弹出播放界面或其他操作）
+                  }
+            }
+            // Do some mutation on the request
+            
+            do {
+                try Task.checkCancellation()
+                
+                 // Conditionally get a URLSession
+                let session: URLSession =  URLSession.shared
+                
+                // Fire off the request
+                let (data, response) = try await session.data(for: request)
+                
+                await Task.yield()
+                try Task.checkCancellation()
+
+                // Report back to the scheme task
+                // Either of these !! may crash in this implementation
+                urlSchemeTask.didReceive(response) // !!
+                urlSchemeTask.didReceive(data) // !!
+                urlSchemeTask.didFinish() // !!
+                
+            } catch is CancellationError {
+                // Do not call didFailWithError, didFinish, or didReceive in this case
+                print("Task for WKURLSchemeTask \(urlSchemeTask) has been cancelled")
+            } catch {
+                if !Task.isCancelled {
+                    // !! This can crash, too
+                    urlSchemeTask.didFailWithError(error)
+                }
+            }
+            print("\(self?.pendingTasks.count)")
+            do {
+                
+                //self?.pendingTasks.removeValue(forKey: urlSchemeTask.id)
+            }
+            catch {
+                print("pendingTasks.removeValue\(urlSchemeTask.id)  crash")
+            }
+        }
+        
+        pendingTasks[urlSchemeTask.id] = .init(urlSchemeTask: urlSchemeTask, task: task)
+    }
+
+}
+
+
+private extension WKURLSchemeTask {
+    var id: ObjectIdentifier {
+        ObjectIdentifier(self)
+    }
+}
+
+private struct TaskItem {
+    enum Error: Swift.Error {
+        case manualCancellation
+    }
+    
+    let urlSchemeTask: WKURLSchemeTask
+    let task: Task<Void, Never>
+    
+    /// Should be called when urlSchemeTask has been stopped by the system
+    /// Calling anything on the urlSchemeTask afterwards would result in an exception
+    func stop() {
+        task.cancel()
+    }
+    
+    /// Should be called when the urlSchemeTask should be stopped manually
+    func cancel() {
+        task.cancel()
+        urlSchemeTask.didFailWithError(Error.manualCancellation)
+    }
 }

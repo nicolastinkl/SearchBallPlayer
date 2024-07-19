@@ -53,6 +53,9 @@
 		C0AD2B1C2C47B79C0091A508 /* ApplicationS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2B1B2C47B79C0091A508 /* ApplicationS.swift */; };
 		C0AD2B1E2C47BCCE0091A508 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2B1D2C47BCCE0091A508 /* BrowseViewController.swift */; };
 		C0EEFC222C4917A000AAFFD0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0EEFC242C4917A000AAFFD0 /* InfoPlist.strings */; };
+		C0EEFC282C4A46C500AAFFD0 /* VideoPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EEFC272C4A46C500AAFFD0 /* VideoPopupView.swift */; };
+		C0EEFC2A2C4A55A800AAFFD0 /* MethodSwizzing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EEFC292C4A55A800AAFFD0 /* MethodSwizzing.swift */; };
+		C0EEFC302C4A592100AAFFD0 /* Objc.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EEFC2F2C4A592100AAFFD0 /* Objc.m */; };
 		EFA861AE282C041E5293EAD0 /* Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC56020215A4BE85F66C5AA /* Pods_SDKVideoPlayer_SDKVideoPlayerUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +148,11 @@
 		C0EEFC232C4917A000AAFFD0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C0EEFC252C4917A100AAFFD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C0EEFC262C4917A200AAFFD0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C0EEFC272C4A46C500AAFFD0 /* VideoPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPopupView.swift; sourceTree = "<group>"; };
+		C0EEFC292C4A55A800AAFFD0 /* MethodSwizzing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodSwizzing.swift; sourceTree = "<group>"; };
+		C0EEFC2D2C4A592000AAFFD0 /* SDKVideoPlayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDKVideoPlayer-Bridging-Header.h"; sourceTree = "<group>"; };
+		C0EEFC2E2C4A592100AAFFD0 /* Objc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Objc.h; sourceTree = "<group>"; };
+		C0EEFC2F2C4A592100AAFFD0 /* Objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Objc.m; sourceTree = "<group>"; };
 		C233142CF27D3A70C5907986 /* Pods-SDKVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayer.debug.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayer/Pods-SDKVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		D2D96159D4A16121035BB634 /* Pods-SDKVideoPlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKVideoPlayerTests.release.xcconfig"; path = "Target Support Files/Pods-SDKVideoPlayerTests/Pods-SDKVideoPlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -256,6 +264,10 @@
 				C0AD2B1B2C47B79C0091A508 /* ApplicationS.swift */,
 				C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */,
 				C0AD2B1D2C47BCCE0091A508 /* BrowseViewController.swift */,
+				C0EEFC272C4A46C500AAFFD0 /* VideoPopupView.swift */,
+				C0EEFC2E2C4A592100AAFFD0 /* Objc.h */,
+				C0EEFC2F2C4A592100AAFFD0 /* Objc.m */,
+				C0EEFC292C4A55A800AAFFD0 /* MethodSwizzing.swift */,
 				C0AD2AF02C44F8A70091A508 /* SettingsHomeViewController.swift */,
 				C0AD2AF22C45118C0091A508 /* SwiftLoader */,
 				C0AD2AE22C44F5260091A508 /* SwiftWebVC */,
@@ -268,6 +280,7 @@
 				C09C70272C3D4642000F6E01 /* Info.plist */,
 				C0EEFC242C4917A000AAFFD0 /* InfoPlist.strings */,
 				C09C701E2C3D4641000F6E01 /* SDKVideoPlayer.xcdatamodeld */,
+				C0EEFC2D2C4A592000AAFFD0 /* SDKVideoPlayer-Bridging-Header.h */,
 			);
 			path = SDKVideoPlayer;
 			sourceTree = "<group>";
@@ -399,6 +412,7 @@
 				TargetAttributes = {
 					C09C70112C3D4641000F6E01 = {
 						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1520;
 					};
 					C09C702B2C3D4642000F6E01 = {
 						CreatedOnToolsVersion = 15.2;
@@ -578,10 +592,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0AD2AF62C4527C10091A508 /* GradientView.swift in Sources */,
+				C0EEFC2A2C4A55A800AAFFD0 /* MethodSwizzing.swift in Sources */,
 				C0AD2AF42C45118C0091A508 /* SwiftLoader.swift in Sources */,
 				C0AD2AEA2C44F5260091A508 /* SwiftWebVCActivityChrome.swift in Sources */,
 				C0AD2B182C47AEC90091A508 /* BaseViewController.swift in Sources */,
 				C0AD2B1C2C47B79C0091A508 /* ApplicationS.swift in Sources */,
+				C0EEFC302C4A592100AAFFD0 /* Objc.m in Sources */,
 				C0AD2AED2C44F5260091A508 /* SwiftModalWebVC.swift in Sources */,
 				12CADDAE2C3E398E0032635B /* MainViewController.swift in Sources */,
 				12CADDAC2C3E31FB0032635B /* Utitils.swift in Sources */,
@@ -593,6 +609,7 @@
 				C00A39FC2C3FEB39004E31E4 /* MovieDetailViewController.swift in Sources */,
 				C0AD2B1E2C47BCCE0091A508 /* BrowseViewController.swift in Sources */,
 				C0AD2AEE2C44F5260091A508 /* SwiftWebVCActivitySafari.swift in Sources */,
+				C0EEFC282C4A46C500AAFFD0 /* VideoPopupView.swift in Sources */,
 				C0AD2AF12C44F8A70091A508 /* SettingsHomeViewController.swift in Sources */,
 				C050488C2C48F0B800E4DEDB /* SDKAdServices.swift in Sources */,
 				C09C70202C3D4641000F6E01 /* SDKVideoPlayer.xcdatamodeld in Sources */,
@@ -799,6 +816,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SDKVideoPlayer/SDKVideoPlayer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -827,6 +845,8 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SDKVideoPlayer/SDKVideoPlayer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -838,6 +858,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SDKVideoPlayer/SDKVideoPlayer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -866,6 +887,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SDKVideoPlayer/SDKVideoPlayer-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

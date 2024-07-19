@@ -17,6 +17,9 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     var vc:UIViewController?
     let historyLabel = UILabel()
     
+    
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -184,10 +187,17 @@ class CustomTableViewCell: UITableViewCell {
     
 }
 
-class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsHomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     let tableView = UITableView()
 
+    private let themeSwitch: UISwitch = {
+           let themeSwitch = UISwitch()
+           themeSwitch.translatesAutoresizingMaskIntoConstraints = false
+           themeSwitch.isOn = UserDefaults.standard.bool(forKey: "isDarkMode")
+           return themeSwitch
+       }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -254,7 +264,7 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
 //        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
              
-        tableView.separatorStyle = .none // 隐藏每行cell的横线
+//        tableView.separatorStyle = .none // 隐藏每行cell的横线
         tableView.frame = view.bounds
         view.addSubview(tableView)
         
@@ -284,6 +294,20 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
         startButton.layer.borderColor = UIColor.MainColor().cgColor
         
         startButton.addTarget(self, action: #selector(ButtonhdplayurlTapped(_:)), for: .touchUpInside)
+        
+        
+        // Add the switch to the view
+//        headView.addSubview(themeSwitch)
+//              
+//          // Setup Auto Layout constraints for the switch
+//          NSLayoutConstraint.activate([
+//              themeSwitch.trailingAnchor.constraint(equalTo: headView.trailingAnchor,constant: -10),
+//              themeSwitch.centerYAnchor.constraint(equalTo: headView.centerYAnchor)
+//          ])
+//        // Add target action for the switch
+//           themeSwitch.addTarget(self, action: #selector(themeSwitchChanged(_:)), for: .valueChanged)
+      
+        
         // 设置约束
         NSLayoutConstraint.activate([
             customTextLabel.leadingAnchor.constraint(equalTo: headView.leadingAnchor, constant: 16),
@@ -298,13 +322,16 @@ class SettingsHomeViewController: UIViewController, UITableViewDelegate, UITable
             startButton.heightAnchor.constraint(equalToConstant: 44),
             
             
-            
         ])
          
         
         tableView.tableHeaderView = headView
     }
-    
+    @objc private func themeSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "isDarkMode")
+        NotificationCenter.default.post(name: .themeChanged, object: nil)
+    }
+     
     @objc private func ButtonhdplayurlTapped(_ button:UIButton){
         UIApplication.shared.open( URL(string: "https://apps.apple.com/us/app/mystictreasureslegends/id652341")!,options: [:]) { complate in
             

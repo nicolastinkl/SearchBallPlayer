@@ -14,7 +14,7 @@ import SwiftfulLoadingIndicators
 //import SwiftLoader
 import KSPlayer
 
-class MovieDetailViewController: UIViewController {
+class MovieDetailViewController: BaseViewController {
     
     var movieDetail: Video?
     
@@ -96,12 +96,10 @@ class MovieDetailViewController: UIViewController {
         
         // 使用提供的JSON数据填充界面
         guard let movieDetail = movieDetail else { return }
-        loadMovieDetail(movieDetail)
-        
+        loadMovieDetail(movieDetail)        
         
         //generation back button
-        setupNavigationBar()
-          
+        //setupNavigationBar()
     }
     
     

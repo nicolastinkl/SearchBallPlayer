@@ -18,7 +18,7 @@ import SwiftfulLoadingIndicators
 //import SwiftLoader
 import KSPlayer
 
-class MoreVideosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
    
     public var requestType : Int = 0
     
