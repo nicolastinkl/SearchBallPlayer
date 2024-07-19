@@ -299,6 +299,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     
     @objc func openSearchTarget(_ sender: UIButton){
         
+        self.searchBar.endEditing(true)
         if let text =  searchBar.text as? NSString {
             let newText = text as String
             
@@ -321,7 +322,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                 var isNotSearchlist:Bool = true
                 if let searchlist = searchlist, !searchlist.isEmpty {
                     searchlist.forEach { model in
-                        if model.keyword == newText {
+                        if model.keyword == newText && model.url.count > 10 {
                             let controller = SwiftWebVC(urlString:  model.url )
                             self.show(controller, sender: self)
                             isNotSearchlist = false
@@ -335,9 +336,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
                 
             }
         }
-        
-        
-        
+         
     }
     
     func searchRequest(searchText: String) {
