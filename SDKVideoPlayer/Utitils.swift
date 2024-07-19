@@ -118,8 +118,8 @@ class LocalStore{
 
 extension UIColor {
     static func MainColor() -> UIColor{
-        return UIColor.systemPurple
-//     return UIColor(fromHex: "#9c45ac")
+//        return UIColor.systemPurple
+     return UIColor(fromHex: "#0191e8")
     }
         
         /// Initialises UIColor from a hexadecimal string. Color is clear if string is invalid.

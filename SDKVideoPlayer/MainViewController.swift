@@ -526,14 +526,17 @@ class MainViewController: UIViewController,  UICollectionViewDelegate, UICollect
           let category = videoCategorys[indexPath.section]
           headerView.configure(with: category.categoryName)
           headerView.moreButton.addTarget(self, action: #selector(MoreButtonTapped(_:)), for: .touchUpInside)
-          headerView.moreButton.tag = category.videoListChild.first?.typeID ?? 0
+          headerView.moreButton.tag = indexPath.section// category.videoListChild.first?.typeID ?? 0
           return headerView
       }
     
     @objc private func MoreButtonTapped(_ button:UIButton){
 
         let controller = MoreVideosViewController()
-        controller.requestType = button.tag        
+        let category = videoCategorys[button.tag]
+        controller.requestType = category.videoListChild.first?.typeID ?? 0
+        
+        controller.titleString = category.categoryName
         self.show(controller, sender: self)
     }
     

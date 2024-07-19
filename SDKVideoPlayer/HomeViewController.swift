@@ -141,9 +141,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         labelSearchBar.clipsToBounds = true
         
         searchButton.addTarget(self, action: #selector(self.openSearchTarget(_:)), for: UIControl.Event.touchUpInside)
-        
-        
-        
+        searchButton.backgroundColor = UIColor.MainColor()
         
         // 设置搜索框背景颜色为白色
         //        searchBar.barTintColor = .white
@@ -209,6 +207,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         // 创建 UISearchBar
         searchBar.delegate = self
          
+        if #available(iOS 15, *) {
+            
+        }
+        
+        configureNavigationBar()
         
     }
     
@@ -266,36 +269,33 @@ class HomeViewController: UIViewController, UISearchBarDelegate, UICollectionVie
         
     }
     
+     
+
+  override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      // 确保在视图将要出现时隐藏导航栏
+      navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      // 确保在视图将要消失时显示导航栏
+      navigationController?.setNavigationBarHidden(false, animated: animated)
+  }
+  
     
-//
-//        configureNavigationBar()
-//                
-//    }
-//  
-//  override func viewWillAppear(_ animated: Bool) {
-//      super.viewWillAppear(animated)
-//      // 确保在视图将要出现时隐藏导航栏
-//      navigationController?.setNavigationBarHidden(true, animated: animated)
-//  }
-//
-//  override func viewWillDisappear(_ animated: Bool) {
-//      super.viewWillDisappear(animated)
-//      // 确保在视图将要消失时显示导航栏
-//      navigationController?.setNavigationBarHidden(false, animated: animated)
-//  }
-//  
-//  private func configureNavigationBar() {
-//      if #available(iOS 13.0, *) {
-//          // iOS 13 及以上版本使用 UINavigationBarAppearance
-//          let appearance = UINavigationBarAppearance()
-//          appearance.configureWithTransparentBackground()
-//          appearance.backgroundColor = .clear
-//          appearance.shadowColor = .clear
-//
-//          navigationController?.navigationBar.standardAppearance = appearance
-//          navigationController?.navigationBar.scrollEdgeAppearance = appearance
-//      }
-//  }
+  private func configureNavigationBar() {
+      if #available(iOS 13.0, *) {
+          // iOS 13 及以上版本使用 UINavigationBarAppearance
+          let appearance = UINavigationBarAppearance()
+          appearance.configureWithTransparentBackground()
+          appearance.backgroundColor = .clear
+          appearance.shadowColor = .clear
+
+          navigationController?.navigationBar.standardAppearance = appearance
+          navigationController?.navigationBar.scrollEdgeAppearance = appearance
+      }
+  }
     
     @objc func openSearchTarget(_ sender: UIButton){
         

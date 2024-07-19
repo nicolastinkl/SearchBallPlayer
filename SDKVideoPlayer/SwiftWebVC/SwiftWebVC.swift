@@ -342,8 +342,13 @@ extension SwiftWebVC: WKNavigationDelegate {
         self.delegate?.didStartLoading()
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         updateToolbarItems()
-       // SwiftLoader.show(view: self.view,title: "正在加载中...", animated: true)
+        if !webView.canGoBack {
+            SwiftLoader.show(view: self.view,title: "正在加载中...", animated: true)
+        }
+        
     }
+    
+    
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.delegate?.didFinishLoading(success: true)
@@ -357,7 +362,7 @@ extension SwiftWebVC: WKNavigationDelegate {
             }
             self.updateToolbarItems()
         })
-        //SwiftLoader.hide()
+         SwiftLoader.hide()
         
     }
     
@@ -365,7 +370,7 @@ extension SwiftWebVC: WKNavigationDelegate {
         self.delegate?.didFinishLoading(success: false)
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
 //        updateToolbarItems()
-        //SwiftLoader.hide()
+        SwiftLoader.hide()
         
 //        self.showNetworkErrorView(errormsg: "\(error.localizedDescription)") {
 //            webView.reload()

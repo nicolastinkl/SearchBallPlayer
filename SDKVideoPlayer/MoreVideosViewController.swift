@@ -36,6 +36,9 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
     var limit = 0
     var pagecount = 0
     
+    var titleString: String  = ""
+    
+    
     
     private let  footView =  LoadingFooterView(reuseIdentifier: LoadingFooterView.reuseIdentifier)
     
@@ -43,11 +46,13 @@ class MoreVideosViewController: UIViewController, UITableViewDataSource, UITable
        
        super.viewDidLoad()
        view.backgroundColor = ThemeManager.shared.viewBackgroundColor
-       if requestType == 64 {
-           self.title =  "热门短剧"
-       }else if requestType == 65 {
-           self.title =  "热门解说"
-       }
+       
+//       if requestType == 64 {
+//           self.title =  "热门短剧"
+//       }else if requestType == 65 {
+//           self.title =  "热门解说"
+//       }
+       self.title = titleString
        
        setupTableView()
        
