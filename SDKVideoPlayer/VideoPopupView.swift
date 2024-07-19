@@ -42,9 +42,9 @@ class VideoPopupView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = ThemeManager.shared.viewBackgroundColor
         layer.cornerRadius = 12
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = ThemeManager.shared.viewBackgroundColor.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowOffset = CGSize(width: 0, height: -2)
         

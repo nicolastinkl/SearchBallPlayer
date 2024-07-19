@@ -422,7 +422,13 @@ extension SwiftWebVC: WKNavigationDelegate  {
             popupView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
-        popupView.configData(title: "asdfasf ", durationLabel:  "Duration: 00:00" )
+        webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
+            if let s = response as? String {
+                
+                popupView.configData(title: s, durationLabel:  "" )
+            }
+        })
+        
         // 保存视图到属性中
         self.videoPopupView = popupView
         self.overlayView = overlayView
@@ -495,7 +501,7 @@ extension SwiftWebVC: WKNavigationDelegate  {
         
          SwiftLoader.hide()
         
-        self.showVideoPopupView(with: URL(string: "https://super.ffzy-online6.com/20240626/33711_6bf52cc1/2000k/hls/mixed.m3u8"))
+       // self.showVideoPopupView(with: URL(string: "https://super.ffzy-online6.com/20240626/33711_6bf52cc1/2000k/hls/mixed.m3u8"))
         
     }
     
@@ -628,14 +634,14 @@ class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
                     urlSchemeTask.didFailWithError(error)
                 }
             }
-            print("\(self?.pendingTasks.count)")
-            do {
-                
-                //self?.pendingTasks.removeValue(forKey: urlSchemeTask.id)
-            }
-            catch {
-                print("pendingTasks.removeValue\(urlSchemeTask.id)  crash")
-            }
+//            print("\(self?.pendingTasks.count)")
+//            do {
+//                
+//                //self?.pendingTasks.removeValue(forKey: urlSchemeTask.id)
+//            }
+//            catch {
+//                print("pendingTasks.removeValue\(urlSchemeTask.id)  crash")
+//            }
         }
         
         pendingTasks[urlSchemeTask.id] = .init(urlSchemeTask: urlSchemeTask, task: task)
