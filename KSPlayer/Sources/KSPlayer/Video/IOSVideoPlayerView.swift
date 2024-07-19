@@ -93,7 +93,9 @@ open class IOSVideoPlayerView: VideoPlayerView {
         }
         insertSubview(maskImageView, at: 0)
         maskImageView.contentMode = .scaleAspectFit
-        toolBar.addArrangedSubview(landscapeButton)
+        
+        //toolBar.addArrangedSubview(landscapeButton)
+        
         landscapeButton.tag = PlayerButtonType.landscape.rawValue
         landscapeButton.addTarget(self, action: #selector(onButtonPressed(_:)), for: .touchUpInside)
         landscapeButton.tintColor = .white
@@ -264,7 +266,7 @@ open class IOSVideoPlayerView: VideoPlayerView {
         judgePanGesture()
          
 //        landscapeButton.isHidden = false
-//        toolBar.srtButton.isHidden = true // srtControl.subtitleInfos.isEmpty //隐藏字幕按钮
+        toolBar.srtButton.isHidden = true // srtControl.subtitleInfos.isEmpty //隐藏字幕按钮
     }
 
     override open func player(layer: KSPlayerLayer, state: KSPlayerState) {

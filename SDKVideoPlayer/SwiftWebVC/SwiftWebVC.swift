@@ -125,12 +125,24 @@ public class SwiftWebVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor =  ThemeManager.shared.viewBackgroundColor
         
-        
-        
-        
-        
+        configureNavigationBar()
         
     }
+    
+    
+  private func configureNavigationBar() {
+      if #available(iOS 13.0, *) {
+          // iOS 13 及以上版本使用 UINavigationBarAppearance
+          let appearance = UINavigationBarAppearance()
+          appearance.configureWithTransparentBackground()
+          appearance.backgroundColor = ThemeManager.shared.viewBackgroundColor
+          appearance.shadowColor = ThemeManager.shared.viewBackgroundColor
+
+          navigationController?.navigationBar.standardAppearance = appearance
+          navigationController?.navigationBar.scrollEdgeAppearance = appearance
+      }
+  }
+    
     
     func injectDarkModeJavaScript() {
           // Check system dark mode setting

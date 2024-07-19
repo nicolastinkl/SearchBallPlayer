@@ -76,6 +76,25 @@ class LocalStore{
         if let savedHistoryItems = UserDefaults.standard.data(forKey: "Recently_watched_history") {
             let decoder = JSONDecoder()
             if var loadedHistoryItems = try? decoder.decode([Video].self, from: savedHistoryItems) {
+                //查询老数据是否存在
+                var isFxits = false
+                var removeindex = 0
+                 
+                var index = 0
+                loadedHistoryItems.forEach { oldVideo in
+                    if oldVideo.vodID == RecentlyWatchVideo.vodID {
+                        isFxits =  true
+                        removeindex = index
+                    }
+                    index = index + 1
+                }
+                
+                if isFxits {
+                    // 移动 item 的位置
+                    loadedHistoryItems.remove(at: removeindex)
+                    
+                }
+                
                 loadedHistoryItems.insert(RecentlyWatchVideo, at: 0)
                 
                 if let encoded = try? encoder.encode(loadedHistoryItems) {

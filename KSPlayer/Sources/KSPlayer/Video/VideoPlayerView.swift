@@ -438,7 +438,8 @@ extension VideoPlayerView {
                 self.playerLayer?.player.select(track: value)
             }
         }
-        toolBar.playbackRateButton.setMenu(title: NSLocalizedString("speed", comment: ""), current: playerLayer?.player.playbackRate ?? 1, list: [0.75, 1.0, 1.25, 1.5, 2.0]) { value in
+        // NSLocalizedString("speed", comment: "")
+        toolBar.playbackRateButton.setMenu(title: "播放速度", current: playerLayer?.player.playbackRate ?? 1, list: [0.75, 1.0, 1.25, 1.5, 2.0]) { value in
             "\(value) x"
         } completition: { [weak self] value in
             guard let self else { return }
@@ -775,15 +776,15 @@ extension VideoPlayerView {
         toolBar.addArrangedSubview(toolBar.timeLabel)
         toolBar.addArrangedSubview(toolBar.playbackRateButton)
         toolBar.addArrangedSubview(toolBar.definitionButton)
-        toolBar.addArrangedSubview(toolBar.audioSwitchButton)
-        toolBar.addArrangedSubview(toolBar.videoSwitchButton)
-        toolBar.addArrangedSubview(toolBar.srtButton)
+        // toolBar.addArrangedSubview(toolBar.audioSwitchButton)
+        // toolBar.addArrangedSubview(toolBar.videoSwitchButton)
+        //toolBar.addArrangedSubview(toolBar.srtButton)
         toolBar.addArrangedSubview(toolBar.pipButton)
 
         toolBar.setCustomSpacing(20, after: toolBar.timeLabel)
         toolBar.setCustomSpacing(20, after: toolBar.playbackRateButton)
         toolBar.setCustomSpacing(20, after: toolBar.definitionButton)
-        toolBar.setCustomSpacing(20, after: toolBar.srtButton)
+        //toolBar.setCustomSpacing(20, after: toolBar.srtButton)
 
         NSLayoutConstraint.activate([
             toolBar.bottomAnchor.constraint(equalTo: bottomMaskView.safeBottomAnchor),
