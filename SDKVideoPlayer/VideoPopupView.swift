@@ -60,10 +60,13 @@ class VideoPopupView: UIView {
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            titleLabel.heightAnchor.constraint(equalToConstant: 44),
             
             durationLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             durationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             durationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+//            durationLabel.heightAnchor.constraint(equalToConstant: 44),
+            
             
             playButton.topAnchor.constraint(equalTo: durationLabel.bottomAnchor, constant: 16),
             playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -78,5 +81,9 @@ class VideoPopupView: UIView {
     
     @objc private func playButtonTapped() {
         playAction?()
+    }
+    
+    public func configData(title: String ,durationLabel :String){
+        self.titleLabel.text = title
     }
 }

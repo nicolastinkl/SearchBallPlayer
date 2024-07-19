@@ -395,14 +395,13 @@ extension SwiftWebVC: WKNavigationDelegate  {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideVideoPopupView))
         overlayView.addGestureRecognizer(tapGesture)
+        playVideourl = url
         
         // 创建并配置弹出视图
         let popupView = VideoPopupView()
-        popupView.titleLabel.text = self.title // Customize the title
-        popupView.durationLabel.text = "Duration: 00:00" // Fetch and set the actual duration
         
         
-        playVideourl = url
+        
 //        popupView.playAction = { [weak self] in
 //            if let url = url {
 //                self?.playVideo(with: url)
@@ -412,9 +411,10 @@ extension SwiftWebVC: WKNavigationDelegate  {
         //startButton.addTarget(self, action: #selector(ButtonhdplayurlTapped(_:)), for: .touchUpInside)
         popupView.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         
-        overlayView.addSubview(popupView)
+        
         
         popupView.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.addSubview(popupView)
         NSLayoutConstraint.activate([
             popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 6),
             popupView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -6),
@@ -422,6 +422,7 @@ extension SwiftWebVC: WKNavigationDelegate  {
             popupView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
+        popupView.configData(title: "asdfasf ", durationLabel:  "Duration: 00:00" )
         // 保存视图到属性中
         self.videoPopupView = popupView
         self.overlayView = overlayView
