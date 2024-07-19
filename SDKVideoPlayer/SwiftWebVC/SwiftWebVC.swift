@@ -7,6 +7,7 @@
 //
 
 import WebKit
+import KSPlayer
 
 public protocol SwiftWebVCDelegate: class {
     func didStartLoading()
@@ -15,6 +16,7 @@ public protocol SwiftWebVCDelegate: class {
 
 public class SwiftWebVC: UIViewController{
     
+    private var playVideourl:URL?
     
      private struct AssociatedKeys {
          static var videoPopupView = "videoPopupView"
@@ -376,6 +378,7 @@ extension SwiftWebVC: WKUIDelegate {
 extension SwiftWebVC: WKNavigationDelegate  {
      
     
+    
     func showVideoPopupView(with url: URL?) {
         // 创建半透明遮罩视图
         let overlayView = UIView()
@@ -395,27 +398,42 @@ extension SwiftWebVC: WKNavigationDelegate  {
         
         // 创建并配置弹出视图
         let popupView = VideoPopupView()
-        popupView.titleLabel.text = "Video Title" // Customize the title
+        popupView.titleLabel.text = self.title // Customize the title
         popupView.durationLabel.text = "Duration: 00:00" // Fetch and set the actual duration
-        popupView.playAction = { [weak self] in
-            if let url = url {
-                self?.playVideo(with: url)
-            }
-            
-        }
+        
+        
+        playVideourl = url
+//        popupView.playAction = { [weak self] in
+//            if let url = url {
+//                self?.playVideo(with: url)
+//            }
+//            
+//        }
+        //startButton.addTarget(self, action: #selector(ButtonhdplayurlTapped(_:)), for: .touchUpInside)
+        popupView.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         
         overlayView.addSubview(popupView)
         
         popupView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 16),
-            popupView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -16),
-            popupView.bottomAnchor.constraint(equalTo: overlayView.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 6),
+            popupView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -6),
+            popupView.bottomAnchor.constraint(equalTo: overlayView.safeAreaLayoutGuide.bottomAnchor, constant: -6),
+            popupView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
         // 保存视图到属性中
         self.videoPopupView = popupView
         self.overlayView = overlayView
+    }
+    
+    @objc private func playButtonTapped() {
+//        hideVideoPopupView()
+        if let url = playVideourl {
+            playVideo(with: url)
+        }
+        
+        
     }
     
     @objc private func hideVideoPopupView() {
@@ -428,7 +446,17 @@ extension SwiftWebVC: WKNavigationDelegate  {
     private func playVideo(with url: URL) {
         // Implement video playback logic here
         print("Playing video from URL: \(url.absoluteString)")
-        hideVideoPopupView()
+//        hideVideoPopupView()
+         
+            
+       let resource = KSPlayerResource(url: url)
+       let controller = DetailViewController()
+       controller.resource = resource
+         
+
+       controller.modalPresentationStyle = .fullScreen
+       self.present(controller, animated:false)
+  
     }
     
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {

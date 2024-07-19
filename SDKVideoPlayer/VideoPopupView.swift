@@ -13,6 +13,7 @@ class VideoPopupView: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = ThemeManager.shared.fontColor
         label.textAlignment = .center
         return label
     }()
@@ -20,6 +21,7 @@ class VideoPopupView: UIView {
     let durationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = ThemeManager.shared.fontColor2
         label.textAlignment = .center
         return label
     }()
@@ -27,7 +29,11 @@ class VideoPopupView: UIView {
     let playButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("立即播放", for: .normal)
-        button.addTarget(VideoPopupView.self, action: #selector(playButtonTapped), for: .touchUpInside)
+        button.setTitleColor(ThemeManager.shared.fontColor, for: UIControl.State.normal)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = UIColor.MainColor()
+        button.clipsToBounds = true
+        
         return button
     }()
     
