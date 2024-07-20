@@ -234,12 +234,12 @@ public class SwiftWebVC: UIViewController{
         
         self.navigationController?.setToolbarHidden(true, animated: true)
         
-//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
-//            self.navigationController?.setToolbarHidden(false, animated: false)
-//        }
-//        else if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
-//            self.navigationController?.setToolbarHidden(true, animated: true)
-//        }
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
+            self.navigationController?.setToolbarHidden(false, animated: false)
+        }
+        else if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            self.navigationController?.setToolbarHidden(true, animated: true)
+        }
     }
     
 //    override public func viewWillDisappear(_ animated: Bool) {
@@ -259,7 +259,7 @@ public class SwiftWebVC: UIViewController{
     // Toolbar
     
     func updateToolbarItems() {
-        return
+        
         backBarButtonItem.isEnabled = webView.canGoBack
         forwardBarButtonItem.isEnabled = webView.canGoForward
         
@@ -494,17 +494,17 @@ extension SwiftWebVC: WKNavigationDelegate  {
         
     }
     
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-          if let url = navigationAction.request.url {
-              print("decidePolicyFor \( url.absoluteString)")
-//              if url.absoluteString.contains(".m3u8") {
-//                  print("decidePolicyFor video URL: \(url.absoluteString)")
-//                  self.showVideoPopupView(with: url)
-//                  // 处理视频 URL（如弹出播放界面或其他操作）
-//              }
-          }
-          decisionHandler(.allow)
-      }
+//    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//          if let url = navigationAction.request.url {
+//              print("decidePolicyFor \( url.absoluteString)")
+////              if url.absoluteString.contains(".m3u8") {
+////                  print("decidePolicyFor video URL: \(url.absoluteString)")
+////                  self.showVideoPopupView(with: url)
+////                  // 处理视频 URL（如弹出播放界面或其他操作）
+////              }
+//          }
+//          decisionHandler(.allow)
+//      }
     
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -621,7 +621,8 @@ class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
             print(">>>>>> \(request.urlRequest?.url?.absoluteString ?? ""  )")
             
             if  let urlstring = request.urlRequest?.url?.absoluteString {
-                  if urlstring.contains(".m3u8") {
+                
+                if urlstring.contains(".m3u8") || urlstring.contains(".mp4") {
                       await self?.ViewController?.hideVideoPopupView()
                       await self?.ViewController?.showVideoPopupView(with: request.urlRequest?.url)
                       // 处理视频 URL（如弹出播放界面或其他操作）

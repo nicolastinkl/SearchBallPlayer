@@ -25,6 +25,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         layout.scrollDirection = .horizontal
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        collectionView.backgroundColor = .clear
         setupCollectionView()
         setupHistoryLabel()
     }
