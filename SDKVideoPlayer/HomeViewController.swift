@@ -212,7 +212,21 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         
         configureNavigationBar()
         
-    }
+        NotificationCenter.default.addObserver(self, selector: #selector(historyItemsUpdated), name: .favitorItemsUpdated, object: nil) 
+        
+    }    
+    @objc func historyItemsUpdated() {
+        // 刷新表格视图
+        if let newweb = LocalStore.readToWebsiteFaviators()?.last {
+//            self.icons.forEach { oldwebsite in
+//                if !newweb.url.localizedCaseInsensitiveContains(oldwebsite.url) {
+//
+//                }
+//            }
+            self.icons.append(newweb)
+            self.iconsCollectionView.reloadData()
+        }
+     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -510,6 +524,13 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                             
                             
                             self.icons = response_config.data.classlist
+                            if let olds = LocalStore.readToWebsiteFaviators() {
+//                                olds.forEach { web in
+//                                    self.icons.append(web)
+//                                }
+                                self.icons.append(contentsOf: olds)
+                                
+                            }
                             self.searchlist = response_config.data.searchlist
                             DispatchQueue.main.async {
                                 self.dajiaLabel.text = "大家都在搜"

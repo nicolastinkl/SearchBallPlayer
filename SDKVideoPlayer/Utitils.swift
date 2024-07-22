@@ -54,12 +54,68 @@ extension UIViewController{
 extension Notification.Name {
     static let historyItemsUpdated = Notification.Name("RecentlyWatchVideoItemsUpdated")
     static let themeChanged = Notification.Name("themeChanged")
+    
+    static let favitorItemsUpdated = Notification.Name("RecentlyWatchFavitorItemsUpdated")
 }
  
 
 
 class LocalStore{
-    static    func saveToUserDefaults(RecentlyWatchVideo: Video) {
+    
+    
+    static func saveToWebsiteFaviator(weburl:Website){
+        let encoder = JSONEncoder()
+            
+          if let savedHistoryItems = UserDefaults.standard.data(forKey: "Recently_Faviator_list_history") {
+              let decoder = JSONDecoder()
+              if var loadedHistoryItems = try? decoder.decode([Website].self, from: savedHistoryItems) {
+                  //查询老数据是否存在
+                  var isFxits = false
+                  var removeindex = 0
+                   
+                  var index = 0
+                  loadedHistoryItems.forEach { oldVideo in
+                      if oldVideo.url == weburl.url{
+                          isFxits =  true
+                          removeindex = index
+                      }
+                      index = index + 1
+                  }
+                  
+                  if isFxits {
+                      // 移动 item 的位置
+                      loadedHistoryItems.remove(at: removeindex)
+                      
+                  }
+                  
+                  loadedHistoryItems.insert(weburl, at: 0)
+                  
+                  if let encoded = try? encoder.encode(loadedHistoryItems) {
+                      UserDefaults.standard.set(encoded, forKey: "Recently_Faviator_list_history")
+                      NotificationCenter.default.post(name: .favitorItemsUpdated, object: nil)
+                  }
+              }
+          }else{
+              let arraryVideo:[Website] = [weburl]
+              if let encoded = try? encoder.encode(arraryVideo) {
+                  UserDefaults.standard.set(encoded, forKey: "Recently_Faviator_list_history")
+                  NotificationCenter.default.post(name: .favitorItemsUpdated, object: nil)
+                  
+              }
+          }
+    }
+    
+    static func readToWebsiteFaviators() -> [Website]?{
+        if let savedHistoryItems = UserDefaults.standard.data(forKey: "Recently_Faviator_list_history") {
+            let decoder = JSONDecoder()
+            if let loadedHistoryItems = try? decoder.decode([Website].self, from: savedHistoryItems) {
+                return loadedHistoryItems
+            }
+        }
+        return nil
+    }
+    
+    static  func saveToUserDefaults(RecentlyWatchVideo: Video) {
         
         
         //Array Object/

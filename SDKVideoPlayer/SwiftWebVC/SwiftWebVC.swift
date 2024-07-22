@@ -8,6 +8,7 @@
 
 import WebKit
 import KSPlayer
+import SDWebImage
 
 public protocol SwiftWebVCDelegate: AnyObject {
     func didStartLoading()
@@ -91,6 +92,22 @@ public class SwiftWebVC: UIViewController{
         return tempActionBarButtonItem
     }()
     
+    lazy var faviatorBarButtonItem: UIBarButtonItem = {
+        var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add,
+                                                      target: self,
+                                                      action: #selector(SwiftWebVC.actionfaviatorButtonTapped(_:)))
+        tempActionBarButtonItem.tintColor = self.buttonColor
+        return tempActionBarButtonItem
+    }()
+    
+    lazy var searchbarButtonItem: UIBarButtonItem = {
+        var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.search,
+                                                      target: self,
+                                                      action: #selector(SwiftWebVC.searchButtonTapped(_:)))
+        tempActionBarButtonItem.tintColor = self.buttonColor
+        return tempActionBarButtonItem
+    }()
+    
 //    
 //    lazy var webView: WKWebView = {
 //        
@@ -112,10 +129,11 @@ public class SwiftWebVC: UIViewController{
     
     var navBarTitle: UILabel!
     
-    var sharingEnabled = true
+    var sharingEnabled = false
     
     var proxyHttps = false
     
+    var iconFaviICO:String = ""
     ////////////////////////////////////////////////
     
     deinit {
@@ -125,7 +143,7 @@ public class SwiftWebVC: UIViewController{
         webView.navigationDelegate = nil;
     }
     
-    public convenience init(urlString: String, sharingEnabled: Bool = true) {
+    public convenience init(urlString: String, sharingEnabled: Bool = false) {
         var urlString = urlString
         if !urlString.hasPrefix("https://") && !urlString.hasPrefix("http://") {
             urlString = "https://"+urlString
@@ -138,11 +156,11 @@ public class SwiftWebVC: UIViewController{
         
     }
     
-    public convenience init(pageURL: URL, sharingEnabled: Bool = true) {
+    public convenience init(pageURL: URL, sharingEnabled: Bool = false) {
         self.init(aRequest: URLRequest(url: pageURL), sharingEnabled: sharingEnabled)
     }
     
-    public convenience init(aRequest: URLRequest, sharingEnabled: Bool = true) {
+    public convenience init(aRequest: URLRequest, sharingEnabled: Bool = false) {
         self.init()
         self.sharingEnabled = sharingEnabled
         self.request = aRequest
@@ -243,38 +261,40 @@ public class SwiftWebVC: UIViewController{
         
         super.viewWillAppear(true)
         
-//        self.navigationController?.setToolbarHidden(true, animated: true)
-//        
-//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
-//            self.navigationController?.setToolbarHidden(false, animated: false)
-//        }
-//        else if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
-//            self.navigationController?.setToolbarHidden(true, animated: true)
-//        }
+        self.navigationController?.setToolbarHidden(true, animated: true)
+        
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
+            self.navigationController?.setToolbarHidden(false, animated: false)
+        }
+        else if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            self.navigationController?.setToolbarHidden(true, animated: true)
+        }
     }
     
-//    override public func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(true)
-//        
-//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
-//            self.navigationController?.setToolbarHidden(true, animated: true)
-//        }
-//    }
-//    
-//    override public func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(true)
-////        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//    }
+    override public func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
+            self.navigationController?.setToolbarHidden(true, animated: true)
+        }
+    }
+    
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
     
     ////////////////////////////////////////////////
     // Toolbar
     
     func updateToolbarItems() {
-        return
+//        return
         backBarButtonItem.isEnabled = webView.canGoBack
         forwardBarButtonItem.isEnabled = webView.canGoForward
         
         let refreshStopBarButtonItem: UIBarButtonItem = webView.isLoading ? stopBarButtonItem : refreshBarButtonItem
+        
+        self.navigationItem.rightBarButtonItem = refreshStopBarButtonItem
         
         let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
         let flexibleSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
@@ -284,8 +304,9 @@ public class SwiftWebVC: UIViewController{
             let toolbarWidth: CGFloat = 250.0
             fixedSpace.width = 35.0
             
-            let items: NSArray = sharingEnabled ? [fixedSpace, refreshStopBarButtonItem, fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem, fixedSpace, actionBarButtonItem] : [fixedSpace, refreshStopBarButtonItem, fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem]
+            // let items: NSArray = sharingEnabled ? [fixedSpace, refreshStopBarButtonItem, fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem, fixedSpace, actionBarButtonItem] : [fixedSpace, refreshStopBarButtonItem, fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem]
             
+            let items: NSArray =   [  fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem]
             let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: toolbarWidth, height: 44.0))
             if !closing {
                 toolbar.items = items as? [UIBarButtonItem]
@@ -301,7 +322,11 @@ public class SwiftWebVC: UIViewController{
             
         }
         else {
-            let items: NSArray = sharingEnabled ? [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, flexibleSpace, actionBarButtonItem, fixedSpace] : [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, fixedSpace]
+            // let items: NSArray = sharingEnabled ? [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, flexibleSpace, actionBarButtonItem, fixedSpace] : [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, fixedSpace]
+            
+            
+            let items: NSArray =   [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace,faviatorBarButtonItem,flexibleSpace,searchbarButtonItem]
+           
             
             if let navigationController = navigationController, !closing {
                 if presentingViewController == nil {
@@ -335,6 +360,119 @@ public class SwiftWebVC: UIViewController{
     @objc func stopTapped(_ sender: UIBarButtonItem) {
         webView.stopLoading()
         updateToolbarItems()
+    }
+    
+    
+    // 获取网页图标URL
+    func getFaviconURL(webView: WKWebView, completion: @escaping (String?) -> Void) {
+        webView.evaluateJavaScript("var icons = document.querySelectorAll('link[rel=\"icon\"], link[rel=\"shortcut icon\"]'); icons.length > 0 ? icons[0].href : null", completionHandler: { (result, error) in
+            if let error = error {
+                print("获取图标URL出错: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            if let iconURL = result as? String {
+                print("图标URL: \(iconURL)")
+                completion(iconURL)
+            } else {
+                print("未找到图标URL")
+                completion(nil)
+            }
+        })
+    }
+    
+    @objc func actionfaviatorButtonTapped(_ sender: AnyObject) {
+        if let url: URL = ((webView.url != nil) ? webView.url : request.url) {
+            webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
+                if let s = response as? String {
+                    
+                    self.getFaviconURL(webView: self.webView) { (iconURL) in
+                       if let iconURL = iconURL {
+                           print("图标URL: \(iconURL)")
+                           self.presentTextInputAlert(title: s, url: url.absoluteString,iconurl: iconURL)
+                           // 下载图标
+                          // self.downloadFavicon(faviconURL: iconURL)
+                       } else {
+                           print("未找到图标URL")
+                           self.presentTextInputAlert(title: "未知", url: url.absoluteString,iconurl: "")
+                       }
+                   }
+            
+                    
+                }else{
+                    self.presentTextInputAlert(title: "未知", url: url.absoluteString,iconurl: "")
+                }
+            })
+        }
+    }
+    func presentTextInputAlert(title: String, url:String,iconurl:String?) {
+           // 创建 UIAlertController 实例
+           let alertController = UIAlertController(title: "收藏网址", message: "", preferredStyle: .alert)
+           
+           // 创建第一个文本输入框
+           let textField1 = UITextField()
+           
+           textField1.borderStyle = .roundedRect
+           
+            alertController.addTextField { (textF) in
+                textF.placeholder = "请输入标题"
+                textF.text = title
+           }
+            
+           
+           // 创建第二个文本输入框
+           let textField2 = UITextField()
+           
+           textField2.borderStyle = .roundedRect
+           alertController.addTextField { (textF) in
+               textF.placeholder = "请输入网址"
+               textF.text = url
+           }
+            
+        if let u = iconurl, u.count > 10 {
+            iconFaviICO = u
+        }
+        /*
+         if let u = iconurl, u.count > 10 {
+             let iconImageView = SDAnimatedImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                   iconImageView.contentMode = .scaleAspectFit
+                     iconImageView.sd_setImage(with: URL(string: u), placeholderImage: UIImage(named: "imageholder1"), context: [:])
+                   
+                   // 将图标视图添加到 UIAlertController 的视图中
+                   alertController.view.addSubview(iconImageView)
+                   
+                   // 设置图标视图的位置
+                   iconImageView.center = alertController.view.center
+         }
+         */
+       
+           
+           // 创建取消按钮
+           let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+               // 取消操作
+           }
+           alertController.addAction(cancelAction)
+           
+           // 创建保存按钮
+           let saveAction = UIAlertAction(title: "保存", style: .default) { (action) in
+               if let text1 = alertController.textFields?.first?.text,
+                  let text2 = alertController.textFields?.last?.text {
+                   // 这里处理保存逻辑
+                   print("文本1: \(text1), 文本2: \(text2)")
+                   if text1.count > 0 && text2.count > 0 {
+                       LocalStore.saveToWebsiteFaviator(weburl: Website(name: text1, url: text2, iconurl: self.iconFaviICO))
+                   }
+               }
+           }
+           alertController.addAction(saveAction)
+           
+           // 显示弹出窗口
+           present(alertController, animated: true, completion: nil)
+       }
+    
+    @objc func searchButtonTapped(_ sender: AnyObject) {
+        
     }
     
     @objc func actionButtonTapped(_ sender: AnyObject) {
