@@ -609,15 +609,26 @@ extension SwiftWebVC: WKNavigationDelegate  {
     
 class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
     
+    private let queue = DispatchQueue(label: "com.example.CustomURLSchemeHandlerQueue")
+
+    
     public var ViewController:SwiftWebVC?
     
     private var pendingTasks = [ObjectIdentifier: TaskItem]()
     
         
     func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
-        guard let task = pendingTasks.removeValue(forKey: urlSchemeTask.id) else { return }
-        print("Stopping task \(urlSchemeTask)")
-        task.stop()
+        
+        self.queue.async {
+                    if let taskItem = self.pendingTasks[urlSchemeTask.id] {
+                        print("Stopping task \(urlSchemeTask)")
+                        taskItem.stop()
+                        self.pendingTasks.removeValue(forKey: urlSchemeTask.id)
+                    }
+                }
+//        guard let task = pendingTasks.removeValue(forKey: urlSchemeTask.id) else { return }
+//        print("Stopping task \(urlSchemeTask)")
+//        task.stop()
     }
     
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
@@ -649,9 +660,24 @@ class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
 
                 // Report back to the scheme task
                 // Either of these !! may crash in this implementation
-                urlSchemeTask.didReceive(response) // !!
-                urlSchemeTask.didReceive(data) // !!
-                urlSchemeTask.didFinish() // !!
+//                urlSchemeTask.didReceive(response) // !!
+//                urlSchemeTask.didReceive(data) // !!         
+//                urlSchemeTask.didFinish() // !!
+                
+                self?.queue.async { [weak self] in
+                    // !taskItem.isStopped
+                   guard let taskItem = self?.pendingTasks[urlSchemeTask.id], !taskItem.task.isCancelled else {
+                       return
+                   }
+                    
+                    
+
+                   urlSchemeTask.didReceive(response)
+                   urlSchemeTask.didReceive(data)
+                   urlSchemeTask.didFinish()
+
+                   self?.pendingTasks.removeValue(forKey: urlSchemeTask.id)
+               }
                 
             } catch is CancellationError {
                 // Do not call didFailWithError, didFinish, or didReceive in this case
@@ -659,7 +685,16 @@ class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
             } catch {
                 if !Task.isCancelled {
                     // !! This can crash, too
-                    urlSchemeTask.didFailWithError(error)
+                    //urlSchemeTask.didFailWithError(error)
+                    
+                    self?.queue.async {[weak self] in
+                       guard let taskItem = self?.pendingTasks[urlSchemeTask.id], !taskItem.task.isCancelled  else {
+                           return
+                       }
+                       urlSchemeTask.didFailWithError(error)
+                       self?.pendingTasks.removeValue(forKey: urlSchemeTask.id)
+                   }
+        
                 }
             }
 //            print("\(self?.pendingTasks.count)")
