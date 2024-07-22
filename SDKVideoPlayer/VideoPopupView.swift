@@ -39,6 +39,17 @@ class VideoPopupView: UIView {
         return label
     }()
     
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "Play")
+//        imageView.clipsToBounds = true
+//        imageView.layer.cornerRadius = 10
+//        imageView.cornerRadius = 10
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let playButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("立即播放", for: .normal)
@@ -59,14 +70,35 @@ class VideoPopupView: UIView {
     
     var playAction: (() -> Void)?
     
+    
+    let gradientView = GradientView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = ThemeManager.shared.viewBackgroundColor
+        
+        gradientView.startColor = UIColor.MainColor() // Light blue
+        gradientView.endColor = ThemeManager.shared.viewBackgroundColor
+        //  UIColor(fromHex: "#eeeff1") //UIColor(red: 0.12, green: 0.56, blue: 1.0, alpha: 1.0)   // Blue
+        gradientView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(gradientView)
+        //insertSubview(gradientView, at: 0)
+        
+        
+        // 设置 Auto Layout 约束
+        NSLayoutConstraint.activate([
+            gradientView.topAnchor.constraint(equalTo: self.topAnchor),
+            gradientView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            gradientView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            gradientView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        ])
+        gradientView.frame = self.frame
+
+        //backgroundColor = ThemeManager.shared.viewBackgroundColor
 //        layer.cornerRadius = 12
         self.cornerRadius = 12
         
-        layer.shadowColor = ThemeManager.shared.viewBackgroundColor.cgColor
+        layer.shadowColor = ThemeManager.shared.fontColor.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowOffset = CGSize(width: 0, height: -2)
         
@@ -75,9 +107,11 @@ class VideoPopupView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
         playButton.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabelName)
         addSubview(titleLabel)
         addSubview(durationLabel)
+        addSubview(imageView)
         addSubview(playButton)
         
         NSLayoutConstraint.activate([            
@@ -97,8 +131,15 @@ class VideoPopupView: UIView {
             durationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             durationLabel.heightAnchor.constraint(equalToConstant: 10),
             
+//            imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            imageView.heightAnchor.constraint(equalToConstant: 50),
+            imageView.widthAnchor.constraint(equalToConstant: 50),
             
-            playButton.topAnchor.constraint(equalTo: durationLabel.bottomAnchor, constant: 16),
+            
+            //playButton.topAnchor.constraint(equalTo: durationLabel.bottomAnchor, constant: 16),
+            playButton.heightAnchor.constraint(equalToConstant: 50),
             playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 80),
             playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -80),
             playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)

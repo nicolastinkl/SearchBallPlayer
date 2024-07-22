@@ -21,22 +21,25 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "MovieCollectionViewCell"
     
-    private let imageView: SDAnimatedImageView = {
-        let imageView = SDAnimatedImageView()
+    private let imageView: RoundedCornersImageView = {
+        let imageView = RoundedCornersImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
+//        imageView.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.textAlignment = .center
         label.textColor = ThemeManager.shared.fontColor
         label.numberOfLines = 2
         label.lineBreakMode = .byCharWrapping
+//        label.layer.borderColor = ThemeManager.shared.fontColor.withAlphaComponent(0.6).cgColor
+//        label.layer.borderWidth = 1 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -54,7 +57,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 //               imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
-            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.widthAnchor.constraint(equalToConstant: 110),
             imageView.heightAnchor.constraint(equalToConstant: 120),
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
