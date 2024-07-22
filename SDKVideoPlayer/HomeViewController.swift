@@ -168,10 +168,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             
         }
-        
-        
-        
-        searchBar.delegate = self
+         
         suggestionsTableView.dataSource = self
         suggestionsTableView.delegate = self
         //
@@ -308,10 +305,10 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
               
                 if let _ = URL(string: newText) {
                     let controller = SwiftWebVC(urlString:  newText )
+                    //controller.hidesBottomBarWhenPushed = true
                     self.show(controller, sender: self)
                     return
                 }
-              
                 
             }
             
@@ -324,6 +321,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                     searchlist.forEach { model in
                         if model.keyword == newText && model.url.count > 10 {
                             let controller = SwiftWebVC(urlString:  model.url )
+                            //controller.hidesBottomBarWhenPushed = true
                             self.show(controller, sender: self)
                             isNotSearchlist = false
                         }
@@ -432,9 +430,13 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         }
         
          
+        var searchTextEncoding = ""
+        if let encodedQuery = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
+            searchTextEncoding = encodedQuery
+        }            
         
-        AF.request("\(ApplicationS.baseURL)/player/search?keyword=\(searchText)", method: .get,headers: ApplicationS.addCustomHeaders())
-            .validate(statusCode: 200..<300)            
+        AF.request("\(ApplicationS.baseURL)/player/search?keyword=\(searchTextEncoding)", method: .get,headers: ApplicationS.addCustomHeaders())
+            .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
                 requestComplete1(response.response, response.result)
                      
@@ -570,6 +572,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if(collectionView === self.suggestionsTableView) {
             
+            
         }else{
             let keyword:Website = icons[indexPath.item]
             let urlString = keyword.url
@@ -578,6 +581,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
 //                       safariViewController.delegate = self
 //                       present(safariViewController, animated: true, completion: nil)
                 let controller = SwiftWebVC(urlString: urlString)
+                //controller.hidesBottomBarWhenPushed = true
                 self.show(controller, sender: self)
                    }
         }
@@ -611,14 +615,22 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
     
         @objc func openRecommandTarget(_ sender: UIButton){
             let keyword:SearchRecommendation =  searchSuggestionKeywords[sender.tag]
+            
             let urlString = keyword.url
-            if let url = URL(string: urlString) {
+            print("<\(urlString)>")
+            
+            if let _ = URL(string: urlString) {
 //                       let safariViewController = SFSafariViewController(url: url)
 //                       safariViewController.delegate = self
 //                       present(safariViewController, animated: true, completion: nil)
                 
                 let controller = SwiftWebVC(urlString: urlString)
+                //controller.hidesBottomBarWhenPushed = true
                 self.show(controller, sender: self)
+            }else{
+                //openSearchTarget
+                searchBar.text = keyword.keyword
+                openSearchTarget(UIButton())
             }
         }
        

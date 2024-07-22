@@ -128,7 +128,12 @@ public class SwiftWebVC: UIViewController{
         if !urlString.hasPrefix("https://") && !urlString.hasPrefix("http://") {
             urlString = "https://"+urlString
         }
-        self.init(pageURL: URL(string: urlString)!, sharingEnabled: sharingEnabled)
+        if let url = URL(string: urlString){
+            self.init(pageURL: url, sharingEnabled: sharingEnabled)
+        }else{
+            self.init(pageURL: URL(string: "About:blank")!, sharingEnabled: sharingEnabled)
+        }
+        
     }
     
     public convenience init(pageURL: URL, sharingEnabled: Bool = true) {

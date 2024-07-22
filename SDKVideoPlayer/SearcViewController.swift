@@ -167,9 +167,13 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
             
         }
         
+        var searchTextEncoding = ""
+        if let encodedQuery = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
+            searchTextEncoding = encodedQuery
+        }
          
-        print("\(ApplicationS.baseURL)/player/search?keyword=\(searchText)&page=\(self.page)")
-        AF.request("\(ApplicationS.baseURL)/player/search?keyword=\(searchText)&page=\(self.page)", method: .get,headers: ApplicationS.addCustomHeaders())
+//        print("\(ApplicationS.baseURL)/player/search?keyword=\(searchTextEncoding)&page=\(self.page)") 
+        AF.request("\(ApplicationS.baseURL)/player/search?keyword=\(searchTextEncoding)&page=\(self.page)", method: .get,headers: ApplicationS.addCustomHeaders())
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
                 requestComplete1(response.response, response.result)

@@ -43,64 +43,74 @@ class SDKAdServices{
     
     func requestAttributionDetails() {
         if #available(iOS 14.3, *) {
-           
-            if let attributionToken = try? AAAttribution.attributionToken() {
-                   let request = NSMutableURLRequest(url: URL(string:"https://api-adservices.apple.com/api/v1/")!)
-                   request.httpMethod = "POST"
-                   request.setValue("text/plain", forHTTPHeaderField: "Content-Type")
-                   request.httpBody = Data(attributionToken.utf8)
-                   let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, _, error) in
-                       if let error = error {
-                           print(error)
-                           return
-                       }
-                       do {
-                          let result = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
-                           print("Search Ads attribution info:", result)
-                           /*
-                            ["adId": 1234567890, "campaignId": 1234567890, "orgId": 1234567890, "adGroupId": 1234567890, "conversionType": Download, "countryOrRegion": US, "keywordId": 12323222, "attribution": 1, "clickDate": 2024-07-19T07:11Z]
-                           Code: 1
-                            */
-                           if let campaignId = result["campaignId"] as? Int {
-                           // Only send data to Amplitude if it is not mock data, in which case the campaign id would be the integer below
-                               if campaignId != 1234567890 {
-                                   // Send data to your tracking tool, we use Amplitude, with the line of code below.
-                                   // Amplitude.instance().logEvent("open_app_from_apple_search_ad, with EventProperties: result)
-                               }
-                           }
-                       } catch {
-                          print(error)
-                       }
-                   }
-                task.resume()
-            }else{
-                print("AAAttribution is null")
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let attributionToken = try? AAAttribution.attributionToken() {
+                    let request = NSMutableURLRequest(url: URL(string:"https://api-adservices.apple.com/api/v1/")!)
+                    request.httpMethod = "POST"
+                    request.setValue("text/plain", forHTTPHeaderField: "Content-Type")
+                    request.httpBody = Data(attributionToken.utf8)
+                    let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, _, error) in
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        do {
+                            let result = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
+                            print("Search Ads attribution info:", result)
+                            /*
+                             ["adId": 1234567890, "campaignId": 1234567890, "orgId": 1234567890, "adGroupId": 1234567890, "conversionType": Download, "countryOrRegion": US, "keywordId": 12323222, "attribution": 1, "clickDate": 2024-07-19T07:11Z]
+                             Code: 1
+                             */
+                            if let campaignId = result["campaignId"] as? Int {
+                                // Only send data to Amplitude if it is not mock data, in which case the campaign id would be the integer below
+                                if campaignId != 1234567890 {
+                                    // Send data to your tracking tool, we use Amplitude, with the line of code below.
+                                    // Amplitude.instance().logEvent("open_app_from_apple_search_ad, with EventProperties: result)
+                                }
+                            }
+                            self.handleAttributionDetails13(to: result as? [String:NSObject])
+                            
+                            //push Search Ads attribution info to server
+                            
+                            
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    task.resume()
+                    
+                }else{
+                    print("AAAttribution is null")
+                }
             }
             
              
         }
     }
 
-    func handleAttributionDetails13(to attributionDetails: [String : NSObject]) {
+    func handleAttributionDetails13(to attributionDetails: [String : NSObject]?) {
         // 将归因数据转换为JSON并发送到服务器
-        let jsonData = try? JSONSerialization.data(withJSONObject: attributionDetails, options: [])
-        guard let url = URL(string: "\(ApplicationS.baseURL)/attribution") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = jsonData
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error sending attribution details: \(error.localizedDescription)")
-                return
+        if let requestdata = attributionDetails {
+            let jsonData = try? JSONSerialization.data(withJSONObject: requestdata, options: [])
+            guard let url = URL(string: "\(ApplicationS.baseURL)/player/attribution") else { return }
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error sending attribution details: \(error.localizedDescription)")
+                    return
+                }
+                guard let data = data else { return }
+                // 处理服务器响应
+                let responseString = String(data: data, encoding: .utf8)
+                print("Server response: \(responseString ?? "No response")")
             }
-            guard let data = data else { return }
-            // 处理服务器响应
-            let responseString = String(data: data, encoding: .utf8)
-            print("Server response: \(responseString ?? "No response")")
+            task.resume()
         }
-        task.resume()
+        
     }
 
     func handleError(error: Error) {
@@ -127,7 +137,7 @@ class SDKAdServices{
                     // 处理 attributionDetails，例如将其发送到你的服务器
                     print("Attribution Details: \(attribu)")
                     
-                    self.handleAttributionDetails13(to: attribu)
+                    self.handleAttributionDetails13(to: attribu as? [String:NSObject])
                 }
             }
         }
