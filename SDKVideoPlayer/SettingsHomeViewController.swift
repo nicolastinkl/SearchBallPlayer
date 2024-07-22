@@ -334,7 +334,7 @@ class SettingsHomeViewController: BaseViewController, UITableViewDelegate, UITab
     }
      
     @objc private func ButtonhdplayurlTapped(_ button:UIButton){
-        UIApplication.shared.open( URL(string: "https://apps.apple.com/us/app/mystictreasureslegends/id652341")!,options: [:]) { complate in
+        UIApplication.shared.open( URL(string: "https://apps.apple.com/app/%E6%90%9C%E7%90%83%E5%90%A7/id6566178187")!,options: [:]) { complate in
             
         }
     }

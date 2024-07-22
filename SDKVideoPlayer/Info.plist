@@ -8,14 +8,14 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>www.apple.com</key>
+			<key>api.cloudkit-apple.com</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
-			<key>www.gooapis.com</key>
+			<key>www.apple.com</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>

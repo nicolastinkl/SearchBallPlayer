@@ -9,7 +9,7 @@
 import WebKit
 import KSPlayer
 
-public protocol SwiftWebVCDelegate: class {
+public protocol SwiftWebVCDelegate: AnyObject {
     func didStartLoading()
     func didFinishLoading(success: Bool)
 }
@@ -114,6 +114,8 @@ public class SwiftWebVC: UIViewController{
     
     var sharingEnabled = true
     
+    var proxyHttps = false
+    
     ////////////////////////////////////////////////
     
     deinit {
@@ -164,14 +166,16 @@ public class SwiftWebVC: UIViewController{
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor =  ThemeManager.shared.viewBackgroundColor
-        
-        
+                
         let webConfiguration = WKWebViewConfiguration()
         
         // Create a CustomURLSchemeHandler and set it
         let schemeHandler = CustomURLSchemeHandler()
         schemeHandler.ViewController = self
-        webConfiguration.setURLSchemeHandler(schemeHandler, forURLScheme: "https")
+        if proxyHttps{
+            webConfiguration.setURLSchemeHandler(schemeHandler, forURLScheme: "https")
+        }
+        
         
 //        webConfiguration.setURLSchemeHandler(schemeHandler, forURLScheme:  "customscheme")
         // Create a WKUserContentController
@@ -259,12 +263,12 @@ public class SwiftWebVC: UIViewController{
 //        super.viewDidDisappear(true)
 ////        UIApplication.shared.isNetworkActivityIndicatorVisible = false
 //    }
-//    
+    
     ////////////////////////////////////////////////
     // Toolbar
     
     func updateToolbarItems() {
-        return;
+        return
         backBarButtonItem.isEnabled = webView.canGoBack
         forwardBarButtonItem.isEnabled = webView.canGoForward
         
@@ -381,6 +385,33 @@ extension SwiftWebVC: WKUIDelegate {
     
     // Add any desired WKUIDelegate methods here: https://developer.apple.com/reference/webkit/wkuidelegate
     
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        
+        guard navigationAction.targetFrame == nil else {
+              return nil
+        }
+        
+        print("\(webView.url?.absoluteString ?? "")")
+        
+        // Create a new web view with the same configuration
+        let newWebView = WKWebView(frame: self.view.bounds, configuration: configuration)
+        self.view.addSubview(newWebView)
+        newWebView.uiDelegate = self
+        newWebView.navigationDelegate = self
+        newWebView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            newWebView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                    newWebView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                    newWebView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+                    newWebView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+                ])
+        self.view.layoutIfNeeded()
+          
+        
+         return newWebView
+         
+    }
 }
 
 extension SwiftWebVC: WKNavigationDelegate  {
@@ -499,17 +530,25 @@ extension SwiftWebVC: WKNavigationDelegate  {
         
     }
     
-//    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//          if let url = navigationAction.request.url {
-//              print("decidePolicyFor \( url.absoluteString)")
-////              if url.absoluteString.contains(".m3u8") {
-////                  print("decidePolicyFor video URL: \(url.absoluteString)")
-////                  self.showVideoPopupView(with: url)
-////                  // 处理视频 URL（如弹出播放界面或其他操作）
-////              }
-//          }
-//          decisionHandler(.allow)
-//      }
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+          if let url = navigationAction.request.url {
+              print("decidePolicyFor \( url.absoluteString)")
+//          https://download.huiliandao.com/dis/489324623124234lkhbaijuea.mobileprovision
+              
+              if url.absoluteString.contains(".mobileprovision") {
+                  UIApplication.shared.open(url,options: [:]) { complated in
+                      
+                  }
+                  
+                  
+                  
+//                  print("decidePolicyFor video URL: \(url.absoluteString)")
+//                  self.showVideoPopupView(with: url)
+                  // 处理视频 URL（如弹出播放界面或其他操作）
+              }
+          }
+          decisionHandler(.allow)
+      }
     
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
