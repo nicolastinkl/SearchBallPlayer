@@ -183,7 +183,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜球吧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol8-7N-ZiM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol8-7N-ZiM">
                                 <rect key="frame" x="108" y="79" width="177" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="7pP-gG-Jy9"/>
@@ -202,13 +202,22 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="搜索"/>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="souqiubaicon" translatesAutoresizingMaskIntoConstraints="NO" id="bt0-5r-7rN">
+                                <rect key="frame" x="36.666666666666657" y="99" width="320" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="ASR-g9-6So"/>
+                                    <constraint firstAttribute="width" constant="320" id="vQr-iG-uid"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="53h-qm-nj3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="53h-qm-nj3" firstAttribute="top" secondItem="Ol8-7N-ZiM" secondAttribute="top" constant="24" id="4vt-1P-147"/>
                             <constraint firstItem="YQQ-Si-YYT" firstAttribute="centerY" secondItem="uA9-CE-Zwk" secondAttribute="centerY" id="BUl-LY-I0f"/>
+                            <constraint firstItem="bt0-5r-7rN" firstAttribute="centerX" secondItem="53h-qm-nj3" secondAttribute="centerX" id="BfK-lH-bMg"/>
                             <constraint firstItem="VVR-QJ-jNG" firstAttribute="leading" secondItem="53h-qm-nj3" secondAttribute="leading" id="C3B-CS-5Eh"/>
+                            <constraint firstItem="YQQ-Si-YYT" firstAttribute="top" secondItem="bt0-5r-7rN" secondAttribute="bottom" constant="20" id="EfK-pM-gPc"/>
                             <constraint firstItem="hyF-zq-sN8" firstAttribute="top" secondItem="VVR-QJ-jNG" secondAttribute="bottom" constant="10" id="HYv-7Q-cKD"/>
                             <constraint firstItem="YQQ-Si-YYT" firstAttribute="centerX" secondItem="uA9-CE-Zwk" secondAttribute="centerX" id="IfU-YR-yKm"/>
                             <constraint firstItem="uA9-CE-Zwk" firstAttribute="leading" secondItem="53h-qm-nj3" secondAttribute="leading" id="KsL-Bv-9iv"/>
@@ -241,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfZ-Is-l8d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="487.78625954198469" y="5.6338028169014089"/>
+            <point key="canvasLocation" x="516.79389312977094" y="0.70422535211267612"/>
         </scene>
         <!--Searc View Controller-->
         <scene sceneID="lXq-kZ-9LF">
@@ -318,6 +327,7 @@
         <image name="placeholder" width="80" height="60"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
         <image name="settings1" width="24" height="24"/>
+        <image name="souqiubaicon" width="1000" height="300"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

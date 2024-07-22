@@ -58,7 +58,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 //               imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
             imageView.widthAnchor.constraint(equalToConstant: 110),
-            imageView.heightAnchor.constraint(equalToConstant: 120),
+            imageView.heightAnchor.constraint(equalToConstant: 140),
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),

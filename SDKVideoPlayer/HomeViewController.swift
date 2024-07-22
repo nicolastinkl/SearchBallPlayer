@@ -355,7 +355,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
     }
     
     func searchRequest(searchText: String) {
-        
+        timer?.invalidate()
         SwiftLoader.show(view: self.view,title: "搜索中...", animated: true)
          
         

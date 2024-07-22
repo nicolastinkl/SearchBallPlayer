@@ -76,7 +76,7 @@ class DetailViewController: BaseViewController, DetailProtocol {
             #endif
         }
         playerView.becomeFirstResponder()
-        SwiftLoader.show(view: self.view , title: "正在缓冲...", animated: true)
+//        SwiftLoader.show(view: self.view , title: "正在缓冲...", animated: true)
         
     }
 
@@ -101,12 +101,12 @@ extension DetailViewController: PlayerControllerDelegate {
     func playerController(state states: KSPlayerState) {
         if states == .readyToPlay {
             
-            SwiftLoader.hide()
+          //  SwiftLoader.hide()
             
             
         }else if states ==  .error {
             
-            SwiftLoader.hide()
+          //  SwiftLoader.hide()
             self.showSearchErrorAlert(on: self, error: "请求视频出错，请重试", title: "提示")            
             
         }
