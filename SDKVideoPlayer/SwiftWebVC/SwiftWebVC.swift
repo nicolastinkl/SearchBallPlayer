@@ -237,34 +237,34 @@ public class SwiftWebVC: UIViewController{
         
         super.viewWillAppear(true)
         
-        self.navigationController?.setToolbarHidden(true, animated: true)
-        
-        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
-            self.navigationController?.setToolbarHidden(false, animated: false)
-        }
-        else if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
-            self.navigationController?.setToolbarHidden(true, animated: true)
-        }
+//        self.navigationController?.setToolbarHidden(true, animated: true)
+//        
+//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
+//            self.navigationController?.setToolbarHidden(false, animated: false)
+//        }
+//        else if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+//            self.navigationController?.setToolbarHidden(true, animated: true)
+//        }
     }
     
-    override public func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        
-        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
-            self.navigationController?.setToolbarHidden(true, animated: true)
-        }
-    }
-    
-    override public func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
+//    override public func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(true)
+//        
+//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
+//            self.navigationController?.setToolbarHidden(true, animated: true)
+//        }
+//    }
+//    
+//    override public func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(true)
+////        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//    }
 //    
     ////////////////////////////////////////////////
     // Toolbar
     
     func updateToolbarItems() {
-        
+        return;
         backBarButtonItem.isEnabled = webView.canGoBack
         forwardBarButtonItem.isEnabled = webView.canGoForward
         
