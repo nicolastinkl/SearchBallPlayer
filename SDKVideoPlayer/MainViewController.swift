@@ -36,6 +36,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.textColor = ThemeManager.shared.fontColor
         label.numberOfLines = 2
+        label.lineBreakMode = .byCharWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -54,9 +55,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
 //               imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
             imageView.widthAnchor.constraint(equalToConstant: 100),
-            imageView.heightAnchor.constraint(equalToConstant: 140),
+            imageView.heightAnchor.constraint(equalToConstant: 120),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)

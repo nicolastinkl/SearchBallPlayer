@@ -44,6 +44,8 @@ class MovieDetailViewController: BaseViewController {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .center
+        label.numberOfLines = 3
+        label.lineBreakMode = .byCharWrapping
         label.textColor = ThemeManager.shared.fontColor
         return label
     }()
@@ -174,9 +176,7 @@ class MovieDetailViewController: BaseViewController {
               //contentView.heightAnchor.constraint(equalToConstant: 1200)
           ])
       }
-    
-    
-      
+     
     
     private func setupPosterImageView() {
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
