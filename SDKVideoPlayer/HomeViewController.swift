@@ -29,6 +29,7 @@ struct SearchRecommendation: Codable {
     let url: String
 }
 
+ 
 struct ConfigResponse: Codable {
     let code: String
     let message: String
@@ -39,6 +40,7 @@ struct DataClass: Codable {
     let classlist: [Website]
     let searchlist: [SearchRecommendation]
     let searchrecommadlist: [SearchRecommendation]
+    let blackDomains: [String]
 }
 
 
@@ -284,6 +286,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
   private func configureNavigationBar() {
       if #available(iOS 13.0, *) {
           // iOS 13 及以上版本使用 UINavigationBarAppearance
+          // iOS 13 及以上版本使用 UINavigationBarAppearance
           let appearance = UINavigationBarAppearance()
           appearance.configureWithTransparentBackground()
           appearance.backgroundColor = .clear
@@ -306,6 +309,13 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                 if let _ = URL(string: newText) {
                     let controller = SwiftWebVC(urlString:  newText )
                     controller.hidesBottomBarWhenPushed = true
+                    var blackBol = false
+                    configData?.data.blackDomains.forEach({ blackurl in
+                        if blackurl.localizedCaseInsensitiveContains(newText) {
+                            blackBol = true
+                        }
+                    })
+                    controller.proxyHttps = blackBol
                     self.show(controller, sender: self)
                     return
                 }
@@ -322,6 +332,13 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                         if model.keyword == newText && model.url.count > 10 {
                             let controller = SwiftWebVC(urlString:  model.url )
                             controller.hidesBottomBarWhenPushed = true
+                            var blackBol = false
+                            configData?.data.blackDomains.forEach({ blackurl in
+                                if blackurl.localizedCaseInsensitiveContains(model.url) {
+                                    blackBol = true
+                                }
+                            })
+                            controller.proxyHttps = blackBol
                             self.show(controller, sender: self)
                             isNotSearchlist = false
                         }
@@ -576,12 +593,19 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         }else{
             let keyword:Website = icons[indexPath.item]
             let urlString = keyword.url
-            if let url = URL(string: urlString) {
+            if let _ = URL(string: urlString) {
 //                       let safariViewController = SFSafariViewController(url: url)
 //                       safariViewController.delegate = self
 //                       present(safariViewController, animated: true, completion: nil)
                 let controller = SwiftWebVC(urlString: urlString)
                 controller.hidesBottomBarWhenPushed = true
+                var blackBol = false
+                configData?.data.blackDomains.forEach({ blackurl in
+                    if blackurl.localizedCaseInsensitiveContains(urlString) {
+                        blackBol = true
+                    }
+                })
+                controller.proxyHttps = blackBol
                 self.show(controller, sender: self)
                    }
         }
@@ -626,6 +650,13 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                 
                 let controller = SwiftWebVC(urlString: urlString)
                 controller.hidesBottomBarWhenPushed = true
+                var blackBol = false
+                configData?.data.blackDomains.forEach({ blackurl in
+                    if blackurl.localizedCaseInsensitiveContains(urlString) {
+                        blackBol = true
+                    }
+                })
+                controller.proxyHttps = blackBol
                 self.show(controller, sender: self)
             }else{
                 //openSearchTarget

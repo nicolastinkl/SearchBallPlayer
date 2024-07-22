@@ -173,6 +173,8 @@ public class SwiftWebVC: UIViewController{
         let schemeHandler = CustomURLSchemeHandler()
         schemeHandler.ViewController = self
         if proxyHttps{
+            
+        }else{
             webConfiguration.setURLSchemeHandler(schemeHandler, forURLScheme: "https")
         }
         
