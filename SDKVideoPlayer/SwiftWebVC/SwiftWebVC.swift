@@ -247,18 +247,18 @@ public class SwiftWebVC: UIViewController{
         }
     }
     
-//    override public func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(true)
-//        
-//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
-//            self.navigationController?.setToolbarHidden(true, animated: true)
-//        }
-//    }
-//    
-//    override public func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(true)
-////        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//    }
+    override public func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone) {
+            self.navigationController?.setToolbarHidden(true, animated: true)
+        }
+    }
+    
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
 //    
     ////////////////////////////////////////////////
     // Toolbar
@@ -534,7 +534,7 @@ extension SwiftWebVC: WKNavigationDelegate  {
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.delegate?.didFinishLoading(success: false)
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//        updateToolbarItems()
+         updateToolbarItems()
         SwiftLoader.hide()
         
 //        self.showNetworkErrorView(errormsg: "\(error.localizedDescription)") {

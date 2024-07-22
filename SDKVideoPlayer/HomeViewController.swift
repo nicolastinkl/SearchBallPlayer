@@ -305,7 +305,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
               
                 if let _ = URL(string: newText) {
                     let controller = SwiftWebVC(urlString:  newText )
-                    //controller.hidesBottomBarWhenPushed = true
+                    controller.hidesBottomBarWhenPushed = true
                     self.show(controller, sender: self)
                     return
                 }
@@ -321,7 +321,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                     searchlist.forEach { model in
                         if model.keyword == newText && model.url.count > 10 {
                             let controller = SwiftWebVC(urlString:  model.url )
-                            //controller.hidesBottomBarWhenPushed = true
+                            controller.hidesBottomBarWhenPushed = true
                             self.show(controller, sender: self)
                             isNotSearchlist = false
                         }
@@ -581,7 +581,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
 //                       safariViewController.delegate = self
 //                       present(safariViewController, animated: true, completion: nil)
                 let controller = SwiftWebVC(urlString: urlString)
-                //controller.hidesBottomBarWhenPushed = true
+                controller.hidesBottomBarWhenPushed = true
                 self.show(controller, sender: self)
                    }
         }
@@ -625,7 +625,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
 //                       present(safariViewController, animated: true, completion: nil)
                 
                 let controller = SwiftWebVC(urlString: urlString)
-                //controller.hidesBottomBarWhenPushed = true
+                controller.hidesBottomBarWhenPushed = true
                 self.show(controller, sender: self)
             }else{
                 //openSearchTarget
