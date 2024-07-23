@@ -112,9 +112,9 @@
                                 </connections>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhL-yO-FiP">
-                                <rect key="frame" x="16" y="257" width="119" height="24"/>
+                                <rect key="frame" x="16" y="257" width="320" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="119" id="G10-3x-7YZ"/>
+                                    <constraint firstAttribute="width" constant="320" id="G10-3x-7YZ"/>
                                     <constraint firstAttribute="height" constant="24" id="eiY-qF-sGJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>

@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  SDKVideoPlayer
+
+  Created by Zeus on 2024/7/23.
+  
+*/
+"appName"="搜球吧";
+"speed"="播放速度";
+"mybrowserecord"="我的浏览记录";
+"Service_agreement"="服务协议";
+"Copyright_statement"="版权说明";
+"Privacy_policy"="隐私政策";
+"App_Version"="版本号";
+"welcometo"="欢迎来到";
+"StarUS"="评价我们";
+"ReceentBroswerRecode"="最新观看记录";
+"recommandSearch"="大家都在搜";
+"home"="浏览器";
+"video"="观影";
+"Settings"="设置";
+"Searching"="搜索中...";
+"Searched"="的搜索结果";
+"Loaindgmore"="正在加载更多...";
+"LoadedNoMore"="没有更多数据了";
+"favitorurl"="添加收藏网址";
+"Cancel"="取消";
+"Save"="保存";
+"SaveSuccess"="保存成功";
+"Alert"="提示";
+"SaveFailed"="保存失败";
+"PleaseInputTitle"="请输入标题";
+"PleaseInputURL"="请输入网址"; 
+"Loading"="正在加载中...";
+"Get_successful_online_video"="检测到可播放的在线视频";
+"Get_successful_online_video_faild"="未检测到可播放的在线视频";
+"Getingsvideo"="获取中...";
+"ClickPlay"="点击播放";

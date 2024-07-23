@@ -43,7 +43,7 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
        
        super.viewDidLoad()
        view.backgroundColor =  ThemeManager.shared.viewBackgroundColor
-       self.title =  "'\(searchText)' 搜索结果"
+       self.title =  "'\(searchText)' \(NSLocalizedString("Searched", comment: ""))"
        
        setupTableView()
        
@@ -458,14 +458,14 @@ class LoadingFooterView: UITableViewHeaderFooterView {
         label.textAlignment = .center
         //activityIndicator.frame = contentView.bounds
         if hasMoreData {
-            label.text = "正在加载更多..."
+            label.text = NSLocalizedString("Loaindgmore", comment: "") // "正在加载更多..."
             //label.frame = CGRect(x: 0, y: 40, width: contentView.frame.width, height: 30)
             activityIndicator.startAnimating()
             activityIndicator.isHidden = false
             label.isHidden = false
         } else {
            // label.frame = contentView.bounds
-            label.text = "没有更多数据了"
+            label.text =  NSLocalizedString("LoadedNoMore", comment: "")// "没有更多数据了"
             label.isHidden = false
             activityIndicator.stopAnimating()
             activityIndicator.isHidden = true

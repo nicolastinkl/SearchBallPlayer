@@ -373,6 +373,7 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
           
           configureNavigationBar()
           
+//          self.title = NSLocalizedString("Viewing", comment: "")
           
       }
     
@@ -405,7 +406,7 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
       
       func sendRequestGetconfig() {
           
-          SwiftLoader.show(view: self.view,title: "正在请求数据...", animated: true)
+          SwiftLoader.show(view: self.view,title: NSLocalizedString("Loading", comment: ""), animated: true)
           
 
         //  LoadingIndicator()

@@ -52,7 +52,8 @@ class VideoPopupView: UIView {
     
     let playButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("立即播放", for: .normal)
+        
+        button.setTitle( NSLocalizedString("ClickPlay", comment: ""), for: .normal)
         button.setTitleColor(.white, for: UIControl.State.normal)
         button.layer.cornerRadius = 8
         button.backgroundColor = UIColor.MainColor()
@@ -176,6 +177,6 @@ class VideoPopupView: UIView {
     
     public func configData(title: String ,durationLabel :String){
         self.titleLabel.text = title
-        self.titleLabelName.text = "检测到可播放的视频"
+        self.titleLabelName.text = NSLocalizedString("Get_successful_online_video", comment: "") 
     }
 }

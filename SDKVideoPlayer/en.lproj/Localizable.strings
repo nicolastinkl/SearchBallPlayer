@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  SDKVideoPlayer
+
+  Created by Zeus on 2024/7/23.
+  
+*/
+"appName"="搜球吧";
+"speed"="Speed";
+"mybrowserecord"="My browsing history";
+"Service_agreement"="Service agreement";
+"Copyright_statement"="Copyright statement";
+"Privacy_policy"="Privacy policy";
+"App_Version"="App Version number";
+"welcometo"="Welcome to ";
+"StarUS"="Star US";
+"ReceentBroswerRecode"="Recent Play Record";
+"recommandSearch"="Search Recommendations";
+"Browser"="Browser";
+"Viewing"="Viewing";
+"Settings"="Settings";
+
+"Searching"="Searching...";
+"Searched"=" Results";
+"Loaindgmore"="Loading More Data...";
+"LoadedNoMore"="No More Data";
+"favitorurl"="Add favorite URL";
+"Cancel"="Cancel";
+"Save"="Save";
+"SaveSuccess"="Save Success";
+"Alert"="Alert";
+"SaveFailed"="Save Failure";
+"PleaseInputTitle"="Please input title";
+"PleaseInputURL"="Please input url address";
+"Loading"="Loading...";
+"Get_successful_online_video"="Get the playable online video";
+"Get_successful_online_video_faild"="Failed Get the playable online video";
+"Getting online Video..."="Getting online Video...";
+"ClickPlay"="Click Play";

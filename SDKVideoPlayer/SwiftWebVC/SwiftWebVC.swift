@@ -222,7 +222,7 @@ public class SwiftWebVC: UIViewController{
         ])
         loadRequest(request)
         configureNavigationBar()
-        SwiftLoader.show(view: self.view,title: "正在加载中...", animated: true)
+        SwiftLoader.show(view: self.view,title: NSLocalizedString("Loading", comment: ""), animated: true)
         
          
         
@@ -414,7 +414,7 @@ public class SwiftWebVC: UIViewController{
     }
     func presentTextInputAlert(title: String, url:String,iconurl:String?) {
            // 创建 UIAlertController 实例
-           let alertController = UIAlertController(title: "收藏网址", message: "", preferredStyle: .alert)
+           let alertController = UIAlertController(title: NSLocalizedString("favitorurl", comment: ""), message: "", preferredStyle: .alert)
            
            // 创建第一个文本输入框
            let textField1 = UITextField()
@@ -422,7 +422,7 @@ public class SwiftWebVC: UIViewController{
            textField1.borderStyle = .roundedRect
            
             alertController.addTextField { (textF) in
-                textF.placeholder = "请输入标题"
+                textF.placeholder = NSLocalizedString("PleaseInputTitle", comment: "")
                 textF.text = title
            }
             
@@ -432,7 +432,7 @@ public class SwiftWebVC: UIViewController{
            
            textField2.borderStyle = .roundedRect
            alertController.addTextField { (textF) in
-               textF.placeholder = "请输入网址"
+               textF.placeholder = NSLocalizedString("PleaseInputURL", comment: "")
                textF.text = url
            }
             
@@ -455,23 +455,23 @@ public class SwiftWebVC: UIViewController{
        
            
            // 创建取消按钮
-           let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+           let cancelAction = UIAlertAction(title:NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
                // 取消操作
            }
            alertController.addAction(cancelAction)
            
            // 创建保存按钮
-           let saveAction = UIAlertAction(title: "保存", style: .default) { (action) in
+           let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { (action) in
                if let text1 = alertController.textFields?.first?.text,
                   let text2 = alertController.textFields?.last?.text {
                    // 这里处理保存逻辑
-                   print("文本1: \(text1), 文本2: \(text2)")
+                   //print("文本1: \(text1), 文本2: \(text2)")
                    if text1.count > 0 && text2.count > 0 {
                        //提示成功
                        LocalStore.saveToWebsiteFaviator(weburl: Website(name: text1, url: text2, iconurl: self.iconFaviICO))
-                       self.view.makeToast("添加成功", duration: 3.0, position: .bottom)
+                       self.view.makeToast( NSLocalizedString("SaveSuccess", comment: ""), duration: 3.0, position: .bottom)
                    }else{
-                       self.view.makeToast("添加失败", duration: 3.0, position: .bottom)
+                       self.view.makeToast( NSLocalizedString("SaveFailed", comment: ""), duration: 3.0, position: .bottom)
 
                    }
                }
@@ -484,7 +484,7 @@ public class SwiftWebVC: UIViewController{
     
     @objc func searchButtonTapped(_ sender: AnyObject) {
         
-        SwiftLoader.show(view: self.view,title: "正在检测...", animated: true)
+        SwiftLoader.show(view: self.view,title: NSLocalizedString("Getingsvideo", comment: "") , animated: true)
        
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -492,7 +492,7 @@ public class SwiftWebVC: UIViewController{
                 self.hideVideoPopupView()
                 self.showVideoPopupView(with: u)
             }else{
-                self.view.makeToast("暂时没有检测到可播放的视频", duration: 3.0, position: .center )
+                self.view.makeToast(NSLocalizedString("Get_successful_online_video_faild", comment: ""), duration: 3.0, position: .center )
 
             }
             SwiftLoader.hide(view: self.view)

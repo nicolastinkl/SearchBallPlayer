@@ -214,6 +214,8 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         
         NotificationCenter.default.addObserver(self, selector: #selector(historyItemsUpdated), name: .favitorItemsUpdated, object: nil) 
         
+//        self.title = NSLocalizedString("Browser", comment: "")
+        
     }    
     @objc func historyItemsUpdated() {
         // 刷新表格视图
@@ -371,7 +373,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
     
     func searchRequest(searchText: String) {
         timer?.invalidate()
-        SwiftLoader.show(view: self.view,title: "搜索中...", animated: true)
+        SwiftLoader.show(view: self.view,title: NSLocalizedString("Searching", comment: ""), animated: true)
          
         
         let requestComplete1: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
@@ -482,7 +484,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
          */
 
         
-        SwiftLoader.show(view: self.view,title: "加载中...", animated: true)
+        SwiftLoader.show(view: self.view,title: NSLocalizedString("Loading", comment: ""), animated: true)
         
 //        // Fetch Request
         
@@ -536,7 +538,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                             self.icons.append(contentsOf: response_config.data.classlist)
                             self.searchlist = response_config.data.searchlist
                             DispatchQueue.main.async {
-                                self.dajiaLabel.text = "大家都在搜"
+                                self.dajiaLabel.text = NSLocalizedString("recommandSearch", comment: "")
                                 self.timer =   Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
                                 
 //                                if let s = response_config.data.searchrecommadlist.first?.keyword {

@@ -35,7 +35,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     }
     func setupHistoryLabel() {
         if let ls =  LocalStore.getFromWatchedHistory(), ls.count > 0 {
-            historyLabel.text = "最近观看记录"
+            historyLabel.text = NSLocalizedString("ReceentBroswerRecode", comment: "")
         }else{
             historyLabel.text = ""
         }
@@ -213,6 +213,7 @@ class SettingsHomeViewController: BaseViewController, UITableViewDelegate, UITab
         
         configureNavigationBar()
         
+//        self.title = NSLocalizedString("Settings", comment: "")
         
     }
   
@@ -277,7 +278,7 @@ class SettingsHomeViewController: BaseViewController, UITableViewDelegate, UITab
         
         let customTextLabel = UILabel()
         headView.addSubview(customTextLabel)
-        customTextLabel.text = "欢迎来到搜球吧"
+        customTextLabel.text = NSLocalizedString("welcometo", comment: "") +  NSLocalizedString("appName", comment: "") 
         
         customTextLabel.translatesAutoresizingMaskIntoConstraints = false
         customTextLabel.font = UIFont.boldSystemFont(ofSize: 22)
@@ -285,7 +286,7 @@ class SettingsHomeViewController: BaseViewController, UITableViewDelegate, UITab
         
         
         let startButton = UIButton(type: .system)
-        startButton.setTitle("评价我们", for: UIControl.State.normal)
+        startButton.setTitle(NSLocalizedString("StarUS", comment: "") , for: UIControl.State.normal)
         startButton.translatesAutoresizingMaskIntoConstraints = false
         headView.addSubview(startButton)
         
@@ -354,15 +355,17 @@ class SettingsHomeViewController: BaseViewController, UITableViewDelegate, UITab
              
              switch indexPath.row {
                  case 1:
-                     cell.configure(text: "我的浏览记录", detailText: nil)
+                 
+                 
+                     cell.configure(text: NSLocalizedString("mybrowserecord", comment: ""), detailText: nil)
                  case 2:
-                     cell.configure(text: "服务协议", detailText: nil)
+                     cell.configure(text:  NSLocalizedString("Service_agreement", comment: ""), detailText: nil)
                  case 3:
-                     cell.configure(text: "版权说明", detailText: nil)
+                     cell.configure(text:  NSLocalizedString("Copyright_statement", comment: ""), detailText: nil)
                  case 4:
-                     cell.configure(text: "隐私政策", detailText: nil)
+                     cell.configure(text:  NSLocalizedString("Privacy_policy", comment: ""), detailText: nil)
                  case 5:
-                     cell.configure(text: "版本号", detailText: "1.0.0")
+                     cell.configure(text:  NSLocalizedString("App_Version", comment: ""), detailText: "1.0.0")
                  default:
                      cell.configure(text: "", detailText: nil)
              }
@@ -423,7 +426,7 @@ class SettingsHomeViewController: BaseViewController, UITableViewDelegate, UITab
 //                cell.configure(text: "隐私政策", detailText: nil)
             case 5:
                 print("")
-                showSearchErrorAlert(on: self, error: "1.0.0(1000)",title: "版本号信息")
+                showSearchErrorAlert(on: self, error: "1.0.0(1000)",title: NSLocalizedString("App_Version", comment: ""))
 //                cell.configure(text: "版本号", detailText: "1.0.0")
             default:
                 print("")
