@@ -275,10 +275,10 @@ extension UIViewController {
           // 创建背景视图
     
         guard !isShowingErrorView else { return }
-               self.isShowingErrorView = true
+        self.isShowingErrorView = true
         // 创建背景视图
-       let errorView = UIView()
-       view.addSubview(errorView)
+        let errorView = UIView()
+        view.addSubview(errorView)
         errorView.backgroundColor = ThemeManager.shared.viewBackgroundColor
         errorView.translatesAutoresizingMaskIntoConstraints = false
         
