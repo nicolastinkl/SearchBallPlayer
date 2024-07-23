@@ -735,6 +735,8 @@ class IconCollectionViewCell: UICollectionViewCell {
          let label = UILabel()
          label.textAlignment = .center
          label.font = UIFont.systemFont(ofSize: 12)
+         label.numberOfLines = 2
+         label.lineBreakMode = .byCharWrapping
          label.textColor = ThemeManager.shared.fontColor
          label.translatesAutoresizingMaskIntoConstraints = false
          return label
