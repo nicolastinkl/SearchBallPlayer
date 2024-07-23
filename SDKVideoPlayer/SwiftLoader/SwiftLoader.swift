@@ -62,6 +62,9 @@ public class SwiftLoader: UIView {
             NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(notification: )),
                                                    name: UIDevice.orientationDidChangeNotification,
                                                    object: nil)
+             
+            NotificationCenter.default.addObserver(loader, selector: #selector(loader.didBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+                     
             
             let height: CGFloat = UIScreen.main.bounds.size.height
             let width: CGFloat = UIScreen.main.bounds.size.width
@@ -113,7 +116,8 @@ public class SwiftLoader: UIView {
         NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(notification: )),
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
-        
+        NotificationCenter.default.addObserver(loader, selector: #selector(loader.didBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+               
         let height: CGFloat = UIScreen.main.bounds.size.height
         let width: CGFloat = UIScreen.main.bounds.size.width
         let center: CGPoint = CGPoint(x: width / 2.0, y: height / 2.0)
@@ -133,6 +137,10 @@ public class SwiftLoader: UIView {
             }
         }
     }
+    
+    @objc func didBecomeActive(notification: NSNotification) {
+           self.loadingView?.start()
+       }
     
     public class func hide() {
         NotificationCenter.default.removeObserver(SwiftLoader.shared)
