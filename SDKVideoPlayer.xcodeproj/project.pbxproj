@@ -38,6 +38,8 @@
 		C09C70632C3D6558000F6E01 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C09C70622C3D6558000F6E01 /* SDWebImage */; };
 		C09C70652C3D6558000F6E01 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C09C70642C3D6558000F6E01 /* SDWebImageMapKit */; };
 		C09CB0692C4E4B570028C461 /* RoundedCornersImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09CB0682C4E4B570028C461 /* RoundedCornersImageView.swift */; };
+		C09CB06B2C4F4A7A0028C461 /* NaviSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09CB06A2C4F4A7A0028C461 /* NaviSearchViewController.swift */; };
+		C09CB06E2C4F53E70028C461 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = C09CB06D2C4F53E70028C461 /* Toast */; };
 		C0AD2AEA2C44F5260091A508 /* SwiftWebVCActivityChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AE32C44F5260091A508 /* SwiftWebVCActivityChrome.swift */; };
 		C0AD2AEB2C44F5260091A508 /* SwiftWebVCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD2AE42C44F5260091A508 /* SwiftWebVCActivity.swift */; };
 		C0AD2AEC2C44F5260091A508 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0AD2AE62C44F5260091A508 /* Media.xcassets */; };
@@ -129,6 +131,7 @@
 		C09C704C2C3D4AE5000F6E01 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C09C704F2C3D5B8B000F6E01 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09CB0682C4E4B570028C461 /* RoundedCornersImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornersImageView.swift; sourceTree = "<group>"; };
+		C09CB06A2C4F4A7A0028C461 /* NaviSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviSearchViewController.swift; sourceTree = "<group>"; };
 		C0AD2AE32C44F5260091A508 /* SwiftWebVCActivityChrome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWebVCActivityChrome.swift; sourceTree = "<group>"; };
 		C0AD2AE42C44F5260091A508 /* SwiftWebVCActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftWebVCActivity.swift; sourceTree = "<group>"; };
 		C0AD2AE62C44F5260091A508 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C09CB06E2C4F53E70028C461 /* Toast in Frameworks */,
 				59027263754A113519BFADEA /* Pods_SDKVideoPlayer.framework in Frameworks */,
 				C050488E2C48F0DA00E4DEDB /* iAd.framework in Frameworks */,
 				C0AD2B1A2C47B0D50091A508 /* AppTrackingTransparency.framework in Frameworks */,
@@ -269,6 +273,7 @@
 				C00A39F42C3FC0C4004E31E4 /* DetailViewController.swift */,
 				C09CB0682C4E4B570028C461 /* RoundedCornersImageView.swift */,
 				C0AD2B1D2C47BCCE0091A508 /* BrowseViewController.swift */,
+				C09CB06A2C4F4A7A0028C461 /* NaviSearchViewController.swift */,
 				C0EEFC272C4A46C500AAFFD0 /* VideoPopupView.swift */,
 				12CA1C122C4A97E000D2154F /* VideoUnities.swift */,
 				C0EEFC2E2C4A592100AAFFD0 /* Objc.h */,
@@ -362,6 +367,7 @@
 				12CADDA62C3E2F540032635B /* Alamofire */,
 				12CADDB02C3E43940032635B /* SwiftfulLoadingIndicators */,
 				C00A39F92C3FCA4C004E31E4 /* KSPlayer */,
+				C09CB06D2C4F53E70028C461 /* Toast */,
 			);
 			productName = SDKVideoPlayer;
 			productReference = C09C70122C3D4641000F6E01 /* SDKVideoPlayer.app */;
@@ -447,6 +453,7 @@
 				12CADDA52C3E2F050032635B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				12CADDAF2C3E43940032635B /* XCRemoteSwiftPackageReference "SwiftfulLoadingIndicators" */,
 				C00A39F82C3FCA4C004E31E4 /* XCLocalSwiftPackageReference "KSPlayer" */,
+				C09CB06C2C4F53E70028C461 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = C09C70132C3D4641000F6E01 /* Products */;
 			projectDirPath = "";
@@ -625,6 +632,7 @@
 				C09CB0692C4E4B570028C461 /* RoundedCornersImageView.swift in Sources */,
 				C00A39F52C3FC0C4004E31E4 /* DetailViewController.swift in Sources */,
 				C0AD2AF82C452BC80091A508 /* SearcViewController.swift in Sources */,
+				C09CB06B2C4F4A7A0028C461 /* NaviSearchViewController.swift in Sources */,
 				C00A3A022C413871004E31E4 /* SDKWBViewController.swift in Sources */,
 				C0AD2AEF2C44F5260091A508 /* SwiftWebVC.swift in Sources */,
 				C0AD2B162C4797C00091A508 /* ThemeManager.swift in Sources */,
@@ -1062,6 +1070,14 @@
 				minimumVersion = 5.19.4;
 			};
 		};
+		C09CB06C2C4F53E70028C461 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1088,6 +1104,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C09C70612C3D6558000F6E01 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		C09CB06D2C4F53E70028C461 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C09CB06C2C4F53E70028C461 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
 

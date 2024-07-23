@@ -9,6 +9,7 @@
 import WebKit
 import KSPlayer
 import SDWebImage
+import Toast
 
 public protocol SwiftWebVCDelegate: AnyObject {
     func didStartLoading()
@@ -47,6 +48,10 @@ public class SwiftWebVC: UIViewController{
     var buttonColor: UIColor? = nil
     var titleColor: UIColor? = nil
     var closing: Bool! = false
+    
+    
+    @MainActor
+    var m3u8playurl: URL?
     
     lazy var backBarButtonItem: UIBarButtonItem =  {
         var tempBackBarButtonItem = UIBarButtonItem(image: SwiftWebVC.bundledImage(named: "SwiftWebVCBack"),
@@ -101,7 +106,7 @@ public class SwiftWebVC: UIViewController{
     }()
     
     lazy var searchbarButtonItem: UIBarButtonItem = {
-        var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.search,
+        var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.play,
                                                       target: self,
                                                       action: #selector(SwiftWebVC.searchButtonTapped(_:)))
         tempActionBarButtonItem.tintColor = self.buttonColor
@@ -319,7 +324,7 @@ public class SwiftWebVC: UIViewController{
                 toolbar.tintColor = navigationController!.navigationBar.tintColor
             }
             navigationItem.rightBarButtonItems = items.reverseObjectEnumerator().allObjects as? [UIBarButtonItem]
-            
+            toolbar.backgroundColor = ThemeManager.shared.viewBackgroundColor
         }
         else {
             // let items: NSArray = sharingEnabled ? [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, flexibleSpace, actionBarButtonItem, fixedSpace] : [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, fixedSpace]
@@ -337,6 +342,7 @@ public class SwiftWebVC: UIViewController{
                 }
                 navigationController.toolbar.tintColor = navigationController.navigationBar.tintColor
                 toolbarItems = items as? [UIBarButtonItem]
+                navigationController.toolbar.backgroundColor = ThemeManager.shared.viewBackgroundColor
             }
         }
     }
@@ -461,7 +467,12 @@ public class SwiftWebVC: UIViewController{
                    // 这里处理保存逻辑
                    print("文本1: \(text1), 文本2: \(text2)")
                    if text1.count > 0 && text2.count > 0 {
+                       //提示成功
                        LocalStore.saveToWebsiteFaviator(weburl: Website(name: text1, url: text2, iconurl: self.iconFaviICO))
+                       self.view.makeToast("添加成功", duration: 3.0, position: .bottom)
+                   }else{
+                       self.view.makeToast("添加失败", duration: 3.0, position: .bottom)
+
                    }
                }
            }
@@ -473,6 +484,23 @@ public class SwiftWebVC: UIViewController{
     
     @objc func searchButtonTapped(_ sender: AnyObject) {
         
+        SwiftLoader.show(view: self.view,title: "正在检测...", animated: true)
+       
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if let u = self.m3u8playurl {
+                self.hideVideoPopupView()
+                self.showVideoPopupView(with: u)
+            }else{
+                self.view.makeToast("暂时没有检测到可播放的视频", duration: 3.0, position: .center )
+
+            }
+            SwiftLoader.hide(view: self.view)
+        }
+        
+        
+//        let search = NaviSearchViewController()
+//        self.show(search, sender: self)
     }
     
     @objc func actionButtonTapped(_ sender: AnyObject) {
@@ -560,6 +588,7 @@ extension SwiftWebVC: WKNavigationDelegate  {
     
     func showVideoPopupView(with url: URL?) {
         // 创建半透明遮罩视图
+        self.m3u8playurl = url
         let overlayView = UIView()
         overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         view.addSubview(overlayView)
@@ -818,7 +847,9 @@ class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
             if  let urlstring = request.urlRequest?.url?.absoluteString {
                 
                 if urlstring.contains(".m3u8") || urlstring.contains(".mp4") {
+                      
                       await self?.ViewController?.hideVideoPopupView()
+                    
                       await self?.ViewController?.showVideoPopupView(with: request.urlRequest?.url)
                       // 处理视频 URL（如弹出播放界面或其他操作）
                   }

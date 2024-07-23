@@ -217,13 +217,14 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
     }    
     @objc func historyItemsUpdated() {
         // 刷新表格视图
-        if let newweb = LocalStore.readToWebsiteFaviators()?.last {
+        if let newweb = LocalStore.readToWebsiteFaviators()?.first {
 //            self.icons.forEach { oldwebsite in
 //                if !newweb.url.localizedCaseInsensitiveContains(oldwebsite.url) {
 //
 //                }
 //            }
-            self.icons.append(newweb)
+            self.icons.insert(newweb, at: 0)
+            
             self.iconsCollectionView.reloadData()
         }
      }
@@ -523,14 +524,16 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                             
                             
                             
-                            self.icons = response_config.data.classlist
+                            //self.icons = response_config.data.classlist
                             if let olds = LocalStore.readToWebsiteFaviators() {
 //                                olds.forEach { web in
 //                                    self.icons.append(web)
 //                                }
-                                self.icons.append(contentsOf: olds)
+                                self.icons =  olds //response_config.data.classlist
+                               
                                 
                             }
+                            self.icons.append(contentsOf: response_config.data.classlist)
                             self.searchlist = response_config.data.searchlist
                             DispatchQueue.main.async {
                                 self.dajiaLabel.text = "大家都在搜"
@@ -652,6 +655,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
            }
            
            let keyword:Website = icons[indexPath.item]
+           print("\(keyword.name) \(keyword.iconurl)")
            cell.configure(with: keyword.iconurl, title: keyword.name)
            return cell
            
@@ -781,14 +785,21 @@ class IconCollectionViewCell: UICollectionViewCell {
     func configure(with iconurl: String, title: String) {
 
 //            iconImageView.sd_setImage(with: URL.init(string: iconurl), placeholderImage: UIImage(named: "placeholder-image"), context: nil)
-        iconImageView.sd_setImage(with:  URL.init(string: iconurl)) { image, error,sdimagetype, url in
-           
-            if let err = error {
-                //
-                print("\(err.localizedDescription)  ")
-                self.iconImageView.setIcon(icon:  .weather(.rainMix))
+        if iconurl.count > 10, let u = URL(string: iconurl){
+            iconImageView.sd_setImage(with: u) { image, error,sdimagetype, url in
+               
+                if let err = error {
+                    //
+                    print("\(err.localizedDescription)  ")
+                    self.iconImageView.image = UIImage(named: "internet")
+                    //self.iconImageView.setIcon(icon:  .weather(.rainMix))
+                }
             }
+        }else{
+            self.iconImageView.image = UIImage(named: "internet")
+//            self.iconImageView.setIcon(icon:  .weather(.rainMix))
         }
+        
             titleLabel.text = title
         }
     
