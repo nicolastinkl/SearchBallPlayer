@@ -107,7 +107,7 @@ extension DetailViewController: PlayerControllerDelegate {
         }else if states ==  .error {
             
           //  SwiftLoader.hide()
-            self.showSearchErrorAlert(on: self, error: "请求视频出错，请重试", title: "提示")            
+            self.showSearchErrorAlert(on: self, error: NSLocalizedString("dataexception", comment: ""), title: NSLocalizedString("Alert", comment: ""))            
             
         }
         print(">>>>>>>>>>state: \(states.description)")

@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class ApplicationS {
-    public static let baseURL: String = "https://api.cloudkit-apple.com"
+    public static let baseURL: String = "https://api.search-ball.com"
     
     static func initAppConfig(){
         

@@ -36,3 +36,5 @@
 "Get_successful_online_video_faild"="未检测到可播放的在线视频";
 "Getingsvideo"="获取中...";
 "ClickPlay"="点击播放";
+"dataexception"="网络异常";
+"dataretry"="点击重试";

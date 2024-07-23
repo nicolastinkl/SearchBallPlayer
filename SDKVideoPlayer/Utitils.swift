@@ -304,7 +304,7 @@ extension UIViewController {
         
         // 创建并添加标题标签
         let titleLabel = UILabel()
-        titleLabel.text = "数据异常"
+        titleLabel.text = NSLocalizedString("dataexception", comment: "")
         titleLabel.textColor = ThemeManager.shared.fontColor
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -321,7 +321,7 @@ extension UIViewController {
         
         // 创建并添加重试按钮
         let retryButton = UIButton(type: .system)
-        retryButton.setTitle("重试", for: .normal)
+        retryButton.setTitle( NSLocalizedString("dataretry", comment: ""), for: .normal)
         retryButton.setTitleColor(UIColor.MainColor(), for: .normal)
         retryButton.backgroundColor = ThemeManager.shared.fontColor.withAlphaComponent(0.1) // UIColor(white: 1.0, alpha: 0.1)
         retryButton.layer.cornerRadius = 20

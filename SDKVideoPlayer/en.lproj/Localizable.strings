@@ -37,3 +37,5 @@
 "Get_successful_online_video_faild"="Failed Get the playable online video";
 "Getting online Video..."="Getting online Video...";
 "ClickPlay"="Click Play";
+"dataexception"="Network Exception";
+"dataretry"="Click Retry";
