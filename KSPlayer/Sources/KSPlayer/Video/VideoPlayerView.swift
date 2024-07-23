@@ -438,8 +438,8 @@ extension VideoPlayerView {
                 self.playerLayer?.player.select(track: value)
             }
         }
-        // NSLocalizedString("speed", comment: "")
-        toolBar.playbackRateButton.setMenu(title: "播放速度", current: playerLayer?.player.playbackRate ?? 1, list: [0.75, 1.0, 1.25, 1.5, 2.0]) { value in
+        // 
+        toolBar.playbackRateButton.setMenu(title: NSLocalizedString("speed", comment: ""), current: playerLayer?.player.playbackRate ?? 1, list: [0.75, 1.0, 1.25, 1.5, 2.0]) { value in
             "\(value) x"
         } completition: { [weak self] value in
             guard let self else { return }
