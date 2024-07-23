@@ -842,7 +842,7 @@ class CustomURLSchemeHandler: NSObject, WKURLSchemeHandler {
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         let task = Task { [weak self] in
             let request = urlSchemeTask.request
-           // print(">>>>>> \(request.urlRequest?.url?.absoluteString ?? ""  )")
+           //debugPrint(">>>>>> \(request.urlRequest?.url?.absoluteString ?? ""  )")
             
             if  let urlstring = request.urlRequest?.url?.absoluteString {
                 
