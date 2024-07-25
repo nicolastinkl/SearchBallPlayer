@@ -137,7 +137,7 @@ class SDKAdServices{
                     // 处理 attributionDetails，例如将其发送到你的服务器
                     print("Attribution Details: \(attribu)")
                     
-                    self.handleAttributionDetails13(to: attribu as? [String:NSObject])
+                    self.handleAttributionDetails13(to: attribu as [String:NSObject]?)
                 }
             }
         }
