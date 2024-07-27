@@ -1,16 +1,41 @@
 PODS:
+  - FFmpegKit (6.1.0):
+    - FFmpegKit/FFmpegKit (= 6.1.0)
+  - FFmpegKit/FFmpegKit (6.1.0):
+    - Libass
+  - Libass (0.17.1):
+    - Libass/Libass (= 0.17.1)
+  - Libass/Libass (0.17.1)
+  - Libmpv (0.37.0):
+    - Libmpv/Libmpv (= 0.37.0)
+  - Libmpv/Libmpv (0.37.0):
+    - FFmpegKit
   - SwiftIcons (3.0)
 
 DEPENDENCIES:
+  - FFmpegKit (from `/Users/abc123456/Documents/ios/FFmpegKit`)
+  - Libass (from `/Users/abc123456/Documents/ios/FFmpegKit`)
+  - Libmpv (from `/Users/abc123456/Documents/ios/FFmpegKit`)
   - SwiftIcons (~> 3.0)
 
 SPEC REPOS:
   trunk:
     - SwiftIcons
 
+EXTERNAL SOURCES:
+  FFmpegKit:
+    :path: "/Users/abc123456/Documents/ios/FFmpegKit"
+  Libass:
+    :path: "/Users/abc123456/Documents/ios/FFmpegKit"
+  Libmpv:
+    :path: "/Users/abc123456/Documents/ios/FFmpegKit"
+
 SPEC CHECKSUMS:
+  FFmpegKit: db65e6897763aefc6e4d5330db5ea5bf8c42c0df
+  Libass: e88af2324e1217e3a4c8bdc675f6f23a9dfc7677
+  Libmpv: f221c4019c71818458578aa3d3777c9d3a2eca88
   SwiftIcons: 3b748e57d9eee0c7c8d3bdbf2d742c0b1b4c6172
 
-PODFILE CHECKSUM: 88605a25cd686ce094fb96a5742b8aba43083c38
+PODFILE CHECKSUM: df35498c1fc07def86bd8ab98545552224cf8a26
 
 COCOAPODS: 1.15.2

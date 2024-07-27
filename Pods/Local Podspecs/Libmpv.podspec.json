@@ -1,0 +1,33 @@
+{
+  "name": "Libmpv",
+  "version": "0.37.0",
+  "summary": "Libmpv",
+  "description": "Libmpv",
+  "homepage": "https://github.com/kingslay/FFmpegKit",
+  "authors": {
+    "kintan": "554398854@qq.com"
+  },
+  "license": "MIT",
+  "source": {
+    "git": "https://github.com/kingslay/FFmpegKit.git",
+    "tag": "0.37.0"
+  },
+  "platforms": {
+    "ios": "13.0",
+    "osx": "10.15",
+    "tvos": "13.0"
+  },
+  "default_subspecs": "Libmpv",
+  "static_framework": true,
+  "subspecs": [
+    {
+      "name": "Libmpv",
+      "vendored_frameworks": "Sources/libmpv.xcframework",
+      "dependencies": {
+        "FFmpegKit": [
+
+        ]
+      }
+    }
+  ]
+}
