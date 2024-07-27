@@ -62,7 +62,7 @@ class VideoPopupView: UIView {
         return button
     }()
     
-    var cornerRadius: CGFloat = 0 {
+    var cornerRadius2: CGFloat = 0 {
         didSet {
             setNeedsLayout()
         }
@@ -164,7 +164,7 @@ class VideoPopupView: UIView {
     private func applyCornerRadius() {
         let path = UIBezierPath(roundedRect: bounds,
                                 byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight],
-                                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+                                cornerRadii: CGSize(width: cornerRadius2, height: cornerRadius2))
         let maskLayer = CAShapeLayer()
         maskLayer.path = path.cgPath
         layer.mask = maskLayer
