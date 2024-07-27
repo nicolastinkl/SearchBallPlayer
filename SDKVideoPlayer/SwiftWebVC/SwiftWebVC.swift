@@ -16,30 +16,32 @@ public protocol SwiftWebVCDelegate: AnyObject {
     func didFinishLoading(success: Bool)
 }
 
+private struct AssociatedKeys {
+    static var videoPopupView = "videoPopupView"
+    static var overlayView = "overlayView"
+}
+
+
 public class SwiftWebVC: UIViewController{
     
     private var playVideourl:URL?
     
-     private struct AssociatedKeys {
-         static var videoPopupView = "videoPopupView"
-         static var overlayView = "overlayView"
-     }
-     
+   
      private var videoPopupView: VideoPopupView? {
          get {
-             return objc_getAssociatedObject(self, &AssociatedKeys.videoPopupView) as? VideoPopupView
+             return objc_getAssociatedObject(self, AssociatedKeys.videoPopupView) as? VideoPopupView
          }
          set {
-             objc_setAssociatedObject(self, &AssociatedKeys.videoPopupView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+             objc_setAssociatedObject(self, AssociatedKeys.videoPopupView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
          }
      }
      
      private var overlayView: UIView? {
          get {
-             return objc_getAssociatedObject(self, &AssociatedKeys.overlayView) as? UIView
+             return objc_getAssociatedObject(self, AssociatedKeys.overlayView) as? UIView
          }
          set {
-             objc_setAssociatedObject(self, &AssociatedKeys.overlayView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+             objc_setAssociatedObject(self, AssociatedKeys.overlayView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
          }
      }
     
