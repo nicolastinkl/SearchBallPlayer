@@ -138,7 +138,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         //generation back button
         //setupNavigationBar()
         if movieDetail.vodID == 1 || movieDetail.vodID == 2 || movieDetail.vodID == 3 {
-            
+            loadLocals(movieDetail)
             if movieDetail.vodID == 1  {
                 let m3u8Files = CloudKitCentra.getM3u8FilesInDocumentsDirectory()
                 if (m3u8Files.count > 0){
@@ -153,6 +153,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                 }else{
                     remarksLabel.text = "No More Data"
                 }
+                setupButtonLists()
             }
             
             if( movieDetail.vodID == 2){
@@ -169,30 +170,19 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                 }else{
                     remarksLabel.text = "No More Data"
                 }
+                setupButtonLists()
             }
             
             if(movieDetail.vodID == 3) {
                 // 定义支持的文件类型
-                       let m3u8Type = String(kUTTypeM3UPlaylist as CFString) // .m3u8 文件
-                       let mp4Type = String(kUTTypeMPEG4 as CFString) // .mp4 文件
-                       
-                       // 初始化文档选择器
-                       let documentPicker = UIDocumentPickerViewController(documentTypes: [m3u8Type, mp4Type], in: .open)
-                //let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypeURL)], in: .open)
-                  documentPicker.delegate = self
-                  documentPicker.modalPresentationStyle = .formSheet
-//                  documentPicker.sourceView = self.view
-                  
-                  // 允许从iCloud选择文件
-                
-//                  documentPicker.options = [_UIDocumentPickerOptionAllowCloud]
-                  present(documentPicker, animated: true, completion: nil)
-             
+                   
+                //add button
+                addOpenCloudkit()
             }
             
-            loadLocals(movieDetail)
             
-            setupButtonLists()
+            
+           
         }else{
             
             let tempForwardBarButtonItem = UIBarButtonItem(image: UIImage(named: "updloadtocloud"),
@@ -206,6 +196,64 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         }
         
         
+    }
+    
+    func addOpenCloudkit(){
+        let button = UIButton(type: .custom)
+        button.setTitle("Open Files & Choose .m3u8 file", for: .normal)
+        button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
+        button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+         
+        button.layer.cornerRadius = 5
+        button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+        button.layer.borderWidth = 1
+        button.clipsToBounds = true
+ 
+        button.addTarget(self, action: #selector(addOpenCloudkitTapped(_:)), for: .touchUpInside)
+        
+        
+        contentView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+          
+        let buttonSize: CGFloat = 44
+          NSLayoutConstraint.activate([
+              
+              button.heightAnchor.constraint(equalToConstant: buttonSize),
+              button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+              
+              button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -10),
+              button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 )
+          ])
+        
+        var heightSummary:CGFloat = CGFloat(summaryLabel.text?.count ?? 0) * 1.2
+        print(heightSummary)
+          if ( heightSummary <= 0.0) {
+              heightSummary = 200.0
+          }
+        NSLayoutConstraint.activate([
+        
+              contentView.heightAnchor.constraint(equalToConstant:self.view.frame.height*0.6 + heightSummary  + 50)
+          
+        ])
+        
+    }
+
+    @objc func addOpenCloudkitTapped(_ button: UIButton){
+        let m3u8Type = String(kUTTypeM3UPlaylist as CFString) // .m3u8 文件
+        let mp4Type = String(kUTTypeMPEG4 as CFString) // .mp4 文件
+        
+        // 初始化文档选择器
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [m3u8Type, mp4Type], in: .open)
+ //let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypeURL)], in: .open)
+       documentPicker.delegate = self
+       documentPicker.modalPresentationStyle = .formSheet
+//                  documentPicker.sourceView = self.view
+       
+       // 允许从iCloud选择文件
+     
+//                  documentPicker.options = [_UIDocumentPickerOptionAllowCloud]
+       present(documentPicker, animated: true, completion: nil)
     }
         
     
