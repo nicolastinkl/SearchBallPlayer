@@ -58,7 +58,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .center
-        label.textColor = ThemeManager.shared.viewBackgroundColor
+        label.textColor = ThemeManager.shared.fontColor
         label.numberOfLines = 4
         label.lineBreakMode = .byCharWrapping
 //        label.layer.borderColor = ThemeManager.shared.fontColor.withAlphaComponent(0.6).cgColor

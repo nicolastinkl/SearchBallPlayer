@@ -198,11 +198,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
             loadMovieDetail(movieDetail)
         }
         
-         
-        
-        
-        
-     
+          
         
     }
         
@@ -218,6 +214,29 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
               if success {
                   print("文件打开成功")
                   // 这里可以添加代码来处理打开的文件，例如浏览或编辑
+                  if(document.fileURL.pathExtension == "m3u8" || document.fileURL.pathExtension == "mp4"){
+                      
+                      
+                      let resource = KSPlayerResource(url:  document.fileURL)
+                      let controller = DetailViewController()
+                      controller.resource = resource
+                       
+                       if let s = self.movieDetail {
+                           if s.vodID > 10 {
+                               
+                               LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+                               //通知刷新列表
+                               
+                               // 发送通知
+                               NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+                           }
+                       }  
+                      controller.modalPresentationStyle = .fullScreen
+                      self.present(controller, animated:false)
+                      
+                  }
+                  
+                  
               } else {
                   print("文件打开失败")
               }
