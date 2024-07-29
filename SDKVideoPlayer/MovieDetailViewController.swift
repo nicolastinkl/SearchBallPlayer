@@ -172,12 +172,19 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
             }
             
             if(movieDetail.vodID == 3) {
-                let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypeURL)], in: .open)
+                // 定义支持的文件类型
+                       let m3u8Type = String(kUTTypeM3UPlaylist as CFString) // .m3u8 文件
+                       let mp4Type = String(kUTTypeMPEG4 as CFString) // .mp4 文件
+                       
+                       // 初始化文档选择器
+                       let documentPicker = UIDocumentPickerViewController(documentTypes: [m3u8Type, mp4Type], in: .open)
+                //let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypeURL)], in: .open)
                   documentPicker.delegate = self
                   documentPicker.modalPresentationStyle = .formSheet
 //                  documentPicker.sourceView = self.view
                   
                   // 允许从iCloud选择文件
+                
 //                  documentPicker.options = [_UIDocumentPickerOptionAllowCloud]
                   present(documentPicker, animated: true, completion: nil)
              
@@ -198,7 +205,6 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
             loadMovieDetail(movieDetail)
         }
         
-          
         
     }
         
@@ -208,39 +214,39 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
       func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
           guard let url = urls.first else { return }
           
+          if(url.pathExtension == "m3u8" || url.pathExtension == "mp4"){
+              
+              
+              let resource = KSPlayerResource(url: url)
+              let controller = DetailViewController()
+              controller.resource = resource
+               
+               if let s = self.movieDetail {
+                   if s.vodID > 10 {
+                       
+                       LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+                       //通知刷新列表
+                       
+                       // 发送通知
+                       NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+                   }
+               }
+              controller.modalPresentationStyle = .fullScreen
+              self.present(controller, animated:false)
+              
+          }
+          
           // 使用UIDocument打开文件
-          let document = UIDocument(fileURL: url)
+          /*let document = UIDocument(fileURL: url)
           document.open(completionHandler: { (success) in
               if success {
                   print("文件打开成功")
                   // 这里可以添加代码来处理打开的文件，例如浏览或编辑
-                  if(document.fileURL.pathExtension == "m3u8" || document.fileURL.pathExtension == "mp4"){
-                      
-                      
-                      let resource = KSPlayerResource(url:  document.fileURL)
-                      let controller = DetailViewController()
-                      controller.resource = resource
-                       
-                       if let s = self.movieDetail {
-                           if s.vodID > 10 {
-                               
-                               LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
-                               //通知刷新列表
-                               
-                               // 发送通知
-                               NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
-                           }
-                       }  
-                      controller.modalPresentationStyle = .fullScreen
-                      self.present(controller, animated:false)
-                      
-                  }
-                  
                   
               } else {
                   print("文件打开失败")
               }
-          })
+          })*/
       }
 
       // MARK: - UIDocumentInteractionControllerDelegate
