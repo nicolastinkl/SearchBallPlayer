@@ -425,9 +425,9 @@ class SettingsHomeViewController: BaseViewController, UITableViewDelegate, UITab
                 self.show(controller, sender: self)
 //                cell.configure(text: "隐私政策", detailText: nil)
             case 5:
-                print("")
-                showSearchErrorAlert(on: self, error: "1.0.0(1000)",title: NSLocalizedString("App_Version", comment: ""))
-//                cell.configure(text: "版本号", detailText: "1.0.0")
+                let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
+                showSearchErrorAlert(on: self, error: appVersion,title: NSLocalizedString("App_Version", comment: ""))
+
             default:
                 print("")
 //                cell.configure(text: "", detailText: nil)

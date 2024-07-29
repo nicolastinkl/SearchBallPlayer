@@ -25,6 +25,12 @@ class ApplicationS {
     // 创建一个函数来添加自定义头部
     static func addCustomHeaders() -> HTTPHeaders {
         
+        
+//        App-Version: 1.0.0
+//        Accept-Language: en-US;q=1.0, zh-Hans-US;q=0.9
+//        User-Agent: SDKVideoPlayer/1.0.0 (com.sdkplayer.souqiuba-1; build:101; iOS 17.2.0) Alamofire/5.9.1
+//        App-Bid: com.sdkplayer.souqiuba-1
+//        
          // 假设这是你的应用的业务ID和版本信息
          let appBid =  Bundle.main.bundleIdentifier ?? ""
          let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"

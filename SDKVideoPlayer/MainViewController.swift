@@ -257,13 +257,21 @@ class HeaderView: UICollectionReusableView {
     public let moreButton:UIButton = {
         
         let retryButton = UIButton(type: .system)
-        retryButton.setTitle("更多", for: .normal)
+        retryButton.setTitle(NSLocalizedString("more", comment: ""), for: .normal)
         retryButton.setTitleColor(UIColor.MainColor(), for: .normal)
         retryButton.layer.cornerRadius = 20
         retryButton.translatesAutoresizingMaskIntoConstraints = false
         return retryButton
     }()
     
+    
+    
+    let lineLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor.MainColor().withAlphaComponent(0.5) //ThemeManager.shared.fontColor2
+        return label
+    }()
     
     private let iconTag:IconGradientView = IconGradientView()
     
@@ -290,6 +298,7 @@ class HeaderView: UICollectionReusableView {
         addSubview(titleLabel)
         addSubview(imageView)
         addSubview(moreButton)
+        addSubview(lineLabel)
 //        addSubview(iconTag)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 36),
@@ -308,8 +317,14 @@ class HeaderView: UICollectionReusableView {
             moreButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             moreButton.widthAnchor.constraint(equalToConstant: 80),
             moreButton.heightAnchor.constraint(equalToConstant: 20),
-//            
-//            
+            
+            lineLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            lineLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+            lineLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 10),
+            lineLabel.heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            
 //            iconTag.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
 //            iconTag.topAnchor.constraint(equalTo: imageView.topAnchor),
 //            iconTag.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),

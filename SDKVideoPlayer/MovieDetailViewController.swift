@@ -18,6 +18,9 @@ class MovieDetailViewController: BaseViewController {
     
     var movieDetail: Video?
     
+    var jishuArray :[String] = [String]()
+    var jishuURLArray :[String] = [String]()
+    
     private let posterImageView: SDAnimatedImageView = {
         let imageView = SDAnimatedImageView()
         imageView.contentMode = .scaleAspectFill
@@ -102,8 +105,64 @@ class MovieDetailViewController: BaseViewController {
         
         //generation back button
         //setupNavigationBar()
+        let tempForwardBarButtonItem = UIBarButtonItem(image: UIImage(named: "updloadtocloud"),
+                                                       style: UIBarButtonItem.Style.plain,
+                                                       target: self,
+                                                       action: #selector(MovieDetailViewController.uploadtoCloud(_:)))
+        tempForwardBarButtonItem.width = 18.0
+        tempForwardBarButtonItem.tintColor = UIColor.MainColor()
+        navigationItem.rightBarButtonItem = tempForwardBarButtonItem
+        
     }
     
+    @objc func uploadtoCloud(_ button: UIButton){
+        if hdplayurl.count > 5 ,let u = URL(string: hdplayurl) {
+            SwiftLoader.show(title: "Saving...", animated: true)
+            CloudKitCentra.downloadAndSaveToiCloud(urlString: hdplayurl) { result in
+                //Result<URL, Error>
+                switch result {
+                    case .success(let fileURL):
+                        print("文件已成功保存到: \(fileURL)")
+                        DispatchQueue.main.async {
+                            SwiftLoader.hide()
+                            self.view.makeToast( NSLocalizedString("SaveSuccess", comment: ""), duration: 3.0, position: .bottom)
+                            
+                        }
+                    case .failure(let error):
+                        print("下载或保存文件时发生错误: \(error.localizedDescription)")
+                        DispatchQueue.main.async {
+                            SwiftLoader.hide()
+                            self.showSearchErrorAlert(on: self, error: error.localizedDescription)
+                        }
+                    }
+            }
+                
+        }else{
+            //保存 list
+            SwiftLoader.show(title: "Saving List...", animated: true)
+            jishuURLArray.forEach { url in
+                CloudKitCentra.downloadAndSaveToiCloud(urlString: url) { result in
+                    //Result<URL, Error>
+                    switch result {
+                        case .success(let fileURL):
+                            print("文件已成功保存到: \(fileURL)")
+                            DispatchQueue.main.async {
+                                SwiftLoader.hide()
+                                self.view.makeToast( NSLocalizedString("SaveSuccess", comment: ""), duration: 3.0, position: .bottom)
+                                
+                            }
+                        case .failure(let error):
+                            print("下载或保存文件时发生错误: \(error.localizedDescription)")
+                            DispatchQueue.main.async {
+                                SwiftLoader.hide()
+                                self.showSearchErrorAlert(on: self, error: error.localizedDescription)
+                            }
+                        }
+                }
+            }
+            
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -245,8 +304,6 @@ class MovieDetailViewController: BaseViewController {
         ])
     }
     
-    var jishuArray :[String] = [String]()
-    var jishuURLArray :[String] = [String]()
     private func loadMovieDetail(_ movie: Video) {
         // 从URL加载图片
         if let imageUrl = URL(string: movie.vodPic) {

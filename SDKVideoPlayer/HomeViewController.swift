@@ -229,12 +229,12 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
             
             self.iconsCollectionView.reloadData()
         }
-//        let encoder = JSONEncoder()
-//        if let encoded = try? encoder.encode(self.icons) {
-//            let newStr = String(data: encoded, encoding: String.Encoding.utf8)
-//            print("\n" ,  "json: " , newStr!)
-//
-//        }
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(self.icons) {
+            let newStr = String(data: encoded, encoding: String.Encoding.utf8)
+            print("\n" ,  "json: " , newStr!)
+
+        }
      }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -504,7 +504,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                 switch  result {
                        case .success(let value):
                     // 将 JSON 字符串转换为 Data
-                    
+//                    print("response: \(value)")
                     
                     guard let data = value.data(using: String.Encoding.utf8) else {
                         print("Error: Cannot create data from JSON string.")
