@@ -12,7 +12,7 @@ import UIKit
 
 class RoundedCornersImageView: SDAnimatedImageView {
 
-    var cornerRadius: CGFloat = 0 {
+    var cornerRadius2: CGFloat = 0 {
         didSet {
             setNeedsLayout()
         }
@@ -28,7 +28,7 @@ class RoundedCornersImageView: SDAnimatedImageView {
         // 创建一个路径
         let path = UIBezierPath(roundedRect: bounds,
                                 byRoundingCorners: [.topLeft, .topRight],
-                                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+                                cornerRadii: CGSize(width: cornerRadius2, height: cornerRadius2))
 
         // 创建一个形状层并设置路径
         let maskLayer = CAShapeLayer()

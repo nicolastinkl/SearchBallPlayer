@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -22,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().tintColor = UIColor.MainColor()
           // 或者使用 UIAppearance Proxy 设置整体的 TintColor
           window?.tintColor = UIColor.MainColor()
-       
+        FirebaseApp.configure()
         
         
         guard let _ = (scene as? UIWindowScene) else { return }

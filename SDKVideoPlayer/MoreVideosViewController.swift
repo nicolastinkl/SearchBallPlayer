@@ -16,7 +16,7 @@ import SDWebImage
 import SwiftIcons
 import SwiftfulLoadingIndicators
 //import SwiftLoader
-import KSPlayer
+//import KSPlayer
 
 class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
    

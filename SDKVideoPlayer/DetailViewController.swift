@@ -7,7 +7,7 @@
 //
 
 import CoreServices
-import KSPlayer
+//import KSPlayer
 import UIKit
 
 protocol DetailProtocol: UIViewController {
