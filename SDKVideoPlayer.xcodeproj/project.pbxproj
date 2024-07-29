@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1221C3E42C573DE5004686CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1221C3E32C573DE5004686CA /* GoogleService-Info.plist */; };
 		1266EB942C54960000D76306 /* BrightnessVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1266EB4F2C54960000D76306 /* BrightnessVolume.swift */; };
 		1266EB952C54960000D76306 /* SeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1266EB502C54960000D76306 /* SeekView.swift */; };
 		1266EB962C54960000D76306 /* KSPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1266EB512C54960000D76306 /* KSPlayerItem.swift */; };
@@ -153,6 +154,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1221C3E32C573DE5004686CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1266EB4F2C54960000D76306 /* BrightnessVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessVolume.swift; sourceTree = "<group>"; };
 		1266EB502C54960000D76306 /* SeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekView.swift; sourceTree = "<group>"; };
 		1266EB512C54960000D76306 /* KSPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSPlayerItem.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				C09CB0792C4F7F860028C461 /* Main.storyboard */,
 				C09CB07C2C4F7F8E0028C461 /* Home.storyboard */,
 				C09C70212C3D4642000F6E01 /* Assets.xcassets */,
+				1221C3E32C573DE5004686CA /* GoogleService-Info.plist */,
 				C09C70232C3D4642000F6E01 /* LaunchScreen.storyboard */,
 				C09C70262C3D4642000F6E01 /* SDKVideoPlayer.entitlements */,
 				C09C70272C3D4642000F6E01 /* Info.plist */,
@@ -738,6 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C09C70252C3D4642000F6E01 /* LaunchScreen.storyboard in Resources */,
+				1221C3E42C573DE5004686CA /* GoogleService-Info.plist in Resources */,
 				C09C70222C3D4642000F6E01 /* Assets.xcassets in Resources */,
 				C09CB0782C4F7F860028C461 /* Main.storyboard in Resources */,
 				C09CB0712C4F7BD00028C461 /* Localizable.strings in Resources */,
