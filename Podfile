@@ -9,18 +9,18 @@ target 'SDKVideoPlayer' do
   
   pod 'SwiftIcons', '~> 3.0'
   
-  
+  pod 'FirebaseCrashlytics'
   
   
 #---------- from github
-  pod 'Libass', :git => 'https://github.com/nicolastinkl/FFmpegKit', :branch => 'main'
-  pod 'Libmpv', :git => 'https://github.com/nicolastinkl/FFmpegKit', :branch => 'main'
-  pod 'FFmpegKit', :git => 'https://github.com/nicolastinkl/FFmpegKit', :branch => 'main'
+#  pod 'Libass', :git => 'https://github.com/nicolastinkl/FFmpegKit', :branch => 'main'
+#  pod 'Libmpv', :git => 'https://github.com/nicolastinkl/FFmpegKit', :branch => 'main'
+#  pod 'FFmpegKit', :git => 'https://github.com/nicolastinkl/FFmpegKit', :branch => 'main'
 
 #---------- from local folder
-#  pod 'Libass', :path => '/Users/abc123456/Documents/ios/FFmpegKit'
-#  pod 'Libmpv', :path => '/Users/abc123456/Documents/ios/FFmpegKit'
-#  pod 'FFmpegKit', :path => '/Users/abc123456/Documents/ios/FFmpegKit'
+  pod 'Libass', :path => '/Users/abc123456/Documents/ios/FFmpegKit'
+  pod 'Libmpv', :path => '/Users/abc123456/Documents/ios/FFmpegKit'
+  pod 'FFmpegKit', :path => '/Users/abc123456/Documents/ios/FFmpegKit'
 
 
 #  pod 'DisplayCriteria', :path => './KSPlayer/'
