@@ -1,2 +1,2 @@
 ${PODS_ROOT}/Target Support Files/Libmpv/Libmpv-xcframeworks.sh
-${PODS_ROOT}/../../FFmpegKit/Sources/libmpv.xcframework
+${PODS_ROOT}/Libmpv/Sources/libmpv.xcframework

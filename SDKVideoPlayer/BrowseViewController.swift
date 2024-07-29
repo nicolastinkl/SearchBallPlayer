@@ -26,7 +26,7 @@ class BrowseViewController : BaseViewController, UITableViewDataSource, UITableV
        
        super.viewDidLoad()
        view.backgroundColor = ThemeManager.shared.viewBackgroundColor
-       self.title = "我的浏览记录"
+       self.title =  NSLocalizedString("mybrowserecord", comment: "")
        //searchList
        
        setupTableView()

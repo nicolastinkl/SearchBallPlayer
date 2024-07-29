@@ -69,10 +69,10 @@ PODS:
   - SwiftIcons (3.0)
 
 DEPENDENCIES:
-  - FFmpegKit (from `/Users/abc123456/Documents/ios/FFmpegKit`)
+  - FFmpegKit (from `https://github.com/nicolastinkl/FFmpegKit`, branch `main`)
   - FirebaseCrashlytics
-  - Libass (from `/Users/abc123456/Documents/ios/FFmpegKit`)
-  - Libmpv (from `/Users/abc123456/Documents/ios/FFmpegKit`)
+  - Libass (from `https://github.com/nicolastinkl/FFmpegKit`, branch `main`)
+  - Libmpv (from `https://github.com/nicolastinkl/FFmpegKit`, branch `main`)
   - SwiftIcons (~> 3.0)
 
 SPEC REPOS:
@@ -93,11 +93,25 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   FFmpegKit:
-    :path: "/Users/abc123456/Documents/ios/FFmpegKit"
+    :branch: main
+    :git: https://github.com/nicolastinkl/FFmpegKit
   Libass:
-    :path: "/Users/abc123456/Documents/ios/FFmpegKit"
+    :branch: main
+    :git: https://github.com/nicolastinkl/FFmpegKit
   Libmpv:
-    :path: "/Users/abc123456/Documents/ios/FFmpegKit"
+    :branch: main
+    :git: https://github.com/nicolastinkl/FFmpegKit
+
+CHECKOUT OPTIONS:
+  FFmpegKit:
+    :commit: d8f584fcf7f78fb047342dfdfaec30a90317e5a2
+    :git: https://github.com/nicolastinkl/FFmpegKit
+  Libass:
+    :commit: d8f584fcf7f78fb047342dfdfaec30a90317e5a2
+    :git: https://github.com/nicolastinkl/FFmpegKit
+  Libmpv:
+    :commit: d8f584fcf7f78fb047342dfdfaec30a90317e5a2
+    :git: https://github.com/nicolastinkl/FFmpegKit
 
 SPEC CHECKSUMS:
   FFmpegKit: db65e6897763aefc6e4d5330db5ea5bf8c42c0df
@@ -117,6 +131,6 @@ SPEC CHECKSUMS:
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   SwiftIcons: 3b748e57d9eee0c7c8d3bdbf2d742c0b1b4c6172
 
-PODFILE CHECKSUM: f0ebe524d2a0e618bb91ba5aa8993a701febd921
+PODFILE CHECKSUM: 786de22c995660e2323b0ce0048ef00c960a42f5
 
 COCOAPODS: 1.15.2
