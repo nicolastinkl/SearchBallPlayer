@@ -11,10 +11,13 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 import SwiftfulLoadingIndicators
+
+import MobileCoreServices
+
 //import SwiftLoader
 //import KSPlayer
 
-class MovieDetailViewController: BaseViewController {
+class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, UIDocumentInteractionControllerDelegate  {
     
     var movieDetail: Video?
     
@@ -52,6 +55,28 @@ class MovieDetailViewController: BaseViewController {
         label.textColor = ThemeManager.shared.fontColor
         return label
     }()
+    
+    private let mutibgImageView:MutiGradientImageBgView = {
+        let bgview = MutiGradientImageBgView()
+        bgview.contentMode = .scaleAspectFill
+        bgview.clipsToBounds = true
+        bgview.layer.cornerRadius = 10
+        bgview.cornerRadius2 = 10
+        bgview.translatesAutoresizingMaskIntoConstraints = false
+        return bgview
+    }()
+    
+    private let centerLabel: UILabel = {
+        let label = UILabel()
+        
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = UIColor.white
+        return label
+    }()
+    
+    
     
     private let summaryLabel: UILabel = {
         let label = UILabel()
@@ -91,30 +116,119 @@ class MovieDetailViewController: BaseViewController {
         
         view.backgroundColor = ThemeManager.shared.viewBackgroundColor
         
+        guard let movieDetail = movieDetail else { return }
         
         setupScrollView()
+        
+        
         setupPosterImageView()
+        
+        if movieDetail.vodID == 1 || movieDetail.vodID == 2 || movieDetail.vodID == 3 {
+            
+            setupMutibgImageView()
+        }
         setupNameLabel()
         setupSummaryLabel()
         setupRemarksLabel()
         setupPlayButton()
         
         // 使用提供的JSON数据填充界面
-        guard let movieDetail = movieDetail else { return }
-        loadMovieDetail(movieDetail)        
+                
         
         //generation back button
         //setupNavigationBar()
-        let tempForwardBarButtonItem = UIBarButtonItem(image: UIImage(named: "updloadtocloud"),
-                                                       style: UIBarButtonItem.Style.plain,
-                                                       target: self,
-                                                       action: #selector(MovieDetailViewController.uploadtoCloud(_:)))
-        tempForwardBarButtonItem.width = 18.0
-        tempForwardBarButtonItem.tintColor = UIColor.MainColor()
-        navigationItem.rightBarButtonItem = tempForwardBarButtonItem
+        if movieDetail.vodID == 1 || movieDetail.vodID == 2 || movieDetail.vodID == 3 {
+            
+            if movieDetail.vodID == 1  {
+                let m3u8Files = CloudKitCentra.getM3u8FilesInDocumentsDirectory()
+                if (m3u8Files.count > 0){
+                    var index = 1
+                    for fileURL in m3u8Files {
+                        //print("找到 .m3u8 文件：\(fileURL.absoluteString)")
+                        jishuArray.append("\(fileURL.lastPathComponent)")
+                        jishuURLArray.append(fileURL.absoluteString)
+                        index  = index + 1
+                    }
+                    
+                }else{
+                    remarksLabel.text = "No More Data"
+                }
+            }
+            
+            if( movieDetail.vodID == 2){
+                let m3u8Files = CloudKitCentra.getM3u8FilesInCachesDirectory()
+                if (m3u8Files.count > 0){
+                    var index = 1
+                    for fileURL in m3u8Files {
+                        //print("找到 .m3u8 文件：\(fileURL.absoluteString)")
+                        jishuArray.append("\(index)")
+                        jishuURLArray.append(fileURL.absoluteString)
+                        index  = index + 1
+                    }
+                    
+                }else{
+                    remarksLabel.text = "No More Data"
+                }
+            }
+            
+            if(movieDetail.vodID == 3) {
+                let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypeURL)], in: .open)
+                  documentPicker.delegate = self
+                  documentPicker.modalPresentationStyle = .formSheet
+//                  documentPicker.sourceView = self.view
+                  
+                  // 允许从iCloud选择文件
+//                  documentPicker.options = [_UIDocumentPickerOptionAllowCloud]
+                  present(documentPicker, animated: true, completion: nil)
+             
+            }
+            
+            loadLocals(movieDetail)
+            
+            setupButtonLists()
+        }else{
+            
+            let tempForwardBarButtonItem = UIBarButtonItem(image: UIImage(named: "updloadtocloud"),
+                                                           style: UIBarButtonItem.Style.plain,
+                                                           target: self,
+                                                           action: #selector(MovieDetailViewController.uploadtoCloud(_:)))
+            tempForwardBarButtonItem.width = 18.0
+            tempForwardBarButtonItem.tintColor = UIColor.MainColor()
+            navigationItem.rightBarButtonItem = tempForwardBarButtonItem
+            loadMovieDetail(movieDetail)
+        }
+        
          
+        
+        
+        
+     
+        
     }
         
+    
+    // MARK: - UIDocumentPickerDelegate
+
+      func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+          guard let url = urls.first else { return }
+          
+          // 使用UIDocument打开文件
+          let document = UIDocument(fileURL: url)
+          document.open(completionHandler: { (success) in
+              if success {
+                  print("文件打开成功")
+                  // 这里可以添加代码来处理打开的文件，例如浏览或编辑
+              } else {
+                  print("文件打开失败")
+              }
+          })
+      }
+
+      // MARK: - UIDocumentInteractionControllerDelegate
+
+    func documentInteractionControllerDidEndPreview(_ controller: UIDocumentInteractionController) {
+          // 处理文件浏览器关闭后的逻辑
+      }
     
     @objc func uploadtoCloud(_ button: UIButton){
         if hdplayurl.count > 5 ,let _ = URL(string: hdplayurl) {
@@ -247,7 +361,10 @@ class MovieDetailViewController: BaseViewController {
               posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
               posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 //              posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 16/9) // 根据图片实际比例调整
-            posterImageView.heightAnchor.constraint(equalToConstant: 400)
+              posterImageView.heightAnchor.constraint(equalToConstant: 400),
+              
+              
+                
           ])
           
           // 更新渐变层的位置，确保它适应刘海屏
@@ -256,6 +373,31 @@ class MovieDetailViewController: BaseViewController {
           gradientLayer?.frame = CGRect(x: 0, y: 0, width: posterImageView.bounds.width, height: posterImageView.bounds.height)
 
     
+    }
+    
+    private func setupMutibgImageView(){
+        contentView.addSubview(mutibgImageView)
+        centerLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(centerLabel)
+        NSLayoutConstraint.activate([
+            mutibgImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: -100),
+            mutibgImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            mutibgImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//              posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 16/9) // 根据图片实际比例调整
+            mutibgImageView.heightAnchor.constraint(equalToConstant: 400),
+            
+            centerLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: -100),
+            centerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            centerLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//              posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 16/9) // 根据图片实际比例调整
+            centerLabel.heightAnchor.constraint(equalToConstant: 400),
+            
+        ])
+        
+        // 更新渐变层的位置，确保它适应刘海屏
+        //mutibgImageView.layoutIfNeeded()
+        mutibgImageView.cornerRadius2 = 0
+        
     }
     
     private func setupPlayButton(){
@@ -304,12 +446,23 @@ class MovieDetailViewController: BaseViewController {
         ])
     }
     
+    
+    private func loadLocals(_ movie: Video) {
+        
+        
+        
+        centerLabel.text = ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? movie.vodName : movie.vodEn
+        summaryLabel.text = movie.vodBlurb + movie.vodContent
+        
+        
+    }
     private func loadMovieDetail(_ movie: Video) {
         // 从URL加载图片
         if let imageUrl = URL(string: movie.vodPic) {
             self.posterImageView.sd_setImage(with: imageUrl, placeholderImage:  UIImage(named: "placeholder-image"), context: nil)
         }
-        nameLabel.text = movie.vodName
+        
+        nameLabel.text = ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? movie.vodName : movie.vodEn
         summaryLabel.text = movie.vodBlurb + movie.vodContent
         remarksLabel.text = movie.vodRemarks + " " + movie.vodLang  + " " + movie.vodYear
         let movies = movie.vodPlayURL as NSString
@@ -386,6 +539,62 @@ class MovieDetailViewController: BaseViewController {
         
     }
     
+    func setupButtonLists() {
+        let numberOfColumns: Int = 1
+        
+        let numberOfRows =   jishuArray.count/numberOfColumns+1
+        let spacing: CGFloat = 10
+        let buttonSize: CGFloat = (self.view.frame.width - spacing*7) / 6
+        for row in 0..<numberOfRows { //  6 rows of buttons, adjust as needed
+
+            for col in 0..<numberOfColumns {
+                   let index = row * numberOfColumns + col
+                   if index < jishuArray.count {
+                       let button = UIButton(type: .custom)
+                       button.setTitle(jishuArray[index], for: .normal)
+                       button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
+                       button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
+                       button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+                       
+//                       button.backgroundColor = UIColor(fromHex: "#eeeef0")
+                       button.layer.cornerRadius = 5
+                       button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+                       button.layer.borderWidth = 1
+                       button.clipsToBounds = true
+
+                       button.tag = index
+                       button.addTarget(self, action: #selector(ButtonTapped(_:)), for: .touchUpInside)
+                       
+                       
+                       contentView.addSubview(button)
+                       button.translatesAutoresizingMaskIntoConstraints = false
+                         
+                     
+                         NSLayoutConstraint.activate([
+                             
+                             button.heightAnchor.constraint(equalToConstant: buttonSize),
+                             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(col) * (buttonSize + spacing) + spacing),
+                             
+                             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -spacing),
+                             button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 + CGFloat(row) * (buttonSize + spacing) + spacing)
+                         ])
+                   }
+                  
+               }
+           }
+        
+              // 约束内容视图的高度，使其包含所有按钮
+              var heightSummary:CGFloat = CGFloat(summaryLabel.text?.count ?? 0) * 1.2
+              print(heightSummary)
+                if ( heightSummary <= 0.0) {
+                    heightSummary = 200.0
+                }
+              NSLayoutConstraint.activate([
+              
+                    contentView.heightAnchor.constraint(equalToConstant:self.view.frame.height*0.6 + heightSummary   +  CGFloat(numberOfRows) * (buttonSize + spacing) + spacing)
+                
+              ])
+    }
  
     func setupButtons() {
         
@@ -473,14 +682,16 @@ class MovieDetailViewController: BaseViewController {
            controller.resource = resource
             
             if let s = self.movieDetail {
-                LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
-                //通知刷新列表
-                
-                // 发送通知
-                NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
-                
+                if s.vodID > 10 {
+                    
+                    LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+                    //通知刷新列表
+                    
+                    // 发送通知
+                    NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+                }
             }
-            
+            print(jishuURLArray[button.tag])
 //            self.show(controller, sender: self)
            controller.modalPresentationStyle = .fullScreen
            self.present(controller, animated:false)

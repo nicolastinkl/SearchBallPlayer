@@ -30,7 +30,7 @@ class ApplicationS {
 //        Accept-Language: en-US;q=1.0, zh-Hans-US;q=0.9
 //        User-Agent: SDKVideoPlayer/1.0.0 (com.sdkplayer.souqiuba-1; build:101; iOS 17.2.0) Alamofire/5.9.1
 //        App-Bid: com.sdkplayer.souqiuba-1
-//        
+//
          // 假设这是你的应用的业务ID和版本信息
          let appBid =  Bundle.main.bundleIdentifier ?? ""
          let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
@@ -42,5 +42,18 @@ class ApplicationS {
         return headers
          
     }
+    
+    static func isCurrentLanguageEnglishOrChineseSimplified() -> Bool {
+        let currentLocale = Locale.current
+        let languageCode = currentLocale.languageCode ?? ""
+        if (languageCode == "zh-Hans" || languageCode == "zh-CN"){
+            return true
+        }
+        if ( languageCode == "en"){
+            return false
+        }
+        return false
+    }
+    
 
 }

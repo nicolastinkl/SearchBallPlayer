@@ -44,26 +44,63 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let mutibgImageView:MutiGradientImageBgView = {
+        let bgview = MutiGradientImageBgView()
+        bgview.contentMode = .scaleAspectFill
+        bgview.clipsToBounds = true
+        bgview.layer.cornerRadius = 10
+        bgview.cornerRadius2 = 10
+        bgview.translatesAutoresizingMaskIntoConstraints = false
+        return bgview
+    }()
+    
+    private let CenterLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.textAlignment = .center
+        label.textColor = ThemeManager.shared.viewBackgroundColor
+        label.numberOfLines = 4
+        label.lineBreakMode = .byCharWrapping
+//        label.layer.borderColor = ThemeManager.shared.fontColor.withAlphaComponent(0.6).cgColor
+//        label.layer.borderWidth = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.addSubview(mutibgImageView)
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
 //        contentView.backgroundColor = UIColor.lightGray
+        
+        contentView.addSubview(CenterLabel)
         NSLayoutConstraint.activate([
+            
+            
+            mutibgImageView.topAnchor.constraint(equalTo: contentView.topAnchor ,constant: 10),
+            mutibgImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            mutibgImageView.widthAnchor.constraint(equalToConstant: 110),
+            mutibgImageView.heightAnchor.constraint(equalToConstant: 140),
+            
+            
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor ,constant: 10),
-//            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-//               imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-
             imageView.widthAnchor.constraint(equalToConstant: 110),
             imageView.heightAnchor.constraint(equalToConstant: 140),
+            
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            
+            CenterLabel.topAnchor.constraint(equalTo: contentView.topAnchor ,constant: 10),
+            CenterLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            CenterLabel.widthAnchor.constraint(equalToConstant: 110),
+            CenterLabel.heightAnchor.constraint(equalToConstant: 140),
         ])
     }
     
@@ -71,12 +108,23 @@ class MovieCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func configure(with data: Video) {
         
-        imageView.sd_setImage(with: URL.init(string: data.vodPic), placeholderImage: UIImage(named: "placeholder-image"), context: nil)
-        titleLabel.text = data.vodName
-//        imageView.image = image
-//        titleLabel.text = title
+        if(data.vodID > 10){
+            imageView.sd_setImage(with: URL.init(string: data.vodPic), placeholderImage: UIImage(named: "placeholder-image"), context: nil)
+            titleLabel.text = ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? data.vodName : data.vodEn
+            imageView.isHidden = false
+            mutibgImageView.isHidden = true
+            CenterLabel.text = ""
+        }else{
+            titleLabel.text = ""
+            imageView.image = UIImage()
+            imageView.isHidden = true
+            mutibgImageView.isHidden = false
+            CenterLabel.text = ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? data.vodName : data.vodEn
+        }
+         
           
     }
 }
@@ -337,7 +385,12 @@ class HeaderView: UICollectionReusableView {
     }
     
     func configure(with title: String,at indexPath: IndexPath) {
-        imageView.image = UIImage(named: "cateicon")
+        if indexPath.section == 0 {
+            imageView.image = UIImage(named: "phone")
+        }else{
+            imageView.image = UIImage(named: "cloud")
+        }
+        
         titleLabel.text = title
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
     }
@@ -388,15 +441,7 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
           
           configureNavigationBar()
           
-          
-          let m3u8Files = CloudKitCentra.getM3u8FilesInDocumentsDirectory()
-          if (m3u8Files.count > 0){
-              
-              for fileURL in m3u8Files {
-                  print("找到 .m3u8 文件：\(fileURL.absoluteString)")
-              }
-              
-          }
+        
           
       }
     
@@ -576,6 +621,7 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let category = videoCategorys[indexPath.section]
+        
         let  movie =  category.videoListChild[indexPath.item]
         let  controller = MovieDetailViewController()
         controller.movieDetail = movie
