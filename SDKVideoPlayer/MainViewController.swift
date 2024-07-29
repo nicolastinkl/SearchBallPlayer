@@ -336,7 +336,7 @@ class HeaderView: UICollectionReusableView {
         
     }
     
-    func configure(with title: String) {
+    func configure(with title: String,at indexPath: IndexPath) {
         imageView.image = UIImage(named: "cateicon")
         titleLabel.text = title
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
@@ -388,7 +388,15 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
           
           configureNavigationBar()
           
-//          self.title = NSLocalizedString("Viewing", comment: "")
+          
+          let m3u8Files = CloudKitCentra.getM3u8FilesInDocumentsDirectory()
+          if (m3u8Files.count > 0){
+              
+              for fileURL in m3u8Files {
+                  print("找到 .m3u8 文件：\(fileURL.absoluteString)")
+              }
+              
+          }
           
       }
     
@@ -470,15 +478,12 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
                                           self.movies.append(Videoitem)
                                       }
                                   }
-                                  
-                                  
                                    
                                   DispatchQueue.main.async {
-
                                       self.collectionView.reloadData()
-                                      
-                                      
                                   }
+                              }else{
+                                  
                               }
                               
                           } catch {
@@ -544,9 +549,16 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
       func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
           let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:  HeaderView.identifier, for: indexPath) as! HeaderView
           let category = videoCategorys[indexPath.section]
-          headerView.configure(with: category.categoryName)
+          headerView.configure(with: category.categoryName,at: indexPath)
+          if indexPath.section == 0 {
+              headerView.moreButton.isHidden = true
+          }else{
+              headerView.moreButton.isHidden = false
+              
+          }
           headerView.moreButton.addTarget(self, action: #selector(MoreButtonTapped(_:)), for: .touchUpInside)
           headerView.moreButton.tag = indexPath.section// category.videoListChild.first?.typeID ?? 0
+          
           return headerView
       }
     

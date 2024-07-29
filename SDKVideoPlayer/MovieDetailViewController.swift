@@ -112,11 +112,12 @@ class MovieDetailViewController: BaseViewController {
         tempForwardBarButtonItem.width = 18.0
         tempForwardBarButtonItem.tintColor = UIColor.MainColor()
         navigationItem.rightBarButtonItem = tempForwardBarButtonItem
-        
+         
     }
+        
     
     @objc func uploadtoCloud(_ button: UIButton){
-        if hdplayurl.count > 5 ,let u = URL(string: hdplayurl) {
+        if hdplayurl.count > 5 ,let _ = URL(string: hdplayurl) {
             SwiftLoader.show(title: "Saving...", animated: true)
             CloudKitCentra.downloadAndSaveToiCloud(urlString: hdplayurl) { result in
                 //Result<URL, Error>
@@ -135,8 +136,7 @@ class MovieDetailViewController: BaseViewController {
                             self.showSearchErrorAlert(on: self, error: error.localizedDescription)
                         }
                     }
-            }
-                
+            }                
         }else{
             //保存 list
             SwiftLoader.show(title: "Saving List...", animated: true)
