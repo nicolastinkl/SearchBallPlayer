@@ -22,12 +22,13 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
    
  
     
-   private let tableView = UITableView()
+    private let tableView = UITableView()
      
-   private let loadMoreOffset = 20 // 定义触发加载更多的偏移量
-
+    private let loadMoreOffset = 20 // 定义触发加载更多的偏移量
     
     var searchText : String = ""
+    
+    var viewtype = -1
     
     var searchList:[Video] = [Video]()
     
@@ -103,8 +104,7 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
 //                    if let sstr = value as? NSString {
 //                        s = sstr.replacingOccurrences(of: "null", with: "\"\"")
 //                    }
-//
-//                    print(s)
+  print(value)
                     guard let data = value.data(using: String.Encoding.utf8) else {
                         
                          
@@ -149,6 +149,14 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
                                     self.tableView.reloadData()
                                     
                                 }
+                            }else{
+                                DispatchQueue.main.async {
+                                    self.hasMoreData = false
+                                    self.isLoading = false
+                                    self.footView.configure(hasMoreData: self.hasMoreData)
+                                    self.tableView.reloadData()
+                                    
+                                }
                             }
                             
                         } catch {
@@ -177,14 +185,14 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
             
         }
         
-        var searchTextEncoding = ""
-        if let encodedQuery = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
-            searchTextEncoding = encodedQuery
-        }
+//        var searchTextEncoding = ""
+//        if let encodedQuery = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
+//            searchTextEncoding = encodedQuery
+//        }
          
  
-        
-        AF.request("\(ApplicationS.baseURL)/player/getplaylist", method: .post,headers: ApplicationS.addCustomHeaders())
+         
+        AF.request("\(ApplicationS.baseURL)/player/getplaylist?viewtype=\(viewtype)", method: .post,headers: ApplicationS.addCustomHeaders())
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
             
@@ -221,7 +229,7 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
    }
    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 180
     }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCellCloud
@@ -257,11 +265,47 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
         let movie = searchList[indexPath.item]
-        let  controller = MovieDetailViewController()
-        controller.movieDetail = movie
-//        controller.modalPresentationStyle = .fullScreen
-        self.show(controller, sender: self)
+//        let  controller = MovieDetailViewController()
+//        controller.movieDetail = movie
+////        controller.modalPresentationStyle = .fullScreen
+//        self.show(controller, sender: self)
+        
+        
+        let movies = movie.vodPlayURL as NSString
+        var newMovices = movies.replacingOccurrences(of: ".m3u8#", with: ".m3u8\n")
+        newMovices = newMovices.replacingOccurrences(of: ".mp4#", with: ".mp4\n")
+        newMovices = newMovices.replacingOccurrences(of: "$https", with: "\nhttps")
+        var urlstring:NSString = ""
+        var index = 1
+        newMovices.components(separatedBy: "\n").forEach { str in
+            //print("\n" + str)
+            
+            if(str.count > 10){
+                let newStr =  str as NSString
+                if  newStr.contains(".m3u8") || newStr.contains(".mp4") {
+                    urlstring = newStr
+                    index  = index + 1
+                }
+                
+            }
+   
+        }
+        
+        if urlstring.length > 0   ,let u = URL(string: urlstring as String ) {
+            let resource = KSPlayerResource(url: u)
+            let controller = DetailViewController()
+            controller.resource = resource
+//            self.show(controller, sender: self)
+            LocalStore.saveToUserDefaults(RecentlyWatchVideo: movie)
+            // 发送通知
+            NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+            
+            
+            controller.modalPresentationStyle = .fullScreen
+            self.present(controller, animated:false)
+        }
         
     }
      
@@ -309,10 +353,10 @@ class CustomCellCloud: UITableViewCell {
         
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            itemImageView.widthAnchor.constraint(equalToConstant: 70),
-            itemImageView.heightAnchor.constraint(equalToConstant: 120)
+            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            itemImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
+            itemImageView.widthAnchor.constraint(equalToConstant: 120),
+            itemImageView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
