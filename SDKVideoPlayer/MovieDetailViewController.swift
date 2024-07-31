@@ -140,6 +140,31 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         if movieDetail.vodID == 1 || movieDetail.vodID == 2 || movieDetail.vodID == 3 {
             loadLocals(movieDetail)
             if movieDetail.vodID == 1  {
+                
+                
+                AF.request("\(ApplicationS.baseURL)/player/getplaylist", method: .post,headers: ApplicationS.addCustomHeaders())
+                    .validate(statusCode: 200..<300)
+                    .responseString(completionHandler: { response in
+                     debugPrint("\(response.value)")
+                        if (response.value?.count ?? 0) > 5 {
+                            
+                            DispatchQueue.main.async {
+                                SwiftLoader.hide()
+                                self.view.makeToast( NSLocalizedString("SaveSuccess", comment: "") + (response.value ?? ""), duration: 3.0, position: .bottom)
+                                
+                            }
+                        }else{
+                            DispatchQueue.main.async {
+                                SwiftLoader.hide()
+                                self.view.makeToast(NSLocalizedString("SaveFailed", comment: ""), duration: 3.0, position: .bottom)
+                            }
+                        }
+                        
+                         
+                             
+                    })
+                
+                
                 let m3u8Files = CloudKitCentra.getM3u8FilesInDocumentsDirectory()
                 if (m3u8Files.count > 0){
                     var index = 1
@@ -200,7 +225,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     func addOpenCloudkit(){
         let button = UIButton(type: .custom)
-        button.setTitle("Open Files & Choose .m3u8 file", for: .normal)
+        button.setTitle("Choose file", for: .normal)
         button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
         button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
@@ -211,7 +236,6 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         button.clipsToBounds = true
  
         button.addTarget(self, action: #selector(addOpenCloudkitTapped(_:)), for: .touchUpInside)
-        
         
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -304,6 +328,61 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
       }
     
     @objc func uploadtoCloud(_ button: UIButton){
+        
+        if let model = self.movieDetail {
+            
+            let encoder = JSONEncoder()
+            if let encodedData = try? encoder.encode(model) {
+                // 将编码后的数据转换为字符串
+                   if let jsonString = String(data: encodedData, encoding: .utf8)   {
+                      
+                       // UTF 8 str from original
+                       // NSData! type returned (optional)
+                       
+                       let utf8str = jsonString.data(using: String.Encoding.utf8)
+
+                       // Base64 encode UTF 8 string
+                       // fromRaw(0) is equivalent to objc 'base64EncodedStringWithOptions:0'
+                       // Notice the unwrapping given the NSData! optional
+                       // NSString! returned (optional)
+                       
+                       let base64Encoded = utf8str?.base64EncodedString() ?? ""
+                       
+                       
+                       let parameters: [String: Any] = [
+                           "requestbody": base64Encoded,
+                       ]
+                       
+                       SwiftLoader.show(title: "Saving...", animated: true)
+                       // push encodedData to server
+                       AF.request("\(ApplicationS.baseURL)/player/saveplaylist", method: .post,parameters: parameters,headers: ApplicationS.addCustomHeaders())
+                           .validate(statusCode: 200..<300)
+                           .responseString(completionHandler: { response in
+                              // debugPrint("\(response.value)")
+                               if (response.value?.count ?? 0) > 5 {
+                                   
+                                   
+                                   DispatchQueue.main.async {
+                                       SwiftLoader.hide()
+                                       self.view.makeToast( NSLocalizedString("SaveSuccess", comment: "") + (response.value ?? ""), duration: 3.0, position: .bottom)
+                                       
+                                   }
+                               }else{
+                                   DispatchQueue.main.async {
+                                       SwiftLoader.hide()
+                                       self.view.makeToast(NSLocalizedString("SaveFailed", comment: ""), duration: 3.0, position: .bottom)
+                                   }
+                               }
+                               
+                                
+                                    
+                           })
+                             
+                   }
+            }
+                
+        }
+      /*
         if hdplayurl.count > 5 ,let _ = URL(string: hdplayurl) {
             SwiftLoader.show(title: "Saving...", animated: true)
             CloudKitCentra.downloadAndSaveToiCloud(urlString: hdplayurl) { result in
@@ -348,7 +427,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                 }
             }
             
-        }
+        }*/
     }
     
     override func viewDidAppear(_ animated: Bool) {

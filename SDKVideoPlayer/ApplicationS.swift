@@ -11,6 +11,18 @@ import Alamofire
 class ApplicationS {
     public static let baseURL: String = "https://api.search-ball.com"
     
+    public static let DeviceCustomUUID: String = {
+        let userDefaults = UserDefaults.standard
+        if let savedID = userDefaults.string(forKey: "com.sdkplayer.souqiuba") {
+            return savedID
+        } else {
+            let newID = UUID().uuidString
+            userDefaults.set(newID, forKey: "com.sdkplayer.souqiuba")
+            userDefaults.synchronize()
+            return newID
+        }
+    }()
+    
     static func initAppConfig(){
         
         // 假设这是你的应用的业务ID和版本信息
@@ -34,10 +46,11 @@ class ApplicationS {
          // 假设这是你的应用的业务ID和版本信息
          let appBid =  Bundle.main.bundleIdentifier ?? ""
          let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
-        
+        let deviceUUID = ApplicationS.DeviceCustomUUID
         let headers: HTTPHeaders = [
             "App-Bid": appBid,
             "App-Version": appVersion,
+            "App-DeviceUUID":deviceUUID,
         ]
         return headers
          

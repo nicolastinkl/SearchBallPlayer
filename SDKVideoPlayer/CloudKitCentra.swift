@@ -9,6 +9,8 @@ import Foundation
 import CloudKit
 import UIKit
 
+import Alamofire
+import SDWebImage
 
 typealias DownloadCompletion = (Result<URL, Error>) -> Void
 
@@ -69,9 +71,13 @@ class CloudKitCentra{
         }
     }
     
+    
+    
+    
     static func downloadAndSaveToiCloud(urlString: String ,completion: @escaping DownloadCompletion)  {
         guard let url = URL(string: urlString) else { return   }
  
+      
         let task = URLSession.shared.downloadTask(with: url) { (tempFileURL, response, error) in
             guard let tempFileURL = tempFileURL, error == nil else {
                 print("Error downloading file: \(error?.localizedDescription ?? "Unknown error")")

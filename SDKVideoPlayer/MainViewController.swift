@@ -56,11 +56,12 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     private let CenterLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
+        
+        label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textAlignment = .center
         label.textColor = ThemeManager.shared.fontColor
-        label.numberOfLines = 4
-        label.lineBreakMode = .byCharWrapping
+        label.numberOfLines = 2
+        label.lineBreakMode = .byWordWrapping
 //        label.layer.borderColor = ThemeManager.shared.fontColor.withAlphaComponent(0.6).cgColor
 //        label.layer.borderWidth = 1
         label.translatesAutoresizingMaskIntoConstraints = false
