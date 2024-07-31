@@ -297,6 +297,7 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
             let resource = KSPlayerResource(url: u)
             let controller = DetailViewController()
             controller.resource = resource
+            
 //            self.show(controller, sender: self)
             LocalStore.saveToUserDefaults(RecentlyWatchVideo: movie)
             // 发送通知
@@ -305,6 +306,8 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
             
             controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated:false)
+            
+            switchToLandscape()
         }
         
     }
@@ -404,6 +407,7 @@ class CustomCellCloud: UITableViewCell {
             tagLabel.font = UIFont.systemFont(ofSize: 12)
 //            tagLabel.text = tagName
             tagLabel.tag = index
+            tagLabel.textColor = ThemeManager.shared.fontColor
             tagLabel.textAlignment = .center
             tagLabel.layer.cornerRadius = 6 // 设置标签圆角
             tagLabel.layer.borderWidth = 1
