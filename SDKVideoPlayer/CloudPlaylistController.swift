@@ -1,8 +1,11 @@
 //
-//  SearcViewController.swift
+//  CloudPlaylistController.swift
 //  SDKVideoPlayer
 //
-//  Created by Zeus on 2024/7/15.
+//  Created by Zeus on 2024/7/31.
+//
+
+import Foundation
 //
 
 import Foundation
@@ -15,7 +18,7 @@ import SDWebImage
 import SwiftIcons
 
 
-class SearcViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
    
  
     
@@ -26,7 +29,7 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
     
     var searchText : String = ""
     
-    var searchList:[Video]?
+    var searchList:[Video] = [Video]()
     
     var isLoading = false
     var hasMoreData = true
@@ -43,11 +46,11 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
        
        super.viewDidLoad()
        view.backgroundColor =  ThemeManager.shared.viewBackgroundColor
-       self.title =  "'\(searchText)' \(NSLocalizedString("Searched", comment: ""))"
+       self.title =  searchText
        
        setupTableView()
        
-       //loadData()
+       loadData()
    }
    
    private func setupTableView() {
@@ -62,7 +65,7 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
        ])
        
-     tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
+     tableView.register(CustomCellCloud.self, forCellReuseIdentifier: "cell")
      //tableView.register(LoadingFooterView.self, forHeaderFooterViewReuseIdentifier: "footer")
 //     tableView.tableFooterView = UIView()
        tableView.tableFooterView = footView
@@ -106,7 +109,10 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
                         
                          
 //                        let error = SearchError.errorWith("Error: Cannot create data from JSON string.")
-                        self.showSearchErrorAlert(on:self, error: "Error: Cannot create data from JSON string." )
+                       // self.showSearchErrorAlert(on:self, error: "Error: Cannot create data from JSON string." )
+                        self.showNetworkErrorView(errormsg: "Error: Cannot create data from JSON string.") {
+                            self.searchRequest(searchText: self.searchText)
+                        }
                         return
                     }
                     
@@ -117,7 +123,7 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
                         // 使用 JSONDecoder 解码数据
                         do {
                             let response_config = try decoder.decode(VideoSearchResponse.self, from: data)
-                            print("Load more Code: \(response_config.code)  \(response_config.page) - \(response_config.pagecount) -  \(response_config.total)")
+                            print("Load more Code: \(response_config.code) - \(response_config.page) - \(response_config.pagecount) -  \(response_config.total)")
                             
                             if(Int(response_config.code) == 1){
                                 self.page = self.page + 1
@@ -133,7 +139,7 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
                                  
                                 
                                 response_config.data.forEach { video in
-                                    self.searchList?.append(video)
+                                    self.searchList.append(video)
                                 }
                                 
                                 DispatchQueue.main.async {
@@ -148,16 +154,20 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
                         } catch {
                             print("\(error.localizedDescription)")
 //                            let error = SearchError.errorWith("Json parse Error: \(error.localizedDescription)")
-                            self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
-                            
+                           // self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
+                            self.showNetworkErrorView(errormsg:"Json parse Error: \(error.localizedDescription)" ) {
+                                self.searchRequest(searchText: self.searchText)
+                            }
                             
                         }
                     
                             
                        case .failure(let error):
-                            
+                            self.showNetworkErrorView(errormsg: "\(error.localizedDescription)") {
+                                self.searchRequest(searchText: self.searchText)
+                            }
 //                            let error = SearchError.errorWith("\(error.localizedDescription)")
-                            self.showSearchErrorAlert(on:self, error: "\(error.localizedDescription)" )
+                           // self.showSearchErrorAlert(on:self, error: "\(error.localizedDescription)" )
                     
                      
                        }
@@ -172,13 +182,29 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
             searchTextEncoding = encodedQuery
         }
          
-//        print("\(ApplicationS.baseURL)/player/search?keyword=\(searchTextEncoding)&page=\(self.page)") 
-        AF.request("\(ApplicationS.baseURL)/player/search?keyword=\(searchTextEncoding)&page=\(self.page)", method: .get,headers: ApplicationS.addCustomHeaders())
+ 
+        
+        AF.request("\(ApplicationS.baseURL)/player/getplaylist", method: .post,headers: ApplicationS.addCustomHeaders())
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
-                requestComplete1(response.response, response.result)
+            
+                if (response.value?.count ?? 0) > 5 {
+                    requestComplete1(response.response, response.result)
+                    DispatchQueue.main.async {
+                        SwiftLoader.hide()
+                        
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        SwiftLoader.hide()
+                         
+                    }
+                }
+                
+                 
                      
             })
+        
     }
     
    
@@ -191,19 +217,17 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
    // MARK: - UITableViewDataSource
    
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return searchList?.count ?? 0
+       return searchList.count
    }
    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
-       if let s = searchList{
-           cell.configure(with: s[indexPath.row])
-       }
-        
+       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCellCloud
        
+       cell.configure(with: searchList[indexPath.row])
+         
        return cell
    }
     
@@ -233,7 +257,7 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let movie = searchList?[indexPath.item]
+        let movie = searchList[indexPath.item]
         let  controller = MovieDetailViewController()
         controller.movieDetail = movie
 //        controller.modalPresentationStyle = .fullScreen
@@ -244,7 +268,7 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
 }
 
 
-class CustomCell: UITableViewCell {
+class CustomCellCloud: UITableViewCell {
     let titleLabel = UILabel()
 //    let itemImageView = UIImageView()
     
@@ -331,13 +355,15 @@ class CustomCell: UITableViewCell {
         for index in 10...13 {
             let tagLabel = UILabel()
             
-            tagLabel.backgroundColor = UIColor.MainColor()  // 设置标签背景颜色
+            tagLabel.backgroundColor = UIColor.clear  // 设置标签背景颜色
             tagLabel.textColor = .white // 设置标签文字颜色
             tagLabel.font = UIFont.systemFont(ofSize: 12)
 //            tagLabel.text = tagName
             tagLabel.tag = index
             tagLabel.textAlignment = .center
             tagLabel.layer.cornerRadius = 6 // 设置标签圆角
+            tagLabel.layer.borderWidth = 1
+            tagLabel.layer.borderColor = ThemeManager.shared.fontColor.cgColor
             tagLabel.clipsToBounds = true
             
             tagsStackView.addSubview(tagLabel)
@@ -404,73 +430,14 @@ class CustomCell: UITableViewCell {
     
 //    func addTags(tagName : String?, preView:UILabel?) -> UILabel?{
 //        if let tagName = tagName {
-//           
-//            
-//            
+//
+//
+//
 //            return tagLabel
 //        }
 //        return nil
 //    }
 }
 
-class LoadingFooterView: UITableViewHeaderFooterView {
-    
-    let label = UILabel()
-    static let reuseIdentifier = "LoadingFooterView"
-    let activityIndicator = UIActivityIndicatorView(style: .medium)
-    
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(label)
-        contentView.addSubview(activityIndicator)
-        
-        activityIndicator.isHidden = true
-        label.isHidden = true
-        
-        activityIndicator.hidesWhenStopped = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-         NSLayoutConstraint.activate([
-            activityIndicator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            activityIndicator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            activityIndicator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            
-            
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            
-            
-         ])
-        
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configure(hasMoreData: Bool) {
-
-        
-        label.textAlignment = .center
-        //activityIndicator.frame = contentView.bounds
-        if hasMoreData {
-            label.text = NSLocalizedString("Loaindgmore", comment: "") // "正在加载更多..."
-            //label.frame = CGRect(x: 0, y: 40, width: contentView.frame.width, height: 30)
-            activityIndicator.startAnimating()
-            activityIndicator.isHidden = false
-            label.isHidden = false
-        } else {
-           // label.frame = contentView.bounds
-            label.text =  NSLocalizedString("LoadedNoMore", comment: "")// "没有更多数据了"
-            label.isHidden = false
-            activityIndicator.stopAnimating()
-            activityIndicator.isHidden = true
-        }
-    }
-}
-
+ 
 

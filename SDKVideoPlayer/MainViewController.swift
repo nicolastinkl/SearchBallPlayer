@@ -622,12 +622,35 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let category = videoCategorys[indexPath.section]
+        if indexPath.section == 0{
+            let searvc = CloudPlaylistController()
+            let  movie =  category.videoListChild[indexPath.item]
+            if indexPath.row == 0  {
+                
+                searvc.searchText =   ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? movie.vodName : movie.vodEn
+                  
+                self.show(searvc, sender: self)
+            }else if indexPath.row == 1  {
+                
+                searvc.searchText =  ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? movie.vodName : movie.vodEn
+                
+                self.show(searvc, sender: self)
+            }else{
+                let  movie =  category.videoListChild[indexPath.item]
+                let  controller = MovieDetailViewController()
+                controller.movieDetail = movie
+                self.show(controller, sender: self)
+            }
+           
+        }else{
+            
+            let  movie =  category.videoListChild[indexPath.item]
+            let  controller = MovieDetailViewController()
+            controller.movieDetail = movie
+            self.show(controller, sender: self)
+            
+        }
         
-        let  movie =  category.videoListChild[indexPath.item]
-        let  controller = MovieDetailViewController()
-        controller.movieDetail = movie
-//        controller.modalPresentationStyle = .fullScreen
-        self.show(controller, sender: self)
 //         self.present(controller, animated:false)
 //        if let u = URL(string: "https://hn.bfvvs.com/play/6dBWo3We/index.m3u8") { //movie.link
 //            let resource = KSPlayerResource(url: u)

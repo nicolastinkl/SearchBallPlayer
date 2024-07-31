@@ -141,30 +141,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
             loadLocals(movieDetail)
             if movieDetail.vodID == 1  {
                 
-                
-                AF.request("\(ApplicationS.baseURL)/player/getplaylist", method: .post,headers: ApplicationS.addCustomHeaders())
-                    .validate(statusCode: 200..<300)
-                    .responseString(completionHandler: { response in
-                     debugPrint("\(response.value)")
-                        if (response.value?.count ?? 0) > 5 {
-                            
-                            DispatchQueue.main.async {
-                                SwiftLoader.hide()
-                                self.view.makeToast( NSLocalizedString("SaveSuccess", comment: "") + (response.value ?? ""), duration: 3.0, position: .bottom)
-                                
-                            }
-                        }else{
-                            DispatchQueue.main.async {
-                                SwiftLoader.hide()
-                                self.view.makeToast(NSLocalizedString("SaveFailed", comment: ""), duration: 3.0, position: .bottom)
-                            }
-                        }
-                        
-                         
-                             
-                    })
-                
-                
+                 
                 let m3u8Files = CloudKitCentra.getM3u8FilesInDocumentsDirectory()
                 if (m3u8Files.count > 0){
                     var index = 1
