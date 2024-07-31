@@ -78,8 +78,10 @@ class DetailViewController: BaseViewController, DetailProtocol {
         playerView.becomeFirstResponder()
 //        SwiftLoader.show(view: self.view , title: "正在缓冲...", animated: true)
         
+        switchToLandscape()
     }
-
+ 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if UIDevice.current.userInterfaceIdiom == .phone {
@@ -90,6 +92,10 @@ class DetailViewController: BaseViewController, DetailProtocol {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        switchToPortrait()
     }
 }
 
