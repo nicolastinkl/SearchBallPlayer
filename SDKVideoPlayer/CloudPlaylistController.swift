@@ -307,7 +307,7 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
             controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated:false)
             
-            switchToLandscape()
+//            switchToLandscape()
         }
         
     }

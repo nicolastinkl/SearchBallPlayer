@@ -596,6 +596,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         remarksLabel.text = movie.vodRemarks + " " + movie.vodLang  + " " + movie.vodYear
         let movies = movie.vodPlayURL as NSString
         var newMovices = movies.replacingOccurrences(of: ".m3u8#", with: ".m3u8\n")
+        newMovices = newMovices.replacingOccurrences(of: ".mp4#", with: ".mp4\n")
         newMovices = newMovices.replacingOccurrences(of: "$https", with: "\nhttps")
       
         var index = 1
@@ -604,7 +605,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
             
             if(str.count > 10){
                 let newStr =  str as NSString
-                if  newStr.contains(".m3u8"){
+                if  newStr.contains(".m3u8") ||  newStr.contains(".mp4"){
                     
                     jishuURLArray.append(newStr as String)
                     jishuArray.append("\(index)")
@@ -623,13 +624,51 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
             //只有一个播放列表时
             if let playlistOne  = jishuURLArray.first as? NSString {
                 
-                if let url = playlistOne.components(separatedBy: ".m3u8").first {
+                
+                if playlistOne.contains(".mp4") {
+                    let button = UIButton(type: .custom)
+                    button.setTitle("Play Video", for: .normal)
+                    button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                    button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
+                    button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+                    
+                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
+                    button.layer.cornerRadius = 5
+                    button.clipsToBounds = true
+
+                    button.tag = index
+                    button.addTarget(self, action: #selector(ButtonhdplayurlTapped(_:)), for: .touchUpInside)
+                    
+                    
+                    contentView.addSubview(button)
+                    button.translatesAutoresizingMaskIntoConstraints = false
+                      
+                    let buttonSize: CGFloat = 44
+                      NSLayoutConstraint.activate([
+                          button.heightAnchor.constraint(equalToConstant: buttonSize),
+                          button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  50),
+                          button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -50),
+                          button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 )
+                      ])
+                    
+                    
+                    jishuURLArray.removeAll()
+                    jishuURLArray.append(playlistOne as String )
+                    hdplayurl = playlistOne  as String
+                    NSLayoutConstraint.activate([
+                    
+                          contentView.heightAnchor.constraint(equalToConstant:1200)
+                      
+                    ])
+                }
+                
+                if   playlistOne.contains(".m3u8") ,let url = playlistOne.components(separatedBy: ".m3u8").first   {
                     
                     
                     let button = UIButton(type: .custom)
                     button.setTitle("\(movie.vodRemarks)", for: .normal)
                     button.setTitleColor(UIColor.black, for: UIControl.State.normal)
-                    button.setTitleColor(UIColor.orange, for: UIControl.State.selected)
+                    button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
                     button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
                     
                     button.backgroundColor = UIColor(fromHex: "#eeeef0")
@@ -662,6 +701,8 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                     ])
                 }
             }
+            
+            
         }
 //        print(movie)
 //        print(jishuURLArray)
