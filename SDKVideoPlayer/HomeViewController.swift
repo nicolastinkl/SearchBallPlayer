@@ -379,7 +379,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
     
     func searchRequest(searchText: String) {
         timer?.invalidate()
-        SwiftLoader.show(view: self.view,title: NSLocalizedString("Searching", comment: ""), animated: true)
+        SwiftLoader.show(view: self.view,title: NSLocalizedString("Searching", comment: "") + searchText, animated: true)
          
         
         let requestComplete1: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
@@ -399,7 +399,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
 //                        s = sstr.replacingOccurrences(of: "null", with: "\"\"")
 //                    }
 //                    
-//                    print(s)
+                    print(value)
                     guard let data = value.data(using: String.Encoding.utf8) else {
                         
                          
@@ -429,28 +429,32 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
 //                                    }
 //                                }
                                  
-                                DispatchQueue.main.async {
- 
-                                    let searvc = SearcViewController()
-                                    searvc.searchList = response_config.data
-                                    searvc.searchText =  self.searchBar.text ?? "" // "'\()' 搜索结果"
-                                    
-                                    
-                                    searvc.total = response_config.total
-                                    searvc.page = response_config.page
-                                    searvc.limit = response_config.limit
-                                    searvc.pagecount = response_config.pagecount
-                                    
-                                    self.show(searvc, sender: self)
+                                if response_config.data.count > 0 {
+                                    DispatchQueue.main.async {
+     
+                                        let searvc = SearcViewController()
+                                        searvc.searchList = response_config.data
+                                        searvc.searchText =  searchText
+                                        
+                                        
+                                        searvc.total = response_config.total
+                                        searvc.page = response_config.page
+                                        searvc.limit = response_config.limit
+                                        searvc.pagecount = response_config.pagecount
+                                        
+                                        self.show(searvc, sender: self)
+                                    }
+                                }else{
+                                    self.showSearchErrorAlert(on:self, error: "Sorry, no matches were found for your search. Please try again with different keywords.",title: "No Results Found" )
                                 }
+                                
                             }
                             
                         } catch {
                             print("\(error.localizedDescription)")
 //                            let error = SearchError.errorWith("Json parse Error: \(error.localizedDescription)")
                             self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
-                            
-                           
+                             
                             
                         }
                     

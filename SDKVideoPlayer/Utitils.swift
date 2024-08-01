@@ -34,6 +34,8 @@ enum SearchError: Error {
 
 extension UIViewController{
     
+    
+    
     // 创建一个函数来显示搜索错误弹窗
     func showSearchErrorAlert(on viewController: UIViewController, error: String,title: String = "搜索失败") {
         // 根据错误类型创建UIAlertController
