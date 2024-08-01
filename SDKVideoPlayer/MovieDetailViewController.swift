@@ -929,6 +929,44 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                       
                     ])
                 }
+            }else{
+                if (self.movieDetail?.vodPlayURL.count ?? 0) > 0 {
+                    let button = UIButton(type: .custom)
+                    button.setTitle("Play Video", for: .normal)
+                    button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
+                    button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
+                    button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+                    
+//                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
+                    button.layer.borderColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.2).cgColor
+                    button.backgroundColor = ThemeManager.shared.fontColor.withAlphaComponent(0.1)
+                    button.layer.cornerRadius = 5
+//                    button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+                    button.layer.borderWidth = 1
+                    button.clipsToBounds = true
+
+                    button.tag = index
+                    button.addTarget(self, action: #selector(ButtonhdplayurlYoutubeTapped(_:)), for: .touchUpInside)
+                    
+                    
+                    contentView.addSubview(button)
+                    button.translatesAutoresizingMaskIntoConstraints = false
+                      
+                    let buttonSize: CGFloat = 44
+                      NSLayoutConstraint.activate([
+                          button.heightAnchor.constraint(equalToConstant: buttonSize),
+                          button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  50),
+                          button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -50),
+                          button.topAnchor.constraint(equalTo: lineLabel.bottomAnchor, constant: 35 )
+                      ])
+                    
+                     
+                    NSLayoutConstraint.activate([
+                    
+                          contentView.heightAnchor.constraint(equalToConstant:1200)
+                      
+                    ])
+                }
             }
             
             
@@ -936,6 +974,29 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
 //        print(movie)
 //        print(jishuURLArray)
         
+    }
+    
+    @objc func ButtonhdplayurlYoutubeTapped(_ button: UIButton){
+        if ((self.movieDetail?.vodPlayURL.localizedCaseInsensitiveContains("youtube.com")) != nil) {
+            
+            if  let urlString = self.movieDetail?.vodPlayURL, let _ = URL(string: self.movieDetail?.vodPlayURL ?? "") {
+                let controller = SwiftWebVC(urlString: urlString)
+                controller.hidesBottomBarWhenPushed = true
+                controller.proxyHttps = true
+                if let s = self.movieDetail {
+                    LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+                    //通知刷新列表
+                    
+                    // 发送通知
+                    NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+                    
+                }
+                self.show(controller, sender: self)
+            }
+            
+        }else{
+            self.showSearchErrorAlert(on: self, error: "Play URL Error, Please try again.", title: "Alert URL Error")
+        }
     }
     
     func image(fromPngFilePath filePath: String) -> UIImage? {

@@ -234,10 +234,12 @@ class SearcViewController: BaseViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let movie = searchList?[indexPath.item]
+        
+        
         let  controller = MovieDetailViewController()
         controller.movieDetail = movie
-//        controller.modalPresentationStyle = .fullScreen
         self.show(controller, sender: self)
+        
         
     }
      
