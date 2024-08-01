@@ -307,7 +307,25 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
             controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated:false)
             
-//            switchToLandscape()
+
+        }else{
+            if ((movie.vodPlayURL.localizedCaseInsensitiveContains("youtube.com")) ) {
+                let urlString = movie.vodPlayURL
+                if   let _ = URL(string: urlString) {
+                    let controller = SwiftWebVC(urlString: urlString)
+                    controller.hidesBottomBarWhenPushed = true
+                    controller.proxyHttps = true
+                    LocalStore.saveToUserDefaults(RecentlyWatchVideo: movie)
+                    //通知刷新列表
+                    
+                    // 发送通知
+                    NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+                    self.show(controller, sender: self)
+                }
+                
+            }else{
+                self.showSearchErrorAlert(on: self, error: "Play URL Error, Please try again.", title: "Alert URL Error")
+            }
         }
         
     }
