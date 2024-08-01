@@ -639,7 +639,9 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                 })
                 controller.proxyHttps = blackBol
                 self.show(controller, sender: self)
-                   }
+            }else{
+                searchRequest(searchText: keyword.name)
+            }
         }
     }
     
