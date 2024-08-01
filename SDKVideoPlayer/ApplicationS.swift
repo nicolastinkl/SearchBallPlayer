@@ -59,7 +59,8 @@ class ApplicationS {
     static func isCurrentLanguageEnglishOrChineseSimplified() -> Bool {
         let currentLocale = Locale.current
         let languageCode = currentLocale.languageCode ?? ""
-        if (languageCode == "zh-Hans" || languageCode == "zh-CN"){
+        
+        if (languageCode == "zh" || languageCode == "zh-Hans" || languageCode == "zh-CN"){
             return true
         }
         if ( languageCode == "en"){

@@ -94,8 +94,9 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 28)
         label.textAlignment = .center
-        label.numberOfLines = 3
-        label.lineBreakMode = .byCharWrapping
+        label.numberOfLines = 2
+        label.lineBreakMode = .byWordWrapping
+        
         label.textColor = ThemeManager.shared.fontColor
         return label
     }()
@@ -144,7 +145,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     private let lineLabel: UILabel = {
         let label = UILabel()
 //        label.textColor = .gray
-        label.backgroundColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.3)
+        label.backgroundColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.1)
         
         return label
     }()
@@ -285,7 +286,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     func addOpenCloudkit(){
         let button = UIButton(type: .custom)
-        button.setTitle("Choose file", for: .normal)
+        button.setTitle("Add media file", for: .normal)
         button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
         button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
