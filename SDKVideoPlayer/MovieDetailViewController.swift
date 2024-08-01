@@ -29,6 +29,19 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
            
+        
+        // 创建 UIBlurEffect
+       let blurEffect = UIBlurEffect(style: .regular) // 可选的效果：.dark, .extraLight, .light, .regular, .prominent
+       
+       // 创建 UIVisualEffectView
+       let blurEffectView = UIVisualEffectView(effect: blurEffect)
+       blurEffectView.frame = imageView.bounds
+       
+       // 可选：设置自动调整大小掩码以处理旋转或视图大小变化
+       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+       
+       // 将毛玻璃效果视图添加到 UIImageView
+       imageView.addSubview(blurEffectView)
            // 创建渐变层
 //           let gradientLayer = CAGradientLayer()
 //           gradientLayer.colors = [
@@ -46,9 +59,40 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         return imageView
     }()
     
+    private let posterSmallImageView: SDAnimatedImageView = {
+        let imageView = SDAnimatedImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true 
+    
+      // 设置圆角
+      imageView.layer.cornerRadius = 5 // 设置圆角半径
+      imageView.layer.masksToBounds = true // 确保图片也遵循圆角
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = ThemeManager.shared.fontColor.withAlphaComponent(0.5).cgColor
+        
+//        // 设置阴影颜色为白色
+        imageView.layer.shadowColor = UIColor.white.cgColor
+              
+              // 设置阴影透明度
+        imageView.layer.shadowOpacity = 0.9
+              
+              // 设置阴影偏移为 (0, 0) 使其均匀分布
+        imageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+              
+              // 设置较高的阴影模糊半径以模拟发光效果
+        imageView.layer.shadowRadius = 15
+              
+              // 使用阴影路径优化性能
+        imageView.layer.shadowPath = UIBezierPath(roundedRect: imageView.bounds, cornerRadius: imageView.layer.cornerRadius).cgPath
+         
+        
+    return imageView
+    }()
+    
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont.boldSystemFont(ofSize: 28)
         label.textAlignment = .center
         label.numberOfLines = 3
         label.lineBreakMode = .byCharWrapping
@@ -80,7 +124,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     private let summaryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.numberOfLines = 0
         label.textAlignment = .center
         label.textColor = ThemeManager.shared.fontColor
@@ -89,11 +133,19 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     private let remarksLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 17)
 //        label.textColor = .gray
-        label.textColor = ThemeManager.shared.fontColor
+        label.textColor = ThemeManager.shared.fontColor2
         label.numberOfLines = 0
         label.textAlignment = .center
+        return label
+    }()
+    
+    private let lineLabel: UILabel = {
+        let label = UILabel()
+//        label.textColor = .gray
+        label.backgroundColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.3)
+        
         return label
     }()
     
@@ -110,6 +162,36 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     let scrollView = UIScrollView()
     let contentView = UIView()
     var hdplayurl = ""
+    
+    // 为 UIImageView 应用绚丽的阴影效果
+        func applyFancyShadow(to view: UIView) {
+            // 设置阴影颜色
+            view.layer.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5).cgColor // 黑色半透明阴影
+            
+            // 设置阴影透明度
+            view.layer.shadowOpacity = 0.7
+            
+            // 设置阴影偏移量
+            view.layer.shadowOffset = CGSize(width: 0, height: 5)
+            
+            // 设置阴影模糊半径
+            view.layer.shadowRadius = 10
+            
+            // 设置阴影路径，优化性能
+            view.layer.shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: view.layer.cornerRadius).cgPath
+            
+            // 添加渐变色叠加效果
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = view.bounds
+            gradientLayer.colors = [
+                UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5).cgColor, // 半透明红色
+                UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 0.5).cgColor  // 半透明蓝色
+            ]
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+            gradientLayer.cornerRadius = view.layer.cornerRadius
+            view.layer.insertSublayer(gradientLayer, below: view.layer)
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +212,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         setupNameLabel()
         setupSummaryLabel()
         setupRemarksLabel()
+        setupLineLabel()
         setupPlayButton()
         
         // 使用提供的JSON数据填充界面
@@ -224,7 +307,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
               button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
               
               button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -10),
-              button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 )
+              button.topAnchor.constraint(equalTo: remarksLabel.bottomAnchor, constant: 35 )
           ])
         
         var heightSummary:CGFloat = CGFloat(summaryLabel.text?.count ?? 0) * 1.2
@@ -484,16 +567,23 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(posterImageView)
         
+        posterSmallImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(posterSmallImageView)
+        
+        
         // 约束：顶部对齐刘海屏，宽度占满屏幕，高度根据图片比例设置
           NSLayoutConstraint.activate([
               posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: -100),
               posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
               posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 //              posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 16/9) // 根据图片实际比例调整
-              posterImageView.heightAnchor.constraint(equalToConstant: 400),
+              posterImageView.heightAnchor.constraint(equalToConstant: 500),
               
-              
-                
+              posterSmallImageView.centerXAnchor.constraint(equalTo: posterImageView.centerXAnchor),
+              posterSmallImageView.centerYAnchor.constraint(equalTo: posterImageView.centerYAnchor),
+              posterSmallImageView.widthAnchor.constraint(equalToConstant: 180),
+              posterSmallImageView.heightAnchor.constraint(equalToConstant: 300),
+                          
           ])
           
           // 更新渐变层的位置，确保它适应刘海屏
@@ -547,7 +637,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         contentView.addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 20),
+            nameLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: -80),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
@@ -560,7 +650,9 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         NSLayoutConstraint.activate([
             summaryLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
             summaryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            summaryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
+            summaryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            summaryLabel.heightAnchor.constraint(equalToConstant: 40)
+//            summaryLabel.bottomAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 20)
         ])
     }
     
@@ -575,11 +667,24 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         ])
     }
     
+    private func setupLineLabel(){
+        
+        
+        lineLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(lineLabel)
+        
+        NSLayoutConstraint.activate([
+            lineLabel.topAnchor.constraint(equalTo: remarksLabel.bottomAnchor, constant: 20),
+            lineLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            lineLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            lineLabel.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        
+    }
     
     private func loadLocals(_ movie: Video) {
         
-        
-        
+        posterSmallImageView.isHidden = true
         centerLabel.text = ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? movie.vodName : movie.vodEn
         summaryLabel.text = movie.vodBlurb + movie.vodContent
         
@@ -589,11 +694,12 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         // 从URL加载图片
         if let imageUrl = URL(string: movie.vodPic) {
             self.posterImageView.sd_setImage(with: imageUrl, placeholderImage:  UIImage(named: "placeholder-image"), context: nil)
+            self.posterSmallImageView.sd_setImage(with: imageUrl, placeholderImage:  UIImage(named: "placeholder-image"), context: nil)
         }
         
         nameLabel.text = ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? movie.vodName : movie.vodEn
-        summaryLabel.text = movie.vodBlurb + movie.vodContent
-        remarksLabel.text = movie.vodRemarks + " " + movie.vodLang  + " " + movie.vodYear
+        summaryLabel.text = movie.vodRemarks + " / " + movie.vodLang  + " / " + movie.vodYear
+        remarksLabel.text = movie.vodBlurb + movie.vodContent
         let movies = movie.vodPlayURL as NSString
         var newMovices = movies.replacingOccurrences(of: ".m3u8#", with: ".m3u8\n")
         newMovices = newMovices.replacingOccurrences(of: ".mp4#", with: ".mp4\n")
@@ -628,12 +734,15 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                 if playlistOne.contains(".mp4") {
                     let button = UIButton(type: .custom)
                     button.setTitle("Play Video", for: .normal)
-                    button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                    button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
                     button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
                     button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
                     
-                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
+//                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
+                    
                     button.layer.cornerRadius = 5
+                    button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+                    button.layer.borderWidth = 1
                     button.clipsToBounds = true
 
                     button.tag = index
@@ -648,7 +757,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                           button.heightAnchor.constraint(equalToConstant: buttonSize),
                           button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  50),
                           button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -50),
-                          button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 )
+                          button.topAnchor.constraint(equalTo: lineLabel.bottomAnchor, constant: 35 )
                       ])
                     
                     
@@ -667,12 +776,14 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                     
                     let button = UIButton(type: .custom)
                     button.setTitle("\(movie.vodRemarks)", for: .normal)
-                    button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                    button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
                     button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
                     button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
                     
-                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
-                    button.layer.cornerRadius = 5
+//                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
+                    button.layer.cornerRadius = 10
+                    button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+                    button.layer.borderWidth = 1
                     button.clipsToBounds = true
 
                     button.tag = index
@@ -687,7 +798,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                           button.heightAnchor.constraint(equalToConstant: buttonSize),
                           button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  50),
                           button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -50),
-                          button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 )
+                          button.topAnchor.constraint(equalTo: lineLabel.bottomAnchor, constant: 35 )
                       ])
                     
                     
@@ -746,7 +857,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                              button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(col) * (buttonSize + spacing) + spacing),
                              
                              button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -spacing),
-                             button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 + CGFloat(row) * (buttonSize + spacing) + spacing)
+                             button.topAnchor.constraint(equalTo: lineLabel.bottomAnchor, constant: 35 + CGFloat(row) * (buttonSize + spacing) + spacing)
                          ])
                    }
                   
@@ -754,7 +865,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
            }
         
               // 约束内容视图的高度，使其包含所有按钮
-              var heightSummary:CGFloat = CGFloat(summaryLabel.text?.count ?? 0) * 1.2
+              var heightSummary:CGFloat = CGFloat(remarksLabel.text?.count ?? 0) * 1.2
               print(heightSummary)
                 if ( heightSummary <= 0.0) {
                     heightSummary = 200.0
@@ -781,12 +892,16 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                    if index < jishuArray.count {
                        let button = UIButton(type: .custom)
                        button.setTitle(jishuArray[index], for: .normal)
-                       button.setTitleColor(UIColor.black, for: UIControl.State.normal)
-                       button.setTitleColor(UIColor.orange, for: UIControl.State.selected)
+                       button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
+                       button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
+                       
                        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
                        
-                       button.backgroundColor = UIColor(fromHex: "#eeeef0")
+//                       button.backgroundColor = UIColor(fromHex: "#eeeef0")
                        button.layer.cornerRadius = 5
+                       button.layer.cornerRadius = 10
+                       button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+                       button.layer.borderWidth = 1
                        button.clipsToBounds = true
 
                        button.tag = index
@@ -801,7 +916,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                              button.widthAnchor.constraint(equalToConstant: buttonSize),
                              button.heightAnchor.constraint(equalToConstant: buttonSize),
                              button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(col) * (buttonSize + spacing) + spacing),
-                             button.topAnchor.constraint(equalTo: remarksLabel.topAnchor, constant: 35 + CGFloat(row) * (buttonSize + spacing) + spacing)
+                             button.topAnchor.constraint(equalTo: lineLabel.bottomAnchor, constant: 35 + CGFloat(row) * (buttonSize + spacing) + spacing)
                          ])
                    }
                   
@@ -809,7 +924,8 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
            }
         
               // 约束内容视图的高度，使其包含所有按钮
-              var heightSummary:CGFloat = CGFloat(summaryLabel.text?.count ?? 0) * 1.2
+        
+              var heightSummary:CGFloat = CGFloat(remarksLabel.text?.count ?? 0) * 1.2
               print(heightSummary)
                 if ( heightSummary <= 0.0) {
                     heightSummary = 200.0
