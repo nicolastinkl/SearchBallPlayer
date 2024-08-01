@@ -13,6 +13,7 @@ import SwiftIcons
 import SwiftfulLoadingIndicators
 
 import MobileCoreServices
+import AVFoundation
 
 //import SwiftLoader
 //import KSPlayer
@@ -23,6 +24,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     var jishuArray :[String] = [String]()
     var jishuURLArray :[String] = [String]()
+    var jishuURLImageArray :[String] = [String]()
     
     private let posterImageView: SDAnimatedImageView = {
         let imageView = SDAnimatedImageView()
@@ -105,6 +107,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         let bgview = MutiGradientImageBgView()
         bgview.contentMode = .scaleAspectFill
         bgview.clipsToBounds = true
+        bgview.backgroundColor = UIColor.black
         bgview.layer.cornerRadius = 10
         bgview.cornerRadius2 = 10
         bgview.translatesAutoresizingMaskIntoConstraints = false
@@ -233,6 +236,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                         //print("找到 .m3u8 文件：\(fileURL.absoluteString)")
                         jishuArray.append("\(fileURL.lastPathComponent)")
                         jishuURLArray.append(fileURL.absoluteString)
+                        
                         index  = index + 1
                     }
                     
@@ -260,10 +264,41 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
             }
             
             if(movieDetail.vodID == 3) {
-                // 定义支持的文件类型
-                   
+                //
+                let m3u8Files = CloudKitCentra.getMP4FilesInDocumentsDirectory()
+                
+                
+                let tempForwardBarButtonItem = UIBarButtonItem(image: UIImage(named: "videobutton"),
+                                                               style: UIBarButtonItem.Style.plain,
+                                                               target: self,
+                                                               action: #selector(MovieDetailViewController.addOpenCloudkitTapped(_:)))
+                tempForwardBarButtonItem.width = 18.0
+                tempForwardBarButtonItem.tintColor = UIColor.MainColor()
+                navigationItem.rightBarButtonItem = tempForwardBarButtonItem
+            
+                
+                if (m3u8Files.count > 0){
+                    var index = 1
+                    for fileURL in m3u8Files {
+                        //print("找到 .m3u8 文件：\(fileURL.absoluteString)")
+                        jishuArray.append("\(fileURL.lastPathComponent)")
+                        jishuURLArray.append(fileURL.absoluteString)
+                        var newString = fileURL.absoluteString.replacingOccurrences(of: ".MP4", with: ".png", options: .literal, range: nil)
+                          newString = newString.replacingOccurrences(of: ".mp4", with: ".png", options: .literal, range: nil)
+                        jishuURLImageArray.append(newString)
+                        index  = index + 1
+                    }
+                    
+                    // 定义支持的文件类型
+                    setupButtonLists()
+                    
+                    
+                    
+                }else{
+                    addOpenCloudkit()
+                }
                 //add button
-                addOpenCloudkit()
+                
             }
             
             
@@ -284,15 +319,17 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         
     }
     
+    var addOpenCloudkitButton: UIButton?
     func addOpenCloudkit(){
         let button = UIButton(type: .custom)
         button.setTitle("Add media file", for: .normal)
-        button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
+        button.setTitleColor(ThemeManager.shared.fontColor, for: UIControl.State.normal)
         button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
+        button.backgroundColor = ThemeManager.shared.fontColor.withAlphaComponent(0.1)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
          
         button.layer.cornerRadius = 5
-        button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+        button.layer.borderColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.2).cgColor
         button.layer.borderWidth = 1
         button.clipsToBounds = true
  
@@ -300,7 +337,8 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
-          
+        addOpenCloudkitButton = button
+        
         let buttonSize: CGFloat = 44
           NSLayoutConstraint.activate([
               
@@ -344,30 +382,106 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     // MARK: - UIDocumentPickerDelegate
 
+    
+    func generateThumbnail(from videoURL: URL) -> UIImage?{
+             
+            let asset = AVAsset(url: videoURL)
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            imageGenerator.appliesPreferredTrackTransform = true
+
+            // 选择你想要生成缩略图的时间（此处为视频的第1秒）
+            let time = CMTime(seconds: 1.0, preferredTimescale: 600)
+            do {
+                let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                let thumbnail = UIImage(cgImage: imageRef)
+ 
+
+                // 将缩略图保存为 PNG 格式
+                if let data = thumbnail.pngData() {
+                    // 确保文件名和目录
+                    let thumbnailFilename = videoURL.deletingPathExtension().lastPathComponent + ".png"
+                    let thumbnailURL = videoURL.deletingLastPathComponent().appendingPathComponent(thumbnailFilename)
+
+                    try data.write(to: thumbnailURL)
+                    print("缩略图已保存到：\(thumbnailURL.path)")
+                    
+                }
+                return thumbnail
+            } catch {
+                print("缩略图生成失败：\(error)")
+            }
+            return nil
+        }
+    
       func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
           guard let url = urls.first else { return }
+          //▿ file:///private/var/mobile/Containers/Shared/AppGroup/B52EBE26-6D27-403D-8EF1-FC1174D21531/File%20Provider%20Storage/ALL%20Michael%20Phelps'%20Olympic%20Medal%20Races%20from%20London%202012%20_%20Top%20Moments.MP4
+
           
-          if(url.pathExtension == "m3u8" || url.pathExtension == "mp4"){
+          if(url.pathExtension == "m3u8" || url.pathExtension == "mp4"  || url.pathExtension == "MP4" || url.pathExtension == "M3U8"){
               
               
-              let resource = KSPlayerResource(url: url)
-              let controller = DetailViewController()
-              controller.resource = resource
-               
-               if let s = self.movieDetail {
-                   if s.vodID > 10 {
-                       
-                       LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
-                       //通知刷新列表
-                       
-                       // 发送通知
-                       NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
-                   }
-               }
-              controller.modalPresentationStyle = .fullScreen
-              self.present(controller, animated:false)
+              // 请求访问文件权限
+              let hasAccess = url.startAccessingSecurityScopedResource()
+              defer {
+                  // 确保在使用完文件后释放访问权限
+                  if hasAccess {
+                      url.stopAccessingSecurityScopedResource()
+                  }
+              }
               
+              do {
+                  let fileManager = FileManager.default
+                  // 目标文件的路径（app 的 Documents 目录）
+                  if  let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+                      let destinationURL = documentsDirectory.appendingPathComponent(url.lastPathComponent)
+                      
+                      // 检查文件是否已存在，若存在则删除
+                      if fileManager.fileExists(atPath: destinationURL.path) {
+                          try fileManager.removeItem(at: destinationURL)
+                      }
+                      
+                      // 复制文件到 Documents 目录
+                      try fileManager.copyItem(at: url, to: destinationURL)
+                      print("文件复制成功到：\(destinationURL.path)")
+                      
+                      // 生成视频截图
+                      //generateThumbnail(from: destinationURL)
+                      self.view.makeToast( NSLocalizedString("SaveSuccess", comment: "")  , duration: 3.0, position: .bottom)
+                      
+                      //
+                      addOpenCloudkitButton?.isHidden = true
+                      jishuArray.append("\(destinationURL.lastPathComponent)")
+                      jishuURLArray.append("\(destinationURL.absoluteString)")
+                      addlastButton()
+                      
+                  }
+                  
+              } catch {
+                  print("文件操作失败：\(error)")
+                  self.view.makeToast(NSLocalizedString("SaveFailed", comment: "") + "\(error)", duration: 3.0, position: .bottom)
+              }
           }
+      
+//
+//              let resource = KSPlayerResource(url: url)
+//              let controller = DetailViewController()
+//              controller.resource = resource
+//               
+//               if let s = self.movieDetail {
+//                   if s.vodID > 10 {
+//                       
+//                       LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+//                       //通知刷新列表
+//                       
+//                       // 发送通知
+//                       NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+//                   }
+//               }
+//              controller.modalPresentationStyle = .fullScreen
+//              self.present(controller, animated:false)
+              
+//          }
           
           // 使用UIDocument打开文件
           /*let document = UIDocument(fileURL: url)
@@ -740,9 +854,10 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                     button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
                     
 //                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
-                    
+                    button.layer.borderColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.2).cgColor
+                    button.backgroundColor = ThemeManager.shared.fontColor.withAlphaComponent(0.1)
                     button.layer.cornerRadius = 5
-                    button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+//                    button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
                     button.layer.borderWidth = 1
                     button.clipsToBounds = true
 
@@ -781,9 +896,11 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                     button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
                     button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
                     
+                    button.layer.borderColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.2).cgColor
+                    button.backgroundColor = ThemeManager.shared.fontColor.withAlphaComponent(0.1)
 //                    button.backgroundColor = UIColor(fromHex: "#eeeef0")
                     button.layer.cornerRadius = 10
-                    button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+                    
                     button.layer.borderWidth = 1
                     button.clipsToBounds = true
 
@@ -821,53 +938,211 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         
     }
     
-    func setupButtonLists() {
+    func image(fromPngFilePath filePath: String) -> UIImage? {
+        let fileURL = URL(fileURLWithPath: filePath)
+        
+        // 使用 UIImage 的 init(contentsOfFile:) 方法从文件路径加载图像
+        if let image = UIImage(contentsOfFile: fileURL.path) {
+            return image
+        } else {
+            print("无法从路径加载图像：\(filePath)")
+            return nil
+        }
+    }
+
+    
+    
+    func getVideoInfo(from fileURL: String) -> String {
+        var returnString = ""
+        if let url = URL(string: fileURL) {
+            let asset = AVAsset(url:url )
+                // 获取视频的时长
+                let duration = asset.duration
+                let durationSeconds = CMTimeGetSeconds(duration)
+                print("视频时长: \(durationSeconds) 秒")
+                var timespace = 0
+                if durationSeconds > 60 {
+                    returnString = "\(Int(durationSeconds/60)) min"
+                }else{
+                    returnString = "\(Int(durationSeconds)) s"
+                }
+                // 获取视频的创建时间
+                if let creationDate = asset.creationDate {
+                    let date = creationDate.dateValue
+                    print("视频创建时间: \(String(describing: date))")
+                    //returnString = "\(returnString)/ \(String(describing: date))"
+                } else {
+                    print("无法获取视频创建时间")
+                }
+                
+                // 获取视频的其他元数据（例如标题）
+                let metadata = asset.metadata
+                for item in metadata {
+                    if let key = item.commonKey?.rawValue, let value = item.value {
+                        print("\(key): \(value)")
+                    }
+                }
+        
+        }
+        
+     return returnString
+    }
+    
+    
+    var preButton: UIButton!
+    
+    func addlastButton(){
         let numberOfColumns: Int = 1
         
         let numberOfRows =   jishuArray.count/numberOfColumns+1
         let spacing: CGFloat = 10
         let buttonSize: CGFloat = (self.view.frame.width - spacing*7) / 6
+        let heightBuView: CGFloat = 120
+        addnewButtonFunc(jishuURLArray.count-1, spacing, heightBuView, 1, buttonSize)
+        
+        var heightSummary:CGFloat = CGFloat(jishuArray.count) *   heightBuView
+        if ( heightSummary <= 0.0) {
+            heightSummary = 200.0
+        }
+      NSLayoutConstraint.activate([
+      
+            contentView.heightAnchor.constraint(equalToConstant:self.view.frame.height*0.6 + heightSummary   +  CGFloat(numberOfRows) * (buttonSize + spacing) + spacing)
+        
+      ])
+        
+    }
+    
+    fileprivate func addnewButtonFunc(_ index: Int, _ spacing: CGFloat, _ heightBuView: CGFloat, _ col: Int, _ buttonSize: CGFloat) {
+        let button = UIButton(type: .custom)
+        //                       button.setTitle(jishuArray[index], for: .normal)
+        //                       button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
+        //                       button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.layer.cornerRadius = 5
+        
+        button.layer.borderWidth = 1
+        button.layer.borderColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.2).cgColor
+        //                       button.backgroundColor = ThemeManager.shared.fontColor.withAlphaComponent(0.1)
+        button.clipsToBounds = true
+        
+        button.tag = index
+        button.addTarget(self, action: #selector(ButtonTapped(_:)), for: .touchUpInside)
+        
+        contentView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 6
+        contentView.addSubview(imageView)
+//        if let img = image(fromPngFilePath: jishuURLImageArray[index]) {
+//            imageView.image = img
+//        }else{
+//            
+//            //重新生成图片
+//            
+//            
+//        }
+        if let u = URL(string: jishuURLArray[index]) ,let img = generateThumbnail(from:u ){
+            imageView.image = img
+        }else{
+            
+            imageView.image = UIImage(named: "placeholder-image")
+        }
+        
+        let nameLabel = UILabel()
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.font = UIFont.systemFont(ofSize: 17)
+        contentView.addSubview(nameLabel)
+        nameLabel.textColor = ThemeManager.shared.fontColor
+        nameLabel.numberOfLines = 2
+        nameLabel.text = jishuArray[index]
+        let returnString = getVideoInfo(from: jishuURLArray[index])
+        
+        
+        let contentLabel = UILabel()
+        contentLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        contentView.addSubview(contentLabel)
+        contentLabel.textColor = ThemeManager.shared.fontColor2
+        contentLabel.numberOfLines = 1
+        contentLabel.text = returnString
+        lineLabel.backgroundColor = UIColor.clear
+        if index == 0 {
+            NSLayoutConstraint.activate([
+                button.topAnchor.constraint(equalTo: lineLabel.bottomAnchor, constant:   spacing)
+            ])
+        }else{
+            NSLayoutConstraint.activate([
+                button.topAnchor.constraint(equalTo: preButton.bottomAnchor, constant:   spacing)
+            ])
+        }
+        
+        let playImageview = UIImageView()
+        playImageview.translatesAutoresizingMaskIntoConstraints = false
+        playImageview.contentMode = .scaleAspectFit
+        playImageview.clipsToBounds = true
+        contentView.addSubview(playImageview)
+        playImageview.image = UIImage(named: "Play")
+        playImageview.tintColor = UIColor.MainColor()
+        NSLayoutConstraint.activate([
+            
+            button.heightAnchor.constraint(equalToConstant: heightBuView),
+            button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  spacing),
+            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -spacing),
+            
+            imageView.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: 0),
+            imageView.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 10),
+            imageView.widthAnchor.constraint(equalToConstant: 80),
+            imageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            nameLabel.topAnchor.constraint(equalTo: button.topAnchor, constant: 5),
+            nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
+            nameLabel.trailingAnchor.constraint(equalTo: button.trailingAnchor,constant: -20),
+            nameLabel.heightAnchor.constraint(equalToConstant: 70),
+            
+            contentLabel.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: -10),
+            contentLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 15),
+            contentLabel.trailingAnchor.constraint(equalTo: button.trailingAnchor,constant: -20),
+            contentLabel.heightAnchor.constraint(equalToConstant: 50),
+            
+            
+            playImageview.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: 0),
+            playImageview.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -10),
+            playImageview.widthAnchor.constraint(equalToConstant: 30),
+            playImageview.heightAnchor.constraint(equalToConstant: 30),
+            
+        ])
+        
+        preButton = button
+    }
+    
+    func setupButtonLists() {
+        
+        let numberOfColumns: Int = 1
+        
+        let numberOfRows =   jishuArray.count/numberOfColumns+1
+        let spacing: CGFloat = 10
+        let buttonSize: CGFloat = (self.view.frame.width - spacing*7) / 6
+        let heightBuView: CGFloat = 120
         for row in 0..<numberOfRows { //  6 rows of buttons, adjust as needed
 
             for col in 0..<numberOfColumns {
                    let index = row * numberOfColumns + col
-                   if index < jishuArray.count {
-                       let button = UIButton(type: .custom)
-                       button.setTitle(jishuArray[index], for: .normal)
-                       button.setTitleColor(ThemeManager.shared.fontColor2, for: UIControl.State.normal)
-                       button.setTitleColor(UIColor.MainColor(), for: UIControl.State.highlighted)
-                       button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-                       
-//                       button.backgroundColor = UIColor(fromHex: "#eeeef0")
-                       button.layer.cornerRadius = 5
-                       button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
-                       button.layer.borderWidth = 1
-                       button.clipsToBounds = true
-
-                       button.tag = index
-                       button.addTarget(self, action: #selector(ButtonTapped(_:)), for: .touchUpInside)
-                       
-                       
-                       contentView.addSubview(button)
-                       button.translatesAutoresizingMaskIntoConstraints = false
-                         
                      
-                         NSLayoutConstraint.activate([
-                             
-                             button.heightAnchor.constraint(equalToConstant: buttonSize),
-                             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(col) * (buttonSize + spacing) + spacing),
-                             
-                             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -spacing),
-                             button.topAnchor.constraint(equalTo: lineLabel.bottomAnchor, constant: 35 + CGFloat(row) * (buttonSize + spacing) + spacing)
-                         ])
+                   if index < jishuArray.count {
+                       addnewButtonFunc(index, spacing, heightBuView, col, buttonSize)
+                       
                    }
                   
                }
            }
         
               // 约束内容视图的高度，使其包含所有按钮
-              var heightSummary:CGFloat = CGFloat(remarksLabel.text?.count ?? 0) * 1.2
-              print(heightSummary)
+                var heightSummary:CGFloat = CGFloat(jishuArray.count) *   heightBuView
                 if ( heightSummary <= 0.0) {
                     heightSummary = 200.0
                 }
@@ -900,8 +1175,10 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                        
 //                       button.backgroundColor = UIColor(fromHex: "#eeeef0")
                        button.layer.cornerRadius = 5
-                       button.layer.cornerRadius = 10
-                       button.layer.borderColor = ThemeManager.shared.fontColor2.cgColor
+                       
+                       
+                       button.layer.borderColor = ThemeManager.shared.fontColor2.withAlphaComponent(0.2).cgColor
+                       button.backgroundColor = ThemeManager.shared.fontColor.withAlphaComponent(0.1)
                        button.layer.borderWidth = 1
                        button.clipsToBounds = true
 

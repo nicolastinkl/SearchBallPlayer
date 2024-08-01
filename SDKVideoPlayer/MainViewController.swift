@@ -49,6 +49,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         bgview.contentMode = .scaleAspectFill
         bgview.clipsToBounds = true
         bgview.layer.cornerRadius = 10
+        bgview.backgroundColor = UIColor.black
         bgview.cornerRadius2 = 10
         bgview.translatesAutoresizingMaskIntoConstraints = false
         return bgview
@@ -59,7 +60,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textAlignment = .center
-        label.textColor = ThemeManager.shared.fontColor
+        label.textColor = UIColor.white
         label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
 //        label.layer.borderColor = ThemeManager.shared.fontColor.withAlphaComponent(0.6).cgColor

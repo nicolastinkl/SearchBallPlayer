@@ -24,13 +24,43 @@ class CloudKitCentra{
             print("无法找到文档目录")
             return []
         }
-
+        
         // 尝试获取目录中所有文件的URL
         do {
             let items = try fileManager.contentsOfDirectory(at: documentsDirectoryURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
             // 筛选出所有.m3u8文件
             
             let m3u8Files = items.filter { $0.pathExtension == "m3u8" }
+            //            var newm3u8Files = [URL]()
+            //            m3u8Files.forEach { url in
+            //                var newurl = documentsDirectoryURL.absoluteString + url.absoluteString
+            //
+            //                newm3u8Files.append(documentsDirectoryURL.appendingPathComponent(url.absoluteString))
+            //            }
+            return m3u8Files
+        } catch {
+            print("读取文档目录时发生错误：\(error)")
+            return []
+        }
+        
+    }
+    
+    
+    
+    static func getMP4FilesInDocumentsDirectory() -> [URL] {
+        // 获取文档目录路径
+        let fileManager = FileManager.default
+        guard let documentsDirectoryURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            print("无法找到文档目录")
+            return []
+        }
+
+        // 尝试获取目录中所有文件的URL
+        do {
+            let items = try fileManager.contentsOfDirectory(at: documentsDirectoryURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+            // 筛选出所有.m3u8文件
+            
+            let m3u8Files = items.filter { $0.pathExtension == "MP4" || $0.pathExtension == "mp4" }
 //            var newm3u8Files = [URL]()
 //            m3u8Files.forEach { url in
 //                var newurl = documentsDirectoryURL.absoluteString + url.absoluteString
@@ -43,6 +73,7 @@ class CloudKitCentra{
             return []
         }
     }
+    
     
     static func getM3u8FilesInDocumentsDirectory() -> [URL] {
         // 获取文档目录路径
