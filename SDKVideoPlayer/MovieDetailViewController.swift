@@ -14,6 +14,7 @@ import SwiftfulLoadingIndicators
 
 import MobileCoreServices
 import AVFoundation
+import AVKit
 
 //import SwiftLoader
 //import KSPlayer
@@ -177,6 +178,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         
         return label
     }()
+ 
     
     private let playButton:UIButton = {
         
@@ -1007,7 +1009,7 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     func sendRequestGetPlayerURL() {
         
-        SwiftLoader.show(view: self.view,title: NSLocalizedString("Gettings play url...", comment: ""), animated: true)
+        SwiftLoader.show(view: self.view,title: NSLocalizedString("Getting play url...", comment: ""), animated: true)
         
 
       //  LoadingIndicator()
@@ -1048,19 +1050,20 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
                                 //self.movies = response_config.data.videolist
                             
                                 DispatchQueue.main.async {
-                                    if let u = URL(string: response_config.data?.videoURL ?? "") ,let coverurl =  URL(string: response_config.data?.thumbnail ?? ""){
-                                        
+                                    /*if let u = URL(string: response_config.data?.videoURL ?? "") ,let coverurl =  URL(string: response_config.data?.thumbnail ?? ""){
+                                        debugPrint(">>>>>>> \n \(u)")
                                         let resource = KSPlayerResource(url: u, name: response_config.data?.title ?? "",cover: coverurl)
                                        let controller = DetailViewController()
                                        controller.resource = resource
-                                         
                                        controller.modalPresentationStyle = .fullScreen
                                        self.present(controller, animated:false)
+                                         
+                                         
                                     }else{
                                        
                                         self.showSearchErrorAlert(on: self , error: "Get Play Video play URL Failed.Please try again.", title: "Error Info")
                                        
-                                    }
+                                    } */
                                 }
                             }else{
                                 DispatchQueue.main.async {
@@ -1111,22 +1114,21 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     @objc func ButtonhdplayurlYoutubeTapped(_ button: UIButton){
         if ((self.movieDetail?.vodPlayURL.localizedCaseInsensitiveContains("youtube.com")) != nil) {
-            
-            sendRequestGetPlayerURL()
-//            if  let urlString = self.movieDetail?.vodPlayURL, let _ = URL(string: self.movieDetail?.vodPlayURL ?? "") {
-//                let controller = SwiftWebVC(urlString: urlString)
-//                controller.hidesBottomBarWhenPushed = true
-//                controller.proxyHttps = true
-//                if let s = self.movieDetail {
-//                    LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
-//                    //通知刷新列表
-//                    
-//                    // 发送通知
-//                    NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
-//                    
-//                }
-//                self.show(controller, sender: self)
-//            }
+             
+            if  let urlString = self.movieDetail?.vodPlayURL, let _ = URL(string: self.movieDetail?.vodPlayURL ?? "") {
+                let controller = SwiftWebVC(urlString: urlString)
+                controller.hidesBottomBarWhenPushed = true
+                controller.proxyHttps = true
+                if let s = self.movieDetail {
+                    LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+                    //通知刷新列表
+                    
+                    // 发送通知
+                    NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+                    
+                }
+                self.show(controller, sender: self)
+            }
             
         }else{
             self.showSearchErrorAlert(on: self, error: "Play URL Error, Please try again.", title: "Alert URL Error")

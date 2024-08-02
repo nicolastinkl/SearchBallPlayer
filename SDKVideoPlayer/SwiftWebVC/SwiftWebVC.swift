@@ -22,6 +22,57 @@ private struct AssociatedKeys {
 }
 
 
+public enum YouTubePlayerState: String {
+    case Unstarted = "-1"
+    case Ended = "0"
+    case Playing = "1"
+    case Paused = "2"
+    case Buffering = "3"
+    case Queued = "4"
+}
+
+public enum YouTubePlayerEvents: String {
+    case YouTubeIframeAPIReady = "onYouTubeIframeAPIReady"
+    case Ready = "onReady"
+    case StateChange = "onStateChange"
+    case PlaybackQualityChange = "onPlaybackQualityChange"
+}
+
+public enum YouTubePlaybackQuality: String {
+    case Small = "small"
+    case Medium = "medium"
+    case Large = "large"
+    case HD720 = "hd720"
+    case HD1080 = "hd1080"
+    case HighResolution = "highres"
+}
+
+
+
+private extension URL {
+    func queryStringComponents() -> [String: AnyObject] {
+
+        var dict = [String: AnyObject]()
+
+        // Check for query string
+        if let query = self.query {
+
+            // Loop through pairings (separated by &)
+            for pair in query.components(separatedBy: "&") {
+
+                // Pull key, val from from pair parts (separated by =) and set dict[key] = value
+                let components = pair.components(separatedBy: "=")
+                dict[components[0]] = components[1] as AnyObject?
+            }
+
+        }
+
+        return dict
+    }
+}
+
+
+
 public class SwiftWebVC: UIViewController{
     
     private var playVideourl:URL?
@@ -173,9 +224,140 @@ public class SwiftWebVC: UIViewController{
         self.request = aRequest
     }
     
+    public typealias YouTubePlayerParameters = [String: AnyObject]
+    /** The readiness of the player */
+    fileprivate(set) open var ready = false
+
+    /** The current state of the video player */
+    fileprivate(set) open var playerState = YouTubePlayerState.Unstarted
+
+    /** The current playback quality of the video player */
+    fileprivate(set) open var playbackQuality = YouTubePlaybackQuality.Small
+
+    /** Used to configure the player */
+    open var playerVars = YouTubePlayerParameters()
     
+    fileprivate func playerParameters() -> YouTubePlayerParameters {
+
+        return [
+            "height": "100%" as AnyObject,
+            "width": "100%" as AnyObject,
+            "events": playerCallbacks() as AnyObject,
+            "playerVars": playerVars as AnyObject
+        ]
+    }
+    public func videoIDFromYouTubeURL(_ videoURL: URL) -> String? {
+        return videoURL.queryStringComponents()["v"] as! String?
+    }
+    
+
+    fileprivate func playerCallbacks() -> YouTubePlayerParameters {
+        return [
+            "onReady": "onReady" as AnyObject,
+            "onStateChange": "onStateChange" as AnyObject,
+            "onPlaybackQualityChange": "onPlaybackQualityChange" as AnyObject,
+            "onError": "onPlayerError" as AnyObject
+        ]
+    }
     func loadRequest(_ request: URLRequest) {
-        webView.load(request)
+        if let url =  request.url {
+            
+            if let videoID = videoIDFromYouTubeURL(url) {
+                loadVideoID(videoID)
+            }else{
+                webView.load(request)
+            }
+            
+        } 
+        
+    }
+    
+    open func loadVideoID(_ videoID: String) {
+        if let rawHTMLString = htmlStringWithFilePath(playerHTMLPath()){
+            // Replace %@ in rawHTMLString with jsonParameters string
+            let htmlString = rawHTMLString.replacingOccurrences(of: "%@", with: videoID, options: [], range: nil)
+            
+            // Load HTML in web view
+            webView.loadHTMLString(htmlString, baseURL: URL(string: "about:blank"))
+        }
+    }
+ 
+    
+    fileprivate func loadWebViewWithParameters(_ parameters: YouTubePlayerParameters) {
+
+        // Get HTML from player file in bundle
+        let rawHTMLString = htmlStringWithFilePath(playerHTMLPath())!
+
+        // Get JSON serialized parameters string
+        let jsonParameters = serializedJSON(parameters as AnyObject)!
+
+        // Replace %@ in rawHTMLString with jsonParameters string
+        let htmlString = rawHTMLString.replacingOccurrences(of: "%@", with: jsonParameters, options: [], range: nil)
+
+        // Load HTML in web view
+        webView.loadHTMLString(htmlString, baseURL: URL(string: "about:blank"))
+    }
+    
+    fileprivate func playerHTMLPath() -> String {
+        return Bundle(for: self.classForCoder).path(forResource: "YTPlayer", ofType: "html")!
+    }
+
+    fileprivate func htmlStringWithFilePath(_ path: String) -> String? {
+
+        // Error optional for error handling
+        var error: NSError?
+
+        // Get HTML string from path
+        let htmlString: NSString?
+        do {
+            htmlString = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+        } catch let error1 as NSError {
+            error = error1
+            htmlString = nil
+        }
+
+        // Check for error
+        if let _ = error {
+            print("Lookup error: no HTML file found for path, \(path)")
+        }
+
+        return htmlString! as String
+    }
+ 
+
+    fileprivate func serializedJSON(_ object: AnyObject) -> String? {
+
+        // Empty error
+        var error: NSError?
+
+        // Serialize json into NSData
+        let jsonData: Data?
+        do {
+            jsonData = try JSONSerialization.data(withJSONObject: object, options: JSONSerialization.WritingOptions.prettyPrinted)
+        } catch let error1 as NSError {
+            error = error1
+            jsonData = nil
+        }
+
+        // Check for error and return nil
+        if let _ = error {
+            print("Error parsing JSON")
+            return nil
+        }
+
+        // Success, return JSON string
+        return NSString(data: jsonData!, encoding: String.Encoding.utf8.rawValue) as? String
+    }
+    
+    
+    fileprivate func evaluatePlayerCommand(_ command: String) {
+//        let fullCommand = "player." + command + ";"
+        //webView.stringByEvaluatingJavaScript(from: fullCommand)
+        
+        webView.evaluateJavaScript(command, completionHandler: {(response, error) in
+            print("\(String(describing: response))   \(String(describing: error))")
+        })
+        
     }
     
     ////////////////////////////////////////////////
@@ -209,6 +391,7 @@ public class SwiftWebVC: UIViewController{
         webView = WKWebView(frame: UIScreen.main.bounds,configuration: webConfiguration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        
         webView.backgroundColor =  ThemeManager.shared.viewBackgroundColor
         
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -224,7 +407,7 @@ public class SwiftWebVC: UIViewController{
         ])
         loadRequest(request)
         configureNavigationBar()
-        SwiftLoader.show(view: self.view,title: NSLocalizedString("Loading", comment: ""), animated: true)
+        //SwiftLoader.show(view: self.view,title: NSLocalizedString("Loading", comment: ""), animated: true)
         
          
         
@@ -550,11 +733,10 @@ public class SwiftWebVC: UIViewController{
     }
     
 }
+ 
 
-extension SwiftWebVC: WKUIDelegate {
-    
-    // Add any desired WKUIDelegate methods here: https://developer.apple.com/reference/webkit/wkuidelegate
-    
+extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
+     
     public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         
         guard navigationAction.targetFrame == nil else {
@@ -582,11 +764,6 @@ extension SwiftWebVC: WKUIDelegate {
          return newWebView
          
     }
-}
-
-extension SwiftWebVC: WKNavigationDelegate  {
-     
-    
     
     func showVideoPopupView(with url: URL?) {
         // 创建半透明遮罩视图
@@ -699,28 +876,31 @@ extension SwiftWebVC: WKNavigationDelegate  {
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         updateToolbarItems()
         
-    }
-    
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+    }   
+     
+    /*
+  public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        decisionHandler(.allow)
           if let url = navigationAction.request.url {
               print("decidePolicyFor \( url.absoluteString)")
-//          https://download.huiliandao.com/dis/489324623124234lkhbaijuea.mobileprovision
               
-              if url.absoluteString.contains(".mobileprovision") {
-                  UIApplication.shared.open(url,options: [:]) { complated in
-                      
-                  }
-                  
-                  
-                  
+              if url.absoluteString.localizedCaseInsensitiveContains("ytplayer://onYouTubeIframeAPIReady") {
+                  //evaluatePlayerCommand("javascript:onVideoPlay()")
+              }
+              if url.absoluteString.localizedCaseInsensitiveContains(".mobileprovision") {
+                  UIApplication.shared.open(url,options: [:]) { complated in  }
 //                  print("decidePolicyFor video URL: \(url.absoluteString)")
 //                  self.showVideoPopupView(with: url)
                   // 处理视频 URL（如弹出播放界面或其他操作）
               }
+             
+              
+              
           }
-          decisionHandler(.allow)
+          
       }
-    
+     */
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.delegate?.didFinishLoading(success: true)
@@ -741,10 +921,14 @@ extension SwiftWebVC: WKNavigationDelegate  {
         
     }
     
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("didFailProvisionalNavigation \( error.localizedDescription)")
+    }
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.delegate?.didFinishLoading(success: false)
+        print("didFail \( error.localizedDescription)")
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-         updateToolbarItems()
+        updateToolbarItems()
         SwiftLoader.hide()
         
 //        self.showNetworkErrorView(errormsg: "\(error.localizedDescription)") {
