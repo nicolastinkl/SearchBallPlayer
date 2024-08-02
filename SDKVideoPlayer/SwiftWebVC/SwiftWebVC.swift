@@ -903,7 +903,7 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
                   decisionHandler(.allow)
               }else{
                   decisionHandler(.cancel)
-                  if   url.absoluteString.localizedCaseInsensitiveContains("ytplayer://onYouTubeIframeAPIReady") {
+                  if   url.absoluteString.localizedCaseInsensitiveContains("ytplayer://onReady") {
                        evaluatePlayerCommand("javascript:onVideoPlay()")
                   }
                   
