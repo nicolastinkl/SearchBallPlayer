@@ -870,37 +870,57 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
        self.present(controller, animated:false)
   
     }
+     
     
+
+    // 2) 开始加载
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        print("\(#function)")
         self.delegate?.didStartLoading()
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         updateToolbarItems()
+    }
+
+    // 3) 接受到网页 response 后, 可以根据 statusCode 决定是否 继续加载。allow or cancel, 必须执行肥调 decisionHandler 。逃逸闭包的属性
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        print("\(#function)")
+       guard let httpResponse = navigationResponse.response as? HTTPURLResponse else {
+            decisionHandler(.allow)
+            return
+        }
+        print("httpResponse.statusCode: \(httpResponse.statusCode)")
+
+        let policy : WKNavigationResponsePolicy = httpResponse.statusCode == 200 ? .allow : .cancel
+        decisionHandler(policy)
+    }
+
+    // 1）接受网页信息，决定是否加载还是取消。必须执行肥调 decisionHandler 。逃逸闭包的属性
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
-        
-    }   
-     
-    /*
-  public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        decisionHandler(.allow)
           if let url = navigationAction.request.url {
-              print("decidePolicyFor \( url.absoluteString)")
-              
-              if url.absoluteString.localizedCaseInsensitiveContains("ytplayer://onYouTubeIframeAPIReady") {
-                  //evaluatePlayerCommand("javascript:onVideoPlay()")
+              print("\(#function) \( url.absoluteString)")
+              if url.absoluteString.localizedCaseInsensitiveContains("http") || url.absoluteString == "about:blank" {
+                  decisionHandler(.allow)
+              }else{
+                  decisionHandler(.cancel)
+                  if   url.absoluteString.localizedCaseInsensitiveContains("ytplayer://onYouTubeIframeAPIReady") {
+                       evaluatePlayerCommand("javascript:onVideoPlay()")
+                  }
+                  
+                    //ytplayer://onYouTubeIframeAPIReady
               }
+              
               if url.absoluteString.localizedCaseInsensitiveContains(".mobileprovision") {
                   UIApplication.shared.open(url,options: [:]) { complated in  }
 //                  print("decidePolicyFor video URL: \(url.absoluteString)")
 //                  self.showVideoPopupView(with: url)
                   // 处理视频 URL（如弹出播放界面或其他操作）
               }
-             
-              
               
           }
           
       }
-     */
+   
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.delegate?.didFinishLoading(success: true)
@@ -922,7 +942,9 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
     }
     
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("didFailProvisionalNavigation \( error.localizedDescription)")
+        print("\(#function) \( error.localizedDescription)")
+        updateToolbarItems()
+        SwiftLoader.hide()
     }
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.delegate?.didFinishLoading(success: false)
