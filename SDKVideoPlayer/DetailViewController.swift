@@ -43,6 +43,8 @@ class DetailViewController: BaseViewController, DetailProtocol {
         view.backgroundColor = UIColor.black
         view.addSubview(playerView)
         
+        KSOptions.isAutoPlay = true
+        
         playerView.delegate = self
         playerView.translatesAutoresizingMaskIntoConstraints = false
         #if os(iOS)
@@ -112,7 +114,7 @@ extension DetailViewController: PlayerControllerDelegate {
         }else if states ==  .error {
             
           //  SwiftLoader.hide()
-            self.showSearchErrorAlert(on: self, error: NSLocalizedString("dataexception", comment: ""), title: NSLocalizedString("Alert", comment: ""))            
+                    
             
         }
         print(">>>>>>>>>>state: \(states.description)")
@@ -123,6 +125,7 @@ extension DetailViewController: PlayerControllerDelegate {
     }
 
     func playerController(finish error: Error?) {
+        self.showSearchErrorAlert(on: self, error: NSLocalizedString("dataexception", comment: "") + " \(error?.localizedDescription ?? "")" , title: NSLocalizedString("Alert", comment: ""))
         print(">>>>>>>>>> finish \(String(describing: error?.localizedDescription))")
     }
 

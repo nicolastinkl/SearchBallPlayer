@@ -684,7 +684,7 @@ extension SwiftWebVC: WKNavigationDelegate  {
 //        hideVideoPopupView()
          
             
-       let resource = KSPlayerResource(url: url)
+        let resource = KSPlayerResource(url: url,name: self.title ?? "")
        let controller = DetailViewController()
        controller.resource = resource
          

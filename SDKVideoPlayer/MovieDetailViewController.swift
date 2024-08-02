@@ -18,6 +18,31 @@ import AVFoundation
 //import SwiftLoader
 //import KSPlayer
 
+// MARK: - Welcome
+struct YoutubeResponse: Codable {
+    let code: Int
+    let message: String
+    let data: YoutubeVideoData?
+}
+
+// MARK: - DataClass
+struct YoutubeVideoData: Codable {
+    let videoURL: String
+    let title, description: String
+    let thumbnail: String
+    let uploadDate, uploader: String
+    let duration: Int
+
+    enum CodingKeys: String, CodingKey {
+        case videoURL = "video_url"
+        case title, description, thumbnail
+        case uploadDate = "upload_date"
+        case uploader, duration
+    }
+}
+
+
+
 class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, UIDocumentInteractionControllerDelegate  {
     
     var movieDetail: Video?
@@ -976,23 +1001,132 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
         
     }
     
+    
+    
+    
+    
+    func sendRequestGetPlayerURL() {
+        
+        SwiftLoader.show(view: self.view,title: NSLocalizedString("Gettings play url...", comment: ""), animated: true)
+        
+
+      //  LoadingIndicator()
+//        // Fetch Request
+        
+        let requestComplete33: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
+
+            SwiftLoader.hide()
+            
+            //if let response {
+//                for (field, value) in response.allHeaderFields {
+//                    debugPrint("\(field) \(value)" )
+//                }
+                switch  result {
+                       case .success(let value):
+                    // 将 JSON 字符串转换为 Data
+                    debugPrint("  \(value)" )
+                    guard let data = value.data(using: String.Encoding.utf8) else {
+                        
+                        DispatchQueue.main.async {
+                            self.showSearchErrorAlert(on: self, error: "Error: Cannot create data from JSON string.", title: "Network Exception")
+                        }
+                        
+                        return
+                    }
+                     
+                    // 创建 JSONDecoder 实例
+                    let decoder = JSONDecoder()
+
+                        // 使用 JSONDecoder 解码数据
+                        do {
+                            let response_config = try decoder.decode(YoutubeResponse.self, from: data)
+                            print("Code: \(response_config.code)")
+                            print("Message: \(response_config.message)")
+                            
+                            if(Int(response_config.code) == 1){
+                                
+                                //self.movies = response_config.data.videolist
+                            
+                                DispatchQueue.main.async {
+                                    if let u = URL(string: response_config.data?.videoURL ?? "") ,let coverurl =  URL(string: response_config.data?.thumbnail ?? ""){
+                                        
+                                        let resource = KSPlayerResource(url: u, name: response_config.data?.title ?? "",cover: coverurl)
+                                       let controller = DetailViewController()
+                                       controller.resource = resource
+                                         
+                                       controller.modalPresentationStyle = .fullScreen
+                                       self.present(controller, animated:false)
+                                    }else{
+                                       
+                                        self.showSearchErrorAlert(on: self , error: "Get Play Video play URL Failed.Please try again.", title: "Error Info")
+                                       
+                                    }
+                                }
+                            }else{
+                                DispatchQueue.main.async {
+                                    self.showSearchErrorAlert(on: self , error: "Get Play Video play URL Failed.Please try again.", title: "Error Info")
+                                }
+                            }
+                            
+                        } catch {
+                            DispatchQueue.main.async {
+                                self.showSearchErrorAlert(on: self, error: "Json parse Error: \(error.localizedDescription)", title: "Network Exception")
+                            }
+                            
+                        }
+                    
+                            
+                       case .failure(let error):
+//
+//                             debugPrint("HTTP Request failed: ")
+                            DispatchQueue.main.async {
+                                // UI 更新代码
+                                self.showNetworkErrorView (errormsg: "\(error.localizedDescription)", clickBlock: {
+                                    self.sendRequestGetPlayerURL()
+                                })
+                            }
+                           // 错误处理
+                       }
+                
+//            }
+
+           
+ 
+        }
+        
+        let parameters: [String: Any] = [
+            "url": self.movieDetail?.vodPlayURL ?? "",
+        ]
+        
+        AF.request("\(ApplicationS.baseURL)/player/youtube", method: .post,parameters: parameters,headers: ApplicationS.addCustomHeaders())
+            .validate(statusCode: 200..<300)
+            
+            .responseString(completionHandler: { response in
+                requestComplete33(response.response, response.result)
+                     
+            })
+              
+    }
+
+    
     @objc func ButtonhdplayurlYoutubeTapped(_ button: UIButton){
         if ((self.movieDetail?.vodPlayURL.localizedCaseInsensitiveContains("youtube.com")) != nil) {
             
-            if  let urlString = self.movieDetail?.vodPlayURL, let _ = URL(string: self.movieDetail?.vodPlayURL ?? "") {
-                let controller = SwiftWebVC(urlString: urlString)
-                controller.hidesBottomBarWhenPushed = true
-                controller.proxyHttps = true
-                if let s = self.movieDetail {
-                    LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
-                    //通知刷新列表
-                    
-                    // 发送通知
-                    NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
-                    
-                }
-                self.show(controller, sender: self)
-            }
+            sendRequestGetPlayerURL()
+//            if  let urlString = self.movieDetail?.vodPlayURL, let _ = URL(string: self.movieDetail?.vodPlayURL ?? "") {
+//                let controller = SwiftWebVC(urlString: urlString)
+//                controller.hidesBottomBarWhenPushed = true
+//                controller.proxyHttps = true
+//                if let s = self.movieDetail {
+//                    LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
+//                    //通知刷新列表
+//                    
+//                    // 发送通知
+//                    NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
+//                    
+//                }
+//                self.show(controller, sender: self)
+//            }
             
         }else{
             self.showSearchErrorAlert(on: self, error: "Play URL Error, Please try again.", title: "Alert URL Error")
@@ -1277,9 +1411,9 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
        }
     
     @objc private func ButtonhdplayurlTapped(_ button:UIButton){
-        if hdplayurl.count > 5 ,let u = URL(string: hdplayurl) {
+        if hdplayurl.count > 5 ,let u = URL(string: hdplayurl),let coverurl =  URL(string: self.movieDetail?.vodPic ?? "")   {
             
-            let resource = KSPlayerResource(url: u)
+            let resource = KSPlayerResource(url: u,name: self.movieDetail?.vodName ?? "",cover: coverurl)
             let controller = DetailViewController()
             controller.resource = resource
 //            self.show(controller, sender: self)
@@ -1300,9 +1434,9 @@ class MovieDetailViewController: BaseViewController, UIDocumentPickerDelegate, U
     
     @objc private func ButtonTapped(_ button:UIButton){
                
-        if let u = URL(string: jishuURLArray[button.tag]) {
-            
-           let resource = KSPlayerResource(url: u)
+        if let u = URL(string: jishuURLArray[button.tag]) ,let coverurl =  URL(string: self.movieDetail?.vodPic ?? "")  {
+//           let resource = KSPlayerResource(url: u)
+            let resource = KSPlayerResource(url: u ,name: self.movieDetail?.vodName ?? "",cover: coverurl)
            let controller = DetailViewController()
            controller.resource = resource
             

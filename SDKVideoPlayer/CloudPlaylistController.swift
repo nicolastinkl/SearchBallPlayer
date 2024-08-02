@@ -293,8 +293,8 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
    
         }
         
-        if urlstring.length > 0   ,let u = URL(string: urlstring as String ) {
-            let resource = KSPlayerResource(url: u)
+        if urlstring.length > 0   ,let u = URL(string: urlstring as String ) ,let coverurl =  URL(string: movie.vodPic) {
+            let resource = KSPlayerResource(url: u ,name: movie.vodName  ,cover: coverurl)
             let controller = DetailViewController()
             controller.resource = resource
             
