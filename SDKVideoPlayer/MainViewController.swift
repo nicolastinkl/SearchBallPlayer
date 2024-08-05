@@ -633,7 +633,6 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
                 controller.movieDetail = movie
                 self.show(controller, sender: self)
             }else{
-                
                 let  movie =  category.videoListChild[indexPath.item]
                 let  controller = MoreListMovieDetailViewController()
                 controller.movieDetail = movie
