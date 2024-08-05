@@ -58,7 +58,8 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
     @IBOutlet private weak var releaseDateLabel: UILabel!
     @IBOutlet private weak var overviewLabel: UILabel!
     
-
+    @IBOutlet weak var videoView: UIView!
+    
     static var storyboardName: String = "Home"
     
     
@@ -119,15 +120,16 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
         
         let webConfiguration = WKWebViewConfiguration()
         newWebView = WKWebView(frame: self.view.bounds, configuration: webConfiguration)
-        posterContainerView.addSubview(newWebView)
+        videoView.addSubview(newWebView)
         
         newWebView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            newWebView.topAnchor.constraint(equalTo: posterContainerView.topAnchor),
-            newWebView.bottomAnchor.constraint(equalTo: posterContainerView.bottomAnchor),
-            newWebView.leadingAnchor.constraint(equalTo:posterContainerView.leadingAnchor),
-            newWebView.trailingAnchor.constraint(equalTo: posterContainerView.trailingAnchor),
+//            videoView.heightAnchor.constraint(equalToConstant: 200),
+            newWebView.topAnchor.constraint(equalTo: videoView.topAnchor),
+            newWebView.bottomAnchor.constraint(equalTo: videoView.bottomAnchor),
+            newWebView.leadingAnchor.constraint(equalTo: videoView.leadingAnchor),
+            newWebView.trailingAnchor.constraint(equalTo: videoView.trailingAnchor),
         ])
         
         if let rawHTMLString = htmlStringWithFilePath(playerHTMLPath()){

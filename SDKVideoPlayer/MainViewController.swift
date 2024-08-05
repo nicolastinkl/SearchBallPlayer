@@ -622,16 +622,23 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
         if indexPath.section == 0{
             let searvc = CloudPlaylistController()
             let  movie =  category.videoListChild[indexPath.item]
-            if indexPath.row == 0 ||   indexPath.row == 1  {
+            if indexPath.row == 0   {
                 
                 searvc.searchText =  ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? movie.vodName : movie.vodEn
                 searvc.viewtype = indexPath.row
                 self.show(searvc, sender: self)
-            }else{
+            }else  if  indexPath.row == 1 {
                 let  movie =  category.videoListChild[indexPath.item]
                 let  controller = SQBMovieDetailViewController()
                 controller.movieDetail = movie
                 self.show(controller, sender: self)
+            }else{
+                
+                let  movie =  category.videoListChild[indexPath.item]
+                let  controller = MoreListMovieDetailViewController()
+                controller.movieDetail = movie
+                self.show(controller, sender: self)
+                
             }
            
         }else{

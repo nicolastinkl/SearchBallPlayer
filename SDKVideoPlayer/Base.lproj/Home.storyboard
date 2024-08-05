@@ -333,7 +333,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="clz-A2-PNz">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="519"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="719"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7z-iQ-jkJ" userLabel="Poster Container View">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="200"/>
@@ -367,15 +367,14 @@
                                                     <constraint firstAttribute="height" priority="250" id="tMV-fH-878"/>
                                                 </constraints>
                                             </view>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9c-pq-CDU" userLabel="Separator View">
-                                                <rect key="frame" x="0.0" y="200" width="393" height="1"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9c-pq-CDU" userLabel="Separator View">
+                                                <rect key="frame" x="0.0" y="200" width="393" height="200"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="wYt-pg-AwQ"/>
+                                                    <constraint firstAttribute="height" constant="200" id="wYt-pg-AwQ"/>
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRJ-pd-lhA" userLabel="Options View">
-                                                <rect key="frame" x="0.0" y="200" width="393" height="0.33333333333334281"/>
+                                                <rect key="frame" x="0.0" y="400" width="393" height="0.33333333333331439"/>
                                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="YRJ-pd-lhA" secondAttribute="height" multiplier="1111" id="5H5-KN-QZV"/>
@@ -412,14 +411,14 @@
                                                 </variation>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t4E-DH-kcF" userLabel="Separator View">
-                                                <rect key="frame" x="0.0" y="200" width="393" height="1"/>
+                                                <rect key="frame" x="0.0" y="400" width="393" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="k77-sn-KzA"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="VI3-92-IFD" userLabel="Info Stack View">
-                                                <rect key="frame" x="0.0" y="200" width="393" height="83"/>
+                                                <rect key="frame" x="0.0" y="400" width="393" height="83"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4u-EF-Ynq" userLabel="Genre View">
                                                         <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="83"/>
@@ -483,14 +482,14 @@
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQN-fC-GL7" userLabel="Separator View">
-                                                <rect key="frame" x="0.0" y="283" width="393" height="1"/>
+                                                <rect key="frame" x="0.0" y="483" width="393" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="vOP-Wc-CNN"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GXb-rA-lR0" userLabel="Overview View">
-                                                <rect key="frame" x="0.0" y="284" width="393" height="235"/>
+                                                <rect key="frame" x="0.0" y="484" width="393" height="235"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjh-aU-ftM" userLabel="Overview Label">
                                                         <rect key="frame" x="16" y="16" width="361" height="203"/>
@@ -542,6 +541,7 @@
                         <outlet property="scrollView" destination="2iS-wY-sgY" id="fgW-IA-Mmc"/>
                         <outlet property="titleContainerView" destination="Q9v-2G-DSM" id="dKB-Wk-ePp"/>
                         <outlet property="titleContainerViewHeightConstraint" destination="tMV-fH-878" id="xmc-XK-RNe"/>
+                        <outlet property="videoView" destination="f9c-pq-CDU" id="VfS-YE-cYL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PaG-d4-8Va" userLabel="First Responder" sceneMemberID="firstResponder"/>
