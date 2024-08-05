@@ -59,6 +59,7 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
        tableView.delegate = self
        view.addSubview(tableView)
        tableView.translatesAutoresizingMaskIntoConstraints = false
+       tableView.separatorStyle = .none
        NSLayoutConstraint.activate([
            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -267,10 +268,11 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
         tableView.deselectRow(at: indexPath, animated: true)
         
         let movie = searchList[indexPath.item]
-//        let  controller = MovieDetailViewController()
-//        controller.movieDetail = movie
-////        controller.modalPresentationStyle = .fullScreen
-//        self.show(controller, sender: self)
+        let  controller = MovieDetailViewController()
+        controller.movieDetail = movie
+        self.show(controller, sender: self)
+        
+        return
         
         
         let movies = movie.vodPlayURL as NSString
@@ -334,7 +336,15 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
 
 
 class CustomCellCloud: UITableViewCell {
-    let titleLabel = UILabel()
+    let titleLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = UIColor.white
+        label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 //    let itemImageView = UIImageView()
     
     
@@ -345,8 +355,15 @@ class CustomCellCloud: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = ThemeManager.shared.fontColor2
+        label.textColor = UIColor.white
         label.numberOfLines = 3
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let overlayLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -356,15 +373,19 @@ class CustomCellCloud: UITableViewCell {
         let imageView = SDAnimatedImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
+//        imageView.layer.cornerRadius = 10
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(titleLabel)
+        
+        
         contentView.addSubview(itemImageView)
+        contentView.addSubview(overlayLabel)
+        contentView.addSubview(titleLabel)
         contentView.addSubview(desLabel)
         
 //        itemImageView.frame = CGRect(x: 15, y: 15, width: 70, height: 120)
@@ -372,24 +393,34 @@ class CustomCellCloud: UITableViewCell {
 //        desLabel.frame = CGRect(x: 95, y: 15 + 20, width: contentView.frame.width - 50, height: 80)
         
         
-        itemImageView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            
             itemImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
-            itemImageView.widthAnchor.constraint(equalToConstant: 120),
-            itemImageView.heightAnchor.constraint(equalToConstant: 150)
+//            itemImageView.widthAnchor.constraint(equalToConstant: 120),
+            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            itemImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            itemImageView.heightAnchor.constraint(equalToConstant: 150),
+            
+            
+            overlayLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
+//            itemImageView.widthAnchor.constraint(equalToConstant: 120),
+            overlayLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            overlayLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            overlayLabel.heightAnchor.constraint(equalToConstant: 150),
         ])
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 20),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
+//            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25)
         ])
         
         desLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            desLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 20),
+            desLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             desLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             desLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             desLabel.heightAnchor.constraint(equalToConstant: 60) // 如果高度是固定的，可以设置为一个常数
@@ -407,8 +438,8 @@ class CustomCellCloud: UITableViewCell {
         
         tagsStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tagsStackView.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 20),
-            tagsStackView.topAnchor.constraint(equalTo: desLabel.bottomAnchor, constant: 5),
+            tagsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+            tagsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             tagsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
             tagsStackView.heightAnchor.constraint(equalToConstant: 30) // 如果高度是固定的，可以设置为一个常数
         ])
@@ -425,11 +456,11 @@ class CustomCellCloud: UITableViewCell {
             tagLabel.font = UIFont.systemFont(ofSize: 12)
 //            tagLabel.text = tagName
             tagLabel.tag = index
-            tagLabel.textColor = ThemeManager.shared.fontColor
+            tagLabel.textColor =  UIColor.white//ThemeManager.shared.fontColor
             tagLabel.textAlignment = .center
             tagLabel.layer.cornerRadius = 6 // 设置标签圆角
             tagLabel.layer.borderWidth = 1
-            tagLabel.layer.borderColor = ThemeManager.shared.fontColor.cgColor
+            tagLabel.layer.borderColor =  UIColor.white.cgColor //ThemeManager.shared.fontColor.cgColor
             tagLabel.clipsToBounds = true
             
             tagsStackView.addSubview(tagLabel)
@@ -450,7 +481,7 @@ class CustomCellCloud: UITableViewCell {
     func configure(with data: Video?) {
         titleLabel.text = ApplicationS.isCurrentLanguageEnglishOrChineseSimplified() ? data?.vodName : data?.vodEn //data?.vodName
         // Here you can load the image from a URL
-        desLabel.text = "《" + (data?.vodRemarks ?? "") + "》 " + (data?.vodContent ?? "")
+        //desLabel.text = "《" + (data?.vodRemarks ?? "") + "》 " + (data?.vodContent ?? "")
         itemImageView.sd_setImage(with: URL.init(string: data?.vodPic ?? ""), placeholderImage: UIImage(named: "placeholder-image"), context: nil)
         
         var leftC  :CGFloat = 0

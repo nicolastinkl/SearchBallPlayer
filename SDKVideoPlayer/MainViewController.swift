@@ -541,8 +541,6 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
                               }
                               
                           }
-                      
-                              
                          case .failure(let error):
 //
 //                             debugPrint("HTTP Request failed: ")
@@ -556,8 +554,6 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
                          }
                   
   //            }
-
-             
    
           }
           
