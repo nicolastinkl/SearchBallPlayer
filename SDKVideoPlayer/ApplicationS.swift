@@ -10,7 +10,9 @@ import Alamofire
 
 class ApplicationS {
     public static let baseURL: String = "https://api.search-ball.com"
-    
+    public static let defaultRegularImageBaseURLString: String = "https://image.tmdb.org/t/p/w185"
+    public static let defaultBackdropImageBaseURLString: String = "https://image.tmdb.org/t/p/w500"
+
     public static let DeviceCustomUUID: String = {
         let userDefaults = UserDefaults.standard
         if let savedID = userDefaults.string(forKey: "com.sdkplayer.souqiuba") {

@@ -18,6 +18,23 @@ import AppTrackingTransparency
 //import SwiftLoader
 //import SwiftWebVC
 // 基本的数据模型
+struct UIConstants {
+
+    static let posterAspectRatio: Double = 1.5
+
+}
+
+struct Constants {
+
+    static let previewCellHeight: CGFloat = 150.0
+
+    static let detailCellHeight: CGFloat = 200.0
+    static let detailCellOffset: CGFloat = 32.0
+
+    static let previewLayoutMinColumns: Int = 3
+
+}
+
 struct Website: Codable {
     let name: String
     let url: String
@@ -41,6 +58,45 @@ struct DataClass: Codable {
     let searchlist: [SearchRecommendation]
     let searchrecommadlist: [SearchRecommendation]
     let blackDomains: [String]
+    let popularList: [PopularMovie]
+}
+
+
+
+// MARK: - Result
+struct PopularMovie: Codable {
+    let adult: Bool
+    let backdropPath: String
+    let genreIDS: [Int]
+    let id: Int
+    let originalLanguage: OriginalLanguage
+    let originalTitle, overview: String
+    let popularity: Double
+    let posterPath, releaseDate, title: String
+    let video: Bool
+    let voteAverage: Double
+    let voteCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case adult
+        case backdropPath = "backdrop_path"
+        case genreIDS = "genre_ids"
+        case id
+        case originalLanguage = "original_language"
+        case originalTitle = "original_title"
+        case overview, popularity
+        case posterPath = "poster_path"
+        case releaseDate = "release_date"
+        case title, video
+        case voteAverage = "vote_average"
+        case voteCount = "vote_count"
+    }
+}
+
+enum OriginalLanguage: String, Codable {
+    case en = "en"
+    case ja = "ja"
+    case zh = "zh"
 }
 
 
@@ -74,6 +130,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
     var icons = [Website]() // 图标数组
     var searchlist: [SearchRecommendation]?
     var currentIndex: Int = 0 // 当前展示的搜索项索引
+    private var displayedCellsIndexPaths = Set<IndexPath>()
 
     
     
@@ -185,20 +242,14 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         //icon list
         iconsCollectionView.dataSource = self
         iconsCollectionView.delegate = self
-        iconsCollectionView.register(IconCollectionViewCell.self, forCellWithReuseIdentifier:iconCellId)
         
+        iconsCollectionView.register(IconCollectionViewCell.self, forCellWithReuseIdentifier:iconCellId)
+        iconsCollectionView.registerNib(cellType: UpcomingMovieExpandedCollectionViewCell.self)
         
         suggestionsTableView.backgroundColor = UIColor.clear
         iconsCollectionView.backgroundColor = UIColor.clear
         searchBar.backgroundColor = UIColor.clear
-        let layout2 = UICollectionViewFlowLayout()
-        let width = (iconsCollectionView.frame.width - 60) / 4
-        layout2.itemSize = CGSize(width:width, height: width)
-        layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
-        layout2.minimumLineSpacing = 10 // 设置行间距
-        
-        layout2.sectionInset =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // 设置间距
-        iconsCollectionView.collectionViewLayout = layout2
+       
         
         sendRequestGetconfig()
         
@@ -216,7 +267,42 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         
 //        self.title = NSLocalizedString("Browser", comment: "")
         
-    }    
+    }   
+    
+    
+    private func setupCollectionViewLayout() {
+        
+//        guard let viewModel, let layoutProvider else { return }
+//        let presentationMode = viewModel.currentPresentationMode
+//        let collectionViewWidth = collectionView.frame.width
+//
+//        collectionView.collectionViewLayout = layoutProvider.collectionViewLayout(for: presentationMode, and: collectionViewWidth)
+        
+        if let configdata = self.configData {
+           if( configdata.data.popularList.count > 0) {
+               
+               let collectionViewWidth = iconsCollectionView.frame.width
+               let detailLayoutWidth = collectionViewWidth - Constants.detailCellOffset
+               let vflow = VerticalFlowLayout(preferredWidth: detailLayoutWidth, preferredHeight: Constants.detailCellHeight)
+               
+               iconsCollectionView.collectionViewLayout = vflow
+                
+            }else{
+                
+                let layout2 = UICollectionViewFlowLayout()
+                let width = (iconsCollectionView.frame.width - 60) / 4
+                layout2.itemSize = CGSize(width:width, height: width)
+                layout2.minimumInteritemSpacing = 10 // 设置图标之间的间距)
+                layout2.minimumLineSpacing = 10 // 设置行间距
+                
+                layout2.sectionInset =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // 设置间距
+                iconsCollectionView.collectionViewLayout = layout2
+            }
+        }
+        
+        
+    }
+    
     @objc func historyItemsUpdated() {
         // 刷新表格视图
         if let newweb = LocalStore.readToWebsiteFaviators()?.first {
@@ -243,6 +329,9 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         coordinator.animate(alongsideTransition: { context in
             // 在动画过渡期间更新视图大小
             self.gradientView.frame = CGRect(origin: .zero, size: size)
+        }, completion: nil)
+        coordinator.animate(alongsideTransition: { _ in
+            self.setupCollectionViewLayout()
         }, completion: nil)
     }
 
@@ -555,8 +644,10 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
 ////                                    self.searchBar.placeholder = s
 //                                }
                                 // UI 更新代码
+                                
                                 self.suggestionsTableView.reloadData()
                                 self.iconsCollectionView.reloadData()
+                                self.setupCollectionViewLayout()
                                 
                                 
                             }
@@ -615,12 +706,20 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
            openSearchTarget(UIButton())
        }
      
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            if(collectionView === self.suggestionsTableView) {
-                return searchSuggestionKeywords.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if(collectionView === self.suggestionsTableView) {
+            return searchSuggestionKeywords.count
+        }
+        
+        if let cdata = self.configData {
+            
+            if (cdata.data.popularList.count > 0){
+                return cdata.data.popularList.count
             }
-            return icons.count
-       }
+        }
+        return icons.count
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if(collectionView === self.suggestionsTableView) {
@@ -664,6 +763,22 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                return cell
            }
            
+           
+           if let cdata = self.configData {
+               
+               if (cdata.data.popularList.count > 0){
+                //   collectionView.dequeueReusableCell(withReuseIdentifier: UpcomingMoviePreviewCollectionViewCell.self, for: indexPath)
+                   
+                   guard let preCell = collectionView.dequeueReusableCell(with: UpcomingMovieExpandedCollectionViewCell.self, for: indexPath) as UpcomingMovieExpandedCollectionViewCell? else {
+                       return UICollectionViewCell()
+                   }
+                   let ppmodel = cdata.data.popularList[indexPath.row]
+                   preCell.setupBindables(viewModel: ppmodel)
+                   return preCell
+               }
+           }
+           
+           
            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iconCellId, for: indexPath) as? IconCollectionViewCell else {
                return UICollectionViewCell()
            }
@@ -671,6 +786,8 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
            let keyword:Website = icons[indexPath.item]
            
            cell.configure(with: keyword.iconurl, title: keyword.name)
+           
+           
            return cell
            
            
@@ -724,6 +841,15 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
 //        cell.layer.shadowColor = UIColor.black.cgColor // 设置阴影颜色
 //        cell.layer.shadowOffset = CGSize(width: 0, height: 2) // 设置阴影偏移
 //        cell.layer.shadowOpacity = 0.3 // 设置阴影透明度
+        if let cdata = self.configData {
+            
+            if (cdata.data.popularList.count > 0){
+                if !displayedCellsIndexPaths.contains(indexPath) {
+                    displayedCellsIndexPaths.insert(indexPath)
+                    CollectionViewCellAnimator.fadeAnimate(cell: cell)
+                }
+            }
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
