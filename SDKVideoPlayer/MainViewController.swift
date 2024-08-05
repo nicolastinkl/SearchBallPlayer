@@ -629,7 +629,7 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
                 self.show(searvc, sender: self)
             }else{
                 let  movie =  category.videoListChild[indexPath.item]
-                let  controller = MovieDetailViewController()
+                let  controller = SQBMovieDetailViewController()
                 controller.movieDetail = movie
                 self.show(controller, sender: self)
             }
@@ -637,7 +637,7 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
         }else{
             
             let  movie =  category.videoListChild[indexPath.item]
-            let  controller = MovieDetailViewController()
+            let  controller = SQBMovieDetailViewController()
             controller.movieDetail = movie
             self.show(controller, sender: self)
             

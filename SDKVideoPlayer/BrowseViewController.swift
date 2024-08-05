@@ -101,7 +101,7 @@ class BrowseViewController : BaseViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let movie = searchList?[indexPath.item]
-        let  controller = MovieDetailViewController()
+        let  controller = SQBMovieDetailViewController()
         controller.movieDetail = movie
 //        controller.modalPresentationStyle = .fullScreen
         self.show(controller, sender: self)

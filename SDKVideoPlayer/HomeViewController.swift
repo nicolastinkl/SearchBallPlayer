@@ -726,6 +726,19 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
             
             
         }else{
+            
+            if let cdata = self.configData {
+                
+                if (cdata.data.popularList.count > 0){
+                    let ppmodel:PopularMovie = cdata.data.popularList[indexPath.item]
+                    let  mvController = MovieDetailViewController.instantiate()
+                    mvController.viewModel = ppmodel
+                    self.show(mvController, sender: self)
+                    return
+                }
+            }
+            
+            
             let keyword:Website = icons[indexPath.item]
             let urlString = keyword.url
             if let _ = URL(string: urlString) {

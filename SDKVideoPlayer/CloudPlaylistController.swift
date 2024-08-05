@@ -268,7 +268,7 @@ class CloudPlaylistController: BaseViewController, UITableViewDataSource, UITabl
         tableView.deselectRow(at: indexPath, animated: true)
         
         let movie = searchList[indexPath.item]
-        let  controller = MovieDetailViewController()
+        let  controller = SQBMovieDetailViewController()
         controller.movieDetail = movie
         self.show(controller, sender: self)
         

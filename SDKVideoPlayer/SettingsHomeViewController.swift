@@ -97,7 +97,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let ls =  LocalStore.getFromWatchedHistory() {
             let data =  ls[indexPath.item]
-            let  controller = MovieDetailViewController()
+            let  controller = SQBMovieDetailViewController()
             controller.movieDetail = data
     //        controller.modalPresentationStyle = .fullScreen
             self.vc?.show(controller, sender: self)

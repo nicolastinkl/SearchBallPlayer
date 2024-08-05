@@ -1,6 +1,30 @@
 {
   "sourceLanguage" : "zh-Hans",
   "strings" : {
+    "9aP-KQ-9wB.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Genre\"; ObjectID = \"9aP-KQ-9wB\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Genre"
+          }
+        }
+      }
+    },
+    "31N-Oz-Bnk.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"2018-03-12\"; ObjectID = \"31N-Oz-Bnk\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "2018-03-12"
+          }
+        }
+      }
+    },
     "68C-MA-bki.normalTitle" : {
       "comment" : "Class = \"UIButton\"; normalTitle = \"搜索\"; ObjectID = \"68C-MA-bki\";",
       "extractionState" : "extracted_with_value",
@@ -49,6 +73,18 @@
         }
       }
     },
+    "ecd-9O-mf9.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Release\"; ObjectID = \"ecd-9O-mf9\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Release"
+          }
+        }
+      }
+    },
     "lT4-i4-DGN.title" : {
       "comment" : "Class = \"UITabBarItem\"; title = \"Item\"; ObjectID = \"lT4-i4-DGN\";",
       "extractionState" : "extracted_with_value",
@@ -61,6 +97,18 @@
         }
       }
     },
+    "MB3-hd-0nG.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Comedy\"; ObjectID = \"MB3-hd-0nG\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Comedy"
+          }
+        }
+      }
+    },
     "qcO-BB-627.title" : {
       "comment" : "Class = \"UITabBarItem\"; title = \"Item\"; ObjectID = \"qcO-BB-627\";",
       "extractionState" : "extracted_with_value",
@@ -69,6 +117,18 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Item"
+          }
+        }
+      }
+    },
+    "S6F-E5-Nz7.title" : {
+      "comment" : "Class = \"UIViewController\"; title = \"MovieDetailViewController\"; ObjectID = \"S6F-E5-Nz7\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "MovieDetailViewController"
           }
         }
       }
@@ -129,6 +189,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "设置"
+          }
+        }
+      }
+    },
+    "yjh-aU-ftM.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Movie Overview\"; ObjectID = \"yjh-aU-ftM\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Movie Overview"
           }
         }
       }
