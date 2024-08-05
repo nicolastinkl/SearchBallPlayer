@@ -14,6 +14,7 @@ import SafariServices
 import Alamofire
 import SDWebImage
 
+import WebKit
 
 // MARK: - Welcome
 struct MovieDetailResponse: Codable {
@@ -56,8 +57,14 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
     @IBOutlet private weak var genreLabel: UILabel!
     @IBOutlet private weak var releaseDateLabel: UILabel!
     @IBOutlet private weak var overviewLabel: UILabel!
+    
 
     static var storyboardName: String = "Home"
+    
+    
+//    var webView: WKWebView!
+//    var request: URLRequest!
+    
     
     var moveDetailModel:MovieDetailResponse?
      private let iconImageView: SDAnimatedImageView = {
@@ -69,8 +76,6 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
     
     
 
-    @IBAction func playaction(_ sender: Any) {
-    }
     private lazy var moreBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(image: UIImage(named: "Ellipsis"),
                                             style: .plain,
@@ -92,7 +97,8 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
     var viewModel: PopularMovie?
     var youtubeKey:String  = ""
     private(set) var transitionContainerView: UIView?
-
+    
+    var newWebView: WKWebView!
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -107,6 +113,74 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
         sendRequestGetVideoDetail()
     }
     
+    
+    func setupWebView(){
+        
+        
+        let webConfiguration = WKWebViewConfiguration()
+        newWebView = WKWebView(frame: self.view.bounds, configuration: webConfiguration)
+        posterContainerView.addSubview(newWebView)
+        
+        newWebView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            newWebView.topAnchor.constraint(equalTo: posterContainerView.topAnchor),
+            newWebView.bottomAnchor.constraint(equalTo: posterContainerView.bottomAnchor),
+            newWebView.leadingAnchor.constraint(equalTo:posterContainerView.leadingAnchor),
+            newWebView.trailingAnchor.constraint(equalTo: posterContainerView.trailingAnchor),
+        ])
+        
+        if let rawHTMLString = htmlStringWithFilePath(playerHTMLPath()){
+            // Replace %@ in rawHTMLString with jsonParameters string
+            let htmlString = rawHTMLString.replacingOccurrences(of: "%@", with: self.youtubeKey, options: [], range: nil)
+            
+            // Load HTML in web view
+            newWebView.loadHTMLString(htmlString, baseURL: URL(string: "about:blank"))
+        }
+        
+    }
+    
+    
+    @IBAction func playaction(_ sender: Any) {
+        evaluatePlayerCommand("javascript:onVideoPlay()")
+        
+    }
+    fileprivate func evaluatePlayerCommand(_ command: String) {
+//        let fullCommand = "player." + command + ";"
+        //webView.stringByEvaluatingJavaScript(from: fullCommand)
+        
+        newWebView.evaluateJavaScript(command, completionHandler: {(response, error) in
+            print("\(String(describing: response))   \(String(describing: error))")
+        })
+        
+    }
+    
+    fileprivate func playerHTMLPath() -> String {
+        return Bundle(for: self.classForCoder).path(forResource: "YTPlayer", ofType: "html")!
+    }
+
+    fileprivate func htmlStringWithFilePath(_ path: String) -> String? {
+
+        // Error optional for error handling
+        var error: NSError?
+
+        // Get HTML string from path
+        let htmlString: NSString?
+        do {
+            htmlString = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+        } catch let error1 as NSError {
+            error = error1
+            htmlString = nil
+        }
+
+        // Check for error
+        if let _ = error {
+            print("Lookup error: no HTML file found for path, \(path)")
+        }
+
+        return htmlString! as String
+    }
+       
     
     func sendRequestGetVideoDetail() {
         /**
@@ -159,6 +233,7 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
                                 if let  mmovieDetailResult =   self.moveDetailModel?.results.first {
                                     self.youtubeKey = mmovieDetailResult.key
                                     self.playbutton.isHidden = false
+                                    self.setupWebView()
                                     
                                 }
                             }
