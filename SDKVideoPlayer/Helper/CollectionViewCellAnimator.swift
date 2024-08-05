@@ -18,5 +18,13 @@ final class CollectionViewCellAnimator {
             view.layer.opacity = 1
         }, completion: nil)
     }
+    
+    class func fadeAnimateImageView(imageview: UIImageView) {
+        let view = imageview
+        view.layer.opacity = 0.1
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: .allowUserInteraction, animations: {
+            view.layer.opacity = 1
+        }, completion: nil)
+    }
 
 }

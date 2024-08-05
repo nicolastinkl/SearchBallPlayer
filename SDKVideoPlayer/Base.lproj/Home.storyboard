@@ -333,36 +333,52 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="clz-A2-PNz">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="691.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="520.33333333333337"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7z-iQ-jkJ" userLabel="Poster Container View">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="200"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ec4-5o-3kz">
+                                                        <rect key="frame" x="164.66666666666666" y="72.666666666666657" width="64" height="55"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="64" id="Ne7-k3-IGM"/>
+                                                            <constraint firstAttribute="height" constant="55" id="yhH-uc-wuE"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="PlayVideoGray"/>
+                                                        <connections>
+                                                            <action selector="playaction:" destination="S6F-E5-Nz7" eventType="touchUpInside" id="dyA-Il-AFI"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
                                                 <viewLayoutGuide key="safeArea" id="jeX-i6-Bco"/>
                                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
+                                                    <constraint firstItem="Ec4-5o-3kz" firstAttribute="centerX" secondItem="jeX-i6-Bco" secondAttribute="centerX" id="23j-H4-UBM"/>
                                                     <constraint firstAttribute="height" constant="200" id="Kxb-nl-VER"/>
+                                                    <constraint firstItem="Ec4-5o-3kz" firstAttribute="centerY" secondItem="jeX-i6-Bco" secondAttribute="centerY" id="YSa-Qa-gpW"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Q9v-2G-DSM" userLabel="Title Container View">
-                                                <rect key="frame" x="0.0" y="200" width="393" height="104.66666666666669"/>
+                                                <rect key="frame" x="0.0" y="200" width="393" height="0.0"/>
                                                 <viewLayoutGuide key="safeArea" id="Xs9-OR-AL4"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" priority="250" constant="104.67" id="tMV-fH-878"/>
+                                                    <constraint firstAttribute="height" priority="250" id="tMV-fH-878"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9c-pq-CDU" userLabel="Separator View">
-                                                <rect key="frame" x="0.0" y="304.66666666666669" width="393" height="1"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9c-pq-CDU" userLabel="Separator View">
+                                                <rect key="frame" x="0.0" y="200" width="393" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="wYt-pg-AwQ"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRJ-pd-lhA" userLabel="Options View">
-                                                <rect key="frame" x="0.0" y="305.66666666666669" width="393" height="66"/>
+                                                <rect key="frame" x="0.0" y="200" width="393" height="0.33333333333334281"/>
                                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="YRJ-pd-lhA" secondAttribute="height" multiplier="125:21" id="5H5-KN-QZV"/>
+                                                    <constraint firstAttribute="width" secondItem="YRJ-pd-lhA" secondAttribute="height" multiplier="1111" id="5H5-KN-QZV"/>
                                                     <constraint firstAttribute="width" secondItem="YRJ-pd-lhA" secondAttribute="height" multiplier="11:1" id="TOj-N5-UT4"/>
                                                     <constraint firstAttribute="width" secondItem="YRJ-pd-lhA" secondAttribute="height" multiplier="15:1" id="mif-xN-ZLv"/>
                                                 </constraints>
@@ -373,8 +389,8 @@
                                                 </variation>
                                                 <variation key="heightClass=compact">
                                                     <mask key="constraints">
-                                                        <include reference="TOj-N5-UT4"/>
                                                         <exclude reference="5H5-KN-QZV"/>
+                                                        <include reference="TOj-N5-UT4"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=compact-widthClass=compact">
@@ -389,21 +405,21 @@
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=regular">
                                                     <mask key="constraints">
-                                                        <include reference="mif-xN-ZLv"/>
-                                                        <exclude reference="TOj-N5-UT4"/>
                                                         <exclude reference="5H5-KN-QZV"/>
+                                                        <exclude reference="TOj-N5-UT4"/>
+                                                        <include reference="mif-xN-ZLv"/>
                                                     </mask>
                                                 </variation>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t4E-DH-kcF" userLabel="Separator View">
-                                                <rect key="frame" x="0.0" y="371.66666666666669" width="393" height="1"/>
+                                                <rect key="frame" x="0.0" y="200.33333333333331" width="393" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="k77-sn-KzA"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="VI3-92-IFD" userLabel="Info Stack View">
-                                                <rect key="frame" x="0.0" y="372.66666666666669" width="393" height="83"/>
+                                                <rect key="frame" x="0.0" y="201.33333333333331" width="393" height="83"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4u-EF-Ynq" userLabel="Genre View">
                                                         <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="83"/>
@@ -467,14 +483,14 @@
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQN-fC-GL7" userLabel="Separator View">
-                                                <rect key="frame" x="0.0" y="455.66666666666663" width="393" height="1"/>
+                                                <rect key="frame" x="0.0" y="284.33333333333331" width="393" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="vOP-Wc-CNN"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GXb-rA-lR0" userLabel="Overview View">
-                                                <rect key="frame" x="0.0" y="456.66666666666663" width="393" height="235"/>
+                                                <rect key="frame" x="0.0" y="285.33333333333331" width="393" height="234.99999999999994"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjh-aU-ftM" userLabel="Overview Label">
                                                         <rect key="frame" x="16" y="16" width="361" height="203"/>
@@ -520,6 +536,7 @@
                         <outlet property="genreLabel" destination="MB3-hd-0nG" id="vDa-ep-n5l"/>
                         <outlet property="optionsContainerView" destination="YRJ-pd-lhA" id="Eys-e6-vjW"/>
                         <outlet property="overviewLabel" destination="yjh-aU-ftM" id="hv1-vG-fjR"/>
+                        <outlet property="playbutton" destination="Ec4-5o-3kz" id="u0F-61-jRW"/>
                         <outlet property="posterContainerView" destination="v7z-iQ-jkJ" id="Pkz-iW-9WL"/>
                         <outlet property="releaseDateLabel" destination="31N-Oz-Bnk" id="Igi-2u-GqU"/>
                         <outlet property="scrollView" destination="2iS-wY-sgY" id="fgW-IA-Mmc"/>
@@ -549,10 +566,11 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2143" y="1"/>
+            <point key="canvasLocation" x="2141.2213740458014" y="0.70422535211267612"/>
         </scene>
     </scenes>
     <resources>
+        <image name="PlayVideoGray" width="33" height="33"/>
         <image name="home1" width="24" height="24"/>
         <image name="placeholder" width="80" height="60"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
@@ -562,7 +580,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
