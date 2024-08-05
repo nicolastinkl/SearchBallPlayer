@@ -14,6 +14,14 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 
+
+// MARK: - Welcome
+struct MoreMovieDetailResponse: Codable {
+    let code: Int
+    let msg: String
+    let results: [PopularMovie]
+}
+
 class MoreListMovieDetailViewController: BaseViewController,UICollectionViewDelegate, UICollectionViewDataSource {
     
     
@@ -25,6 +33,7 @@ class MoreListMovieDetailViewController: BaseViewController,UICollectionViewDele
         
         view.backgroundColor = ThemeManager.shared.viewBackgroundColor
         
+        self.title = movieDetail?.vodEn 
         setupCollectView()
         
     }
@@ -108,8 +117,7 @@ class MoreListMovieDetailViewController: BaseViewController,UICollectionViewDele
 //                }
                 switch  result {
                        case .success(let value):
-                    // 将 JSON 字符串转换为 Data
-                    print("response: \(value)")
+                    // 将 JSON 字符串转换为 Data 
                     
                     guard let data = value.data(using: String.Encoding.utf8) else {
                         print("Error: Cannot create data from JSON string.")
@@ -127,14 +135,14 @@ class MoreListMovieDetailViewController: BaseViewController,UICollectionViewDele
 
                     // 使用 JSONDecoder 解码数据
                     do {
-                        let response_config = try decoder.decode(ConfigResponse.self, from: data)
+                        let response_config = try decoder.decode(MoreMovieDetailResponse.self, from: data)
                         print("Code: \(response_config.code)")
-                        print("Message: \(response_config.message)")
+                        print("Message: \(response_config.msg)")
                         
                         if(Int(response_config.code) == 1){
                             
                              
-                            self.popularList.append(contentsOf: response_config.data.popularList)
+                            self.popularList.append(contentsOf: response_config.results)
                             
                             DispatchQueue.main.async {
                                 
@@ -202,6 +210,14 @@ class MoreListMovieDetailViewController: BaseViewController,UICollectionViewDele
         return preCell
     }
     
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let ppmodel:PopularMovie = self.popularList[indexPath.item]
+        let  mvController = MovieDetailViewController.instantiate()
+        mvController.viewModel = ppmodel
+        self.show(mvController, sender: self)
+    }
     private var displayedCellsIndexPaths = Set<IndexPath>()
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
