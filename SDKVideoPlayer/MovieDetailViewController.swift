@@ -79,6 +79,7 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
         return barButtonItem
     }()
 
+    
 //    private lazy var favoriteBarButtonItem: FavoriteToggleBarButtonItem = {
 //        let barButtonItem = FavoriteToggleBarButtonItem()
 //        barButtonItem.target = self
@@ -89,6 +90,7 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
 
     // MARK: - Dependencies
     var viewModel: PopularMovie?
+    var youtubeKey:String  = ""
     private(set) var transitionContainerView: UIView?
 
     // MARK: - Lifecycle
@@ -155,7 +157,8 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
                             DispatchQueue.main.async {
                                  
                                 if let  mmovieDetailResult =   self.moveDetailModel?.results.first {
-                                    let youtubeKey = mmovieDetailResult.key
+                                    self.youtubeKey = mmovieDetailResult.key
+                                    self.playbutton.isHidden = false
                                     
                                 }
                             }

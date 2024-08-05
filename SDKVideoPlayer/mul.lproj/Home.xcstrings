@@ -73,18 +73,6 @@
         }
       }
     },
-    "Ec4-5o-3kz.normalTitle" : {
-      "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"Ec4-5o-3kz\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Button"
-          }
-        }
-      }
-    },
     "ecd-9O-mf9.text" : {
       "comment" : "Class = \"UILabel\"; text = \"Release\"; ObjectID = \"ecd-9O-mf9\";",
       "extractionState" : "extracted_with_value",
