@@ -95,11 +95,11 @@ class ViewController: BaseViewController {
         
         if  ApplicationS.isFirstLaunch()   {
                // 显示一些欢迎信息或教程
-               print("This is the first launch")
+               //print("This is the first launch")
                 self.ShowOnboardView()
            } else {
                // 正常启动
-               print("Not the first launch")
+              // print("Not the first launch")
                self.setupViews()
                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                    self.gotoMainVC()
