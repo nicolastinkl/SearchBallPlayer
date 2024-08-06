@@ -93,7 +93,7 @@ class ViewController: BaseViewController {
         SDKAdServices().requestTrackingAuthorization()
         
         
-        if  ApplicationS.isFirstLaunch() || true  {
+        if  ApplicationS.isFirstLaunch()   {
                // 显示一些欢迎信息或教程
                print("This is the first launch")
                 self.ShowOnboardView()
