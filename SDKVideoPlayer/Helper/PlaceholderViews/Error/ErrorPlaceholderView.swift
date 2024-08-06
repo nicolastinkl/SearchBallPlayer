@@ -50,7 +50,7 @@ final class ErrorPlaceholderView: UIView, NibLoadable, RetryPlaceHolderable {
 
     private func setupErrorTitleLabel() {
         errorTitleLabel.text = Constants.errorTitle
-        errorTitleLabel.textColor = ThemeManager.shared.fontColor
+        errorTitleLabel.textColor =  .systemRed //ThemeManager.shared.fontColor
         errorTitleLabel.font = FontHelper.regular(withSize: 24.0)
         errorTitleLabel.adjustsFontForContentSizeCategory = true
     }
@@ -67,6 +67,13 @@ final class ErrorPlaceholderView: UIView, NibLoadable, RetryPlaceHolderable {
         retryButton.backgroundColor = ThemeManager.shared.viewBackgroundColor
         retryButton.setTitleColor(UIColor.white, for: .normal)
         retryButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        
+//        retryButton.layer.cornerRadius = 5
+        retryButton.clipsToBounds = true
+        retryButton.layer.cornerRadius = retryButton.frame.height/2
+        retryButton.layer.borderColor = UIColor.white.cgColor
+        retryButton.layer.borderWidth = 1
+        
         retryButton.addTarget(self, action: #selector(retryAction), for: .touchUpInside)
     }
 

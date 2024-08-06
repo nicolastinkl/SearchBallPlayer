@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController ,Retryable,PlaceholderDisplayable, LoadingDisplayable{
+    let loaderView: LoadingView = RadarView()
     
 //    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 //        super.traitCollectionDidChange(previousTraitCollection)

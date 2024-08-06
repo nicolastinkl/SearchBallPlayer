@@ -83,6 +83,8 @@
 		C050488A2C48F05200E4DEDB /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C05048892C48F05200E4DEDB /* AdServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C050488C2C48F0B800E4DEDB /* SDKAdServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050488B2C48F0B800E4DEDB /* SDKAdServices.swift */; };
 		C050488E2C48F0DA00E4DEDB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C050488D2C48F0DA00E4DEDB /* iAd.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		C08775E72C61F50E0074835D /* GradientViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08775E52C61F50E0074835D /* GradientViewNew.swift */; };
+		C08775E82C61F50E0074835D /* RadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08775E62C61F50E0074835D /* RadarView.swift */; };
 		C09C70162C3D4641000F6E01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70152C3D4641000F6E01 /* AppDelegate.swift */; };
 		C09C70182C3D4641000F6E01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70172C3D4641000F6E01 /* SceneDelegate.swift */; };
 		C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C70192C3D4641000F6E01 /* ViewController.swift */; };
@@ -298,6 +300,8 @@
 		C05048892C48F05200E4DEDB /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
 		C050488B2C48F0B800E4DEDB /* SDKAdServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKAdServices.swift; sourceTree = "<group>"; };
 		C050488D2C48F0DA00E4DEDB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		C08775E52C61F50E0074835D /* GradientViewNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientViewNew.swift; path = SDKVideoPlayer/Helper/GradientViewNew.swift; sourceTree = SOURCE_ROOT; };
+		C08775E62C61F50E0074835D /* RadarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadarView.swift; path = SDKVideoPlayer/Helper/RadarView.swift; sourceTree = SOURCE_ROOT; };
 		C09C70122C3D4641000F6E01 /* SDKVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09C70152C3D4641000F6E01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C09C70172C3D4641000F6E01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -856,6 +860,8 @@
 		C0A3A9352C60C94800671313 /* PlaceholderViews */ = {
 			isa = PBXGroup;
 			children = (
+				C08775E52C61F50E0074835D /* GradientViewNew.swift */,
+				C08775E62C61F50E0074835D /* RadarView.swift */,
 				C0A3A9402C60C98B00671313 /* ShrinkingButton */,
 				C0A3A9362C60C94800671313 /* Empty */,
 				C0A3A9392C60C94800671313 /* Error */,
@@ -1240,6 +1246,7 @@
 				C0A3A8F02C60C78E00671313 /* MovieDetailViewController.swift in Sources */,
 				1266EBA62C54960000D76306 /* MotionSensor.swift in Sources */,
 				C09C701A2C3D4641000F6E01 /* ViewController.swift in Sources */,
+				C08775E82C61F50E0074835D /* RadarView.swift in Sources */,
 				1266EBB72C54960000D76306 /* Model.swift in Sources */,
 				C0A3A8EA2C60BA2600671313 /* Array+MidElement.swift in Sources */,
 				1266EBA12C54960000D76306 /* PlayerView.swift in Sources */,
@@ -1310,6 +1317,7 @@
 				C0AD2AF82C452BC80091A508 /* SearcViewController.swift in Sources */,
 				C09CB06B2C4F4A7A0028C461 /* NaviSearchViewController.swift in Sources */,
 				C0A3A92E2C60C85E00671313 /* Dequeueable.swift in Sources */,
+				C08775E72C61F50E0074835D /* GradientViewNew.swift in Sources */,
 				1266EBBD2C54960000D76306 /* AudioGraphPlayer.swift in Sources */,
 				C00A3A022C413871004E31E4 /* SDKWBViewController.swift in Sources */,
 				1266EBA42C54960000D76306 /* Transforms.swift in Sources */,
@@ -1564,7 +1572,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sdkplayer.souqiuba;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sdkplayer.souqiuba-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1607,7 +1615,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sdkplayer.souqiuba;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sdkplayer.souqiuba-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

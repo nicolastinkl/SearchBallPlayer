@@ -369,7 +369,7 @@ class CustomCell: UITableViewCell {
                 
                 
                 if (data?.vodLang.count ?? 0) > 1 &&  la.tag == 10 {
-                    la.text = data?.vodLang
+                    la.text = data?.vodLang ?? ""
                     la.frame = CGRect(x: 0, y: 0, width: (data?.vodLang.count ?? 0) * 15, height: 30)
                     leftC  += la.frame.width  + 5
                 }

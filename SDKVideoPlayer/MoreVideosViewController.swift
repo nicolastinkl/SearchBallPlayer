@@ -97,11 +97,7 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
          
         
         let requestComplete2: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
- 
-            //if let response {
-//                for (field, value) in response.allHeaderFields {
-//                    debugPrint("\(field) \(value)" )
-//                }
+  
                 switch  result {
                        case .success(let value):
                     // 将 JSON 字符串转换为 Data
@@ -111,12 +107,17 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
 //                        s = sstr.replacingOccurrences(of: "null", with: "\"\"")
 //                    }
 //
-//                    print(s)
+                    print(value)
                     guard let data = value.data(using: String.Encoding.utf8) else {
                         
                          
 //                        let error = SearchError.errorWith("Error: Cannot create data from JSON string.")
-                        self.showSearchErrorAlert(on:self, error: "Error: Cannot create data from JSON string." )
+                       // self.showSearchErrorAlert(on:self, error: "Error: Cannot create data from JSON string." )
+                        
+                        self.presentRetryView(with:"Error: Cannot create data from JSON string.") {
+                            self.requestMoreduanjuorJiesuo()
+                        }
+                        
                         return
                     }
                     
@@ -152,28 +153,32 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
                                 }
                                 
                                 DispatchQueue.main.async {
+                                    self.hideRetryView()
                                     self.hasMoreData = self.total > self.page * self.limit
                                     self.isLoading = false
                                     self.footView.configure(hasMoreData: self.hasMoreData)
-                                    self.tableView.reloadData()
-                                    
+                                    self.tableView.reloadData()                                    
                                 }
                             }
                             
                         } catch {
                             print("\(error.localizedDescription)")
 //                            let error = SearchError.errorWith("Json parse Error: \(error.localizedDescription)")
-                            self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
+                            //self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
                             
-                            
+                            self.presentRetryView(with: "Json parse Error: \(error.localizedDescription)") {
+                                self.requestMoreduanjuorJiesuo()
+                            }
                         }
                     
                             
                        case .failure(let error):
                             
 //                            let error = SearchError.errorWith("\(error.localizedDescription)")
-                            self.showSearchErrorAlert(on:self, error: "\(error.localizedDescription)" )
-                    
+                            //self.showSearchErrorAlert(on:self, error: "\(error.localizedDescription)" )
+                            self.presentRetryView(with:"\(error.localizedDescription)") {
+                                self.requestMoreduanjuorJiesuo()
+                            }
                      
                        }
                 
@@ -182,8 +187,10 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
            
  
         }
+        
+        print("\(ApplicationS.baseURL)/player/recommand?type=\(self.requestType)&page=\(self.page)")
                 
-        AF.request("\(ApplicationS.baseURL)/player/jieshuo?type=\(self.requestType)&page=\(self.page)", method: .get,headers: ApplicationS.addCustomHeaders())
+        AF.request("\(ApplicationS.baseURL)/player/recommand?type=\(self.requestType)&page=\(self.page)", method: .get,headers: ApplicationS.addCustomHeaders())
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
                 requestComplete2(response.response, response.result)
