@@ -96,7 +96,7 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
         print("searchRequest \( page)")
          
         
-        let requestComplete2: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
+        let requestMoreduanjuorJiesuo222: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
   
                 switch  result {
                        case .success(let value):
@@ -107,7 +107,7 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
 //                        s = sstr.replacingOccurrences(of: "null", with: "\"\"")
 //                    }
 //
-                    print(value)
+//                    print(">>>>>>>>   \(value) <<<<<<<<<")
                     guard let data = value.data(using: String.Encoding.utf8) else {
                         
                          
@@ -115,7 +115,7 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
                        // self.showSearchErrorAlert(on:self, error: "Error: Cannot create data from JSON string." )
                         
                         self.presentRetryView(with:"Error: Cannot create data from JSON string.") {
-                            self.requestMoreduanjuorJiesuo()
+                            self.loadData()
                         }
                         
                         return
@@ -167,7 +167,7 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
                             //self.showSearchErrorAlert(on:self, error: "Json parse Error: \(error.localizedDescription)" )
                             
                             self.presentRetryView(with: "Json parse Error: \(error.localizedDescription)") {
-                                self.requestMoreduanjuorJiesuo()
+                                self.loadData()
                             }
                         }
                     
@@ -177,7 +177,7 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
 //                            let error = SearchError.errorWith("\(error.localizedDescription)")
                             //self.showSearchErrorAlert(on:self, error: "\(error.localizedDescription)" )
                             self.presentRetryView(with:"\(error.localizedDescription)") {
-                                self.requestMoreduanjuorJiesuo()
+                                self.loadData()
                             }
                      
                        }
@@ -187,13 +187,12 @@ class MoreVideosViewController: BaseViewController, UITableViewDataSource, UITab
            
  
         }
-        
-        print("\(ApplicationS.baseURL)/player/recommand?type=\(self.requestType)&page=\(self.page)")
                 
-        AF.request("\(ApplicationS.baseURL)/player/recommand?type=\(self.requestType)&page=\(self.page)", method: .get,headers: ApplicationS.addCustomHeaders())
+        AF.request("\(ApplicationS.baseURL)/player/recommand?type=\(self.requestType)&page=\(self.page)", method: .post ,  headers: ApplicationS.addCustomHeaders()
+        )
             .validate(statusCode: 200..<300)
             .responseString(completionHandler: { response in
-                requestComplete2(response.response, response.result)
+                requestMoreduanjuorJiesuo222(response.response, response.result)
                      
             })
     }

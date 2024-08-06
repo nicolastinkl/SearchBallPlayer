@@ -52,7 +52,7 @@ public class SwiftLoader: UIView {
     
     public class func show(view: UIView?,title: String?, animated : Bool) {
          
-        if let v = view {
+        if let v = view , false {
             let loader = SwiftLoader.shared
             loader.canUpdated = true
             loader.animated = animated

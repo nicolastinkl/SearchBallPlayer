@@ -322,6 +322,9 @@ extension UIViewController {
      
     func showNetworkErrorView(errormsg: String,clickBlock: @escaping () -> Void) {
         
+        
+        
+        
         self.privateClickBlock = clickBlock
           // 创建背景视图
     

@@ -65,15 +65,15 @@ final class ErrorPlaceholderView: UIView, NibLoadable, RetryPlaceHolderable {
     private func setupRetryButton() {
         retryButton.setTitle(Constants.retryButtonTitle, for: .normal)
         retryButton.backgroundColor = ThemeManager.shared.viewBackgroundColor
-        retryButton.setTitleColor(UIColor.white, for: .normal)
-        retryButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        retryButton.setTitleColor(ThemeManager.shared.fontColor, for: .normal)
+        retryButton.setTitleColor(ThemeManager.shared.fontColor.withAlphaComponent(0.5), for: .highlighted)
         
 //        retryButton.layer.cornerRadius = 5
         retryButton.clipsToBounds = true
         retryButton.layer.cornerRadius = retryButton.frame.height/2
-        retryButton.layer.borderColor = UIColor.white.cgColor
+        retryButton.layer.borderColor = ThemeManager.shared.fontColor.cgColor
         retryButton.layer.borderWidth = 1
-        
+        retryButton.spinnerColor =  ThemeManager.shared.fontColor
         retryButton.addTarget(self, action: #selector(retryAction), for: .touchUpInside)
     }
 

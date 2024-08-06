@@ -169,7 +169,7 @@ struct Video: Codable {
     
     enum CodingKeys: String, CodingKey {
         case vodID = "vod_id"
-        case typeID = "type_id" 
+        case typeID = "type_id"
         case vodContent = "vod_content"
         case vodName = "vod_name"
         case vodSub = "vod_sub"
@@ -394,7 +394,7 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
       
       
       func sendRequestGetconfig() {
-          
+//          self.showLoader()
           SwiftLoader.show(view: self.view,title: NSLocalizedString("Loading", comment: ""), animated: true)
           
 
@@ -402,8 +402,8 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
   //        // Fetch Request
           
           let requestComplete: (HTTPURLResponse?, Result<String, AFError>) -> Void = { response, result in
-  
-              SwiftLoader.hide()
+              self.hideLoader()
+               SwiftLoader.hide()
               
               //if let response {
   //                for (field, value) in response.allHeaderFields {
@@ -419,6 +419,7 @@ class MainViewController: BaseViewController,  UICollectionViewDelegate, UIColle
                               self.showNetworkErrorView(errormsg: "Error: Cannot create data from JSON string.", clickBlock: {
                                   self.sendRequestGetconfig()
                               })
+                              
                           }
                           
                           return
