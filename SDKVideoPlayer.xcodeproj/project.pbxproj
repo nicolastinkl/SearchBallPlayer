@@ -104,6 +104,9 @@
 		C09D6F0B2C60DD0300572CC4 /* MoreListMovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D6F0A2C60DD0300572CC4 /* MoreListMovieDetailViewController.swift */; };
 		C09D6F0E2C60E23800572CC4 /* UpcomingMoviePreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C09D6F0C2C60E23800572CC4 /* UpcomingMoviePreviewCollectionViewCell.xib */; };
 		C09D6F0F2C60E23800572CC4 /* UpcomingMoviePreviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D6F0D2C60E23800572CC4 /* UpcomingMoviePreviewCollectionViewCell.swift */; };
+		C09D6F142C61C99100572CC4 /* SwiftyOnboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D6F112C61C99100572CC4 /* SwiftyOnboardPage.swift */; };
+		C09D6F152C61C99100572CC4 /* SwiftyOnboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D6F122C61C99100572CC4 /* SwiftyOnboard.swift */; };
+		C09D6F162C61C99100572CC4 /* SwiftyOnboardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D6F132C61C99100572CC4 /* SwiftyOnboardOverlay.swift */; };
 		C0A3A8972C5A08D100671313 /* CloudPlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A3A8962C5A08D100671313 /* CloudPlaylistController.swift */; };
 		C0A3A8B42C5CC8C300671313 /* VideoPlayerView222.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A3A8B22C5CC8C300671313 /* VideoPlayerView222.swift */; };
 		C0A3A8B52C5CC8C300671313 /* YTPlayer.html in Resources */ = {isa = PBXBuildFile; fileRef = C0A3A8B32C5CC8C300671313 /* YTPlayer.html */; };
@@ -323,6 +326,9 @@
 		C09D6F0A2C60DD0300572CC4 /* MoreListMovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreListMovieDetailViewController.swift; sourceTree = "<group>"; };
 		C09D6F0C2C60E23800572CC4 /* UpcomingMoviePreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpcomingMoviePreviewCollectionViewCell.xib; sourceTree = "<group>"; };
 		C09D6F0D2C60E23800572CC4 /* UpcomingMoviePreviewCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingMoviePreviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		C09D6F112C61C99100572CC4 /* SwiftyOnboardPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardPage.swift; sourceTree = "<group>"; };
+		C09D6F122C61C99100572CC4 /* SwiftyOnboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboard.swift; sourceTree = "<group>"; };
+		C09D6F132C61C99100572CC4 /* SwiftyOnboardOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyOnboardOverlay.swift; sourceTree = "<group>"; };
 		C0A3A8962C5A08D100671313 /* CloudPlaylistController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPlaylistController.swift; sourceTree = "<group>"; };
 		C0A3A8B22C5CC8C300671313 /* VideoPlayerView222.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView222.swift; sourceTree = "<group>"; };
 		C0A3A8B32C5CC8C300671313 /* YTPlayer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = YTPlayer.html; sourceTree = "<group>"; };
@@ -649,11 +655,11 @@
 				C09C70172C3D4641000F6E01 /* SceneDelegate.swift */,
 				1266EB902C54960000D76306 /* DisplayCriteria */,
 				1266EB4D2C54960000D76306 /* KSPlayer */,
-				C09C70192C3D4641000F6E01 /* ViewController.swift */,
 				C0A3A8BE2C60BA2600671313 /* Extensions */,
 				C0A3A8B82C60B85B00671313 /* Helper */,
 				C09C704C2C3D4AE5000F6E01 /* HomeViewController.swift */,
 				C0A3A8EB2C60BC8700671313 /* VerticalFlowLayout.swift */,
+				C09C70192C3D4641000F6E01 /* ViewController.swift */,
 				12CADDAD2C3E398E0032635B /* MainViewController.swift */,
 				C0AD2AF02C44F8A70091A508 /* SettingsHomeViewController.swift */,
 				C0AD2AF52C4527C10091A508 /* GradientView.swift */,
@@ -661,6 +667,7 @@
 				C00A3A012C413871004E31E4 /* SDKWBViewController.swift */,
 				C0A3A8EF2C60C78E00671313 /* MovieDetailViewController.swift */,
 				C0AD2B152C4797C00091A508 /* ThemeManager.swift */,
+				C09D6F102C61C99100572CC4 /* Page */,
 				C09D6F0A2C60DD0300572CC4 /* MoreListMovieDetailViewController.swift */,
 				C00A39FB2C3FEB39004E31E4 /* SQBMovieDetailViewController.swift */,
 				C00A39FF2C4136BC004E31E4 /* MoreVideosViewController.swift */,
@@ -715,6 +722,16 @@
 				C09C703C2C3D4642000F6E01 /* SDKVideoPlayerUITestsLaunchTests.swift */,
 			);
 			path = SDKVideoPlayerUITests;
+			sourceTree = "<group>";
+		};
+		C09D6F102C61C99100572CC4 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				C09D6F112C61C99100572CC4 /* SwiftyOnboardPage.swift */,
+				C09D6F122C61C99100572CC4 /* SwiftyOnboard.swift */,
+				C09D6F132C61C99100572CC4 /* SwiftyOnboardOverlay.swift */,
+			);
+			path = Page;
 			sourceTree = "<group>";
 		};
 		C0A3A8B12C5CC8C300671313 /* Youtube */ = {
@@ -1190,6 +1207,7 @@
 				C0A3A8972C5A08D100671313 /* CloudPlaylistController.swift in Sources */,
 				C0AD2B1C2C47B79C0091A508 /* ApplicationS.swift in Sources */,
 				C0EEFC302C4A592100AAFFD0 /* Objc.m in Sources */,
+				C09D6F142C61C99100572CC4 /* SwiftyOnboardPage.swift in Sources */,
 				1266EBC02C54960000D76306 /* FFmpegDecode.swift in Sources */,
 				C0AD2AED2C44F5260091A508 /* SwiftModalWebVC.swift in Sources */,
 				C0A3A93E2C60C94800671313 /* ErrorPlaceholderView.swift in Sources */,
@@ -1215,6 +1233,7 @@
 				C0AD2AEB2C44F5260091A508 /* SwiftWebVCActivity.swift in Sources */,
 				C0AD2AFE2C4650400091A508 /* IconGradientView.swift in Sources */,
 				C00A3A002C4136BC004E31E4 /* MoreVideosViewController.swift in Sources */,
+				C09D6F152C61C99100572CC4 /* SwiftyOnboard.swift in Sources */,
 				1266EBC72C54960000D76306 /* KSMEPlayer.swift in Sources */,
 				1266EBCD2C54960000D76306 /* KSVideoPlayerViewBuilder.swift in Sources */,
 				C0A3A8E92C60BA2600671313 /* UICollectionView+Extensions.swift in Sources */,
@@ -1242,6 +1261,7 @@
 				C0A3A8D82C60BA2600671313 /* UIView+Extensions.swift in Sources */,
 				1266EBB22C54960000D76306 /* KSSubtitle.swift in Sources */,
 				C0A3A9442C60C98B00671313 /* SpinerLayer.swift in Sources */,
+				C09D6F162C61C99100572CC4 /* SwiftyOnboardOverlay.swift in Sources */,
 				1266EB9C2C54960000D76306 /* PlayerTransitionAnimator.swift in Sources */,
 				C0AD2AEE2C44F5260091A508 /* SwiftWebVCActivitySafari.swift in Sources */,
 				C0A3A8FA2C60C81B00671313 /* Transitionable.swift in Sources */,

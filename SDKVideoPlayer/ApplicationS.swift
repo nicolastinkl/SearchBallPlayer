@@ -25,6 +25,21 @@ class ApplicationS {
         }
     }()
     
+    
+    public static func isFirstLaunch() -> Bool {
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            // 不是第一次启动
+            return false
+        } else {
+            // 是第一次启动
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            UserDefaults.standard.synchronize() // 确保立即保存
+            return true
+        }
+    }
+
+    
     static func initAppConfig(){
         
         // 假设这是你的应用的业务ID和版本信息
