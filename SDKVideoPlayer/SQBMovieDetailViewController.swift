@@ -399,9 +399,7 @@ class SQBMovieDetailViewController: BaseViewController, UIDocumentPickerDelegate
        documentPicker.delegate = self
        documentPicker.modalPresentationStyle = .formSheet
 //                  documentPicker.sourceView = self.view
-       
-       // 允许从iCloud选择文件
-     
+        
 //                  documentPicker.options = [_UIDocumentPickerOptionAllowCloud]
        present(documentPicker, animated: true, completion: nil)
     }
@@ -1436,8 +1434,9 @@ class SQBMovieDetailViewController: BaseViewController, UIDocumentPickerDelegate
     
     @objc private func ButtonTapped(_ button:UIButton){
                
-        if let u = URL(string: jishuURLArray[button.tag]) ,let coverurl =  URL(string: self.movieDetail?.vodPic ?? "")  {
+        if let u = URL(string: jishuURLArray[button.tag])  {
 //           let resource = KSPlayerResource(url: u)
+            let coverurl =  URL(string: self.movieDetail?.vodPic ?? "")
             let resource = KSPlayerResource(url: u ,name: self.movieDetail?.vodName ?? "",cover: coverurl)
            let controller = DetailViewController()
            controller.resource = resource
@@ -1446,8 +1445,7 @@ class SQBMovieDetailViewController: BaseViewController, UIDocumentPickerDelegate
                 if s.vodID > 10 {
                     
                     LocalStore.saveToUserDefaults(RecentlyWatchVideo: s)
-                    //通知刷新列表
-                    
+                    //通知刷新列表 
                     // 发送通知
                     NotificationCenter.default.post(name: .historyItemsUpdated, object: nil)
                 }
