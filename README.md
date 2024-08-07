@@ -25,6 +25,13 @@
 
 ## Installation
 
+```shell
+pod install
+```
+Note: The pod install command may take some time to complete, especially if this is the first time running it on your project or if there have been updates to the CocoaPods repositories. Please be patient during this process as it sets up the necessary dependencies for your project.
+
+Once the installation is complete, open the .xcworkspace file to launch your project in Xcode.
+
 ### CocoaPods
 
 To install `SDKVideoPlayer` using CocoaPods, add the following line to your `Podfile`:
