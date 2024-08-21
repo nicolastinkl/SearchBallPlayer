@@ -851,8 +851,8 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
             overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideVideoPopupView))
-//        overlayView.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideVideoPopupView))
+        overlayView.addGestureRecognizer(tapGesture)
         playVideourl = url
         
         // 创建并配置弹出视图
@@ -873,11 +873,11 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
         popupView.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         
         
-        popupView.alpha = 0
-        
-        UIView.animate(withDuration: 0.3) {
-            popupView.alpha = 1
-        }
+//        popupView.alpha = 0
+//        
+//        UIView.animate(withDuration: 0.3) {
+//            popupView.alpha = 1
+//        }
      
         NSLayoutConstraint.activate([
             popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 20),
@@ -890,7 +890,7 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
         
         webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
             if let s = response as? String {
-                
+                self.title = s
                 popupView.configData(title: s, durationLabel:  "" )
             }
         })

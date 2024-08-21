@@ -115,9 +115,10 @@ class VideoPopupView: UIView {
         addSubview(titleLabel)
         addSubview(durationLabel)
         addSubview(imageView)
+        addViewWithLottie(animationName: "8c4433be", childView: self,index: 1)
         addSubview(playButton)
         
-        addViewWithLottie(animationName: "8c4433be", childView: self,index: 1)
+        
         
         NSLayoutConstraint.activate([            
             
@@ -230,7 +231,7 @@ class VideoPopupView: UIView {
                 animationView.leadingAnchor.constraint(equalTo: childView.leadingAnchor),
                 animationView.trailingAnchor.constraint(equalTo: childView.trailingAnchor),
                 animationView.centerYAnchor.constraint(equalTo: childView.centerYAnchor),
-                animationView.heightAnchor.constraint(equalToConstant: 150),
+                animationView.heightAnchor.constraint(equalToConstant: 120),
                 //animationView.bottomAnchor.constraint(equalTo: childView.bottomAnchor),
             ])
         }
