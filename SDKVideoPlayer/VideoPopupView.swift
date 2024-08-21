@@ -221,6 +221,7 @@ class VideoPopupView: UIView {
                 animationView.bottomAnchor.constraint(equalTo: childView.bottomAnchor),
             ])
         }
+        
         if index == 1 {
             childView.addSubview(animationView)
             

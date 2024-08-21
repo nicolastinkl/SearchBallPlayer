@@ -246,7 +246,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         iconsCollectionView.delegate = self
         
         iconsCollectionView.register(IconCollectionViewCell.self, forCellWithReuseIdentifier:iconCellId)
-        iconsCollectionView.registerNib(cellType: UpcomingMovieExpandedCollectionViewCell.self)
+        iconsCollectionView.registerNib(cellType: SearchBallExpandedCollectionViewCell.self)
         
         suggestionsTableView.backgroundColor = UIColor.clear
         iconsCollectionView.backgroundColor = UIColor.clear
@@ -913,7 +913,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                if (cdata.data.popularList.count > 0){
                 //   collectionView.dequeueReusableCell(withReuseIdentifier: UpcomingMoviePreviewCollectionViewCell.self, for: indexPath)
                    
-                   guard let preCell = collectionView.dequeueReusableCell(with: UpcomingMovieExpandedCollectionViewCell.self, for: indexPath) as UpcomingMovieExpandedCollectionViewCell? else {
+                   guard let preCell = collectionView.dequeueReusableCell(with: SearchBallExpandedCollectionViewCell.self, for: indexPath) as SearchBallExpandedCollectionViewCell? else {
                        return UICollectionViewCell()
                    }
                    let ppmodel = cdata.data.popularList[indexPath.row]

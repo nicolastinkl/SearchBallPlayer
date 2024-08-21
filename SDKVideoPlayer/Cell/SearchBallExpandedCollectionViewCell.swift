@@ -14,7 +14,7 @@ import Alamofire
 import SDWebImage
 
 
-final class UpcomingMovieExpandedCollectionViewCell: UICollectionViewCell {
+final class SearchBallExpandedCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private weak var backdropImageView: SDAnimatedImageView!
     @IBOutlet private weak var titleLabel: UILabel!

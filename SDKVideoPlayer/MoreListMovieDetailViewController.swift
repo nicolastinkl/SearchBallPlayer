@@ -61,7 +61,7 @@ class MoreListMovieDetailViewController: BaseViewController,UICollectionViewDele
         
          
 //        iconsCollectionView.registerNib(cellType: UpcomingMovieExpandedCollectionViewCell.self)
-        iconsCollectionView.registerNib(cellType: UpcomingMoviePreviewCollectionViewCell.self)
+        iconsCollectionView.registerNib(cellType: SearchBallPreviewCollectionViewCell.self)
         
          
         iconsCollectionView.backgroundColor = UIColor.clear
@@ -202,7 +202,7 @@ class MoreListMovieDetailViewController: BaseViewController,UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let preCell = collectionView.dequeueReusableCell(with: UpcomingMoviePreviewCollectionViewCell.self, for: indexPath) as UpcomingMoviePreviewCollectionViewCell? else {
+        guard let preCell = collectionView.dequeueReusableCell(with: SearchBallPreviewCollectionViewCell.self, for: indexPath) as SearchBallPreviewCollectionViewCell? else {
             return UICollectionViewCell()
         }
         let ppmodel = popularList[indexPath.row]

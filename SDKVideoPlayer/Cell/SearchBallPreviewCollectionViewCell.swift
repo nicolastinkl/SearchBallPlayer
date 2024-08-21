@@ -10,7 +10,7 @@ import UIKit
 
 import SDWebImage
 
-final class UpcomingMoviePreviewCollectionViewCell: UICollectionViewCell {
+final class SearchBallPreviewCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private(set) weak var posterImageView: SDAnimatedImageView!
