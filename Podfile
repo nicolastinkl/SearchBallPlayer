@@ -8,7 +8,7 @@ target 'SDKVideoPlayer' do
   # Pods for SDKVideoPlayer
   
   pod 'SwiftIcons', '~> 3.0'
-  
+  pod 'lottie-ios'
   pod 'FirebaseCrashlytics'
   
   

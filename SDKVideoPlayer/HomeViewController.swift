@@ -14,6 +14,7 @@ import Alamofire
 import SDWebImage
 import SwiftIcons
 import AppTrackingTransparency
+import Lottie
 
 //import SwiftLoader
 //import SwiftWebVC
@@ -266,8 +267,69 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
         NotificationCenter.default.addObserver(self, selector: #selector(historyItemsUpdated), name: .favitorItemsUpdated, object: nil) 
         
 //        self.title = NSLocalizedString("Browser", comment: "")
+        addViewWithLottie(animationName: "a89dcca2", childView: self.view)
+        addViewWithLottie(animationName: "40f024e4", childView: self.view,index: 1)
         
-    }   
+//        addViewWithLottie(animationName: "028937ef", childView: self.view,index: 2)
+    }
+    
+    
+    
+    func addViewWithLottie(animationName: String,childView: UIView,index: Int = 0){
+        
+        let   animationView = LottieAnimationView.init(name: animationName)
+          
+//          animationView.frame = view.bounds
+          
+          // 3. Set animation content mode
+          
+          animationView.contentMode = .scaleAspectFit
+          
+          // 4. Set animation loop mode
+          
+        animationView.loopMode = .loop
+          
+          // 5. Adjust animation speed
+          
+          animationView.animationSpeed = 1
+          
+       // childView.addSubview(animationView)
+        childView.insertSubview(animationView, at: 1)
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        if index == 0 {
+            
+            NSLayoutConstraint.activate([
+                animationView.topAnchor.constraint(equalTo: childView.topAnchor,constant: 50),
+                animationView.leadingAnchor.constraint(equalTo: childView.leadingAnchor),
+                animationView.widthAnchor.constraint(equalToConstant: 100),
+                animationView.heightAnchor.constraint(equalToConstant: 100)
+            ])
+        }else if index == 1 {
+            
+            NSLayoutConstraint.activate([
+                animationView.topAnchor.constraint(equalTo: childView.topAnchor,constant: 10),
+                animationView.trailingAnchor.constraint(equalTo: childView.trailingAnchor),
+                animationView.leadingAnchor.constraint(equalTo: childView.leadingAnchor),
+//                animationView.widthAnchor.constraint(equalToConstant: 200),
+                animationView.heightAnchor.constraint(equalToConstant: 200)
+            ])
+        }else if index == 2 {
+            
+            NSLayoutConstraint.activate([
+                animationView.topAnchor.constraint(equalTo: childView.topAnchor,constant: 10),
+                animationView.trailingAnchor.constraint(equalTo: childView.trailingAnchor),
+                animationView.leadingAnchor.constraint(equalTo: childView.leadingAnchor),
+//                animationView.widthAnchor.constraint(equalToConstant: 200),
+                animationView.bottomAnchor.constraint(equalTo: childView.bottomAnchor)
+            ])
+        }
+         
+        // 6. Play animation
+          
+        animationView.play()
+    }
+    
     
     
     private func setupCollectionViewLayout() {
@@ -355,15 +417,17 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                 // 添加动画效果
                 // 隐藏老的文字，新的文字移动到上方暂停显示
                 // 1. 移动老的文字向上隐藏
+                /*
                      UIView.animate(withDuration: 0.1, animations: {
                          self.searchBar.transform = CGAffineTransform(translationX: 0, y: -self.searchBar.bounds.height/4)
                      }) { (finished) in
                         
                      }
-
+*/
                 // 2. 设置新的文字
                 self.searchBar.text = currentItemTitle
                 
+                /*
                 // 3. 将新的文字移动到搜索栏位置
                 self.searchBar.transform = CGAffineTransform(translationX: 0, y: self.searchBar.bounds.height/4)
                 
@@ -373,11 +437,10 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                 }, completion: { (finished) in
                     // 5. 动画完成后，恢复搜索栏原始位置
                     self.searchBar.transform = .identity
-                })
+                })*/
                    // 移动到下一个索引，循环展示
                    currentIndex = (currentIndex + 1) % searchlist.count
                }
-        
     }
     
      

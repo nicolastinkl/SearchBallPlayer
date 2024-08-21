@@ -36,6 +36,13 @@ open class SwiftyOnboardPage: UIView {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+        
+    public var imageViewlottie: UIView = {
+        let animationView = UIView()
+        animationView.contentMode = .scaleAspectFit
+         
+        return animationView
+    }()
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -66,6 +73,15 @@ open class SwiftyOnboardPage: UIView {
         imageView.rightAnchor.constraint(equalTo: margin.rightAnchor, constant: -30).isActive = true
         imageView.topAnchor.constraint(equalTo: margin.topAnchor, constant: 10).isActive = true
         imageView.heightAnchor.constraint(equalTo: margin.heightAnchor, multiplier: 0.5).isActive = true
+        
+        self.addSubview(imageViewlottie)
+        imageViewlottie.translatesAutoresizingMaskIntoConstraints = false
+        imageViewlottie.leftAnchor.constraint(equalTo: margin.leftAnchor, constant: 30).isActive = true
+        imageViewlottie.rightAnchor.constraint(equalTo: margin.rightAnchor, constant: -30).isActive = true
+        imageViewlottie.topAnchor.constraint(equalTo: margin.topAnchor, constant: 10).isActive = true
+        imageViewlottie.heightAnchor.constraint(equalTo: margin.heightAnchor, multiplier: 0.5).isActive = true
+        
+        
         
         self.addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false

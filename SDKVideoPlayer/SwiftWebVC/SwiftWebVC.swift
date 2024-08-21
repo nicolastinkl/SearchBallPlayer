@@ -10,6 +10,7 @@ import WebKit
 //import KSPlayer
 import SDWebImage
 import Toast
+import Lottie
 
 public protocol SwiftWebVCDelegate: AnyObject {
     func didStartLoading()
@@ -78,23 +79,23 @@ public class SwiftWebVC: UIViewController{
     private var playVideourl:URL?
     
    
-     private var videoPopupView: VideoPopupView? {
+     private var videoPopupView: VideoPopupView? /* {
          get {
              return objc_getAssociatedObject(self, AssociatedKeys.videoPopupView) as? VideoPopupView
          }
          set {
              objc_setAssociatedObject(self, AssociatedKeys.videoPopupView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
          }
-     }
+     }*/
      
-     private var overlayView: UIView? {
+     private var overlayView: UIView? /*{
          get {
              return objc_getAssociatedObject(self, AssociatedKeys.overlayView) as? UIView
          }
          set {
              objc_setAssociatedObject(self, AssociatedKeys.overlayView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
          }
-     }
+     }*/
     
     public weak var delegate: SwiftWebVCDelegate?
     var storedStatusColor: UIBarStyle?
@@ -151,18 +152,87 @@ public class SwiftWebVC: UIViewController{
     }()
     
     lazy var faviatorBarButtonItem: UIBarButtonItem = {
-        var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add,
-                                                      target: self,
-                                                      action: #selector(SwiftWebVC.actionfaviatorButtonTapped(_:)))
-        tempActionBarButtonItem.tintColor = self.buttonColor
+//        var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add,
+//                                                      target: self,
+//                                                      action: #selector(SwiftWebVC.actionfaviatorButtonTapped(_:)))
+//        tempActionBarButtonItem.tintColor = self.buttonColor
+        
+        let   animationView = LottieAnimationView.init(name: "87ef38eb")
+          
+//          animationView.frame = view.bounds
+          
+          // 3. Set animation content mode
+          
+          animationView.contentMode = .scaleAspectFit
+          
+          // 4. Set animation loop mode
+          
+        animationView.loopMode = .loop
+          
+          // 5. Adjust animation speed
+          
+          animationView.animationSpeed = 1
+          
+//          view.addSubview(animationView)
+//
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 6. Play animation
+          
+        
+        var tempActionBarButtonItem = UIBarButtonItem(customView: animationView)
+        animationView.play()
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalToConstant: 44),
+            animationView.heightAnchor.constraint(equalToConstant: 44),
+        ])
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(SwiftWebVC.actionfaviatorButtonTapped(_:)))
+        animationView.addGestureRecognizer(tap)
+        
         return tempActionBarButtonItem
     }()
     
     lazy var searchbarButtonItem: UIBarButtonItem = {
-        var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.play,
-                                                      target: self,
-                                                      action: #selector(SwiftWebVC.searchButtonTapped(_:)))
+        //
+        let   animationView = LottieAnimationView.init(name: "bb276970")
+          
+//          animationView.frame = view.bounds
+          
+          // 3. Set animation content mode
+          
+          animationView.contentMode = .scaleAspectFit
+          
+          // 4. Set animation loop mode
+          
+        animationView.loopMode = .loop
+          
+          // 5. Adjust animation speed
+          
+          animationView.animationSpeed = 1
+          
+//          view.addSubview(animationView)
+//          
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 6. Play animation
+          
+        
+        var tempActionBarButtonItem = UIBarButtonItem(customView: animationView)
+        animationView.play()
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalToConstant: 44),
+            animationView.heightAnchor.constraint(equalToConstant: 44),
+        ])
+        
+//        var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.play,
+//                                                      target: self,
+//                                                      action: #selector(SwiftWebVC.searchButtonTapped(_:)))
         tempActionBarButtonItem.tintColor = self.buttonColor
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(SwiftWebVC.searchButtonTapped(_:)))
+        animationView.addGestureRecognizer(tap)
+        
         return tempActionBarButtonItem
     }()
     
@@ -767,6 +837,7 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
     
     func showVideoPopupView(with url: URL?) {
         // 创建半透明遮罩视图
+        
         self.m3u8playurl = url
         let overlayView = UIView()
         overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
@@ -780,8 +851,8 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
             overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideVideoPopupView))
-        overlayView.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideVideoPopupView))
+//        overlayView.addGestureRecognizer(tapGesture)
         playVideourl = url
         
         // 创建并配置弹出视图
@@ -796,17 +867,25 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
 //            
 //        }
         //startButton.addTarget(self, action: #selector(ButtonhdplayurlTapped(_:)), for: .touchUpInside)
-        popupView.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
-        
-        
         
         popupView.translatesAutoresizingMaskIntoConstraints = false
         overlayView.addSubview(popupView)
+        popupView.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+        
+        
+        popupView.alpha = 0
+        
+        UIView.animate(withDuration: 0.3) {
+            popupView.alpha = 1
+        }
+     
         NSLayoutConstraint.activate([
-            popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 0),
-            popupView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: 0),
-            popupView.bottomAnchor.constraint(equalTo: overlayView.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            popupView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 20),
+            popupView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -20),
+//            popupView.bottomAnchor.constraint(equalTo: overlayView.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            popupView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
             popupView.heightAnchor.constraint(equalToConstant: 200)
+//            popupView.topAnchor.constraint(equalTo: overlayView.topAnchor),
         ])
         
         webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
@@ -845,10 +924,14 @@ extension SwiftWebVC: WKNavigationDelegate, WKUIDelegate   {
             playVideo(with: url)
         }
         
-        
     }
     
     @objc public func hideVideoPopupView() {
+        UIView.animate(withDuration: 0.3) {
+            self.overlayView?.alpha = 0
+            self.videoPopupView?.alpha = 0
+        }
+        
         overlayView?.removeFromSuperview()
         videoPopupView?.removeFromSuperview()
         overlayView = nil

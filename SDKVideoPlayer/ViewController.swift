@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Lottie
 
 
 
@@ -27,25 +28,65 @@ extension ViewController: SwiftyOnboardDataSource {
 //                page.title.font =  UIFont.systemFont(ofSize: 20)
                 page.subTitle.text = "Whether it's classic films or current hits, you can easily find them using our search feature."
                 page.subTitle.textColor = UIColor.white
-                page.imageView.image = UIImage(named: "worlwide")
+                //page.imageView.image = UIImage(named: "worlwide")
+                
+                self.addViewWithLottie(animationName: "85a3ee57", childView: page.imageViewlottie)
             } else if index == 1 {
                 
                 page.title.text = "Efficient browsing"
                 page.title.textColor = UIColor.white
                 page.subTitle.text = "Our collection includes various popular and classic films, offering a simple and clear browsing experience."
                 page.subTitle.textColor = UIColor.white
-                page.imageView.image = UIImage(named: "entertainment")
+                //page.imageView.image = UIImage(named: "entertainment")
+                self.addViewWithLottie(animationName: "ef0b9df82", childView: page.imageViewlottie)
             } else if index == 2 {
                 
                 page.title.text = "Wonderful movies"
                 page.title.textColor = UIColor.white
                 page.subTitle.text = "Includes all kinds of popular films, bringing you an unprecedented viewing experience."
                 page.subTitle.textColor = UIColor.white
-                page.imageView.image = UIImage(named: "wandoerfuyll")
+                //page.imageView.image = UIImage(named: "wandoerfuyll")
+                self.addViewWithLottie(animationName: "865f4c39", childView: page.imageViewlottie)
             }
             
             return page
         }
+    
+    func addViewWithLottie(animationName: String,childView: UIView){
+        
+        let   animationView = LottieAnimationView.init(name: animationName)
+          
+//          animationView.frame = view.bounds
+          
+          // 3. Set animation content mode
+          
+          animationView.contentMode = .scaleAspectFit
+          
+          // 4. Set animation loop mode
+          
+        animationView.loopMode = .loop
+          
+          // 5. Adjust animation speed
+          
+          animationView.animationSpeed = 1
+          
+        childView.addSubview(animationView)
+          
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+            
+            NSLayoutConstraint.activate([
+                animationView.topAnchor.constraint(equalTo: childView.topAnchor),
+                animationView.leadingAnchor.constraint(equalTo: childView.leadingAnchor),
+                animationView.trailingAnchor.constraint(equalTo: childView.trailingAnchor),
+                     animationView.bottomAnchor.constraint(equalTo: childView.bottomAnchor),
+            ])
+         
+        // 6. Play animation
+          
+        animationView.play()
+    }
+    
 }
 
 
@@ -93,7 +134,7 @@ class ViewController: BaseViewController {
         SDKAdServices().requestTrackingAuthorization()
         
         
-        if  ApplicationS.isFirstLaunch()   {
+        if  ApplicationS.isFirstLaunch()  {
                // 显示一些欢迎信息或教程
                //print("This is the first launch")
                 self.ShowOnboardView()

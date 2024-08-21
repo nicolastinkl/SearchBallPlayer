@@ -234,7 +234,7 @@ final class MovieDetailViewController: UIViewController, Storyboarded, Transitio
                                  
                                 if let  mmovieDetailResult =   self.moveDetailModel?.results.first {
                                     self.youtubeKey = mmovieDetailResult.key
-                                    self.playbutton.isHidden = false
+                                    //self.playbutton.isHidden = false
                                     self.setupWebView()
                                     
                                 }

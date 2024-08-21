@@ -7,12 +7,13 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 class VideoPopupView: UIView {
     
     let titleLabelName: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = ThemeManager.shared.fontColor2
         label.textAlignment = .center
         label.numberOfLines = 1
@@ -42,7 +43,7 @@ class VideoPopupView: UIView {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "Play")
+        //imageView.image = UIImage(named: "Play")
 //        imageView.clipsToBounds = true
 //        imageView.layer.cornerRadius = 10
 //        imageView.cornerRadius = 10
@@ -109,11 +110,14 @@ class VideoPopupView: UIView {
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
         playButton.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        addViewWithLottie(animationName: "43a3f400", childView: self,index: 0)
         addSubview(titleLabelName)
         addSubview(titleLabel)
         addSubview(durationLabel)
         addSubview(imageView)
         addSubview(playButton)
+        
+        addViewWithLottie(animationName: "8c4433be", childView: self,index: 1)
         
         NSLayoutConstraint.activate([            
             
@@ -140,7 +144,7 @@ class VideoPopupView: UIView {
             
             
             //playButton.topAnchor.constraint(equalTo: durationLabel.bottomAnchor, constant: 16),
-            playButton.heightAnchor.constraint(equalToConstant: 50),
+            playButton.heightAnchor.constraint(equalToConstant: 40),
             playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 80),
             playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -80),
             playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
@@ -179,4 +183,62 @@ class VideoPopupView: UIView {
         self.titleLabel.text = title
         self.titleLabelName.text = NSLocalizedString("Get_successful_online_video", comment: "") 
     }
+    
+    
+    
+    func addViewWithLottie(animationName: String,childView: UIView, index: Int = 0){
+        
+        let   animationView = LottieAnimationView.init(name: animationName)
+          
+//          animationView.frame = view.bounds
+          
+          // 3. Set animation content mode
+          
+          
+          
+          // 4. Set animation loop mode
+          
+        animationView.loopMode = .loop
+          
+          // 5. Adjust animation speed
+          
+         
+          
+       // childView.addSubview(animationView)
+        
+          
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        if index == 0 {
+//            childView.insertSubview(animationView, at: 1)
+            childView.addSubview(animationView)
+            animationView.animationSpeed = 0.3
+            animationView.contentMode = .scaleAspectFill
+            NSLayoutConstraint.activate([
+                animationView.topAnchor.constraint(equalTo: childView.topAnchor),
+                animationView.leadingAnchor.constraint(equalTo: childView.leadingAnchor),
+                animationView.trailingAnchor.constraint(equalTo: childView.trailingAnchor),
+                animationView.bottomAnchor.constraint(equalTo: childView.bottomAnchor),
+            ])
+        }
+        if index == 1 {
+            childView.addSubview(animationView)
+            
+            animationView.animationSpeed = 1
+            animationView.contentMode = .scaleAspectFit
+            NSLayoutConstraint.activate([
+                //animationView.topAnchor.constraint(equalTo: childView.topAnchor),
+                animationView.leadingAnchor.constraint(equalTo: childView.leadingAnchor),
+                animationView.trailingAnchor.constraint(equalTo: childView.trailingAnchor),
+                animationView.centerYAnchor.constraint(equalTo: childView.centerYAnchor),
+                animationView.heightAnchor.constraint(equalToConstant: 150),
+                //animationView.bottomAnchor.constraint(equalTo: childView.bottomAnchor),
+            ])
+        }
+            
+         
+        // 6. Play animation
+          
+        animationView.play()
+    }
+    
 }
