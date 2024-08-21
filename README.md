@@ -95,3 +95,11 @@ end
  2. 修复加载提示退出不转动的问题
  3. 修复数据问题，确保可以加载成功
 ![](ScreenShots/combined_image08-06_15-51.jpeg)
+
+2018-8-21 Change-log:
+ 1. 更新首页内容
+ 2. 主要突出wukong 主题视频
+ 3. 去掉多余的代码
+![](ScreenShots/combined_image08-21_17-07.jpeg)
+
+

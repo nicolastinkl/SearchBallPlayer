@@ -1600,7 +1600,7 @@
 				CODE_SIGN_ENTITLEMENTS = SDKVideoPlayer/SDKVideoPlayer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1255;
+				CURRENT_PROJECT_VERSION = 1275;
 				DEVELOPMENT_TEAM = 26XWXKSR3B;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1620,7 +1620,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sdkplayer.souqiuba-1";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sdkplayer.souqiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1643,7 +1643,7 @@
 				CODE_SIGN_ENTITLEMENTS = SDKVideoPlayer/SDKVideoPlayer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1255;
+				CURRENT_PROJECT_VERSION = 1275;
 				DEVELOPMENT_TEAM = 26XWXKSR3B;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1663,7 +1663,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sdkplayer.souqiuba-1";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sdkplayer.souqiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
