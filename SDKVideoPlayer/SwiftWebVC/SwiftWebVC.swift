@@ -667,6 +667,8 @@ public class SwiftWebVC: UIViewController{
             })
         }
     }
+    
+    
     func presentTextInputAlert(title: String, url:String,iconurl:String?) {
            // 创建 UIAlertController 实例
            let alertController = UIAlertController(title: NSLocalizedString("favitorurl", comment: ""), message: "", preferredStyle: .alert)
@@ -735,7 +737,7 @@ public class SwiftWebVC: UIViewController{
            
            // 显示弹出窗口
            present(alertController, animated: true, completion: nil)
-       }
+    }
     
     @objc func searchButtonTapped(_ sender: AnyObject) {
         

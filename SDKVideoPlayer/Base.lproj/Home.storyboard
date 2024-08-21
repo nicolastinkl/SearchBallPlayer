@@ -159,7 +159,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hyF-zq-sN8">
-                                <rect key="frame" x="0.0" y="349" width="393" height="420"/>
+                                <rect key="frame" x="0.0" y="384" width="393" height="385"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="B44-y0-FiZ">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -209,6 +209,16 @@
                                     <constraint firstAttribute="width" constant="320" id="vQr-iG-uid"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isA-Iq-NUu">
+                                <rect key="frame" x="16" y="350" width="320" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="7mW-ZV-b0x"/>
+                                    <constraint firstAttribute="height" constant="24" id="GTT-wy-8ja"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="53h-qm-nj3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -218,7 +228,7 @@
                             <constraint firstItem="bt0-5r-7rN" firstAttribute="centerX" secondItem="53h-qm-nj3" secondAttribute="centerX" id="BfK-lH-bMg"/>
                             <constraint firstItem="VVR-QJ-jNG" firstAttribute="leading" secondItem="53h-qm-nj3" secondAttribute="leading" id="C3B-CS-5Eh"/>
                             <constraint firstItem="YQQ-Si-YYT" firstAttribute="top" secondItem="bt0-5r-7rN" secondAttribute="bottom" constant="20" id="EfK-pM-gPc"/>
-                            <constraint firstItem="hyF-zq-sN8" firstAttribute="top" secondItem="VVR-QJ-jNG" secondAttribute="bottom" constant="10" id="HYv-7Q-cKD"/>
+                            <constraint firstItem="hyF-zq-sN8" firstAttribute="top" secondItem="VVR-QJ-jNG" secondAttribute="bottom" constant="45" id="HYv-7Q-cKD"/>
                             <constraint firstItem="YQQ-Si-YYT" firstAttribute="centerX" secondItem="uA9-CE-Zwk" secondAttribute="centerX" id="IfU-YR-yKm"/>
                             <constraint firstItem="uA9-CE-Zwk" firstAttribute="leading" secondItem="53h-qm-nj3" secondAttribute="leading" id="KsL-Bv-9iv"/>
                             <constraint firstItem="68C-MA-bki" firstAttribute="top" secondItem="uA9-CE-Zwk" secondAttribute="bottom" constant="-39" id="L0E-UJ-woh"/>
@@ -227,11 +237,13 @@
                             <constraint firstItem="53h-qm-nj3" firstAttribute="trailing" secondItem="hyF-zq-sN8" secondAttribute="trailing" id="Q4u-sz-PJE"/>
                             <constraint firstItem="53h-qm-nj3" firstAttribute="top" secondItem="uA9-CE-Zwk" secondAttribute="top" constant="-100" id="ReV-2B-ieY"/>
                             <constraint firstItem="hyF-zq-sN8" firstAttribute="leading" secondItem="53h-qm-nj3" secondAttribute="leading" id="ScY-xT-fbn"/>
+                            <constraint firstItem="isA-Iq-NUu" firstAttribute="top" secondItem="VVR-QJ-jNG" secondAttribute="bottom" constant="11" id="Wsn-Qh-8HI"/>
                             <constraint firstItem="53h-qm-nj3" firstAttribute="bottom" secondItem="hyF-zq-sN8" secondAttribute="bottom" id="YeA-OX-2Qr"/>
                             <constraint firstItem="53h-qm-nj3" firstAttribute="trailing" secondItem="VVR-QJ-jNG" secondAttribute="trailing" id="Z7L-wE-58F"/>
                             <constraint firstItem="53h-qm-nj3" firstAttribute="trailing" secondItem="uA9-CE-Zwk" secondAttribute="trailing" id="aEa-GJ-Fb9"/>
                             <constraint firstItem="YQQ-Si-YYT" firstAttribute="height" secondItem="uA9-CE-Zwk" secondAttribute="height" multiplier="0.795455" constant="1" id="fqm-Vw-Zk9"/>
                             <constraint firstItem="68C-MA-bki" firstAttribute="leading" secondItem="uA9-CE-Zwk" secondAttribute="trailing" constant="-68" id="gkz-xd-vIR"/>
+                            <constraint firstItem="isA-Iq-NUu" firstAttribute="leading" secondItem="53h-qm-nj3" secondAttribute="leading" constant="16" id="qSv-kW-tOl"/>
                             <constraint firstItem="Ol8-7N-ZiM" firstAttribute="centerX" secondItem="53h-qm-nj3" secondAttribute="centerX" id="qzB-SN-BFQ"/>
                             <constraint firstItem="VVR-QJ-jNG" firstAttribute="top" secondItem="hhL-yO-FiP" secondAttribute="bottom" constant="16" id="sXg-Tn-k4e"/>
                             <constraint firstItem="YQQ-Si-YYT" firstAttribute="width" secondItem="uA9-CE-Zwk" secondAttribute="width" multiplier="0.956743" id="ysO-rA-Zse"/>
@@ -243,6 +255,7 @@
                         <outlet property="dajiaLabel" destination="hhL-yO-FiP" id="BqV-eN-8jJ"/>
                         <outlet property="iconsCollectionView" destination="hyF-zq-sN8" id="Thf-43-A1b"/>
                         <outlet property="labelSearchBar" destination="YQQ-Si-YYT" id="Zkc-q6-bhY"/>
+                        <outlet property="recommandLabel" destination="isA-Iq-NUu" id="5Ha-nj-SEm"/>
                         <outlet property="searchBar" destination="uA9-CE-Zwk" id="rgu-EY-UaF"/>
                         <outlet property="searchButton" destination="68C-MA-bki" id="8gI-Qq-BLv"/>
                         <outlet property="suggestionsTableView" destination="VVR-QJ-jNG" id="hIQ-l9-Tzb"/>

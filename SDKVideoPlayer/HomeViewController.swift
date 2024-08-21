@@ -124,6 +124,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
     
   
     
+    @IBOutlet weak var recommandLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var suggestionsTableView: UICollectionView!
     @IBOutlet weak var iconsCollectionView: UICollectionView!
@@ -701,6 +702,7 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                             self.searchlist = response_config.data.searchlist
                             DispatchQueue.main.async {
                                 self.dajiaLabel.text = NSLocalizedString("recommandSearch", comment: "")
+                                self.recommandLabel.text = NSLocalizedString("recommand", comment: "")
                                 self.timer =   Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
                                 
 //                                if let s = response_config.data.searchrecommadlist.first?.keyword {
@@ -819,9 +821,75 @@ class HomeViewController: BaseViewController, UISearchBarDelegate, UICollectionV
                 controller.proxyHttps = blackBol
                 self.show(controller, sender: self)
             }else{
-                searchRequest(searchText: keyword.name)
+                
+                if keyword.iconurl.localizedStandardContains("add"){
+                    //add new icon 
+                    self.presentTextInputAlert(title: "", url:"",iconurl: "")
+                }else{
+                    searchRequest(searchText: keyword.name)
+                }
+                
+                
             }
         }
+    }
+    
+    
+    func presentTextInputAlert(title: String, url:String,iconurl:String?) {
+           // 创建 UIAlertController 实例
+           let alertController = UIAlertController(title: NSLocalizedString("favitorurl", comment: ""), message: "", preferredStyle: .alert)
+           
+           // 创建第一个文本输入框
+           let textField1 = UITextField()
+           
+           textField1.borderStyle = .roundedRect
+           
+            alertController.addTextField { (textF) in
+                textF.placeholder = NSLocalizedString("PleaseInputTitle", comment: "")
+                textF.text = title
+           }
+            
+           
+           // 创建第二个文本输入框
+           let textField2 = UITextField()
+           
+           textField2.borderStyle = .roundedRect
+           alertController.addTextField { (textF) in
+               textF.placeholder = NSLocalizedString("PleaseInputURL", comment: "")
+               textF.text = url
+           }
+            
+        if let u = iconurl, u.count > 10 {
+            //iconFaviICO = u
+        }
+       
+           
+           // 创建取消按钮
+           let cancelAction = UIAlertAction(title:NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+               // 取消操作
+           }
+           alertController.addAction(cancelAction)
+           
+           // 创建保存按钮
+           let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { (action) in
+               if let text1 = alertController.textFields?.first?.text,
+                  let text2 = alertController.textFields?.last?.text {
+                   // 这里处理保存逻辑
+                   //print("文本1: \(text1), 文本2: \(text2)")
+                   if text1.count > 0 && text2.count > 0 {
+                       //提示成功
+                       LocalStore.saveToWebsiteFaviator(weburl: Website(name: text1, url: text2, iconurl: ""))
+                       self.view.makeToast( NSLocalizedString("SaveSuccess", comment: ""), duration: 3.0, position: .bottom)
+                   }else{
+                       self.view.makeToast( NSLocalizedString("SaveFailed", comment: ""), duration: 3.0, position: .bottom)
+
+                   }
+               }
+           }
+           alertController.addAction(saveAction)
+           
+           // 显示弹出窗口
+           present(alertController, animated: true, completion: nil)
     }
     
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -986,8 +1054,8 @@ class IconCollectionViewCell: UICollectionViewCell {
                 NSLayoutConstraint.activate([
                     iconImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
                     iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -10),
-                    iconImageView.widthAnchor.constraint(equalToConstant: 20),
-                    iconImageView.heightAnchor.constraint(equalToConstant: 20),
+                    iconImageView.widthAnchor.constraint(equalToConstant: 30),
+                    iconImageView.heightAnchor.constraint(equalToConstant: 30),
                     
                     titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 10),
                     titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
@@ -1015,10 +1083,20 @@ class IconCollectionViewCell: UICollectionViewCell {
             }
         }else{
             self.iconImageView.image = UIImage(named: "internet")
+            
+            
+            
 //            self.iconImageView.setIcon(icon:  .weather(.rainMix))
         }
         
-            titleLabel.text = title
+        if iconurl.localizedStandardContains("add"){
+            
+//            contentView.backgroundColor = .clear
+            self.iconImageView.image = UIImage(named: "plus.app")
+         
+        }
+        titleLabel.text = title
+            
         }
     
 }
