@@ -1,5 +1,5 @@
 
-# SOUQIUBA SDKVideoPlayer for iOS
+# SearchBallPlayer for iOS
 
 [![Swift Version](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org/)
 [![Platform](https://img.shields.io/badge/Platforms-iOS-lightgrey.svg)](https://developer.apple.com/ios/)
